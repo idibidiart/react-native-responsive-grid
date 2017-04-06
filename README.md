@@ -42,9 +42,9 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 sm, md, and lg are device-size-dependent 'size' values that are applicable to columns -- most used when the row can wrap and you wish to set different breaking points for different screen sizes.
 
-offset and [size]Offset is the same as for CSS flexbox grids, setting marginLeft on the given column by the combined width of the number of columns indicated. 
+offset and [size]Offset is the same as for CSS flexbox grids, setting marginLeft on the given column by the combined width of the number of columns indicated. Since columns are positioned at flex-start within the row (by design) offset values will behave as expected.
 
-alignVertical maybe supplied as prop to the row as: middle, top, or bottom.
+alignVertical maybe supplied as prop to the row to vertically align the columns within the row. Possible values are: middle, top, or bottom.
 
 #### nowrap
 
