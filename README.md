@@ -23,7 +23,7 @@ Row has two props. `size` and `nowrap`.
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
 <Row cols={12}>
-    <Col cols={5} offset={1}>
+    <Col size={5} offset={1}>
       <Text>
         First Column
       </Text>
