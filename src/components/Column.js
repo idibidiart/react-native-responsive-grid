@@ -35,6 +35,8 @@ const Column = (props) => {
       rowSize
     };
 
+    const justifyContent = (props.alignVertical === 'top' ? 'flex-start' : (props.alignVertical === 'bottom' ? 'flex-end' : (props.alignVertical === 'space' ? 'space-between' : (props.alignVertical === 'distribute' ? 'space-around' : 'center' ))))
+
     if (isHidden(screenSize, gridProps)){
       return null;
     } else {
@@ -46,7 +48,8 @@ const Column = (props) => {
             width: getColumnWidth(screenSize, gridProps),
             flexDirection: 'column',
             marginLeft: getColumnOffset(screenSize, gridProps),
-            justifyContent: (props.alignVertical === 'top' ? 'flex-start' : (props.alignVertical === 'bottom' ? 'flex-end' : (props.alignVertical === 'fill' ? 'stretch' : 'center'))),
+            justifyContent: justifyContent,
+            alignItems: 'flex-start'
           }]}>
           {rest.children}
         </View>
