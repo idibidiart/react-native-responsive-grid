@@ -13,11 +13,7 @@ import {Row} from 'react-native-responsive-grid';
 
 `Row` is a component designed to represent a row. It utilizes `flex-direction: 'row'` to place it's children in rows. Typically we would put a `Column` inside of a `Row`, but it is not necessary. 
 
-### Props
-
-Row has two props. `size` and `nowrap`.
-
-#### size
+#### Mixed Static/Responsive Example
 
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
