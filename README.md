@@ -22,8 +22,8 @@ Row has two props. `size` and `nowrap`.
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
-<Row size={12}>
-    <Col size={5} offset={1}>
+<Row cols={12}>
+    <Col cols={5} offset={1}>
       <Text>
         First Column
       </Text>
@@ -40,7 +40,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 `size` in column - Accepts a number. This number defines how many columns wide the column should be where width of each column is the screen width divided by the cols value from the row component. If you do not specify a number or you input the number 0 the `size` will default to 12 columns wide. Since `size` accepts any number, you can make your column as wide as you want, assuming your row can wrap (or else it will extend beyond the width of the screen)
 
-sm, md, and lg are device-size-dependent size values that are applicable to columns -- most used when the row can wrap and you wish to set different breaking points for different screen sizes.
+sm, md, and lg are device-size-dependent 'size' values that are applicable to columns -- most used when the row can wrap and you wish to set different breaking points for different screen sizes.
 
 offset and [size]Offset is the same as for CSS flexbox grids, setting marginLeft on the given column by the combined width of the number of columns indicated. 
 
@@ -52,7 +52,7 @@ alignVertical maybe supplied as prop to the row as: middle, top, or bottom.
 import {Row} from 'react-native-responsive-grid';
 
 //Will wrap Columns. Second Column's width will not protrude beyond row. It will wrap to the next Row.
-<Row size={10}>
+<Row cols={10}>
     <Col sm={5}>
       <Text>
         First Column
@@ -66,7 +66,7 @@ import {Row} from 'react-native-responsive-grid';
 </Row>
 
 //Will not wrap Columns. Second Column's width will protrude beyond row.
-<Row size={10} nowrap>
+<Row cols={10} nowrap>
     <Col sm={6} md={4} lg={3}>
       <Text>
         First Column
@@ -88,7 +88,7 @@ import {Row} from 'react-native-responsive-grid';
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
-<Row size={12}>
+<Row cols={12}>
     <Col sm={6} md={4} lg={3}>
         <Text>First Column</Text>
     </Col>
@@ -104,7 +104,7 @@ Row has a two types of props. Column size props and hidden props.
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
-<Row size={12}>
+<Row cols={12}>
     <Col sm={6} md={4} lg={3}>
         <Text>First Column</Text>
     </Col>
@@ -126,7 +126,7 @@ Example:
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
-<Row size={12}>
+<Row cols={12}>
     <Col sm={6} md={4} lg={3}>
         <Text>First Column</Text>
     </Col>
@@ -142,7 +142,7 @@ On a big tablet the Column would take up 3 of 12 columns for 25% of the screen.
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
-<Row size={12}>
+<Row cols={12}>
     <Col smHidden>
         <Text>First Column</Text>
     </Col>
