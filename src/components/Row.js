@@ -21,7 +21,7 @@ const Row = (props) => {
           style={[props.style,
                   { flexDirection: 'row',
                     flexWrap: props.nowrap ? 'nowrap' : 'wrap',
-                    alignItems: (props.alignVertical === 'top' ? 'flex-start' : (props.alignVertical === 'bottom' ? 'flex-end' : 'center')),
+                    alignItems: (props.alignVertical === 'top' ? 'flex-start' : (props.alignVertical === 'bottom' ? 'flex-end' : (props.alignVertical === 'fill' ? 'stretch' : 'center'))),
                     justifyContent: 'flex-start'
                   }]}>
             {cloneElements(props)}
