@@ -20,7 +20,7 @@ Row has two props. `size` and `nowrap`.
 #### size
 
 ```
-import {Column as Col, Row} from 'react-native-flexbox-grid';
+import {Column as Col, Row} from 'react-native-responsive-grid';
 
 <Row size={12}>
     <Col size={5} offset={1}>
@@ -49,7 +49,7 @@ alignVertical maybe supplied as prop to the row as: middle, top, or bottom.
 #### nowrap
 
 ```
-import {Row} from 'react-native-flexbox-grid';
+import {Row} from 'react-native-responsive-grid';
 
 //Will wrap Columns. Second Column's width will not protrude beyond row. It will wrap to the next Row.
 <Row size={10}>
@@ -86,7 +86,7 @@ import {Row} from 'react-native-flexbox-grid';
 ## Column
 
 ```
-import {Column as Col, Row} from 'react-native-flexbox-grid';
+import {Column as Col, Row} from 'react-native-responsive-grid';
 
 <Row size={12}>
     <Col sm={6} md={4} lg={3}>
@@ -102,7 +102,7 @@ Row has a two types of props. Column size props and hidden props.
 #### Column size props.
 
 ```
-import {Column as Col, Row} from 'react-native-flexbox-grid';
+import {Column as Col, Row} from 'react-native-responsive-grid';
 
 <Row size={12}>
     <Col sm={6} md={4} lg={3}>
@@ -124,7 +124,7 @@ The three size props refer to the screen sizes they are active on (taking device
 Example: 
 
 ```
-import {Column as Col, Row} from 'react-native-flexbox-grid';
+import {Column as Col, Row} from 'react-native-responsive-grid';
 
 <Row size={12}>
     <Col sm={6} md={4} lg={3}>
@@ -140,7 +140,7 @@ On a big tablet the Column would take up 3 of 12 columns for 25% of the screen.
 #### Hidden props.
 
 ```
-import {Column as Col, Row} from 'react-native-flexbox-grid';
+import {Column as Col, Row} from 'react-native-responsive-grid';
 
 <Row size={12}>
     <Col smHidden>
