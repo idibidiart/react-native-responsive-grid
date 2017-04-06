@@ -13,45 +13,41 @@ const isHidden = (screenSize, props) => {
 
 const toPercent = (num) => (num * 100) + '%';
 
-const getComponentWidth = (screenSize, props) => {
+const getColumnWidth = (screenSize, props) => {
   switch(screenSize) {
     case 'small':
       if(props.sm){
         return toPercent(props.sm/props.rowSize);
       } else {
-        return props.parentWidth;
+        return toPercent((props.size || 12)/props.rowSize);
       }
       break;
     case 'medium':
       if(props.md){
         return toPercent(props.md/props.rowSize);
-      } else if(props.sm){
-        return toPercent(props.sm/props.rowSize);
       } else {
-        return props.parentWidth;
+        return toPercent((props.size || 12)/props.rowSize);
       }
       break;
     case 'large':
       if(props.lg){
         return toPercent(props.lg/props.rowSize);
-      } else if(props.md){
-        return toPercent(props.md/props.rowSize);
-      } else if(props.sm){
-        return toPercent(props.sm/props.rowSize);
       } else {
-        return props.parentWidth;
+        return toPercent((props.size || 12)/props.rowSize);
       }
       break;
     default:
-      return props.parentWidth;
+      return toPercent((props.size || 12)/props.rowSize);
   }
 };
 
-const getComponentOffset = (screenSize, props) => {
+const getColumnOffset = (screenSize, props) => {
   switch(screenSize) {
     case 'small':
       if(props.smOffset){
         return toPercent(props.smOffset/props.rowSize);
+      } else if (props.offset) {
+        return toPercent(props.offset/props.rowSize);
       } else {
         return 0;
       }
@@ -59,8 +55,8 @@ const getComponentOffset = (screenSize, props) => {
     case 'medium':
       if(props.mdOffset){
         return toPercent(props.mdOffset/props.rowSize);
-      } else if(props.smOffset){
-        return toPercent(props.smOffset/props.rowSize);
+      } else if (props.offset){
+        return toPercent(props.offset/props.rowSize);
       } else {
         return 0;
       }
@@ -68,10 +64,8 @@ const getComponentOffset = (screenSize, props) => {
     case 'large':
       if(props.lgOffset){
         return toPercent(props.lgOffset/props.rowSize);
-      } else if(props.mdOffset){
-        return toPercent(props.mdOffset/props.rowSize);
-      } else if(props.smOffset){
-        return toPercent(props.smOffset/props.rowSize);
+      } else if (props.offset){
+        return toPercent(props.offset/props.rowSize);
       } else {
         return 0;
       }
@@ -81,4 +75,4 @@ const getComponentOffset = (screenSize, props) => {
   }
 };
 
-module.exports = {isHidden, getComponentWidth, getComponentOffset}
+module.exports = {isHidden, getColumnWidth, getColumnOffset}

@@ -1,10 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {screenSize} from '../lib/ScreenSize';
-import {isHidden, getComponentWidth, getComponentOffset} from '../lib/helpers';
+import {isHidden, getColumnWidth, getColumnOffset} from '../lib/helpers';
 import {View} from 'react-native';
 
 const Column = (props) => {
     const {
+      size,
       sm,
       smOffset,
       smHidden,
@@ -31,7 +32,7 @@ const Column = (props) => {
       rowSize
     };
 
-    if(isHidden(screenSize, gridProps)){
+    if (isHidden(screenSize, gridProps)){
       return null;
     } else {
       return (
@@ -39,9 +40,9 @@ const Column = (props) => {
         {...rest}
         style={[
           props.style, {
-            width: getComponentWidth(screenSize, gridProps),
+            width: getColumnWidth(screenSize, gridProps),
             flexDirection: 'column',
-            marginLeft: getComponentOffset(screenSize, gridProps)
+            marginLeft: getColumnOffset(screenSize, gridProps)
           }]}>
           {rest.children}
         </View>
@@ -59,6 +60,7 @@ Column.propTypes = {
   lg: PropTypes.number,
   lgOffset: PropTypes.number,
   lgHidden: PropTypes.bool,
+  rowSize: PropTypes.number
 };
 
 export default Column;
