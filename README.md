@@ -36,17 +36,15 @@ import {Column as Col, Row} from 'react-native-flexbox-grid';
 </Row>
 ```
 
-`size` in row - Accepts a number. This number defines the number of columns the `Row` is divided into. If you do not specify a number or you input the number 0 the `size` will default to 12. Since `size` accepts any javascript number, you can make your row contain pretty much any number of `Columns` (down to the floating-point precision limit: http://stackoverflow.com/questions/24126556/what-is-the-smallest-positive-floating-point-value) -- but usually 12 is a good number!
+`cols` in row - Accepts a number. This number defines the number of columns the `Row` is divided into. If you do not specify a number or you input the number 0 the `cols` will default to 12. Since `cols` accepts any number, you can make your row contain pretty much any number of `Columns` (down to the floating-point precision limit: http://stackoverflow.com/questions/24126556/what-is-the-smallest-positive-floating-point-value) -- but usually 12 is a good number!
 
-`size` in column - Accepts a number. This number defines how many columns wide the column should be where width of each column is screen width divided by row size. If you do not specify a number or you input the number 0 the `size` will default to 12 columns wide. Since `size` accepts any javascript number, you can make your column as wide as you want, assuming your row can wrap (or else it will extend beyond the width of the screen)
+`size` in column - Accepts a number. This number defines how many columns wide the column should be where width of each column is the screen width divided by the cols value from the row component. If you do not specify a number or you input the number 0 the `size` will default to 12 columns wide. Since `size` accepts any number, you can make your column as wide as you want, assuming your row can wrap (or else it will extend beyond the width of the screen)
 
 sm, md, and lg are device-size-dependent size values that are applicable to columns -- most used when the row can wrap and you wish to set different breaking points for different screen sizes.
 
-offset and [size]Offset is the same as for CSS flexbox grids, setting marginLeft on the given column by the combined width of the number of columns indicated
+offset and [size]Offset is the same as for CSS flexbox grids, setting marginLeft on the given column by the combined width of the number of columns indicated. 
 
-alignItems and justifyContent maybe supplied as props to the row
-
-Since this is based on Flexbox you can use Flexbox styles on columns and rows but that would confuse things and defeat the purpose of the grid -- you shouldn't need to resort to that
+alignVertical maybe supplied as prop to the row as: middle, top, or bottom.
 
 #### nowrap
 

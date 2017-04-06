@@ -5,7 +5,7 @@ import {View} from 'react-native';
 
 const cloneElements = (props) => {
     //if size doesn't exist or is 0 default to 12
-    const rowSize = props.size > 0 ? props.size : 12;
+    const rowSize = props.cols > 0 ? props.cols : 12;
 
     return React.Children.map(props.children, (element) => {
       return React.cloneElement(element, {rowSize: rowSize});
@@ -21,8 +21,8 @@ const Row = (props) => {
           style={[props.style,
                   { flexDirection: 'row',
                     flexWrap: props.nowrap ? 'nowrap' : 'wrap',
-                    alignItems: props.alignItems,
-                    justifyContent: props.justifyContent
+                    alignItems: (props.alignVertical === 'top' ? 'flex-start' : (props.alignVertical === 'bottom' ? 'flex-end' : 'center')),
+                    justifyContent: 'flex-start'
                   }]}>
             {cloneElements(props)}
         </View>

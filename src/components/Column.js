@@ -6,6 +6,7 @@ import {View} from 'react-native';
 const Column = (props) => {
     const {
       size,
+      offset,
       sm,
       smOffset,
       smHidden,
@@ -20,6 +21,8 @@ const Column = (props) => {
     } = props;
 
     const gridProps = {
+      size,
+      offset,
       sm,
       smOffset,
       smHidden,
@@ -60,7 +63,8 @@ Column.propTypes = {
   lg: PropTypes.number,
   lgOffset: PropTypes.number,
   lgHidden: PropTypes.bool,
-  rowSize: PropTypes.number
+  size: PropTypes.number,
+  offset: PropTypes.number
 };
 
 export default Column;
