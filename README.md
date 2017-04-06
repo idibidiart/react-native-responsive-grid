@@ -46,7 +46,7 @@ offset and [size]Offset is the same as for CSS flexbox grids, setting marginLeft
 
 alignItems and justifyContent maybe supplied as props to the row
 
-Since this is based on Flexbox you can use Flexbox styles on columns and rows but that would confuse things and defeat the purpose of the grid -- you shouldn't beed to resprt to that
+Since this is based on Flexbox you can use Flexbox styles on columns and rows but that would confuse things and defeat the purpose of the grid -- you shouldn't need to resort to that
 
 #### nowrap
 
