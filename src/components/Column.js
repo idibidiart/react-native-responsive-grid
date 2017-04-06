@@ -45,7 +45,8 @@ const Column = (props) => {
           props.style, {
             width: getColumnWidth(screenSize, gridProps),
             flexDirection: 'column',
-            marginLeft: getColumnOffset(screenSize, gridProps)
+            marginLeft: getColumnOffset(screenSize, gridProps),
+            justifyContent: (props.alignVertical === 'top' ? 'flex-start' : (props.alignVertical === 'bottom' ? 'flex-end' : (props.alignVertical === 'fill' ? 'stretch' : 'center'))),
           }]}>
           {rest.children}
         </View>

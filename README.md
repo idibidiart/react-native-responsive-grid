@@ -44,7 +44,7 @@ sm, md, and lg are device-size-dependent 'size' values that are applicable to co
 
 offset and [size]Offset is the same as for CSS flexbox grids, setting marginLeft on the given column by the combined width of the number of columns indicated. Since columns are positioned at flex-start within the row (by design) offset values will behave as expected.
 
-alignVertical maybe supplied as prop to the row to vertically align the columns within the row. Possible values are: middle, top, bottom or fill.
+alignVertical maybe supplied as prop to the row to vertically align the columns within the row. It may also be supplied as prop to the column to vertically align the items within the column. Possible values are: middle, top, bottom or fill.
 
 #### nowrap
 
