@@ -38,7 +38,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 sm, md, and lg are device-size-dependent 'size' values that are applicable to columns.
 
-`offset` and `[size]Offset` - Accepts any number. This number defines the left offset in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (by default) content in offsetted columns will snap to grid. Offset values can also be negative, and **rightAlign* can be given as prop in the column to set alignItems to flex-end. This way content in offsetted columns will snap to grid in both directions.
+`offset` and `[size]Offset` - Accepts any number. This number defines the left offset in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (by default) content in offsetted columns will snap to grid. Offset values can also be negative, and **rightAlign** can be given as prop in the column to set alignItems to flex-end. This way content in offsetted columns will snap to grid in both directions.
 
 **alignVertical** maybe supplied as prop to the row to vertically align the columns within the row. Possible values are: middle, top, bottom or fill.
 
