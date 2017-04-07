@@ -16,7 +16,7 @@ const Column = (props) => {
       lg,
       lgOffset,
       lgHidden,
-      colRatio,
+      colPercent,
       ...rest
     } = props;
 
@@ -32,7 +32,7 @@ const Column = (props) => {
       lg,
       lgOffset,
       lgHidden,
-      colRatio
+      colPercent
     };
 
     const justifyContent = (props.alignVertical === 'top' ? 'flex-start' : (props.alignVertical === 'bottom' ? 'flex-end' : (props.alignVertical === 'space' ? 'space-between' : (props.alignVertical === 'distribute' ? 'space-around' : 'center' ))))
