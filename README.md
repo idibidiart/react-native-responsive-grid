@@ -164,7 +164,7 @@ Hidden props are all booleans. They default to false.
 
 ## Real world example using static (non-screen-sized-prefixed) size and offset props:
 
-![demo](https://s14.postimg.org/4xd42iny9/Screen_Shot_2017-04-07_at_11.29.12_AM.png)
+![demo](https://s29.postimg.org/5k0mn45qf/Screen_Shot_2017-04-07_at_1.09.24_PM.png)
 
 ```
   <Row nowrap colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
