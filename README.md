@@ -1,17 +1,11 @@
 
-# React Native responsive grid based on react-native-flexbox-grid with several enhancements/mods and extended docs
+# Responsive grid for React Native (v0.42 and newer) based on `react-native-flexbox-grid` with some radical modifications and extended Readme, including a real world example. 
 
-## Row
+## Problem Statement
 
-```
-import {Row} from 'react-native-responsive-grid';
+Developing performant, responsive and fairly detailed 2D layouts with raw flexbox in React Native (prior to v0.42) used to take me hours per screen and resulted in markup and styles that were almost unmaintainable. While Flexbox itself maybe confusing to new comers, the lack of perofmant way to encode relative size info was the real pain. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of those, namely, `react-native-flexbox-grid`, which itself is based on `react-flexbox-grid` and modified heavily to fit what I believe is an simple mental model for 2D responsive layout, based entirely on percentages but still fitting within the grid construct. 
 
-<Row>
-    <Text>My First Row</Text>
-</Row>
-```
-
-`Row` is a component designed to represent a row. It utilizes `flex-direction: 'row'` to place it's children in rows. Typically we would put a `Column` inside of a `Row`, but it is not necessary. 
+Hopefully this is useful to others, too. 
 
 #### Mixed Static/Responsive Example
 
