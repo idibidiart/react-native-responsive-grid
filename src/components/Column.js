@@ -38,8 +38,6 @@ const Column = (props) => {
     };
 
     const justifyContent = (props.alignVertical === 'top' ? 'flex-start' : (props.alignVertical === 'bottom' ? 'flex-end' : (props.alignVertical === 'space' ? 'space-between' : (props.alignVertical === 'distribute' ? 'space-around' : 'center' ))))
-    
-    console.log('DEBUG: rightAlign', gridProps.rightAlign)
 
     if (isHidden(screenSize, gridProps)){
       return null;
