@@ -4,11 +4,11 @@ import {isHidden} from '../lib/helpers';
 import {View} from 'react-native';
 
 const cloneElements = (props) => {
-    //if size doesn't exist or is 0 default to 12
-    const rowSize = props.cols > 0 ? props.cols : 12;
+    //if size doesn't exist or is 0 default to "12 columns"" ratio
+    const colPercent = props.columnRatio > 0 ? Math.max(props.colPercent, 100) : 8.33333333;
 
     return React.Children.map(props.children, (element) => {
-      return React.cloneElement(element, {rowSize: rowSize});
+      return React.cloneElement(element, {colPercent: colPercent});
     });
 }
 
