@@ -32,19 +32,19 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-`colPercent` in row - Accepts a number from 0 to 100. This number defines the size of grid's columns as a percent of the row element's width.  If you do not specify a number or you specify 0 the `colPercent` will default to 8.333333 which results in 12 columns. 
+`colPercent` in row - Accepts a number from 0 to 100. This number defines the width of a single grid column as a percent of the row element's width.  If you do not specify a number or you specify 0 the `colPercent` will default to 8.333333 which results in 12 columns for the given row. See also Column Size and Offset. 
 
-`size` in column - Accepts a number from 0 to Infinity. This number defines how many grid columns wide the given column should be. If you do not specify a number or you input the number 0 the `size` will default to 8.333333 (1/12th the width of the row.) Since `size` accepts any number from 0 to Infinity, you can make your column as wide as you want, extending beyond the screen width if norwarp prop is set on the row. If nowrap is not set on the row, the column will wrap.  
+`size` in column - Accepts a number from 0 to MAX\_SAFE\_INTEGER. This number defines how many grid columns wide the given layout column should be. If you do not specify a number or you input the number 0 the `size` will default to 8.333333 (1/12th the width of the row.) Since `size` accepts any number from 0 to Infinity, you can make your layout column as wide as you want, extending beyond the screen width if norwarp prop is set on the row. If nowrap is not set on the row, the column will wrap.  
 
 sm, md, and lg are device-size-dependent 'size' values that are applicable to columns.
 
-offset and [size]Offset is the same as for CSS flexbox grids, setting marginLeft (in percentage) on the number of columns (indicated by 'size') multiplied by column width (indicated by colPercent, which is relative to the parent's width) Since columns are positioned at flex-start within the row (by design) offset values will behave as expected. Offset values can be negative. 
+`offset` and `[size]Offset` - Accepts a number from -MAX\_SAFE\_INTEGER to MAX\_SAFE\_INTEGER.. This number defines the left offset in terms of the number of grid columns. Since grid columns are positioned at flex-start within the row (by design) offset values will snap to grid. Offset values can also be negative. 
 
 **alignVertical** maybe supplied as prop to the row to vertically align the columns within the row. Possible values are: middle, top, bottom or fill.
 
 **alignVertical** maybe also supplied as prop to the column to vertically align the items within the column. Possible values are: middle, top, bottom, space and distribute.
 
-These are the basic rules from which potntially very complex layout behavior can emerge. See also Column Size and Offset.
+These are the basic rules from which potntially complex layout behavior can emerge. See also Column Size and Offset.
 
 #### nowrap
 
