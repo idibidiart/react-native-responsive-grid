@@ -16,6 +16,7 @@ const Column = (props) => {
       lg,
       lgOffset,
       lgHidden,
+      rightAlign,
       colPercent,
       ...rest
     } = props;
@@ -32,6 +33,7 @@ const Column = (props) => {
       lg,
       lgOffset,
       lgHidden,
+      rightAlign,
       colPercent
     };
 
@@ -68,7 +70,8 @@ Column.propTypes = {
   lgOffset: PropTypes.number,
   lgHidden: PropTypes.bool,
   size: PropTypes.number,
-  offset: PropTypes.number
+  offset: PropTypes.number,
+  rightAlign: PropTypes.bool
 };
 
 export default Column;
