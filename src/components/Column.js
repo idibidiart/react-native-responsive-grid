@@ -37,6 +37,8 @@ const Column = (props) => {
 
     const justifyContent = (props.alignVertical === 'top' ? 'flex-start' : (props.alignVertical === 'bottom' ? 'flex-end' : (props.alignVertical === 'space' ? 'space-between' : (props.alignVertical === 'distribute' ? 'space-around' : 'center' ))))
 
+    console.log(999, getColumnWidth(screenSize, gridProps))
+    
     if (isHidden(screenSize, gridProps)){
       return null;
     } else {
