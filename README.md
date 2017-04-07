@@ -38,7 +38,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 sm, md, and lg are device-size-dependent 'size' values that are applicable to columns.
 
-`offset` and `[size]Offset` - Accepts any number. This number defines the left offset in terms of the number of grid columns. Since grid columns have their alignItems as flex-start (by default) content in offsetted columns will snap to grid. Offset values can also be negative, and **rightAlign* can be given as prop in the column to set alignItems to flex-end. This way offset works as expected in both directions with content snapping to grid.
+`offset` and `[size]Offset` - Accepts any number. This number defines the left offset in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (by default) content in offsetted columns will snap to grid. Offset values can also be negative, and **rightAlign* can be given as prop in the column to set alignItems to flex-end. This way content in offsetted columns will snap to grid in both directions.
 
 **alignVertical** maybe supplied as prop to the row to vertically align the columns within the row. Possible values are: middle, top, bottom or fill.
 
@@ -118,7 +118,7 @@ The nested column's size will be the column size value (size, sm, md, lg) times 
 
 This nested percentages model applies to offsets, too, except offsets can also be negative.     
 
-There are currently four offset props for `Column`. `offset`, `smOffset`, `mdOffset`, and `lgOffset`. The first one, `offset`, applies to all screen sizes.
+There are currently four offset props for `Column`. `offset`, `smOffset`, `mdOffset`, and `lgOffset`. The first one, `offset`, applies to all screen sizes. Offset values can be negative, too, and that's often used when rightAlign is supplied as prop to the column, so that content of offsetted column will snap to grid in the right-to-left direction just as it would in the left-to-right direction with a positive offset value.
 
 The screen-size-prefixed size and offset props refer to the screen sizes they are active on (taking device pixel ratio into consideration.) 
 
@@ -167,106 +167,106 @@ Hidden props are all booleans. They default to false.
 ![demo](https://s14.postimg.org/4xd42iny9/Screen_Shot_2017-04-07_at_11.29.12_AM.png)
 
 ```
-    <Row nowrap colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={10} offset={1}>
-          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-          PREVIOUS ORDERS
-          </Text>
-        </Col>
-        <Col size={5} offset={2}>
-          <Text style={{ fontSize: 16, color: '#BD1206'}}>
-            SEE ALL
-          </Text>
-        </Col>
-    </Row>
-
-    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={10} offset={1}>
-            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
-            <Row nowrap colPercent={5}>
-              <Col size={1}>
-                <FontAwesome name='shopping-cart' size={17} color='gray'/>
-              </Col>
-              <Col size={12} offset={.5}>
-                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
-              </Col>
-            </Row>
-          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
-          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>                                                                             
-        </Col>
-        <Col size={1} offset={3.85}>
-          <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206"/>
-        </Col>
-    </Row>
-
-    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={10} offset={1}>
-            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 8, 2017</Text>
-            <Row nowrap colPercent={5}>
-              <Col size={1}>
-                <FontAwesome name='cutlery' size={17} color='gray'/>
-              </Col>
-              <Col size={12} offset={.5}>
-                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>DINE-IN ORDER</Text>
-              </Col>
-            </Row>
-          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Linguini Alfredo</Text>                                                                          
-        </Col>
-        <Col size={1} offset={3.85}>
-          <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206"/>
-        </Col>
-    </Row>
-
-    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={10} offset={1}>
-            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
-            <Row nowrap colPercent={5}>
-              <Col size={1}>
-                <FontAwesome name='cutlery' size={17} color='gray'/>
-              </Col>
-              <Col size={12} offset={.5}>
-                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
-              </Col>
-            </Row>
-          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Double Cheese Burger</Text>                                                                          
-        </Col>
-        <Col size={1} offset={3.85}>
-          <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206"/>
-        </Col>
-    </Row>
-
-    <Row nowrap colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={10} offset={1}>
-          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-          FAVORITE ITEMS
-          </Text>
-        </Col>
-        <Col size={5} offset={1}>
-          <Text style={{ fontSize: 16, color: '#BD1206'}}>
-          ADD MORE
-          </Text>
-        </Col>
-    </Row>
-
-    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={10} offset={1}>
-        <Text style={{fontSize: 16, color: 'black'}}>
-        Linguini Alfredo
+  <Row nowrap colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={10} offset={1} >
+        <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+        PREVIOUS ORDERS
         </Text>
       </Col>
-      <Col size={1} offset={4}>
-        <FontAwesome name='star' size={24} color='#BD1206'/>
-      </Col>
-    </Row>
-
-    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={10} offset={1}>
-        <Text style={{fontSize: 16, color: 'black'}}>
-        Double Cheese Burger
+      <Col size={5} rightAlign>
+        <Text style={{ fontSize: 16, color: '#BD1206'}}>
+          SEE ALL
         </Text>
       </Col>
-      <Col size={1} offset={4}>
-        <FontAwesome name='star' size={24} color='#BD1206'/>
+  </Row>
+
+  <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={10} offset={1} >
+          <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
+          <Row nowrap colPercent={5}>
+            <Col size={1}>
+              <FontAwesome name='shopping-cart' size={17} color='gray'/>
+            </Col>
+            <Col size={12} offset={.5}>
+              <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
+            </Col>
+          </Row>
+        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
+        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>                                                                             
       </Col>
-    </Row>
+      <Col size={5} offset={0.25} rightAlign>
+        <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206"/>
+      </Col>
+  </Row>
+
+  <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={10} offset={1}>
+          <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 8, 2017</Text>
+          <Row nowrap colPercent={5}>
+            <Col size={1}>
+              <FontAwesome name='cutlery' size={17} color='gray'/>
+            </Col>
+            <Col size={12} offset={.5}>
+              <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>DINE-IN ORDER</Text>
+            </Col>
+          </Row>
+        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Linguini Alfredo</Text>                                                                          
+      </Col>
+      <Col size={5} offset={0.25} rightAlign>
+        <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206"/>
+      </Col>
+  </Row>
+
+  <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={10} offset={1}>
+          <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
+          <Row nowrap colPercent={5}>
+            <Col size={1}>
+              <FontAwesome name='cutlery' size={17} color='gray'/>
+            </Col>
+            <Col size={12} offset={.5}>
+              <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
+            </Col>
+          </Row>
+        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Double Cheese Burger</Text>                                                                          
+      </Col>
+      <Col size={5} offset={0.25} rightAlign>
+        <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206"/>
+      </Col>
+  </Row>
+
+  <Row nowrap colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={10} offset={1}>
+        <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+        FAVORITE ITEMS
+        </Text>
+      </Col>
+      <Col size={5} rightAlign>
+        <Text style={{ fontSize: 16, color: '#BD1206'}}>
+        ADD MORE
+        </Text>
+      </Col>
+  </Row>
+
+  <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Col size={10} offset={1}>
+      <Text style={{fontSize: 16, color: 'black'}}>
+      Linguini Alfredo
+      </Text>
+    </Col>
+    <Col size={5} rightAlign>
+      <FontAwesome name='star' size={24} color='#BD1206'/>
+    </Col>
+  </Row>
+
+  <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Col size={10} offset={1}>
+      <Text style={{fontSize: 16, color: 'black'}}>
+      Double Cheese Burger
+      </Text>
+    </Col>
+    <Col size={5} rightAlign>
+      <FontAwesome name='star' size={24} color='#BD1206'/>
+    </Col>
+  </Row>
 ```
