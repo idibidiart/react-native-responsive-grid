@@ -49,7 +49,7 @@ const Column = (props) => {
             flexDirection: 'column',
             marginLeft: getColumnOffset(screenSize, gridProps),
             justifyContent: justifyContent,
-            alignItems: 'flex-start'
+            alignItems: gridProps.rightAlign ? 'flex-end' : 'flex-start'
           }]}>
           {rest.children}
         </View>
