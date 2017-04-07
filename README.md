@@ -1,5 +1,5 @@
 
-# Responsive grid for React Native (v0.42 and newer) based on `react-native-flexbox-grid` with some radical modifications and extended Readme, including a real world example. 
+# Responsive grid for React Native (v0.42 and newer) based on react-native-flexbox-grid with some radical modifications and extended Readme, including a real world example. 
 
 ## Problem Statement
 
@@ -161,106 +161,106 @@ Hidden props are all booleans. They default to false.
 ![demo](https://s29.postimg.org/5k0mn45qf/Screen_Shot_2017-04-07_at_1.09.24_PM.png)
 
 ```
-  <Row nowrap colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={10} offset={1} >
-        <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-        PREVIOUS ORDERS
+    <Row nowrap colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={10} offset={1} >
+          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+          PREVIOUS ORDERS
+          </Text>
+        </Col>
+        <Col size={5} rightAlign>
+          <Text style={{ fontSize: 16, color: '#BD1206'}}>
+            SEE ALL
+          </Text>
+        </Col>
+    </Row>
+
+    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={10} offset={1} >
+            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
+            <Row nowrap colPercent={5}>
+              <Col size={1}>
+                <FontAwesome name='shopping-cart' size={17} color='gray'/>
+              </Col>
+              <Col size={12} offset={.5}>
+                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
+              </Col>
+            </Row>
+          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
+          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>                                                                             
+        </Col>
+        <Col size={5} rightAlign>
+          <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
+        </Col>
+    </Row>
+
+    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={10} offset={1}>
+            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 8, 2017</Text>
+            <Row nowrap colPercent={5}>
+              <Col size={1}>
+                <FontAwesome name='cutlery' size={17} color='gray'/>
+              </Col>
+              <Col size={12} offset={.5}>
+                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>DINE-IN ORDER</Text>
+              </Col>
+            </Row>
+          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Linguini Alfredo</Text>                                                                          
+        </Col>
+        <Col size={5} rightAlign>
+          <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}}/>
+        </Col>
+    </Row>
+
+    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={10} offset={1}>
+            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
+            <Row nowrap colPercent={5}>
+              <Col size={1}>
+                <FontAwesome name='cutlery' size={17} color='gray'/>
+              </Col>
+              <Col size={12} offset={.5}>
+                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
+              </Col>
+            </Row>
+          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Double Cheese Burger</Text>                                                                          
+        </Col>
+        <Col size={5} rightAlign>
+          <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}}/>
+        </Col>
+    </Row>
+
+    <Row nowrap colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={10} offset={1}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+          FAVORITE ITEMS
+          </Text>
+        </Col>
+        <Col size={5} rightAlign>
+          <Text style={{ fontSize: 16, color: '#BD1206'}}>
+          ADD MORE
+          </Text>
+        </Col>
+    </Row>
+
+    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={10} offset={1}>
+        <Text style={{fontSize: 16, color: 'black'}}>
+        Linguini Alfredo
         </Text>
       </Col>
       <Col size={5} rightAlign>
-        <Text style={{ fontSize: 16, color: '#BD1206'}}>
-          SEE ALL
-        </Text>
+        <FontAwesome name='star' size={24} color='#BD1206'/>
       </Col>
-  </Row>
+    </Row>
 
-  <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={10} offset={1} >
-          <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
-          <Row nowrap colPercent={5}>
-            <Col size={1}>
-              <FontAwesome name='shopping-cart' size={17} color='gray'/>
-            </Col>
-            <Col size={12} offset={.5}>
-              <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
-            </Col>
-          </Row>
-        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
-        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>                                                                             
-      </Col>
-      <Col size={5} offset={0.25} rightAlign>
-        <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206"/>
-      </Col>
-  </Row>
-
-  <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
       <Col size={10} offset={1}>
-          <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 8, 2017</Text>
-          <Row nowrap colPercent={5}>
-            <Col size={1}>
-              <FontAwesome name='cutlery' size={17} color='gray'/>
-            </Col>
-            <Col size={12} offset={.5}>
-              <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>DINE-IN ORDER</Text>
-            </Col>
-          </Row>
-        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Linguini Alfredo</Text>                                                                          
-      </Col>
-      <Col size={5} offset={0.25} rightAlign>
-        <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206"/>
-      </Col>
-  </Row>
-
-  <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={10} offset={1}>
-          <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
-          <Row nowrap colPercent={5}>
-            <Col size={1}>
-              <FontAwesome name='cutlery' size={17} color='gray'/>
-            </Col>
-            <Col size={12} offset={.5}>
-              <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
-            </Col>
-          </Row>
-        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Double Cheese Burger</Text>                                                                          
-      </Col>
-      <Col size={5} offset={0.25} rightAlign>
-        <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206"/>
-      </Col>
-  </Row>
-
-  <Row nowrap colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={10} offset={1}>
-        <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-        FAVORITE ITEMS
+        <Text style={{fontSize: 16, color: 'black'}}>
+        Double Cheese Burger
         </Text>
       </Col>
       <Col size={5} rightAlign>
-        <Text style={{ fontSize: 16, color: '#BD1206'}}>
-        ADD MORE
-        </Text>
+        <FontAwesome name='star' size={24} color='#BD1206'/>
       </Col>
-  </Row>
-
-  <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-    <Col size={10} offset={1}>
-      <Text style={{fontSize: 16, color: 'black'}}>
-      Linguini Alfredo
-      </Text>
-    </Col>
-    <Col size={5} rightAlign>
-      <FontAwesome name='star' size={24} color='#BD1206'/>
-    </Col>
-  </Row>
-
-  <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-    <Col size={10} offset={1}>
-      <Text style={{fontSize: 16, color: 'black'}}>
-      Double Cheese Burger
-      </Text>
-    </Col>
-    <Col size={5} rightAlign>
-      <FontAwesome name='star' size={24} color='#BD1206'/>
-    </Col>
-  </Row>
+    </Row>
 ```
