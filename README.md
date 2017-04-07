@@ -140,9 +140,9 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-On a phone the Column would take up 50% of the screen.
-On a normal tablet the Column would take up 33.333% of the screen.
-On a big tablet the Column would take up 25% of the screen.
+On a phone the Column would take up 50% of the row's width.
+On a normal tablet the Column would take up 33.333% of the row's width.
+On a big tablet the Column would take up 25% of the row's width.
 
 #### Hidden props.
 
