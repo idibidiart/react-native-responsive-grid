@@ -32,9 +32,9 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-`colPercent` in row - Accepts a number from 0 to 100. This number defines the size of each column as a percent of the parent element's width.  If you do not specify a number or you specify 0 the `colPercent` will default to 8.333333 which is 12 columns. 
+`colPercent` in row - Accepts a number from 0 to 100. This number defines the size of grid's columns as a percent of the row element's width.  If you do not specify a number or you specify 0 the `colPercent` will default to 8.333333 which results in 12 columns. 
 
-`size` in column - Accepts a number from 0 to Infinity. This number defines how many columns wide the column should be where width of each column is the percent of its parent's width as defined in colPercent. If you do not specify a number or you input the number 0 the `size` will default to 12 columns wide. Since `size` accepts any number from 0 to Infinity, you can make your column as wide as you want, extending beyond the screen width if norwarp prop is set on the row. If nowrap is not set on the row, the column will wrap.  
+`size` in column - Accepts a number from 0 to Infinity. This number defines how many grid columns wide the given column should be. If you do not specify a number or you input the number 0 the `size` will default to 8.333333 (1/12th the width of the row.) Since `size` accepts any number from 0 to Infinity, you can make your column as wide as you want, extending beyond the screen width if norwarp prop is set on the row. If nowrap is not set on the row, the column will wrap.  
 
 sm, md, and lg are device-size-dependent 'size' values that are applicable to columns.
 
@@ -44,7 +44,7 @@ offset and [size]Offset is the same as for CSS flexbox grids, setting marginLeft
 
 **alignVertical** maybe also supplied as prop to the column to vertically align the items within the column. Possible values are: middle, top, bottom, space and distribute.
 
-Remember that these are the basic rules from which complex layout behavior can emerge. 
+These are the basic rules from which potntially very complex layout behavior can emerge. See also Column Size and Offset.
 
 #### nowrap
 
@@ -83,21 +83,44 @@ import {Row} from 'react-native-responsive-grid';
 
 `nowrap` - Accepts a boolean. This boolean defines the style property `flexWrap`. If no prop is specified, then the defaults value will be `flexWrap: 'wrap'`. If you add the prop to the `Row` then the style value will equal flexWrap: `nowrap`. 
 
-## Column
+## Column Size and Offset
 
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
 <Row colPercent={7}>
-    <Col sm={6} md={4} lg={3}>
+    <Col sm={6} md={4} lg={3} smOffset={1} mdOffset={3} lgOffset={5}>
         <Text>First Column</Text>
     </Col>
 </Row>
 ```
 
-There are currently four size props for `Column`. `size`, `sm`, `md`, and `lg`. The first one, `size`, applies to all screen sizes.
+There are currently four size props for `Column`. `size`, `sm`, `md`, and `lg`. The first one, `size`, applies to all screen sizes. The values indicate how many columns wide the column should be. The intrinsic column width is defined by percentage relative to the row as parent. 
 
-The three size props refer to the screen sizes they are active on (taking device pixel ratio into consideration.) 
+If you're nesting a column inside a row which is inside another column that is inside another row as below:
+
+```
+<Row colPercent={5}>
+    <Col size={10}>
+      <Row colPercent={5}>
+        <Col size={10}>
+          <Text>
+            This column is 25% of the width of the top level row
+          </Text>
+        </Col>
+      </Row>
+    </Col>
+</Row>
+
+```
+
+The nested column's size will be the column size value (size, sm, md, lg) times the colPercent of its parent row, so, in effect, nested percentages, e.g. 50% of parent row's width which is 50% of its parent row's width, i.e. the nested column is 25% of the top level row's width. 
+
+This nested percentages model applies to offsets, too, except offsets can also be negative.     
+
+There are currently four offset props for `Column`. `offset`, `smOffset`, `mdOffset`, and `lgOffset`. The first one, `offset`, applies to all screen sizes.
+
+The screen-size-prefixed size and offset props refer to the screen sizes they are active on (taking device pixel ratio into consideration.) 
 
 |Prop |Screen Size|Real World Device   |
 |---|---|---|
@@ -138,3 +161,112 @@ In this example the row and all of it's children will be hidden on small screens
 Every screen size has a hidden prop associated with it.
 
 Hidden props are all booleans. They default to false.
+
+## Real world example using static (non-screen-sized-prefixed) size and offset props:
+
+![demo](https://s13.postimg.org/6o6uygb2v/Screen_Shot_2017-04-07_at_10.40.18_AM.png)
+
+```
+    <Row nowrap colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={10} offset={1}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+          PREVIOUS ORDERS
+          </Text>
+        </Col>
+        <Col size={5} offset={2}>
+          <Text style={{ fontSize: 16, color: '#BD1206'}}>
+            SEE ALL
+          </Text>
+        </Col>
+    </Row>
+
+    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={10} offset={1}>
+            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
+            <Row nowrap colPercent={5}>
+              <Col size={1}>
+                <FontAwesome name='shopping-cart' size={17} color='gray'/>
+              </Col>
+              <Col size={12} offset={.5}>
+                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
+              </Col>
+            </Row>
+          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
+          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>                                                                             
+        </Col>
+        <Col size={1} offset={3.85}>
+          <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206"/>
+        </Col>
+    </Row>
+
+    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={10} offset={1}>
+            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 8, 2017</Text>
+            <Row nowrap colPercent={5}>
+              <Col size={1}>
+                <FontAwesome name='cutlery' size={17} color='gray'/>
+              </Col>
+              <Col size={12} offset={.5}>
+                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>DINE-IN ORDER</Text>
+              </Col>
+            </Row>
+          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Linguini Alfredo</Text>                                                                          
+        </Col>
+        <Col size={1} offset={3.85}>
+          <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206"/>
+        </Col>
+    </Row>
+
+    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={10} offset={1}>
+            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
+            <Row nowrap colPercent={5}>
+              <Col size={1}>
+                <FontAwesome name='cutlery' size={17} color='gray'/>
+              </Col>
+              <Col size={12} offset={.5}>
+                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
+              </Col>
+            </Row>
+          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Double Cheese Burger</Text>                                                                          
+        </Col>
+        <Col size={1} offset={3.85}>
+          <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206"/>
+        </Col>
+    </Row>
+
+    <Row nowrap colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={10} offset={1}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+          FAVORITE ITEMS
+          </Text>
+        </Col>
+        <Col size={5} offset={1}>
+          <Text style={{ fontSize: 16, color: '#BD1206'}}>
+          ADD MORE
+          </Text>
+        </Col>
+    </Row>
+
+    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={10} offset={1}>
+        <Text style={{fontSize: 16, color: 'black'}}>
+        Linguini Alfredo
+        </Text>
+      </Col>
+      <Col size={1} offset={4}>
+        <FontAwesome name='star' size={24} color='#BD1206'/>
+      </Col>
+    </Row>
+
+    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={10} offset={1}>
+        <Text style={{fontSize: 16, color: 'black'}}>
+        Double Cheese Burger
+        </Text>
+      </Col>
+      <Col size={1} offset={4}>
+        <FontAwesome name='star' size={24} color='#BD1206'/>
+      </Col>
+    </Row>
+```
