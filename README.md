@@ -3,7 +3,7 @@
 
 ## Problem Statement
 
-Developing performant, responsive and fairly detailed 2D layouts with raw flexbox in React Native (prior to v0.42) used to take me hours per screen and resulted in markup and styles that were almost unmaintainable. While Flexbox itself maybe confusing to new comers, the lack of perofmant way to encode relative size info was the real pain. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of those, namely, `react-native-flexbox-grid`, which itself is based on `react-flexbox-grid` and modified heavily to fit what I believe is an simple mental model for 2D responsive layout, based entirely on percentages but still fitting within the grid construct. 
+Developing performant, responsive and fairly detailed 2D layouts with raw flexbox in React Native (prior to v0.42) used to take me hours per screen and resulted in markup and styles that were almost unmaintainable. While Flexbox itself maybe confusing to new comers, the lack of perofmant way to encode relative size info was the real pain. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of those, namely, `react-native-flexbox-grid`, which itself is based on `react-flexbox-grid` and modified heavily to fit what I believe is a simpler mental model for 2D responsive layout, based entirely on percentages but still fitting within the grid construct. 
 
 Hopefully this is useful to others, too. 
 
