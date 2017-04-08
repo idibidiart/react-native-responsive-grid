@@ -1,5 +1,5 @@
 
-# Responsive grid for React Native
+# Responsive Grid for React Native
 
 ## Why?
 
