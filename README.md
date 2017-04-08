@@ -1,11 +1,11 @@
 
 # Responsive grid for React Native
 
-## Background
+## Why
 
 Developing performant, responsive and fairly detailed 2D layouts with raw flexbox in React Native (prior to v0.42) used to take me hours per screen and resulted in markup and styles that were almost unmaintainable. While Flexbox itself maybe confusing to new comers, the lack of perofmant way to encode relative size info was the real pain. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of those, namely, `react-native-flexbox-grid`, which itself is based on `react-flexbox-grid` and modified it heavily to fit what I believe is a simpler mental model for 2D responsive layout, one that is based entirely on percentages but still fits within the grid construct. 
 
-## About
+## What
 
 This Responsive Grid (for React Native) corrects the mental model for Grid based layout in that it eliminates the decoherence that results from using both an absolute column count combined relative sizing (!) by letting the developer specify grid column width as a percentage of screen size and allowing the specifying of the width of a given column in the layout as a multiple of that percentage. This way the developer doesn't have to divide the screen size in pixels (assuming they know that for the screen they're testing on, which is not always the case) by some arbitrary number of grid columns in order to get the width they desire per grid column (indirect route.) They can instead use visual intuition about relative sizes to define the column width directly as a percentage of screen width. I also found RTL support (for Hebrew/Arabic apps) generally lacking in RN, so I added RTL layout support to it.
 
