@@ -1,13 +1,15 @@
 
 # Responsive grid for React Native
 
-## Problem Statement
+## Background
 
 Developing performant, responsive and fairly detailed 2D layouts with raw flexbox in React Native (prior to v0.42) used to take me hours per screen and resulted in markup and styles that were almost unmaintainable. While Flexbox itself maybe confusing to new comers, the lack of perofmant way to encode relative size info was the real pain. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of those, namely, `react-native-flexbox-grid`, which itself is based on `react-flexbox-grid` and modified it heavily to fit what I believe is a simpler mental model for 2D responsive layout, one that is based entirely on percentages but still fits within the grid construct. 
 
-Hopefully this is useful to others, too. 
+## About
 
-#### Relative + Responsive Layout Example
+With RN's and Expo's out of the box support for Android/iOS, I find the missing piece is native support for Responsive Grid layout. Till then, I've derived one based on the new support in RN v0.42 for relative dimensions. It fixes the Grid model in that it eliminates the decoherence that results from using both absolute column count and relative sizing by letting the developer specify grid column width as a percentage of screen size and allowing the specifying of the width of a given column in the layout as a multiple of that percentage. This way the developer doesn't have to divide the screen size in pixels by some arbitrary number of grid columns in order to get the width they desire per grid column (indirect definition.) They can instead use visual intuition about relative sizes to define the column width directly as a percentage of screen width. I also found RTL support (for Hebrew/Arabic apps) generally lacking in RN, so I added RTL layout support to it.
+
+### Relative + Responsive Layout
 
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
