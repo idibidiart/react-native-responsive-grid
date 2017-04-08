@@ -277,7 +277,7 @@ This is intended for Hebrew and Arabic layouts, which are right to left.
 
 Noticed the reversed order of the Text relative to the physical order in the markup. Also notice that columns are justified as flex-end within the row and their content is rightAligned (except for the second column which is explicitly leftAligned to mimic the rightAligned behavior in normal ltr layout)
 
-![demo](https://s29.postimg.org/5k0mn45qf/Screen_Shot_2017-04-07_at_1.09.24_PM.png)
+![demo](https://s18.postimg.org/gr89vaghl/Screen_Shot_2017-04-07_at_6.47.22_PM.png)
 
 ### Normal LTR Markup 
 
