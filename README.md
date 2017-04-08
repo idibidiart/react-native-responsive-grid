@@ -1,5 +1,5 @@
 
-# Responsive grid for React Native (v0.42 and newer) based on react-native-flexbox-grid with some radical modifications and extended Readme, including a real world example. 
+# Responsive grid for React Native (v0.42 and newer) based on react-native-flexbox-grid with some radical modifications and extended Readme, including a real world example and RTL layout support (for Hebrew/Arabic)
 
 ## Problem Statement
 
