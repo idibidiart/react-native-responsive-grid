@@ -7,8 +7,10 @@ const cloneElements = (props) => {
     //if size doesn't exist or is 0 default to "12 columns"" ratio
     const colPercent = props.colPercent > 0 ? Math.min(props.colPercent, 100) : 8.33333333;
 
+    const rtl = props.rtl 
+
     return React.Children.map(props.children, (element) => {
-      return React.cloneElement(element, {colPercent: colPercent});
+      return React.cloneElement(element, {colPercent: colPercent, rtl: rtl});
     });
 }
 
@@ -22,7 +24,7 @@ const Row = (props) => {
                   { flexDirection: 'row',
                     flexWrap: props.nowrap ? 'nowrap' : 'wrap',
                     alignItems: (props.alignVertical === 'top' ? 'flex-start' : (props.alignVertical === 'bottom' ? 'flex-end' : (props.alignVertical === 'fill' ? 'stretch' : 'center'))),
-                    justifyContent: 'flex-start'
+                    justifyContent: props.rtl ? 'flex-end' : 'flex-start'
                   }]}>
             {cloneElements(props)}
         </View>

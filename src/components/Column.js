@@ -18,6 +18,7 @@ const Column = (props) => {
       lgHidden,
       rightAlign,
       colPercent,
+      rtl,
       ...rest
     } = props;
 
@@ -34,7 +35,8 @@ const Column = (props) => {
       lgOffset,
       lgHidden,
       rightAlign,
-      colPercent
+      colPercent,
+      rtl
     };
 
     const justifyContent = (props.alignVertical === 'top' ? 'flex-start' : (props.alignVertical === 'bottom' ? 'flex-end' : (props.alignVertical === 'space' ? 'space-between' : (props.alignVertical === 'distribute' ? 'space-around' : 'center' ))))
@@ -51,7 +53,7 @@ const Column = (props) => {
             flexDirection: 'column',
             marginLeft: getColumnOffset(screenSize, gridProps),
             justifyContent: justifyContent,
-            alignItems: gridProps.rightAlign ? 'flex-end' : 'flex-start'
+            alignItems: (gridProps.rightAlign || gridProps.rtl) ? 'flex-end' : 'flex-start'
           }]}>
           {rest.children}
         </View>

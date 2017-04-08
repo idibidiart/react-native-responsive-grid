@@ -3,11 +3,11 @@
 
 ## Problem Statement
 
-Developing performant, responsive and fairly detailed 2D layouts with raw flexbox in React Native (prior to v0.42) used to take me hours per screen and resulted in markup and styles that were almost unmaintainable. While Flexbox itself maybe confusing to new comers, the lack of perofmant way to encode relative size info was the real pain. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of those, namely, `react-native-flexbox-grid`, which itself is based on `react-flexbox-grid` and modified heavily to fit what I believe is a simpler mental model for 2D responsive layout, based entirely on percentages but still fitting within the grid construct. 
+Developing performant, responsive and fairly detailed 2D layouts with raw flexbox in React Native (prior to v0.42) used to take me hours per screen and resulted in markup and styles that were almost unmaintainable. While Flexbox itself maybe confusing to new comers, the lack of perofmant way to encode relative size info was the real pain. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of those, namely, `react-native-flexbox-grid`, which itself is based on `react-flexbox-grid` and modified it heavily to fit what I believe is a simpler mental model for 2D responsive layout, one that is based entirely on percentages but still fits within the grid construct. 
 
 Hopefully this is useful to others, too. 
 
-#### Mixed Static/Responsive Example
+#### Relative + Responsive Layout Example
 
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
@@ -32,11 +32,15 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 sm, md, and lg are device-size-dependent 'size' values that are applicable to columns.
 
-`offset` and `[size]Offset` - Accepts any number. This number defines the left offset in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (by default) content in offsetted columns will snap to grid. Offset values can also be negative, and **rightAlign** can be given as prop in the column to set alignItems to flex-end. This way content in offsetted columns will snap to grid in both directions.
+`offset` and `[size]Offset` - Accepts any number. This number defines the left offset in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (by default) content in offsetted columns will snap to grid. Offset values can also be negative, too.
+
+**rightAlign** can be given as prop in the column to set its alignItems to flex-end. This way content in offsetted columns will snap to grid in both in both the normal left-to-right (ltr) direction as well as thew right-to-left (rtl) directions. 
 
 **alignVertical** maybe supplied as prop to the row to vertically align the columns within the row. Possible values are: middle, top, bottom or fill.
 
 **alignVertical** maybe also supplied as prop to the column to vertically align the items within the column. Possible values are: middle, top, bottom, space and distribute.
+
+**rtl** maybe supplied as prop to the row to both reverse the order of columns (or elements) inside a row as well as to **rightAlign** their contents. This is useful for Hebrew and Arabic layouts.
 
 These are the basic rules from which potentially complex layout behavior can emerge. See also Column Size and Offset.
 
