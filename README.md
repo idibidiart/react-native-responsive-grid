@@ -34,13 +34,13 @@ sm, md, and lg are device-size-dependent 'size' values that are applicable to co
 
 `offset` and `[size]Offset` - Accepts any number. This number defines the left offset in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (by default) content in offsetted columns will snap to grid. Offset values can also be negative, too.
 
-**rightAlign** can be given as prop in the column to set its alignItems to flex-end. This way content in offsetted columns will snap to grid in both in both the normal left-to-right (ltr) direction as well as thew right-to-left (rtl) directions. 
+**rightAlign** may be be supplied as prop in the column to set its alignItems to flex-end. This way content in offsetted columns will snap to grid in both in both the normal left-to-right (ltr) direction as well as thew right-to-left (rtl) directions. 
 
-**alignVertical** maybe supplied as prop to the row to vertically align the columns within the row. Possible values are: middle, top, bottom or fill.
+**alignVertical** may be supplied as prop to the row to vertically align the columns within the row. Possible values are: middle, top, bottom or fill.
 
-**alignVertical** maybe also supplied as prop to the column to vertically align the items within the column. Possible values are: middle, top, bottom, space and distribute.
+**alignVertical** may be also supplied as prop to the column to vertically align the items within the column. Possible values are: middle, top, bottom, space and distribute.
 
-**rtl** maybe supplied as prop to the row to both reverse the order of columns (or elements) inside a row as well as to **rightAlign** their contents. This is useful for Hebrew and Arabic layouts.
+**rtl** may be supplied as prop to the row to both reverse the order of columns (or elements) inside a row as well as to **rightAlign** their contents. This is useful for Hebrew and Arabic layouts. **leftAlign** can be used on a colum in an rtl tagged row to exclude its content from **rightAlign** so the content can be left aligned to mimic the effect of **rightAlign** in normal ltr layouts. See also RTL Example.
 
 These are the basic rules from which potentially complex layout behavior can emerge. See also Column Size and Offset.
 
@@ -268,5 +268,50 @@ Note that in the markup below the right arrow icons have padding on the right an
       <Col size={5} rightAlign>
         <FontAwesome name='star' size={24} color='#BD1206'/>
       </Col>
+    </Row>
+```
+
+## RTL Support
+
+This is intended for Hebrew and Arabic layouts, which are right to left.
+
+Noticed the reversed order of the Text relative to the physical order in the markup. Also notice that columns are justified as flex-end within the row and their content is rightAligned (except for the second column which is explicitly leftAligned to mimic the rightAligned behavior in normal ltr layout)
+
+![demo](https://s29.postimg.org/5k0mn45qf/Screen_Shot_2017-04-07_at_1.09.24_PM.png)
+
+### Normal LTR Markup 
+
+```
+    <Row nowrap colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={10} offset={1} >
+          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+          PREVIOUS ORDERS
+          </Text>
+        </Col>
+        <Col size={5} rightAlign>
+          <Text style={{ fontSize: 16, color: '#BD1206'}}>
+            SEE ALL
+          </Text>
+        </Col>
+    </Row>
+```
+
+### RTL Markup
+
+Notice the offset values work in RTL direction now. The addition of .7 offset is to mimic the fact that the left margin in the LTR layout is smaller than the right margin in that layout, whereas it's the opposite in the RTL direction. So the .7 offset is used in RTL layout instead of the 1 offset, so alignment
+is identical. 
+
+```
+    <Row nowrap rtl colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={10} offset={.7} >
+          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+          PREVIOUS ORDERS
+          </Text>
+        </Col>
+        <Col size={5} leftAlign>
+          <Text style={{ fontSize: 16, color: '#BD1206'}}>
+            SEE ALL
+          </Text>
+        </Col>
     </Row>
 ```

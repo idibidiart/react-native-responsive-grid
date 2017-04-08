@@ -9,7 +9,7 @@ const cloneElements = (props) => {
 
     const rtl = props.rtl 
 
-    return React.Children.map(props.children, (element) => {
+    return React.Children.map((rtl ? React.Children.toArray(props.children).reverse() : props.children), (element) => {
       return React.cloneElement(element, {colPercent: colPercent, rtl: rtl});
     });
 }
