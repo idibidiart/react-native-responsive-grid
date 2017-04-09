@@ -18,7 +18,7 @@ This presentation by Rich Hickey, creator of the Clojure language, sums up our p
 [simple made easy](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/SimpleMadeEasy.md). 
 
 
-### Relative + Responsive Layout
+## Relative and Responsive Layout
 
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
@@ -92,7 +92,7 @@ import {Row} from 'react-native-responsive-grid';
 
 `nowrap` - Accepts a boolean. This boolean defines the style property `flexWrap`. If no prop is specified, then the defaults value will be `flexWrap: 'wrap'`. If you add the prop to the `Row` then the style value will equal flexWrap: `nowrap`. 
 
-## Column Size and Offset
+### Column Size and Offset
 
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
