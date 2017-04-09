@@ -55,7 +55,7 @@ sm, md, and lg are device-size-dependent 'size' values that are applicable to co
 
 These are the basic rules from which potentially complex layout behavior can emerge. See also Column Size and Offset.
 
-#### nowrap
+### nowrap
 
 ```
 import {Row} from 'react-native-responsive-grid';
@@ -153,7 +153,7 @@ On a phone the Column would take up 50% of the row's width.
 On a normal tablet the Column would take up 33.333% of the row's width.
 On a big tablet the Column would take up 25% of the row's width.
 
-#### Hidden props.
+### Hidden props.
 
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
