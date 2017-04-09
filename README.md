@@ -9,7 +9,7 @@ Developing performant, responsive and fairly detailed 2D layouts with raw flexbo
 
 This Responsive Grid (for React Native) corrects the mental model for Grid based layout in that it eliminates the decoherence that results from using both an absolute column count together with relative sizing (!) by letting the developer specify the width of each grid column as a percentage of screen size and then specify the width of a given column in their layout as a multiple of that percentage. In addition to allowing the developer to think of everything in terms of percentages (i.e. only x:100 ratios, as opposed to x:N for the column width and x:100 for everything else), the developer won't have to know the screen size in pixels and guess N for the number of grid columns they need to have in order to get the width they desire per grid column (an indirect route.) They can instead use visual intuition about relative sizes to define the column width as a percentage of the current screen width, and proceed from there. So much easuer, IMO.  
 
-I also found RTL support (for Hebrew/Arabic apps) generally lacking in RN, so I added RTL layout support to this version (See RTL example)
+I also found RTL (right-to-left) support (for Hebrew/Arabic apps) generally lacking in RN, so I added RTL layout support to this version (See RTL example)
 
 ### Relative + Responsive Layout
 
@@ -36,7 +36,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 sm, md, and lg are device-size-dependent 'size' values that are applicable to columns.
 
-`offset` and `[size]Offset` - Accepts any number. This number defines the left offset in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (by default) content in offsetted columns will snap to grid. Offset values can also be negative, too.
+`offset` and `[size]Offset` - Accepts any number. This number defines the marginLeft (or marginRight in csase of **rtl**) for the column in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (or flex-end for **rtl**) content in offsetted columns will snap to grid (in both ltr and rtl modes.) Offset values can also be negative, too.
 
 **rightAlign** may be be supplied as prop in the column to set its alignItems to flex-end. This way content in offsetted columns will snap to grid in both in both the normal left-to-right (ltr) direction as well as thew right-to-left (rtl) directions. 
 
