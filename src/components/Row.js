@@ -17,19 +17,7 @@ const cloneElements = (props) => {
 
     return React.Children.map((rtl ? React.Children.toArray(props.children).reverse() : props.children), (element) => {
       if (element.type.name !== 'Column') {
-        if (__DEV__) { 
-            Alert.alert(
-              'Grid Debug Mode',
-              "Row may only contain columns. ",
-              [
-                {text: 'OK', onPress: () => console.log('OK Pressed!')},
-              ],
-              {
-                cancelable: false
-              }
-            )
-            throw new Error("Row may only contain columns")
-        }
+          throw new Error("Row may only contain columns")
       }
       return React.cloneElement(element, {colPercent: colPercent, rtl: rtl})
     })
@@ -39,18 +27,26 @@ const Row = (props) => {
   if (isHidden(screenSize, props)){
     return null;
   } else {
-    return (
-        <View {...props}
-          style={[props.style,
-                  { flexDirection: 'row',
-                    flexWrap: props.nowrap ? 'nowrap' : 'wrap',
-                    alignItems: (props.alignVertical === 'top' ? 'flex-start' : (props.alignVertical === 'bottom' ? 'flex-end' : (props.alignVertical === 'fill' ? 'stretch' : 'center'))),
-                    justifyContent: props.rtl ? 'flex-end' : 'flex-start'
-                  }]}>
-            {cloneElements(props)}
-        </View>
-      );
+    try {
+        return (
+            <View {...props}
+              style={[props.style,
+                      { flexDirection: 'row',
+                        flexWrap: props.nowrap ? 'nowrap' : 'wrap',
+                        alignItems: (props.alignVertical === 'top' ? 'flex-start' : (props.alignVertical === 'bottom' ? 'flex-end' : (props.alignVertical === 'fill' ? 'stretch' : 'center'))),
+                        justifyContent: props.rtl ? 'flex-end' : 'flex-start'
+                      }]}>
+                {cloneElements(props)}
+            </View>
+        )
+    } catch (e) {
+      if (__DEV__) { 
+        console.error(e)
+      }
+      return null
     }
+    
+  }
 }
 
 Row.propTypes = {

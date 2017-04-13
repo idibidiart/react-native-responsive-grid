@@ -47,18 +47,7 @@ const Column = (props) => {
 
         return React.Children.map(props.children, (element) => {
           if (element.type.name === 'Column') {
-            Alert.alert(
-              'Grid Debug Mode',
-              "Column may not contain another column. Wrap child column in a row.",
-              [
-                {text: 'OK', onPress: () => console.log('OK Pressed!')},
-              ],
-              {
-                cancelable: false
-              }
-            )
-
-            throw new Error("Column may not contain another column. Wrap child column in a row.")
+              throw new Error("Column may not contain another column. Wrap child column in a row.")
           }
           return React.cloneElement(element, {})
         })
@@ -67,23 +56,30 @@ const Column = (props) => {
     if (isHidden(screenSize, gridProps)){
       return null;
     } else {
-      return (
-        <View
-        {...rest}
-        style={[
-          props.style, {
-            width: getColumnWidth(screenSize, gridProps),
-            flexDirection: 'column',
-            marginLeft: gridProps.rtl ? 0 : getColumnOffset(screenSize, gridProps),
-            marginRight: gridProps.rtl ? getColumnOffset(screenSize, gridProps) : 0,
-            justifyContent: justifyContent,
-            alignItems: (gridProps.rightAlign || (gridProps.rtl && !gridProps.leftAlign)) ? 'flex-end' : 'flex-start'
-          }]}>
-          {cloneElements(rest)}
-        </View>
-      );
+      try {
+        return (
+          <View
+          {...rest}
+          style={[
+            props.style, {
+              width: getColumnWidth(screenSize, gridProps),
+              flexDirection: 'column',
+              marginLeft: gridProps.rtl ? 0 : getColumnOffset(screenSize, gridProps),
+              marginRight: gridProps.rtl ? getColumnOffset(screenSize, gridProps) : 0,
+              justifyContent: justifyContent,
+              alignItems: (gridProps.rightAlign || (gridProps.rtl && !gridProps.leftAlign)) ? 'flex-end' : 'flex-start'
+            }]}>
+            {cloneElements(rest)}
+          </View>
+        )
+      } catch (e) {
+        if (__DEV__) {
+          console.error(e)
+        }
+        return null
+      }
     }
-};
+}
 
 Column.propTypes = {
   sm: PropTypes.number,
