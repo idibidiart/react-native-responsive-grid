@@ -47,13 +47,15 @@ sm, md, and lg are device-size-dependent 'size' values that are applicable to co
 
 **rightAlign** may be be supplied as prop in the column to set its alignItems to flex-end. This way content in offsetted columns will snap to grid in both in both the normal left-to-right (ltr) direction as well as thew right-to-left (rtl) directions. 
 
-**alignVertical** may be supplied as prop to the row to vertically align the columns within the row. Possible values are: middle, top, bottom or fill.
+**alignVertical** may be supplied as prop to the row to vertically align the columns within the row. Possible values are: middle, top, bottom or fill. Note that the row's height must be larger than the hight of a given element or column within it for any of the **verticalAlign** values to have any visible effect on that element or column.  
 
-**alignVertical** may be also supplied as prop to the column to vertically align the items within the column. Possible values are: middle, top, bottom, space and distribute.
+**alignVertical** may be also supplied as prop to the column to vertically align the items within the column. Possible values are: middle, top, bottom, space and distribute. Note that the column's height must be larger than the combined hight of the elements (and/or rows) within it for any of the **verticalAlign** values to have any visible effect on those elements (and/or rows.) 
 
 **rtl** may be supplied as prop to the row to both reverse the order of columns (or elements) inside a row as well as to **rightAlign** their contents. This is useful for Hebrew and Arabic layouts. **leftAlign** can be used on a colum in an rtl tagged row to exclude its content from **rightAlign** so the content can be left aligned to mimic the effect of **rightAlign** in normal ltr layouts. See also RTL Example.
 
 These are the basic rules from which potentially complex layout behavior can emerge. See also Column Size and Offset.
+
+To keep things simple, rows must only contain columns and columns must not contain other columns (they must be wrapped in rows within the column)
 
 ### nowrap
 
@@ -158,14 +160,14 @@ On a big tablet the Column would take up 25% of the row's width.
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
-<Row colPercent={5}>
+<Row colPercent={15}>
     <Col smHidden>
         <Text>First Column</Text>
     </Col>
 </Row>
 ```
 
-In this example the row and all of it's children will be hidden on small screens like phones, but it will appear on bigger screens like tablets.
+In this example the column and all of it's children will be hidden on small screens like phones, but it will appear on bigger screens like tablets. These props can be applied to either the row as a whole or to individual columns within it. 
 
 Every screen size has a hidden prop associated with it.
 

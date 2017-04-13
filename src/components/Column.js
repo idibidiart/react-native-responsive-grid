@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {screenSize} from '../lib/ScreenSize';
 import {isHidden, getColumnWidth, getColumnOffset} from '../lib/helpers';
-import {View} from 'react-native';
+import {View, Alert} from 'react-native';
 
 const Column = (props) => {
     const {
@@ -43,6 +43,27 @@ const Column = (props) => {
 
     const justifyContent = (props.alignVertical === 'top' ? 'flex-start' : (props.alignVertical === 'bottom' ? 'flex-end' : (props.alignVertical === 'space' ? 'space-between' : (props.alignVertical === 'distribute' ? 'space-around' : 'center' ))))
 
+    const cloneElements = (props) => {
+
+        return React.Children.map(props.children, (element) => {
+          if (element.type.name === 'Column') {
+            Alert.alert(
+              'Grid Debug Mode',
+              "Column may not contain another column. Wrap child column in a row.",
+              [
+                {text: 'OK', onPress: () => console.log('OK Pressed!')},
+              ],
+              {
+                cancelable: false
+              }
+            )
+
+            throw new Error("Column may not contain another column. Wrap child column in a row.")
+          }
+          return React.cloneElement(element, {})
+        })
+    }
+
     if (isHidden(screenSize, gridProps)){
       return null;
     } else {
@@ -58,7 +79,7 @@ const Column = (props) => {
             justifyContent: justifyContent,
             alignItems: (gridProps.rightAlign || (gridProps.rtl && !gridProps.leftAlign)) ? 'flex-end' : 'flex-start'
           }]}>
-          {rest.children}
+          {cloneElements(rest)}
         </View>
       );
     }
