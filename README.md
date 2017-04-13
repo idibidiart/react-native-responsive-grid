@@ -39,11 +39,11 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 `colPercent` in row - Accepts a number from 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width.  If you do not specify a number or you specify 0 the `colPercent` will default to 8.333333 which results in 12 columns for the given row. See also Column Size and Offset. 
 
-`size` in column - Accepts any positive number. This number defines how many grid columns wide the given layout column should be. If you do not specify a number or you input the number 0 the `size` will default to 8.333333 (1/12th the width of the row.) Since `size` accepts any number from 0 to Infinity, you can make your layout column as wide as you want, extending beyond the screen width if norwarp prop is set on the row. If nowrap is not set on the row, the column will wrap.  
+`size` in column - Accepts any positive number. This number defines how many grid columns wide the given layout column should be. If you do not specify a number or you input the number 0 the `size` will default to 8.333333 (1/12th the width of the row.) Since `size` accepts any number from 0 to Infinity, you can make your layout column as wide as you want, extending beyond the screen width if norwarp prop is set on the row. If nowrap is not set on the row, the column will wrap. Column `size` value defaults to 1 x `colPercent` if size is not specified. This way, the default column `size` is specfified by the row.
 
 sm, md, and lg are device-size-dependent 'size' values that are applicable to columns.
 
-`offset` and `[size]Offset` - Accepts any number. This number defines the marginLeft (or marginRight in csase of **rtl**) for the column in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (or flex-end for **rtl**) content in offsetted columns will snap to grid (in both ltr and rtl modes.) Offset values can also be negative, too.
+`offset` and `[size]Offset` - Accepts any number. This number defines the marginLeft (or marginRight in csase of **rtl**) for the column in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (or flex-end for **rtl**) content in offsetted columns will snap to grid (in both ltr and rtl modes.) Offset values can also be negative, too. Column `offset` value defaults to 0.
 
 **rightAlign** may be be supplied as prop in the column to set its alignItems to flex-end. This way content in offsetted columns will snap to grid in both in both the normal left-to-right (ltr) direction as well as thew right-to-left (rtl) directions. 
 
@@ -53,9 +53,9 @@ sm, md, and lg are device-size-dependent 'size' values that are applicable to co
 
 **rtl** may be supplied as prop to the row to both reverse the order of columns (or elements) inside a row as well as to **rightAlign** their contents. This is useful for Hebrew and Arabic layouts. **leftAlign** can be used on a colum in an rtl tagged row to exclude its content from **rightAlign** so the content can be left aligned to mimic the effect of **rightAlign** in normal ltr layouts. See also RTL Example.
 
-These are the basic rules from which potentially complex layout behavior can emerge. See also Column Size and Offset.
+To keep grid structure simple and consistent, rows must only contain columns and columns must not contain other columns (they must be wrapped in rows within the column.)
 
-To keep things simple, rows must only contain columns and columns must not contain other columns (they must be wrapped in rows within the column)
+These are the basic rules from which complex layout behavior may emerge. See also Column Size and Offset for how percentages work when nesting grid structures.
 
 ### nowrap
 
