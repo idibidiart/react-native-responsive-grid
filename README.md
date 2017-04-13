@@ -53,9 +53,9 @@ sm, md, and lg are device-size-dependent 'size' values that are applicable to co
 
 **rtl** may be supplied as prop to the row to both reverse the order of columns (or elements) inside a row as well as to **rightAlign** their contents. This is useful for Hebrew and Arabic layouts. **leftAlign** can be used on a colum in an rtl tagged row to exclude its content from **rightAlign** so the content can be left aligned to mimic the effect of **rightAlign** in normal ltr layouts. See also RTL Example.
 
-To keep grid structure simple and consistent, rows must only contain columns and columns must not contain other columns (they must be wrapped in rows within the column.)
+To keep the grid structure simple and consistent, rows must only contain columns and columns must not contain other columns (they must be wrapped in rows within the column.) You may, however, nest things as deeply as you need. See also Column Size and Offset for how percentages are calculated when nesting grid structures.
 
-These are the basic rules from which complex layout behavior may emerge. See also Column Size and Offset for how percentages work when nesting grid structures.
+These are the basic rules from which complex layout behavior may emerge. 
 
 ### nowrap
 
