@@ -9,6 +9,8 @@ Developing performant, responsive and fairly detailed 2D layouts with raw flexbo
 
 This Responsive Grid (for React Native) corrects the mental model for Grid based layout in that it eliminates the decoherence that results from using both an absolute column count together with relative sizing (!) by letting the developer specify the width of each grid column as a percentage of screen size and then specify the width of a given column in their layout as a multiple of that percentage. In addition to allowing the developer to think of everything in terms of percentages (i.e. only x:100 ratios, as opposed to x:N for the column width and x:100 for everything else), the developer won't have to know the screen size in pixels and guess N for the number of grid columns they need to have in order to get the width they desire per grid column (an indirect route.) They can instead use visual intuition about relative sizes to define the column width as a percentage of the current screen width, and derive the rest from there. 
 
+In addition, this version adds a constraint to the grid structure to keep things simple, repeatable and consistent. Specifically, it requires that rows have only columns as children and columns to be nested in rows. 
+
 I also found RTL (right-to-left) support (for Hebrew/Arabic apps) generally lacking in RN, so I added RTL layout support to this version (See RTL example)
 
 ## Philosophy
@@ -36,8 +38,6 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
     </Col>
 </Row>
 ```
-
-*To keep the grid structure simple and consistent, rows must only contain columns and columns may contsain rows or any other element but must contain other columns (they must be wrapped in rows.) You may nest row/column structures as deeply as you'd like. See also Column Size and Offset for how percentages are calculated when nesting.*
 
 `colPercent` in row - Accepts a number from 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width.  If you do not specify a number or you specify 0 the `colPercent` will default to 8.333333 which results in 12 columns for the given row. See also Column Size and Offset. 
 
