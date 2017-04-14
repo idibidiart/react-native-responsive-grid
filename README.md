@@ -47,13 +47,13 @@ sm, md, and lg are device-size-dependent 'size' values that are applicable to co
 
 **rightAlign** may be be supplied as prop in the column to set its alignItems to flex-end. This way content in offsetted columns will snap to grid in both in both the normal left-to-right (ltr) direction as well as thew right-to-left (rtl) directions. 
 
-**alignVertical** may be supplied as prop to the row to vertically align the columns within the row. Possible values are: middle, top, bottom or fill. Note that the row's height must be larger than the hight of a given element or column within it for any of the **alignVertical** values to have any visible effect on that element or column.  
+**alignVertical** may be supplied as prop to the row to vertically align the columns within the row. Possible values are: middle, top, bottom or fill. Note that the row's height must be larger than the hight of a given child column for any of the **alignVertical** values to have any visible effect.  
 
-**alignVertical** may be also supplied as prop to the column to vertically align the items within the column. Possible values are: middle, top, bottom, space and distribute. Note that the column's height must be larger than the combined hight of the elements (and/or rows) within it for any of the **alignVertical** values to have any visible effect on those elements (and/or rows.) 
+**alignVertical** may be also supplied as prop to the column to vertically align the elements or rows within the column. Possible values are: middle, top, bottom, space and distribute. Note that the column's height must be larger than the combined hight of the elements (and/or rows) within it for any of the **alignVertical** values to have any visible effect. 
 
 **rtl** may be supplied as prop to the row to both reverse the order of columns (or elements) inside a row as well as to **rightAlign** their contents. This is useful for Hebrew and Arabic layouts. **leftAlign** can be used on a colum in an rtl tagged row to exclude its content from **rightAlign** so the content can be left aligned to mimic the effect of **rightAlign** in normal ltr layouts. See also RTL Example.
 
-To keep the grid structure simple and consistent, rows must only contain columns and columns must not contain other columns (they must be wrapped in rows within the column.) You may, however, nest things as deeply as you need. See also Column Size and Offset for how percentages are calculated when nesting grid structures.
+To keep the grid structure simple and consistent, rows must only contain columns and columns must not contain other columns (they must be wrapped in rows within the column.) You may, however, nest row/column structures as deeply as you need. See also Column Size and Offset for how percentages are calculated when nesting.
 
 These are the basic rules from which complex layout behavior may emerge. 
 
