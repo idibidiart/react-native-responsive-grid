@@ -39,25 +39,25 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-`colPercent` in row - Accepts a number from 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width.  If you do not specify a number or you specify 0 the `colPercent` will default to 8.333333 which results in 12 columns for the given row. See also Column Size and Offset. 
+**colPercent** in row - Accepts a number from 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width.  If you do not specify a number or you specify 0 the `colPercent` will default to 8.333333 which results in 12 columns for the given row. See also Column Size and Offset. 
 
-`size` in column - Accepts any positive number. This number defines how many grid columns wide the given layout column should be. If you do not specify a number or you input the number 0 the `size` will default to 8.333333 (1/12th the width of the row.) Since `size` accepts any number from 0 to Infinity, you can make your layout column as wide as you want, extending beyond the screen width if norwarp prop is set on the row. If nowrap is not set on the row, the column will wrap. Column `size` value defaults to 1 x `colPercent` if size is not specified. This way, the default column `size` is specfified by the row.
+**size** in column - Accepts any positive number. This number defines how many grid columns wide the given layout column should be. If you do not specify a number or you input the number 0 the `size` will default to 8.333333 (1/12th the width of the row.) Since `size` accepts any number from 0 to Infinity, you can make your layout column as wide as you want, extending beyond the screen width if norwarp prop is set on the row. If nowrap is not set on the row, the column will wrap. Column `size` value defaults to 1 x `colPercent` if size is not specified. This way, the default column `size` is specfified by the row.
 
-sm, md, and lg are device-size-dependent 'size' values that are applicable to columns.
+**sm**, **md**, and **lg** are device-size-dependent 'size' values that are applicable to columns.
 
-`offset` and `[device-size-dependent]Offset` - Accepts any number. This number defines the marginLeft (or marginRight in csase of **rtl**) for the column in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (or flex-end for **rtl**) content in offsetted columns will snap to grid (in both ltr and rtl modes.) Offset values can also be negative, too. Column `offset` value defaults to 0. 
+**offset**, **smOffset**, **mdOffset** and **lgOffset** - Accepts any number. This number defines the marginLeft (or marginRight in csase of `rtl`) for the column in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (or flex-end for `rtl`) content in offsetted columns will snap to grid (in both ltr and rtl modes.) Offset values can also be negative, too. Column `offset` value defaults to 0. 
 
-**alignY** may be supplied as prop to the column to vertically align the elements and/or rows within it. Possible values are: center, top, bottom, space and distribute. Default is top.
+**vAlign** may be supplied as prop to the column to vertically align the elements and/or rows within it. Possible values are: center, top, bottom, space and distribute. Default is top.
 
-**alignY** may also be supplied as prop to the row to align the columns within it in the vertical direction. Possible values are: center, top, bottom or fill. Default is top.
+**vAlign** may also be supplied as prop to the row to align the columns within it in the vertical direction. Possible values are: center, top, bottom or fill. Default is top.
 
-**alignX** may be supplied as prop to the row to align the columns within it in the horizontal direction. Possible values are: center, left, right, space and distribute. Default is left.
+**hAlign** may be supplied as prop to the row to align the columns within it in the horizontal direction. Possible values are: center, left, right, space and distribute. Default is left.
 
-**alignX** may also be supplied as prop to the column to align its rows and/or elements within it in the horizontal direction. Possible values are: center, left, right, and fill. Default is left.
+**hAlign** may also be supplied as prop to the column to align its rows and/or elements within it in the horizontal direction. Possible values are: center, left, right, and fill. Default is left.
 
 **rtl** may be supplied as prop to the row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
-**cell** may be supplied as prop to the row to make it the same in height as the column is in width. If not supplied, row height is whatever is in the style prop or if that's not defined then it's set to 'auto'. Column width differs in how it's set for a good reason. It is specified as percentage of the Row parent's view width (see colPercent) and defaults to 1/12th or 8.333%. This is so that we may have predictable `offset` behavior. 
+**cell** may be supplied as prop to the row to make it the same in height as the column is in width. If not supplied, row height is whatever is in the style prop or if that's not defined then it's set to 'auto'. Column width differs in how it's set in gthat it is specified as percentage of the Row parent's view width (see colPercent) with a default valu of 1/12th or 8.333%. This is so that we may have a predictable `offset` behavior. 
 
 These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 
@@ -181,6 +181,54 @@ Hidden props are all booleans. They default to false.
 
 ![demo](https://s29.postimg.org/5k0mn45qf/Screen_Shot_2017-04-07_at_1.09.24_PM.png)
 
+### Navbar styles (for ex-navigation)
+
+```
+  in route's HOC:
+
+  static route = {
+      navigationBar: {
+        title: 'Home',
+        renderTitle: (route, props) => {
+          return (
+          <Row colPercent={100} cell vAlign='center'>
+            <Col size={1} hAlign='center'>
+              <Image style={styles.titleImage} source={require('./assets/logo.png')}/>
+            </Col>
+          </Row>)
+        },
+        renderRight: (route, props) => {
+
+          const { config: { eventEmitter }  } = route;
+
+          return (<Row colPercent={100} cell vAlign='center'>
+            <Col size={1} hAlign='right'>
+              <Button 
+                title="LOG IN"
+                color="#0A0A0A"
+                onPress={() => {
+                    eventEmitter.emit('openModal')
+                  }
+                }
+              ></Button>
+            </Col>
+          </Row>)
+        },
+        backgroundColor: "#fff"
+      }
+    }
+
+    ...
+    
+    // in styles:
+
+    titleImage: {
+      width: 120,
+      height: 24,
+      resizeMode: 'stretch' 
+    }
+```
+
 Note that in the markup below the right arrow icons have padding on the right and left (they should not but I guess they were converted from vector to image and that's how they got their extra padding) so a good way to deal with that is not by using fractional offset value as that will change with screen size while the font remains the same size which would misalign the icons relative to the right-aligned text like SEE ALL, ADD MORE and the start icon (which has no padding in it) -- the right to compensate for icons that have padding in them is by using absolute pixels in the style prob, e.g. left: 6. That is unless your font is responsive, in which case using fractional offset would be the right way.
 
 ```
@@ -190,7 +238,7 @@ Note that in the markup below the right arrow icons have padding on the right an
           PREVIOUS ORDERS
           </Text>
         </Col>
-        <Col size={5} alignX='right'>
+        <Col size={5} hAlign='right'>
           <Text style={{ fontSize: 16, color: '#BD1206'}}>
             SEE ALL
           </Text>
@@ -211,7 +259,7 @@ Note that in the markup below the right arrow icons have padding on the right an
           <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
           <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>                                                                             
         </Col>
-        <Col size={5} alignX='right'>
+        <Col size={5} hAlign='right'>
           <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
         </Col>
     </Row>
@@ -229,7 +277,7 @@ Note that in the markup below the right arrow icons have padding on the right an
             </Row>
           <Text style={{fontSize: 16, color: '#0a0a0a'}}>Linguini Alfredo</Text>                                                                          
         </Col>
-        <Col size={5} alignX='right'>
+        <Col size={5} hAlign='right'>
           <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}}/>
         </Col>
     </Row>
@@ -247,7 +295,7 @@ Note that in the markup below the right arrow icons have padding on the right an
             </Row>
           <Text style={{fontSize: 16, color: '#0a0a0a'}}>Double Cheese Burger</Text>                                                                          
         </Col>
-        <Col size={5} alignX='right'>
+        <Col size={5} hAlign='right'>
           <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}}/>
         </Col>
     </Row>
@@ -258,7 +306,7 @@ Note that in the markup below the right arrow icons have padding on the right an
           FAVORITE ITEMS
           </Text>
         </Col>
-        <Col size={5} alignX='right'>
+        <Col size={5} hAlign='right'>
           <Text style={{ fontSize: 16, color: '#BD1206'}}>
           ADD MORE
           </Text>
@@ -271,7 +319,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         Linguini Alfredo
         </Text>
       </Col>
-      <Col size={5} alignX='right'>
+      <Col size={5} hAlign='right'>
         <FontAwesome name='star' size={24} color='#BD1206'/>
       </Col>
     </Row>
@@ -282,7 +330,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         Double Cheese Burger
         </Text>
       </Col>
-      <Col size={5} alignX='right'>
+      <Col size={5} hAlign='right'>
         <FontAwesome name='star' size={24} color='#BD1206'/>
       </Col>
     </Row>
@@ -305,7 +353,7 @@ Notice the reversed order of the Text relative to the physical order in the mark
           PREVIOUS ORDERS
           </Text>
         </Col>
-        <Col size={5} rightAlign>
+        <Col size={5} hAlign='right'>
           <Text style={{ fontSize: 16, color: '#BD1206'}}>
             SEE ALL
           </Text>
@@ -315,8 +363,7 @@ Notice the reversed order of the Text relative to the physical order in the mark
 
 ### RTL Markup
 
-Notice the offset values work in RTL direction now. The addition of .7 offset is to mimic the fact that the left margin in the LTR layout is smaller than the right margin in that layout, whereas it's the opposite in the RTL direction. So the .7 offset is used in RTL layout instead of the 1 offset, so alignment
-is identical. 
+Notice the offset values work in RTL direction now. The addition of .7 offset is to mimic the fact that the left margin in the LTR layout is smaller than the right margin in that layout, whereas it's the opposite in the RTL direction. So the .7 offset is used in RTL layout instead of the 1 offset, so alignment is identical. 
 
 ```
     <Row nowrap rtl colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
@@ -325,7 +372,7 @@ is identical.
           PREVIOUS ORDERS
           </Text>
         </Col>
-        <Col size={5} leftAlign>
+        <Col size={5} hAlign='left'>
           <Text style={{ fontSize: 16, color: '#BD1206'}}>
             SEE ALL
           </Text>

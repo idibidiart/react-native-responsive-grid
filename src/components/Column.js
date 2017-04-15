@@ -16,8 +16,8 @@ const Column = (props) => {
       lg,
       lgOffset,
       lgHidden,
-      alignY,
-      alignX,
+      vAlign,
+      hAlign,
       colPercent,
       rtl,
       ...rest
@@ -35,17 +35,16 @@ const Column = (props) => {
       lg,
       lgOffset,
       lgHidden,
-      alignY,
-      alignX,
+      vAlign,
+      hAlign,
       colPercent,
       rtl
     };
 
     // top/flex-start is default
-    const align_Y = (props.alignY === 'center' ? 'center' : (props.alignY === 'bottom' ? 'flex-end' : (props.alignY === 'space' ? 'space-between' : (props.alignY === 'distribute' ? 'space-around' : 'flex-start'))))
-    
+    const align_Y = (props.vAlign === 'center' ? 'center' : (props.vAlign === 'bottom' ? 'flex-end' : (props.vAlign === 'space' ? 'space-between' : (props.vAlign === 'distribute' ? 'space-around' : 'flex-start'))))
     // left/flex-start is default
-    const align_X = (props.alignX === 'fill' ? 'stretch' : (props.alignX === 'center' ? 'center' : ((props.alignX === 'right' || (props.rtl && props.alignX !== 'left')) ? 'flex-end' : 'flex-start')))
+    const align_X = (props.hAlign === 'fill' ? 'stretch' : (props.hAlign === 'center' ? 'center' : ((props.hAlign === 'right' || (props.rtl && props.hAlign !== 'left')) ? 'flex-end' : 'flex-start')))
 
     const cloneElements = (props) => {
         return React.Children.map(props.children, (element) => {
@@ -96,8 +95,8 @@ Column.propTypes = {
   lgHidden: PropTypes.bool,
   size: PropTypes.number,
   offset: PropTypes.number,
-  alignY: PropTypes.string,
-  alignX: PropTypes.string
+  vAlign: PropTypes.string,
+  hAlign: PropTypes.string
 }
 
 export default Column;
