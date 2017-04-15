@@ -19,10 +19,10 @@ const cloneElements = (props) => {
 const Row = (props) => {
 
   // left/flex-start is default
-  const alignX =  (props.alignX === 'space' ? 'space-between' : (props.alignX === 'distribute' ? 'space-around' : (props.alignX === 'center' ? 'center' : (props.alignX === 'right' ? 'flex-end' : 'flex-start'))))
+  const align_X =  (props.alignX === 'space' ? 'space-between' : (props.alignX === 'distribute' ? 'space-around' : (props.alignX === 'center' ? 'center' : (props.alignX === 'right' ? 'flex-end' : 'flex-start'))))
   
   // top/flex-start is default
-  const alignY = props.alignY === 'center' ? 'center' : (props.alignY === 'bottom' ? 'flex-end' : (props.alignY === 'fill' ? 'stretch' : 'flex-start'))
+  const align_Y = props.alignY === 'center' ? 'center' : (props.alignY === 'bottom' ? 'flex-end' : (props.alignY === 'fill' ? 'stretch' : 'flex-start'))
 
   if (isHidden(screenSize, props)){
     return null;
@@ -33,8 +33,8 @@ const Row = (props) => {
               style={[props.style,
                       { flexDirection: 'row',
                         flexWrap: props.nowrap ? 'nowrap' : 'wrap',
-                        alignItems: alignY,
-                        justifyContent: alignX
+                        alignItems: align_Y,
+                        justifyContent: align_X
                       }]}>
                 {cloneElements(props)}
             </View>
