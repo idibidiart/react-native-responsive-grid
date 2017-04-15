@@ -34,7 +34,7 @@ const Row = (props) => {
                         flexWrap: props.nowrap ? 'nowrap' : 'wrap',
                         alignItems: align_Y,
                         justifyContent: align_X,
-                        height: props.cell ? props.colPercent + '%' : (props.style && props.style.height !== undefined ? props.style.height : 'auto') 
+                        height: props.cell ? props.colPercent + '%' : (props.style && props.style.height !== undefined ? props.style.height : undefined) 
                       }]}>
                 {cloneElements(props)}
             </View>
