@@ -1,6 +1,6 @@
 {
   "name": "react-native-responsive-grid",
-  "version": "0.9.0",
+  "version": "0.9.5",
   "description": "Responsive grid for React Native based on react-native-flexbox-grid",
   "main": "src/index.js",
   "repository": {
@@ -20,7 +20,5 @@
     "url": "https://github.com/idibidiart/react-native-responsive-grid/issues"
   },
   "homepage": "https://github.com/idibidiart/react-native-responsive-grid#readme",
-  "dependencies": {
-    "redbox-react": "^1.3.6"
-  }
+  "dependencies": {}
 }
