@@ -4,8 +4,8 @@ import {isHidden} from '../lib/helpers';
 import {View, Alert} from 'react-native';
 
 const cloneElements = (props) => {
-    //if size doesn't exist or is 0 default to "12 columns"" ratio
-    const colPercent = props.colPercent > 0 ? Math.min(props.colPercent, 100) : 8.33333333;
+    // if size doesn't exist or is <= 0 then default to "12 columns"" ratio
+    const colPercent = Math.max(0, props.colPercent) ? Math.min(props.colPercent, 100) : 8.33333333;
     const rtl = props.rtl 
 
     return React.Children.map((rtl ? React.Children.toArray(props.children).reverse() : props.children), (element) => {
@@ -20,7 +20,6 @@ const Row = (props) => {
 
   // left/flex-start is default
   const align_X =  (props.alignX === 'space' ? 'space-between' : (props.alignX === 'distribute' ? 'space-around' : (props.alignX === 'center' ? 'center' : (props.alignX === 'right' ? 'flex-end' : 'flex-start'))))
-  
   // top/flex-start is default
   const align_Y = props.alignY === 'center' ? 'center' : (props.alignY === 'bottom' ? 'flex-end' : (props.alignY === 'fill' ? 'stretch' : 'flex-start'))
 
@@ -34,7 +33,8 @@ const Row = (props) => {
                       { flexDirection: 'row',
                         flexWrap: props.nowrap ? 'nowrap' : 'wrap',
                         alignItems: align_Y,
-                        justifyContent: align_X
+                        justifyContent: align_X,
+                        height: props.cell ? props.colPercent + '%' : (props.style.height !== undefined ? props.style.height : 'auto') 
                       }]}>
                 {cloneElements(props)}
             </View>

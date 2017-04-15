@@ -57,6 +57,8 @@ sm, md, and lg are device-size-dependent 'size' values that are applicable to co
 
 **rtl** may be supplied as prop to the row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
+**cell** may be supplied as prop to the row to make it the same in height as the column is in width. If not supplied, row height is whatever is in the style prop or if that's not defined then it's set to 'auto'. Column width differs in how it's set for a good reason. It is specified as percentage of the Row parent's view width (see colPercent) and defaults to 1/12th or 8.333%. This is so that we may have predictable `offset` behavior. 
+
 These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 
 ### nowrap
