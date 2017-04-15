@@ -16,8 +16,8 @@ const Column = (props) => {
       lg,
       lgOffset,
       lgHidden,
-      rightAlign,
-      leftAlign,
+      alignY,
+      alignX,
       colPercent,
       rtl,
       ...rest
@@ -35,19 +35,22 @@ const Column = (props) => {
       lg,
       lgOffset,
       lgHidden,
-      rightAlign,
-      leftAlign,
+      alignY,
+      alignX,
       colPercent,
       rtl
     };
 
-    const justifyContent = (props.alignVertical === 'top' ? 'flex-start' : (props.alignVertical === 'bottom' ? 'flex-end' : (props.alignVertical === 'space' ? 'space-between' : (props.alignVertical === 'distribute' ? 'space-around' : 'center' ))))
+    // top/flex-start is default
+    const alignY = (props.alignY === 'center' ? 'center' : (props.alignY === 'bottom' ? 'flex-end' : (props.alignY=== 'space' ? 'space-between' : (props.alignY === 'distribute' ? 'space-around' : 'flex-start'))))
+    
+    // left/flex-start is default
+    const alignX = (props.alignX === 'fill' ? 'stretch' : (props.alignX === 'center' ? 'center' : ((props.alignX === 'right' || (props.rtl && props.alignX !== 'left')) ? 'flex-end' : 'flex-start')))
 
     const cloneElements = (props) => {
-
         return React.Children.map(props.children, (element) => {
           if (element.type.name === 'Column') {
-              throw new Error("Column may not contain another column. Wrap child column in a row.")
+              throw new Error("Column may not contain another Column. Wrap child Column in Row.")
           }
           return React.cloneElement(element, {})
         })
@@ -66,8 +69,8 @@ const Column = (props) => {
               flexDirection: 'column',
               marginLeft: gridProps.rtl ? 0 : getColumnOffset(screenSize, gridProps),
               marginRight: gridProps.rtl ? getColumnOffset(screenSize, gridProps) : 0,
-              justifyContent: justifyContent,
-              alignItems: (gridProps.rightAlign || (gridProps.rtl && !gridProps.leftAlign)) ? 'flex-end' : 'flex-start'
+              alignItems: alignX,
+              justifyContent: alignY
             }]}>
             {cloneElements(rest)}
           </View>
@@ -93,7 +96,8 @@ Column.propTypes = {
   lgHidden: PropTypes.bool,
   size: PropTypes.number,
   offset: PropTypes.number,
-  rightAlign: PropTypes.bool
-};
+  alignY: PropTypes.string,
+  alignX: PropTypes.string
+}
 
 export default Column;

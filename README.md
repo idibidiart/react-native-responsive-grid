@@ -45,17 +45,19 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 sm, md, and lg are device-size-dependent 'size' values that are applicable to columns.
 
-`offset` and `[size]Offset` - Accepts any number. This number defines the marginLeft (or marginRight in csase of **rtl**) for the column in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (or flex-end for **rtl**) content in offsetted columns will snap to grid (in both ltr and rtl modes.) Offset values can also be negative, too. Column `offset` value defaults to 0.
+`offset` and `[device-size-dependent]Offset` - Accepts any number. This number defines the marginLeft (or marginRight in csase of **rtl**) for the column in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (or flex-end for **rtl**) content in offsetted columns will snap to grid (in both ltr and rtl modes.) Offset values can also be negative, too. Column `offset` value defaults to 0. 
 
-**rightAlign** may be be supplied as prop in the column to set its alignItems to flex-end. This way content in offsetted columns will snap to grid in both in both the normal left-to-right (ltr) direction as well as thew right-to-left (rtl) directions. 
+**alignY** may be supplied as prop to the column to vertically align the elements and/or rows within it. Possible values are: center, top, bottom, space and distribute. Default is top.
 
-**alignVertical** may be supplied as prop to the row to vertically align the columns within the row. Possible values are: middle, top, bottom or fill. Note that the row's height must be larger than the hight of a given child column for any of the **alignVertical** values to have any visible effect.  
+**alignY** may also be supplied as prop to the row to align the columns within it in the vertical direction. Possible values are: center, top, bottom or fill. Default is top.
 
-**alignVertical** may be also supplied as prop to the column to vertically align the elements or rows within the column. Possible values are: middle, top, bottom, space and distribute. Note that the column's height must be larger than the combined hight of the elements (and/or rows) within it for any of the **alignVertical** values to have any visible effect. 
+**alignX** may be supplied as prop to the row to align the columns within it in the horizontal direction. Possible values are: center, left, right, space and distribute. Default is left.
 
-**rtl** may be supplied as prop to the row to both reverse the order of columns (or elements) inside a row as well as to **rightAlign** their contents. This is useful for Hebrew and Arabic layouts. **leftAlign** can be used on a colum in an rtl tagged row to exclude its content from **rightAlign** so the content can be left aligned to mimic the effect of **rightAlign** in normal ltr layouts. See also RTL Example.
+**alignX** may also be supplied as prop to the column to align its rows and/or elements within it in the horizontal direction. Possible values are: center, left, right, and fill. Default is left.
 
-These are the basic rules from which potentially complex layout behavior may emerge. 
+**rtl** may be supplied as prop to the row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
+
+These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 
 ### nowrap
 
