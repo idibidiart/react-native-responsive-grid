@@ -4,8 +4,7 @@ import {isHidden} from '../lib/helpers';
 import {View, Alert} from 'react-native';
 
 const cloneElements = (props) => {
-    // if size doesn't exist or is <= 0 then default to "12 columns"" ratio
-    const colPercent = Math.max(0, props.colPercent) ? Math.min(props.colPercent, 100) : 8.33333333;
+    const colPercent = props.colPercent !== undefined ? Math.max(0, Math.min(props.colPercent, 100)) : 100;
     const rtl = props.rtl 
 
     return React.Children.map((rtl ? React.Children.toArray(props.children).reverse() : props.children), (element) => {

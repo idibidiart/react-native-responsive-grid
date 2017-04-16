@@ -41,9 +41,9 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-**colPercent** in row - Accepts a number from 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width.  If you do not specify a number or you specify 0 the `colPercent` will default to 8.333333 which results in 12 columns for the given row. See also Column Size and Offset. 
+**colPercent** in row - Accepts a number from 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width.  It defaults to 100(%). See also Column Props section. 
 
-**size** in column - Accepts any positive number. This number defines how many grid columns wide the given layout column should be. If you do not specify a number or you input the number 0 the `size` will default to 8.333333 (1/12th the width of the row.) Since `size` accepts any number from 0 to Infinity, you can make your layout column as wide as you want, extending beyond the screen width if norwarp prop is set on the row. If nowrap is not set on the row, the column will wrap. Column `size` value defaults to 1 x `colPercent` if size is not specified. This way, the default column `size` is specfified by the row.
+**size** in column - Accepts any positive number. This number defines how many grid columns wide the given layout column should be. It defaults to 1. Since `size` accepts any number from 0 to Infinity, you can make your layout column as many grid columns wide as you want, extending beyond the screen width if norwarp prop is set on the row. If nowrap is not set on the row, the column will wrap. 
 
 **sm**, **md**, and **lg** are device-size-dependent 'size' values that are applicable to columns.
 
@@ -100,7 +100,7 @@ import {Row} from 'react-native-responsive-grid';
 
 `nowrap` - Accepts a boolean. This boolean defines the style property `flexWrap`. If no prop is specified, then the defaults value will be `flexWrap: 'wrap'`. If you add the prop to the `Row` then the style value will equal flexWrap: `nowrap`. 
 
-### Column Size and Offset
+### Column Props
 
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
@@ -134,8 +134,7 @@ If you're nesting a column inside a row which is inside another column that is i
 The nested column's size will be the column size value (size, sm, md, lg) times the colPercent of its parent row, so, in effect, nested percentages, e.g. 50% of parent row's width which is 50% of its parent row's width, i.e. the nested column is 25% of the top level row's width. 
 
 This nested percentages model applies to offsets, too, except offsets can also be negative.     
-
-There are currently four offset props for `Column`. `offset`, `smOffset`, `mdOffset`, and `lgOffset`. The first one, `offset`, applies to all screen sizes. Offset values can be negative, too, and that's often used when rightAlign is supplied as prop to the column, so that content of offsetted column will snap to grid in the right-to-left direction just as it would in the left-to-right direction with a positive offset value.
+There are also four offset props for `Column`. `offset`, `smOffset`, `mdOffset`, and `lgOffset`. The first one, `offset`, applies to all screen sizes. Offset values can be negative, too, and that's often used when rightAlign is supplied as prop to the column, so that content of offsetted column will snap to grid in the right-to-left direction just as it would in the left-to-right direction with a positive offset value.
 
 The screen-size-prefixed size and offset props refer to the screen sizes they are active on (taking device pixel ratio into consideration.) 
 
