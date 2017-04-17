@@ -59,6 +59,7 @@ const Column = (props) => {
       return null;
     } else {
       try {
+
         return (
           <View
           {...rest}

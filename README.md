@@ -11,7 +11,7 @@ This Responsive Grid (for React Native) fixes the calculation model for Grid bas
 
 This version of the grid abstracts away the Flexbox spec (keeps it under the hood), including confusing terms like justifyContent and alignItems, which are dependent in their meaning on another part of the spec, namely, flexDirection. If flexDirection is 'row' then justifyContent operates horizontally. If it's 'column' then justifyContent operates vertically. The opposite for alignItems. This kind of 'semantic side effect' is rather strange and unexpected. So this version of the grid replaces that weirdness with vAlign and hAlign where v stands for vertical and h for horizontal. Both can be applied to rows AND columns but they retain their meaning: hAlign will always align content horizontally and vAlign will always align content vertically. 
 
-In addition, I've added a constraint to the grid structure to keep it simple and consistent. Specifically, it requires that rows have only columns as children and columns to be nested in rows. 
+In addition, I've added a constraint to the grid structure to keep it simple and consistent. Specifically, it requires that rows have only columns as children while columns may have a row or any element as children. 
 
 I also found that RTL (right-to-left) support (for Hebrew/Arabic apps) to be generally lacking in RN, so I added RTL layout support to this version (See RTL example,)
 
