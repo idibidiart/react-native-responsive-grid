@@ -24,7 +24,7 @@ const Row = (props) => {
   // left/flex-start is default
   const align_X =  (props.hAlign === 'space' ? 'space-between' : (props.hAlign === 'distribute' ? 'space-around' : (props.hAlign === 'center' ? 'center' : (props.hAlign === 'right' ? 'flex-end' : 'flex-start'))))
   // top/flex-start is default
-  const align_Y = (props.fill && !props.vAlign) ? 'stretch' :  props.vAlign === 'center' ? 'center' : (props.vAlign === 'bottom' ? 'flex-end' : (props.vAlign === 'fill' ? 'stretch' : 'flex-start'))
+  const align_Y = props.vAlign === 'center' ? 'center' : (props.vAlign === 'bottom' ? 'flex-end' : (props.vAlign === 'fill' ? 'stretch' : 'flex-start'))
 
   const colPercent = refineColPercent(props.colPercent)
 
@@ -39,7 +39,7 @@ const Row = (props) => {
                         flexWrap: 'wrap',
                         alignItems: align_Y,
                         justifyContent: align_X,
-                        height: props.fill ?  '100%' : (props.style && props.style.height !== undefined ? props.style.height : undefined) 
+                        alignSelf: props.fill ? 'stretch' : undefined
                       }]}>
                 {cloneElements(props)}
             </View>
@@ -57,7 +57,7 @@ const Row = (props) => {
 Row.propTypes = {
   colPercent: PropTypes.number,
   rtl: PropTypes.bool,
-  nowrap: PropTypes.bool,
+  fill: PropTypes.bool,
   smHidden: PropTypes.bool,
   mdHidden: PropTypes.bool,
   lgHidden: PropTypes.bool,

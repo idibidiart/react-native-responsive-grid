@@ -45,7 +45,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-**colPercent** in row - Accepts a number from 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width.  It defaults to 100(%). See also Column Props section. 
+**colPercent** in row - Accepts a number from 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width.  It defaults to 100(%). 
 
 **size** in column - Accepts any positive number. This number defines how many grid columns wide the given layout column should be. It defaults to 1. Since `size` accepts any number from 0 to Infinity, you can make your layout column as many grid columns wide as you want, extending beyond the screen width if norwarp prop is set on the row. If is not set on the row, the column will wrap. The size value will overridethe width value in the style prop for the column, and that's because we wat to have a predictable offset, that is a multiple of the grid column width.
 
@@ -63,11 +63,14 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 **rtl** may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
-**fill** may be supplied as prop to Row to make it 100% of its parent view's height. If not supplied, Row's height is whatever is in the style prop or 'auto'. Using 'fill' on Row will also stretch its child columns in the verical direction to fill the full height of the row, unless a value for vAlign is specified, which can be used to position the columns vertically within the the row. 
+**fill** may be supplied as prop to Row to make it 100% of its parent view's available vertical space. 
+
+**fill** may be supplied as prop to Column to make it 100% of its parent view's available horizontal space. 
+
 
 These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 
-### Column Props
+### Sizing & Offsets
 
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
@@ -98,9 +101,10 @@ If you're nesting a column inside a row which is inside another column that is i
 
 ```
 
-The nested column's size will be the column size value (size, sm, md, lg) times the colPercent of its parent row, so, in effect, nested percentages, e.g. 50% of parent row's width which is 50% of its parent row's width, i.e. the nested column is 25% of the top level row's width. 
+The nested column's size will be the column size value (size, sm, md, lg) times the colPercent of its parent row, so, in effect, we get nested percentages, e.g. 50% of parent row's width which is 50% of its parent row's width means the nested column is 25% of the top level row's width. 
 
-This nested percentages model applies to offsets, too, except offsets can also be negative.     
+This nested percentages model affects offsets since they are a multiple of the grid column width. 
+
 There are also four offset props for `Column`. `offset`, `smOffset`, `mdOffset`, and `lgOffset`. The first one, `offset`, applies to all screen sizes. Offset values can be negative, too, and that's often used when rightAlign is supplied as prop to the column, so that content of offsetted column will snap to grid in the right-to-left direction just as it would in the left-to-right direction with a positive offset value.
 
 The screen-size-prefixed size and offset props refer to the screen sizes they are active on (taking device pixel ratio into consideration.) 

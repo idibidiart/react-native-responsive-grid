@@ -72,7 +72,8 @@ const Column = (props) => {
               marginLeft: gridProps.rtl ? 0 : getColumnOffset(screenSize, gridProps),
               marginRight: gridProps.rtl ? getColumnOffset(screenSize, gridProps) : 0,
               alignItems: align_X,
-              justifyContent: align_Y
+              justifyContent: align_Y,
+              alignSelf: props.fill ? 'stretch' : undefined
             }]}>
             {cloneElements(rest)}
           </View>
