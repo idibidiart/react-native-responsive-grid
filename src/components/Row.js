@@ -3,8 +3,12 @@ import {screenSize} from '../lib/ScreenSize';
 import {isHidden} from '../lib/helpers';
 import {View, Alert} from 'react-native';
 
+const colPercent = (val) => {
+  return (val !== undefined ? Math.max(0, Math.min(val, 100)) : 100)
+}
+
 const cloneElements = (props) => {
-    const colPercent = props.colPercent !== undefined ? Math.max(0, Math.min(props.colPercent, 100)) : 100;
+    const colPercent = colPercent(props.colPercent)
     const rtl = props.rtl 
 
     return React.Children.map((rtl ? React.Children.toArray(props.children).reverse() : props.children), (element) => {
@@ -19,7 +23,9 @@ const Row = (props) => {
   // left/flex-start is default
   const align_X =  (props.hAlign === 'space' ? 'space-between' : (props.hAlign === 'distribute' ? 'space-around' : (props.hAlign === 'center' ? 'center' : (props.hAlign === 'right' ? 'flex-end' : 'flex-start'))))
   // top/flex-start is default
-  const align_Y = props.vAlign === 'center' ? 'center' : (props.vAlign === 'bottom' ? 'flex-end' : (props.vAlign === 'fill' ? 'stretch' : 'flex-start'))
+  const align_Y = (props.fill && !props.vAlign) ? 'stretch' :  props.vAlign === 'center' ? 'center' : (props.vAlign === 'bottom' ? 'flex-end' : (props.vAlign === 'fill' ? 'stretch' : 'flex-start'))
+
+  const colPercent = colPercent(props.colPercent)
 
   if (isHidden(screenSize, props)){
     return null;
@@ -32,7 +38,7 @@ const Row = (props) => {
                         flexWrap: props.nowrap ? 'nowrap' : 'wrap',
                         alignItems: align_Y,
                         justifyContent: align_X,
-                        height: props.cell ? props.colPercent + '%' : (props.style && props.style.height !== undefined ? props.style.height : undefined) 
+                        height: props.fill ? colPercent + '%' : (props.style && props.style.height !== undefined ? props.style.height : undefined) 
                       }]}>
                 {cloneElements(props)}
             </View>

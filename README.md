@@ -21,6 +21,10 @@ This presentation by Rich Hickey, creator of the Clojure language, sums up our p
 
 [simple made easy](https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/SimpleMadeEasy.md). 
 
+## Terms:
+
+RTL = right-to-left layout (Hebrew/Arabic)
+LTR = "normal" left-to-right layout
 
 ## Relative and Responsive Layout
 
@@ -43,11 +47,11 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 **colPercent** in row - Accepts a number from 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width.  It defaults to 100(%). See also Column Props section. 
 
-**size** in column - Accepts any positive number. This number defines how many grid columns wide the given layout column should be. It defaults to 1. Since `size` accepts any number from 0 to Infinity, you can make your layout column as many grid columns wide as you want, extending beyond the screen width if norwarp prop is set on the row. If nowrap is not set on the row, the column will wrap. 
+**size** in column - Accepts any positive number. This number defines how many grid columns wide the given layout column should be. It defaults to 1. Since `size` accepts any number from 0 to Infinity, you can make your layout column as many grid columns wide as you want, extending beyond the screen width if norwarp prop is set on the row. If nowrap is not set on the row, the column will wrap. The size value will overridethe width value in the style prop for the column, and that's because we wat to have a predictable offset, that is a multiple of the grid column width.
 
 **sm**, **md**, and **lg** are device-size-dependent 'size' values that are applicable to columns.
 
-**offset**, **smOffset**, **mdOffset** and **lgOffset** - Accepts any number. This number defines the marginLeft (or marginRight in csase of `rtl`) for the column in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (or flex-end for `rtl`) content in offsetted columns will snap to grid (in both ltr and rtl modes.) Offset values can also be negative, too. Column `offset` value defaults to 0. 
+**offset**, **smOffset**, **mdOffset** and **lgOffset** - Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (or flex-end for RTL mode) content in offsetted columns will snap to grid (in both LTR and RTL modes.) Offset values can also be negative, too. Column `offset` value defaults to 0. When using an offset rule in LTR or RTL modes, marginLeft and marginRight in style prop will be overridden, respectively.  
 
 **vAlign** may be supplied as prop to the column to vertically align the elements and/or rows within it. Possible values are: center, top, bottom, space and distribute. Default is top.
 
@@ -59,7 +63,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 **rtl** may be supplied as prop to the row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
-**cell** may be supplied as prop to the row to make it the same in height as the column is in width. If not supplied, row height is whatever is in the style prop or if that's not defined then it's set to 'auto'. Column width differs in how it's set in gthat it is specified as percentage of the Row parent's view width (see colPercent) with a default valu of 1/12th or 8.333%. This is so that we may have a predictable `offset` behavior. 
+**fill** may be supplied as prop to the row to make it 100% of its parent Column's height. If not supplied, Row's height is whatever is in the style prop or 'auto'. Using 'fill' on a Row will also stretch it's child columns in the vericall direction to fill the full height of the Row, unless a value for vAlign is specified, which can be used to position the columns vertically within the the row. 
 
 These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 
@@ -192,7 +196,7 @@ Hidden props are all booleans. They default to false.
         title: 'Home',
         renderTitle: (route, props) => {
           return (
-          <Row cell vAlign='center'>
+          <Row fill vAlign='center'>
             <Col hAlign='center'>
               <Image style={styles.titleImage} source={require('./assets/logo.png')}/>
             </Col>
@@ -202,7 +206,7 @@ Hidden props are all booleans. They default to false.
 
           const { config: { eventEmitter }  } = route;
 
-          return (<Row cell vAlign='center'>
+          return (<Row fill vAlign='center'>
             <Col hAlign='right'>
               <Button 
                 title="LOG IN"
