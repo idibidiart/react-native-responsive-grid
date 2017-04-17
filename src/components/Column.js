@@ -49,7 +49,7 @@ const Column = (props) => {
     const cloneElements = (props) => {
         return React.Children.map(props.children, (element) => {
           if (element.type.name === 'Column') {
-              throw new Error("Column may not contain another Column. Wrap child Column in Row.")
+              throw new Error("Column may not contain other Columns as children. Child Columns must be wrapped in a Row.")
           }
           return React.cloneElement(element, {})
         })

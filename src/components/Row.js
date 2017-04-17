@@ -12,8 +12,8 @@ const cloneElements = (props) => {
     const rtl = props.rtl 
 
     return React.Children.map((rtl ? React.Children.toArray(props.children).reverse() : props.children), (element) => {
-      if (element.type.name !== 'Column') {
-          throw new Error("Row may only contain Columns")
+      if (element.type.name === 'Row') {
+          throw new Error("Row may not contain other Rows as children. Child Rows must be wrapped in a Column.")
       }
       return React.cloneElement(element, {colPercent: colPercent, rtl: rtl})
     })
