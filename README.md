@@ -67,43 +67,6 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 
-### nowrap
-
-```
-import {Row} from 'react-native-responsive-grid';
-
-//Will wrap Columns. Second Column's width will not protrude beyond row. It will wrap to the next Row.
-<Row colPercent={5}>
-    <Col size={6}>
-      <Text>
-        First Column
-      </Text>
-    </Col>
-    <Col size={6}>
-      <Text>
-        Second Column Wrapped
-      </Text>
-    </Col>
-</Row>
-
-// Will not wrap Columns. Second Column's width will protrude beyond row in case of small (i.e. phone) screens since 60% + 60% = 120%
-// 60% comes from colPercent * sm
-<Row colPercent={10} nowrap>
-    <Col sm={6} md={4} lg={3}>
-      <Text>
-        First Column
-      </Text>
-    </Col>
-    <Col sm={6} md={4} lg={3}>
-      <Text>
-        Second Column
-      </Text>
-    </Col>
-</Row>
-```
-
-`nowrap` - Accepts a boolean. This boolean defines the style property `flexWrap`. If no prop is specified, then the defaults value will be `flexWrap: 'wrap'`. If you add the prop to the `Row` then the style value will equal flexWrap: `nowrap`. 
-
 ### Column Props
 
 ```
@@ -164,7 +127,7 @@ On a phone the Column would take up 50% of the row's width.
 On a normal tablet the Column would take up 33.333% of the row's width.
 On a big tablet the Column would take up 25% of the row's width.
 
-### Hidden props.
+### Hidden props
 
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';

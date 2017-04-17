@@ -47,7 +47,9 @@ const Column = (props) => {
     const align_X = (props.hAlign === 'fill' ? 'stretch' : (props.hAlign === 'center' ? 'center' : ((props.hAlign === 'right' || (props.rtl && props.hAlign !== 'left')) ? 'flex-end' : 'flex-start')))
 
     const cloneElements = (props) => {
+
         return React.Children.map(props.children, (element) => {
+          if (!element) return null
           if (element.type.name === 'Column') {
               throw new Error("Column may not contain other Columns as children. Child Columns must be wrapped in a Row.")
           }

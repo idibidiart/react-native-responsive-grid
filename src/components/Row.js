@@ -12,6 +12,7 @@ const cloneElements = (props) => {
     const rtl = props.rtl 
 
     return React.Children.map((rtl ? React.Children.toArray(props.children).reverse() : props.children), (element) => {
+      if (!element) return null
       if (element.type.name === 'Row') {
           throw new Error("Row may not contain other Rows as children. Child Rows must be wrapped in a Column.")
       }
@@ -35,7 +36,7 @@ const Row = (props) => {
             <View {...props}
               style={[props.style,
                       { flexDirection: 'row',
-                        flexWrap: props.nowrap ? 'nowrap' : 'wrap',
+                        flexWrap: 'wrap',
                         alignItems: align_Y,
                         justifyContent: align_X,
                         height: props.fill ?  '100%' : (props.style && props.style.height !== undefined ? props.style.height : undefined) 
