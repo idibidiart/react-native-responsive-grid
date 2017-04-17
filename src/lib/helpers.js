@@ -19,7 +19,6 @@ const getColumnWidth = (screenSize, props) => {
     return '100%'
   }
   
-  // in case Column is used without Row as its parent
   if (props.colPercent === undefined) {
     return undefined
   }

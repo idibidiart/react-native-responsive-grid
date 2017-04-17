@@ -4,7 +4,7 @@ import {isHidden} from '../lib/helpers';
 import {View, Alert} from 'react-native';
 
 const refineColPercent = (val) => {
-  return (val !== undefined ? Math.max(0, Math.min(val, 100)) : 100)
+  return (val !== undefined ? Math.max(0, Math.min(val, 100)) : undefined)
 }
 
 const cloneElements = (props) => {
