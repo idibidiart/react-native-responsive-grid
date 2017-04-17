@@ -452,3 +452,27 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
       </Row>
     </Modal>
 ```
+## Making Simple Easy
+
+Only tricky part about using this super robust grid is the ability to do basic mental arithmetic:
+
+```
+    <Row nowrap colPercent={3}>
+      <Col size={3.333} offset={2}>  
+        <FontAwesome name='facebook' size={20} color='#f3f3f3'/>
+      </Col> 
+      <Col size={27} offset={1}>
+        <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}> 
+          LOG IN WITH FACEBOOK
+        </Text>
+      </Col>
+    </Row>
+```
+
+This says that we're going to have a row where each grid column is 3% of the width of the screen (since this is a top level row, not nested) 
+
+We must make sure all the columns which have their width as a multiple of that 3% add up to 100% or less or else they extend beyond the screen.
+
+The first column is 10% in width (3.333 * 3) and the second one is 81% (27 * 3) ... That adds up to 91%. The other 9% comes from the 2 column positions the first column is offset by, which is 6% (2 * 3) and the 1 column position the second column in offset by which is 3% (1 * 3)
+
+All the calculations are in percentages and multiples of a percentage. This way we can control my grid offsets and layout column sizes precisely and independently. 
