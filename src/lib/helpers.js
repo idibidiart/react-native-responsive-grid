@@ -15,12 +15,8 @@ const toPercent = (num) => num + '%';
 
 const getColumnWidth = (screenSize, props) => {
   
-  if (props.fullWidth !== undefined) {
-    return '100%'
-  }
-  
   if (props.colPercent === undefined) {
-    return undefined
+    return '100%'
   }
 
   switch(screenSize) {

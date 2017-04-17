@@ -45,9 +45,9 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-**colPercent** in row - Accepts a number from 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width.  
+**colPercent** may be supplied as prop to Row. Possible values are 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width. If not supplied on the row, the width of child Columns will default to 100% of the computed or absolute width of the row. 
 
-**size** in column - Accepts any positive number. This number defines how many grid columns wide the given layout column should be. It defaults to 1. Since `size` accepts any number from 0 to Infinity, you can make your layout column as many grid columns wide as you want, extending beyond the screen width if norwarp prop is set on the row. If is not set on the row, the column will wrap. The size value will overridethe width value in the style prop for the column, and that's because we wat to have a predictable offset, that is a multiple of the grid column width.
+**size** may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines how many grid columns wide the given column element should be. If `size` is not supplied it defaults to 1. If the column is without a parent Row or colPercent is not specified on parent Row the width of the column will default to 100% of the computed or absolute width of its parent. Since `size` accepts any number from 0 to Infinity, you can make your layout column as many grid columns wide as you want, extending beyond the screen width if **norwarp** prop is set on the row. If **nowrap** is not set on the row, the column will wrap. 
 
 **sm**, **md**, and **lg** are device-size-dependent 'size' values that are applicable to columns.
 
@@ -63,7 +63,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 **rtl** may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
-**fullWidth** may be supplied as prop to Column to make it 100% of its parent view's width. It overrides all `size` props (incl. `sm`, `md`, `lg`) It's used for Columns that have no Row parent (and hence no colPercent value to derive column width from) and also when colPercent is not specified on the parent row. In such scenarios, the column width would be 'auto' without it.
+**fill** may be supplied as prop to Row to set its height to 100% of the computed or absolute height of it's parent view.
 
 These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 
