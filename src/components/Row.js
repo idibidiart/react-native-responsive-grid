@@ -39,7 +39,7 @@ const Row = (props) => {
                         flexWrap: 'wrap',
                         alignItems: align_Y,
                         justifyContent: align_X,
-                        alignSelf: props.fill ? 'stretch' : undefined
+                        height: props.fullHeight ?  '100%' : (props.style && props.style.height !== undefined ? props.style.height : undefined) 
                       }]}>
                 {cloneElements(props)}
             </View>
@@ -57,7 +57,7 @@ const Row = (props) => {
 Row.propTypes = {
   colPercent: PropTypes.number,
   rtl: PropTypes.bool,
-  fill: PropTypes.bool,
+  nowrap: PropTypes.bool,
   smHidden: PropTypes.bool,
   mdHidden: PropTypes.bool,
   lgHidden: PropTypes.bool,

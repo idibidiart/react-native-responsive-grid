@@ -19,6 +19,7 @@ const Column = (props) => {
       vAlign,
       hAlign,
       colPercent,
+      fullWidth,
       rtl,
       ...rest
     } = props;
@@ -38,6 +39,7 @@ const Column = (props) => {
       vAlign,
       hAlign,
       colPercent,
+      fullWidth,
       rtl
     };
 
@@ -100,7 +102,8 @@ Column.propTypes = {
   size: PropTypes.number,
   offset: PropTypes.number,
   vAlign: PropTypes.string,
-  hAlign: PropTypes.string
+  hAlign: PropTypes.string,
+  fullWidth: PropTypes.bool
 }
 
 export default Column;

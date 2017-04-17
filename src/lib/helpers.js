@@ -14,7 +14,11 @@ const isHidden = (screenSize, props) => {
 const toPercent = (num) => num + '%';
 
 const getColumnWidth = (screenSize, props) => {
-
+  
+  if (props.fullWidth !== undefined) {
+    return '100%'
+  }
+  
   // in case Column is used without Row as its parent
   if (props.colPercent === undefined) {
     return undefined
