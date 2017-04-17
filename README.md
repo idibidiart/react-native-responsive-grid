@@ -53,17 +53,17 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 **offset**, **smOffset**, **mdOffset** and **lgOffset** - Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (or flex-end for RTL mode) content in offsetted columns will snap to grid (in both LTR and RTL modes.) Offset values can also be negative, too. Column `offset` value defaults to 0. When using an offset rule in LTR or RTL modes, marginLeft and marginRight in style prop will be overridden, respectively.  
 
-**vAlign** may be supplied as prop to the column to vertically align the elements and/or rows within it. Possible values are: center, top, bottom, space and distribute. Default is top.
+**vAlign** may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: center, top, bottom, space and distribute. Default is top.
 
-**vAlign** may also be supplied as prop to the row to align the columns within it in the vertical direction. Possible values are: center, top, bottom or fill. Default is top.
+**vAlign** may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: center, top, bottom or fill. Default is top.
 
-**hAlign** may be supplied as prop to the row to align the columns within it in the horizontal direction. Possible values are: center, left, right, space and distribute. Default is left.
+**hAlign** may be supplied as prop to Row to align the columns within it in the horizontal direction. Possible values are: center, left, right, space and distribute. Default is left.
 
-**hAlign** may also be supplied as prop to the column to align its rows and/or elements within it in the horizontal direction. Possible values are: center, left, right, and fill. Default is left.
+**hAlign** may also be supplied as prop to Column to align its rows and/or elements within it in the horizontal direction. Possible values are: center, left, right, and fill. Default is left.
 
-**rtl** may be supplied as prop to the row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
+**rtl** may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
-**fill** may be supplied as prop to the row to make it 100% of its parent Column's height. If not supplied, Row's height is whatever is in the style prop or 'auto'. Using 'fill' on a Row will also stretch it's child columns in the vericall direction to fill the full height of the Row, unless a value for vAlign is specified, which can be used to position the columns vertically within the the row. 
+**fill** may be supplied as prop to Row to make it 100% of its parent view's height. If not supplied, Row's height is whatever is in the style prop or 'auto'. Using 'fill' on Row will also stretch its child columns in the verical direction to fill the full height of the row, unless a value for vAlign is specified, which can be used to position the columns vertically within the the row. 
 
 These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 
