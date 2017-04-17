@@ -3,12 +3,12 @@ import {screenSize} from '../lib/ScreenSize';
 import {isHidden} from '../lib/helpers';
 import {View, Alert} from 'react-native';
 
-const colPercent = (val) => {
+const refineColPercent = (val) => {
   return (val !== undefined ? Math.max(0, Math.min(val, 100)) : 100)
 }
 
 const cloneElements = (props) => {
-    const colPercent = colPercent(props.colPercent)
+    const colPercent = refineColPercent(props.colPercent)
     const rtl = props.rtl 
 
     return React.Children.map((rtl ? React.Children.toArray(props.children).reverse() : props.children), (element) => {
@@ -25,7 +25,7 @@ const Row = (props) => {
   // top/flex-start is default
   const align_Y = (props.fill && !props.vAlign) ? 'stretch' :  props.vAlign === 'center' ? 'center' : (props.vAlign === 'bottom' ? 'flex-end' : (props.vAlign === 'fill' ? 'stretch' : 'flex-start'))
 
-  const colPercent = colPercent(props.colPercent)
+  const colPercent = refineColPercent(props.colPercent)
 
   if (isHidden(screenSize, props)){
     return null;
