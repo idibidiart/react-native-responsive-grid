@@ -49,7 +49,6 @@ const Column = (props) => {
     const align_X = (props.hAlign === 'fill' ? 'stretch' : (props.hAlign === 'center' ? 'center' : ((props.hAlign === 'right' || (props.rtl && props.hAlign !== 'left')) ? 'flex-end' : 'flex-start')))
 
     const cloneElements = (props) => {
-
         return React.Children.map(props.children, (element) => {
           if (!element) return null
           if (element.type.name === 'Column') {
@@ -63,7 +62,6 @@ const Column = (props) => {
       return null;
     } else {
       try {
-
         return (
           <View
           {...rest}
@@ -74,8 +72,7 @@ const Column = (props) => {
               marginLeft: gridProps.rtl ? 0 : getColumnOffset(screenSize, gridProps),
               marginRight: gridProps.rtl ? getColumnOffset(screenSize, gridProps) : 0,
               alignItems: align_X,
-              justifyContent: align_Y,
-              alignSelf: props.fill ? 'stretch' : undefined
+              justifyContent: align_Y
             }]}>
             {cloneElements(rest)}
           </View>

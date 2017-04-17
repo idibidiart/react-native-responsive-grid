@@ -45,7 +45,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-**colPercent** in row - Accepts a number from 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width.  It defaults to 100(%). 
+**colPercent** in row - Accepts a number from 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width.  
 
 **size** in column - Accepts any positive number. This number defines how many grid columns wide the given layout column should be. It defaults to 1. Since `size` accepts any number from 0 to Infinity, you can make your layout column as many grid columns wide as you want, extending beyond the screen width if norwarp prop is set on the row. If is not set on the row, the column will wrap. The size value will overridethe width value in the style prop for the column, and that's because we wat to have a predictable offset, that is a multiple of the grid column width.
 
@@ -63,9 +63,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 **rtl** may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
-**fullHeight** may be supplied as prop to Row to make it 100% of its parent view's height. It overrides the value set for height in the style prop. 
-
-**fullWidth** may be supplied as prop to Column to make it 100% of its parent view's width. It overrides all `size` props (incl. `sm`, `md`, `lg`)
+**fullWidth** may be supplied as prop to Column to make it 100% of its parent view's width. It overrides all `size` props (incl. `sm`, `md`, `lg`) It's used for Columns that have no Row parent (and hence no colPercent value to derive column width from) and also when colPercent is not specified on the parent row. In such scenarios, the column width would be 'auto' without it.
 
 These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 

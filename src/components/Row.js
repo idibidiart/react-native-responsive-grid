@@ -36,10 +36,9 @@ const Row = (props) => {
             <View {...props}
               style={[props.style,
                       { flexDirection: 'row',
-                        flexWrap: 'wrap',
+                        flexWrap: props.nowrap ? 'nowrap' : 'wrap',
                         alignItems: align_Y,
-                        justifyContent: align_X,
-                        height: props.fullHeight ?  '100%' : (props.style && props.style.height !== undefined ? props.style.height : undefined) 
+                        justifyContent: align_X
                       }]}>
                 {cloneElements(props)}
             </View>
@@ -63,7 +62,7 @@ Row.propTypes = {
   lgHidden: PropTypes.bool,
   hAlign: PropTypes.string,
   vAlign: PropTypes.string,
-  fullHeight: PropTypes.bool
+  nowrap: PropTypes.bool
 }
 
 export default Row;
