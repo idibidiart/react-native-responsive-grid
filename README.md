@@ -47,7 +47,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 **colPercent** in row - Accepts a number from 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width.  It defaults to 100(%). See also Column Props section. 
 
-**size** in column - Accepts any positive number. This number defines how many grid columns wide the given layout column should be. It defaults to 1. Since `size` accepts any number from 0 to Infinity, you can make your layout column as many grid columns wide as you want, extending beyond the screen width if norwarp prop is set on the row. If nowrap is not set on the row, the column will wrap. The size value will overridethe width value in the style prop for the column, and that's because we wat to have a predictable offset, that is a multiple of the grid column width.
+**size** in column - Accepts any positive number. This number defines how many grid columns wide the given layout column should be. It defaults to 1. Since `size` accepts any number from 0 to Infinity, you can make your layout column as many grid columns wide as you want, extending beyond the screen width if norwarp prop is set on the row. If is not set on the row, the column will wrap. The size value will overridethe width value in the style prop for the column, and that's because we wat to have a predictable offset, that is a multiple of the grid column width.
 
 **sm**, **md**, and **lg** are device-size-dependent 'size' values that are applicable to columns.
 
@@ -200,7 +200,7 @@ Hidden props are all booleans. They default to false.
 Note that in the markup below the right arrow icons have padding on the right and left (they should not but I guess they were converted from vector to image and that's how they got their extra padding) so a good way to deal with that is not by using fractional offset value as that will change with screen size while the font remains the same size which would misalign the icons relative to the right-aligned text like SEE ALL, ADD MORE and the start icon (which has no padding in it) -- the right to compensate for icons that have padding in them is by using absolute pixels in the style prob, e.g. left: 6. That is unless your font is responsive, in which case using fractional offset would be the right way.
 
 ```
-    <Row nowrap colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={10} offset={1} >
           <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
           PREVIOUS ORDERS
@@ -213,10 +213,10 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={10} offset={1} >
             <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
-            <Row nowrap colPercent={5}>
+            <Row colPercent={5}>
               <Col size={1}>
                 <FontAwesome name='shopping-cart' size={17} color='gray'/>
               </Col>
@@ -232,10 +232,10 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={10} offset={1}>
             <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 8, 2017</Text>
-            <Row nowrap colPercent={5}>
+            <Row colPercent={5}>
               <Col size={1}>
                 <FontAwesome name='cutlery' size={17} color='gray'/>
               </Col>
@@ -250,10 +250,10 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={10} offset={1}>
             <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
-            <Row nowrap colPercent={5}>
+            <Row colPercent={5}>
               <Col size={1}>
                 <FontAwesome name='cutlery' size={17} color='gray'/>
               </Col>
@@ -268,7 +268,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row nowrap colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={10} offset={1}>
           <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
           FAVORITE ITEMS
@@ -281,7 +281,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
       <Col size={10} offset={1}>
         <Text style={{fontSize: 16, color: 'black'}}>
         Linguini Alfredo
@@ -292,7 +292,7 @@ Note that in the markup below the right arrow icons have padding on the right an
       </Col>
     </Row>
 
-    <Row nowrap colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
       <Col size={10} offset={1}>
         <Text style={{fontSize: 16, color: 'black'}}>
         Double Cheese Burger
@@ -315,7 +315,7 @@ Notice the reversed order of the Text relative to the physical order in the mark
 ### Normal LTR Markup 
 
 ```
-    <Row nowrap colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={10} offset={1} >
           <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
           PREVIOUS ORDERS
@@ -334,7 +334,7 @@ Notice the reversed order of the Text relative to the physical order in the mark
 Notice the offset values work in RTL direction now. The addition of .7 offset is to mimic the fact that the left margin in the LTR layout is smaller than the right margin in that layout, whereas it's the opposite in the RTL direction. So the .7 offset is used in RTL layout instead of the 1 offset, so alignment is identical. 
 
 ```
-    <Row nowrap rtl colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row rtl colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={10} offset={.7} >
           <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
           PREVIOUS ORDERS
