@@ -53,6 +53,11 @@ const getColumnWidth = (screenSize, props) => {
 }
 
 const getColumnOffset = (screenSize, props) => {
+
+  if (props.colPercent === undefined) {
+    return 0
+  }
+
   switch(screenSize) {
     case 'small':
       if (props.smOffset) {
