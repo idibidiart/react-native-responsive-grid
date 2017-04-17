@@ -63,7 +63,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 **rtl** may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
-**fill** may be supplied as prop to Row to set its height to 100% of the computed or absolute height of it's parent view. It will also set `vAlign` on the row to 'fill' unless another `vAlign` value is explicitly supplied. 
+**cell** may be supplied as prop to Row to set its height to 100% of the computed or absolute height of it's parent view. It will set `vAlign` on the row to 'fill' unless another `vAlign` value is explicitly supplied on the row. It will also set `hAlign` on all child columns to 'fill' unless another `hAlign` value is explicitly supplied on the column.
 
 These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 
