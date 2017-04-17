@@ -53,9 +53,9 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 **offset**, **smOffset**, **mdOffset** and **lgOffset** - Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (or flex-end for RTL mode) content in offsetted columns will snap to grid (in both LTR and RTL modes.) Offset values can also be negative, too. Column `offset` value defaults to 0. When using an offset rule in LTR or RTL modes, marginLeft and marginRight in style prop will be overridden, respectively.  
 
-**vAlign** may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: center, top, bottom, space and distribute. Default is top.
+**vAlign** may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: middle, top, bottom, space and distribute. Default is top.
 
-**vAlign** may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: center, top, bottom or fill. Default is top.
+**vAlign** may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: top, middle, bottom or fill. Default is top.
 
 **hAlign** may be supplied as prop to Row to align the columns within it in the horizontal direction. Possible values are: center, left, right, space and distribute. Default is left.
 

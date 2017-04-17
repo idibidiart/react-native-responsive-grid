@@ -44,7 +44,7 @@ const Column = (props) => {
     };
 
     // top/flex-start is default
-    const align_Y = (props.vAlign === 'center' ? 'center' : (props.vAlign === 'bottom' ? 'flex-end' : (props.vAlign === 'space' ? 'space-between' : (props.vAlign === 'distribute' ? 'space-around' : 'flex-start'))))
+    const align_Y = (props.vAlign === 'middle' ? 'center' : (props.vAlign === 'bottom' ? 'flex-end' : (props.vAlign === 'space' ? 'space-between' : (props.vAlign === 'distribute' ? 'space-around' : 'flex-start'))))
     // left/flex-start is default
     const align_X = (props.hAlign === 'fill' ? 'stretch' : (props.hAlign === 'center' ? 'center' : ((props.hAlign === 'right' || (props.rtl && props.hAlign !== 'left')) ? 'flex-end' : 'flex-start')))
 
