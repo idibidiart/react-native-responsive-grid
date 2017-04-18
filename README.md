@@ -152,7 +152,7 @@ Hidden props are all booleans. They default to false.
         title: 'Home',
         renderTitle: (route, props) => {
           return (
-          <Row fill vAlign='center'>
+          <Row cell vAlign='center'>
             <Col hAlign='center'>
               <Image style={styles.titleImage} source={require('./assets/logo.png')}/>
             </Col>
@@ -162,7 +162,7 @@ Hidden props are all booleans. They default to false.
 
           const { config: { eventEmitter }  } = route;
 
-          return (<Row fill vAlign='center'>
+          return (<Row cell vAlign='center'>
             <Col hAlign='right'>
               <Button 
                 title="LOG IN"
