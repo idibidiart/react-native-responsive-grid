@@ -7,9 +7,9 @@ Developing performant, responsive and fairly detailed 2D layouts with raw flexbo
 
 ## What?
 
-This Responsive Grid (for React Native) fixes the calculation model for Grid based layouts by abandoning the format-based, columns-per-view approach (e.g. "12 column grid") and instead allowing the developer to specify the width of each grid column as a percentage of parent view's size, so 10% meams 10 column grid. There is no reason for a grid to be 11, 12, 14 or 16 columns. Grids can be any number of columns, including a fractional number, and that number should be determined by the desired width per column, not the other way around. 
+This Responsive Grid (for React Native) fixes the mental model for Grid based layouts by abandoning the format-based, columns-per-view approach (e.g. "12 column grid") and instead allowing the developer to specify the width of each grid column as a percentage of parent view's size, so 10% meams 10 column grid. There is no reason for a grid to be 11, 12, 14 or 16 columns. Grids can be any number of columns, including a fractional number, and that number should be determined by the desired width per column, not the other way around. Plus, all other style measurements are done by percentage when building responsive layouts, so why would we measure column width as N/12 while we measure everything else as N/100? That's form of cognitive impedence mismatch that we shouldn't have in our grid design.
 
-One constraint this version of the grid has to keep its structure and design simple is that Rows may not contain other Rows as children (they must be wrapped in a Column) and Columns may not contain other columns as children (they must be wrapped in a Row) 
+One constraint I've added in this version of the grid to keep its structure and design simple is that Rows may not contain other Rows as children (they must be wrapped in a Column) and Columns may not contain other columns as children (they must be wrapped in a Row) 
 
 I've also found that RTL (right-to-left) support (for Hebrew/Arabic apps) to be generally lacking in RN, so I added RTL layout support to this version. 
 
