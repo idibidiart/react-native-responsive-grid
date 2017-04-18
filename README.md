@@ -469,4 +469,4 @@ We must make sure all the columns which have their width as a multiple of that 3
 
 The first column is 10% in width (3.333 * 3) and the second one is 81% (27 * 3) ... That adds up to 91%. The other 9% comes from the 2 column positions the first column is offset by, which is 6% (2 * 3) and the 1 column position the second column in offset by which is 3% (1 * 3)
 
-All the calculations are in percentages and multiples of a percentage. This way we can control my grid offsets and layout column sizes precisely and independently. 
+All the calculations are in percentages and multiples of a percentage. This way we can control our grid offsets and layout column sizes precisely and independently. 
