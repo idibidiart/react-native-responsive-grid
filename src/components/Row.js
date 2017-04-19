@@ -22,8 +22,6 @@ const Row = (props) => {
   // top/flex-start is default
   const align_Y = (props.cell && !props.vAlign) ? 'stretch' : props.vAlign === 'middle' ? 'center' : (props.vAlign === 'bottom' ? 'flex-end' : (props.vAlign === 'fill' ? 'stretch' : 'flex-start'))
 
-  const colPercent = refineColPercent(props.colPercent)
-
   if (isHidden(screenSize, props)){
     return null;
   } else {
