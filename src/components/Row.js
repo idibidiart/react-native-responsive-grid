@@ -25,7 +25,7 @@ const Row = (props) => {
   // left/flex-start is default
   const align_X =  (props.hAlign === 'space' ? 'space-between' : (props.hAlign === 'distribute' ? 'space-around' : (props.hAlign === 'center' ? 'center' : (props.hAlign === 'right' ? 'flex-end' : 'flex-start'))))
   // top/flex-start is default
-  const align_Y = props.vAlign === 'middle' ? 'center' : (props.vAlign === 'bottom' ? 'flex-end' : (props.vAlign === 'fill' ? 'stretch' : 'flex-start'))
+  const align_Y = (props.colPercent === undefined && props.cell && !props.vAlign) ? 'stretch' : props.vAlign === 'middle' ? 'center' : (props.vAlign === 'bottom' ? 'flex-end' : (props.vAlign === 'fill' ? 'stretch' : 'flex-start'))
 
   const colPercent = refineColPercent(props.colPercent)
 

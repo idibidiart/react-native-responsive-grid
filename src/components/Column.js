@@ -65,7 +65,7 @@ const Column = (props) => {
           {...rest}
           style={[
             props.style, {
-              width: (gridProps.colPercent === undefined && props.cell) ? '100%' : (gridProps.colPercent === undefined && props.style && props.style.width !== undefined) ? props.style.width : getColumnWidth(screenSize, gridProps),
+              width: (gridProps.colPercent === undefined && props.style && props.style.width !== undefined) ? props.style.width : getColumnWidth(screenSize, gridProps),
               flexDirection: 'column',
               marginLeft: gridProps.rtl ? 0 : getColumnOffset(screenSize, gridProps),
               marginRight: gridProps.rtl ? getColumnOffset(screenSize, gridProps) : 0,
