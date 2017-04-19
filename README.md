@@ -191,34 +191,34 @@ Hidden props are all booleans. They default to false.
 Note that in the markup below the right arrow icons have padding on the right and left (they should not but I guess they were converted from vector to image and that's how they got their extra padding) so a good way to deal with that is not by using fractional offset value as that will change with screen size while the font remains the same size which would misalign the icons relative to the right-aligned text like SEE ALL, ADD MORE and the start icon (which has no padding in it) -- the right to compensate for icons that have padding in them is by using absolute pixels in the style prob, e.g. left: 6. That is unless your font is responsive, in which case using fractional offset would be the right way.
 
 ```
-    <Row colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={10} offset={1} >
+    <Row style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={60} offset={6} >
           <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
           PREVIOUS ORDERS
           </Text>
         </Col>
-        <Col size={5} hAlign='right'>
+        <Col size={30} hAlign='right'>
           <Text style={{ fontSize: 16, color: '#BD1206'}}>
             SEE ALL
           </Text>
         </Col>
     </Row>
 
-    <Row colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={10} offset={1} >
-            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
-            <Row colPercent={5}>
-              <Col size={1}>
-                <FontAwesome name='shopping-cart' size={17} color='gray'/>
-              </Col>
-              <Col size={12} offset={.5}>
-                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
-              </Col>
-            </Row>
+    <Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={60} offset={6} >
+          <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
+          <Row >
+            <Col size={5}>
+              <FontAwesome name='shopping-cart' size={17} color='gray'/>
+            </Col>
+            <Col size={60} offset={2.5}>
+              <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
+            </Col>
+          </Row>
           <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
           <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>                                                                             
         </Col>
-        <Col size={5} hAlign='right'>
+        <Col size={30} hAlign='right'>
           <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
         </Col>
     </Row>
@@ -241,55 +241,55 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={10} offset={1}>
+    <Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={60} offset={1}>
             <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
-            <Row colPercent={5}>
-              <Col size={1}>
+            <Row>
+              <Col size={5}>
                 <FontAwesome name='cutlery' size={17} color='gray'/>
               </Col>
-              <Col size={12} offset={.5}>
+              <Col size={60} offset={2.5}>
                 <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
               </Col>
             </Row>
           <Text style={{fontSize: 16, color: '#0a0a0a'}}>Double Cheese Burger</Text>                                                                          
         </Col>
-        <Col size={5} hAlign='right'>
+        <Col size={30} hAlign='right'>
           <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}}/>
         </Col>
     </Row>
 
-    <Row colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={10} offset={1}>
+    <Row style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={60} offset={6}>
           <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
           FAVORITE ITEMS
           </Text>
         </Col>
-        <Col size={5} hAlign='right'>
+        <Col size={30} hAlign='right'>
           <Text style={{ fontSize: 16, color: '#BD1206'}}>
           ADD MORE
           </Text>
         </Col>
     </Row>
 
-    <Row colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={10} offset={1}>
+    <Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={60} offset={6}>
         <Text style={{fontSize: 16, color: 'black'}}>
         Linguini Alfredo
         </Text>
       </Col>
-      <Col size={5} hAlign='right'>
+      <Col size={30} hAlign='right'>
         <FontAwesome name='star' size={24} color='#BD1206'/>
       </Col>
     </Row>
 
-    <Row colPercent={6} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={10} offset={1}>
+    <Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={60} offset={6}>
         <Text style={{fontSize: 16, color: 'black'}}>
         Double Cheese Burger
         </Text>
       </Col>
-      <Col size={5} hAlign='right'>
+      <Col size={30} hAlign='right'>
         <FontAwesome name='star' size={24} color='#BD1206'/>
       </Col>
     </Row>
@@ -306,13 +306,13 @@ Notice the reversed order of the Text relative to the physical order in the mark
 ### Normal LTR Markup 
 
 ```
-    <Row colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={10} offset={1} >
+    <Row style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={60} offset={6} >
           <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
           PREVIOUS ORDERS
           </Text>
         </Col>
-        <Col size={5} hAlign='right'>
+        <Col size={30} hAlign='right'>
           <Text style={{ fontSize: 16, color: '#BD1206'}}>
             SEE ALL
           </Text>
@@ -325,13 +325,13 @@ Notice the reversed order of the Text relative to the physical order in the mark
 Notice the offset values work in RTL direction now. The addition of .7 offset is to mimic the fact that the left margin in the LTR layout is smaller than the right margin in that layout, whereas it's the opposite in the RTL direction. So the .7 offset is used in RTL layout instead of the 1 offset, so alignment is identical. 
 
 ```
-    <Row rtl colPercent={6} style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={10} offset={.7} >
+    <Row rtl style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={60} offset={4} >
           <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
           PREVIOUS ORDERS
           </Text>
         </Col>
-        <Col size={5} hAlign='left'>
+        <Col size={30} hAlign='left'>
           <Text style={{ fontSize: 16, color: '#BD1206'}}>
             SEE ALL
           </Text>
@@ -350,119 +350,95 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
       visible={this.state.modalVisible}
       onRequestClose={() => this.close()}
       >
-      <Row cell style={[{padding: 20}, modalBackgroundStyle]}>
-        <Col hAlign='center' style={{backgroundColor: "#f3f3f3", padding: 20}}>
-              
-              <Row nowrap colPercent={10} style={{height: 80}}>
-                <Col size={3.333} offset={3.333} hAlign='center' >
-                  <Text>
-                    <Image source={require('./assets/logo-login.png')} style={styles.logoImage}/>
-                  </Text>
-                </Col>
-                <Col size={3.333} hAlign='right'>
-                  <TouchableHighlight activeOpacity={0.5} underlayColor='#f3f3f3' onPress={() => this.close()}>
-                      <FontAwesome
-                        name="close"
-                        size={28}
-                        color="#d0d0d0"
-                      />
-                  </TouchableHighlight>
-                </Col>
-              </Row>
-
-              <Row vAlign='middle' style={{height: 50}}>
-                <Text style={{fontFamily: 'lubalin-graph-regular', fontSize: 16}}>LOG IN TO YOUR ACCOUNT</Text>
-              </Row>
-
-              <Row nowrap vAlign='middle' style={{height: 55}}>
-                <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
-                  <Row colPercent={3}>
-                    <Col size={3.333} >
-                        <FontAwesome name='envelope' size={20} color='#BD1206'/>
-                    </Col>
-                    <Col size={30}>
-                        <TextInput placeholder='Email' style={{flex: 1}}/>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-
-              <Row vAlign='middle' style={{height: 55}}>
-                <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
-                  <Row colPercent={3}>
-                    <Col size={3.333} >
-                        <FontAwesome name='envelope' size={20} color='#BD1206'/>
-                    </Col>
-                    <Col size={30}>
-                        <TextInput secureTextEntry={true} placeholder='Password' style={{flex: 1}}/>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-
-              <Row hAlign='center' style={{height: 12}}>
-                <Text style={{color: '#BD1206', fontSize: 12}}>
-                Forgot password?
-                </Text>
-              </Row>
-
-              <Row style={{ height: 20}}></Row>
-
-              <Row nowrap vAlign='middle' style={{height: 60}}>
-                <Col hAlign='fill'>
-                  <Row hAlign='center' vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#BD1206'}}>
-                    <TouchableHighlight activeOpacity={0.5} underlayColor='transparent' onPress={() => this.login()}>
-                      <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>LOG IN</Text>
-                    </TouchableHighlight>
-                  </Row>
-                </Col>
-              </Row>
-
-              <Row vAlign='middle' style={{height: 60}}>
-                <Col style={{height: 1,  backgroundColor: '#a0a0a0'}}>
-                </Col>
-              </Row>
-
-              <Row style={{height: 60}}>
-                <Col vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#3B5998'}}>
-                  <Row nowrap colPercent={3}>
-                    <Col size={3.333} offset={2}>  
-                      <FontAwesome name='facebook' size={20} color='#f3f3f3'/>
-                    </Col> 
-                    <Col size={27} offset={1}>
-                      <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}> 
-                        LOG IN WITH FACEBOOK
+ <Row cell style={[{padding: 20}, modalBackgroundStyle]}>
+            <Col hAlign='center' style={{backgroundColor: "#f3f3f3", padding: 20}}>
+                  
+                  <Row nowrap style={{height: 80}}>
+                    <Col size={33.333} offset={33.333} hAlign='center' >
+                      <Text>
+                       <Image source={require('./assets/logo-login.png')} style={styles.logoImage}/>
                       </Text>
                     </Col>
+                    <Col size={33.333} hAlign='right'>
+                      <TouchableHighlight activeOpacity={0.5} underlayColor='#f3f3f3' onPress={() => this.close()}>
+                          <FontAwesome
+                            name="close"
+                            size={28}
+                            color="#d0d0d0"
+                          />
+                      </TouchableHighlight>
+                    </Col>
                   </Row>
-                </Col>
-              </Row>
 
-        </Col>
-      </Row>
+                  <Row vAlign='middle' style={{height: 50}}>
+                   <Text style={{fontFamily: 'lubalin-graph-regular', fontSize: 16}}>LOG IN TO YOUR ACCOUNT</Text>
+                  </Row>
+
+                  <Row nowrap vAlign='middle' style={{height: 55}}>
+                    <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
+                      <Row>
+                        <Col size={10} >
+                            <FontAwesome name='envelope' size={20} color='#BD1206'/>
+                        </Col>
+                        <Col size={90}>
+                            <TextInput placeholder='Email' style={{flex: 1}}/>
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
+
+                  <Row vAlign='middle' style={{height: 55}}>
+                    <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
+                      <Row>
+                        <Col size={10} >
+                            <FontAwesome name='envelope' size={20} color='#BD1206'/>
+                        </Col>
+                        <Col size={90}>
+                            <TextInput secureTextEntry={true} placeholder='Password' style={{flex: 1}}/>
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
+
+                  <Row hAlign='center' style={{height: 12}}>
+                    <Text style={{color: '#BD1206', fontSize: 12}}>
+                    Forgot password?
+                    </Text>
+                  </Row>
+
+                  <Row style={{ height: 20}}></Row>
+
+                  <Row nowrap vAlign='middle' style={{height: 60}}>
+                    <Col hAlign='fill'>
+                      <Row hAlign='center' vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#BD1206'}}>
+                        <TouchableHighlight activeOpacity={0.5} underlayColor='transparent' onPress={() => this.login()}>
+                          <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>LOG IN</Text>
+                        </TouchableHighlight>
+                      </Row>
+                    </Col>
+                  </Row>
+
+                  <Row vAlign='middle' style={{height: 60}}>
+                    <Col style={{height: 1,  backgroundColor: '#a0a0a0'}}>
+                    </Col>
+                  </Row>
+
+                  <Row style={{height: 60}}>
+                    <Col vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#3B5998'}}>
+                      <Row nowrap >
+                        <Col size={10} offset={6}>  
+                          <FontAwesome name='facebook' size={20} color='#f3f3f3'/>
+                        </Col> 
+                        <Col size={81} offset={3}>
+                          <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}> 
+                            LOG IN WITH FACEBOOK
+                          </Text>
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
+
+            </Col>
+          </Row>
     </Modal>
 ```
-## Making Simple Easy
-
-Only tricky part about using this super robust grid is the ability to do basic mental arithmetic:
-
-```
-    <Row nowrap colPercent={3}>
-      <Col size={3.333} offset={2}>  
-        <FontAwesome name='facebook' size={20} color='#f3f3f3'/>
-      </Col> 
-      <Col size={27} offset={1}>
-        <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}> 
-          LOG IN WITH FACEBOOK
-        </Text>
-      </Col>
-    </Row>
-```
-
-This says that we're going to have a row where each grid column is 3% of the width of the screen (since this is a top level row, not nested) 
-
-We must make sure all the columns which have their width as a multiple of that 3% add up to 100% or less or else they extend beyond the screen.
-
-The first column is 10% in width (3.333 * 3) and the second one is 81% (27 * 3) ... That adds up to 91%. The other 9% comes from the 2 column positions the first column is offset by, which is 6% (2 * 3) and the 1 column position the second column in offset by which is 3% (1 * 3)
-
-All the calculations are in percentages and multiples of a percentage. This way we can control our grid offsets and layout column sizes precisely and independently. 
