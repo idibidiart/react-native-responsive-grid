@@ -18,35 +18,15 @@ const Column = (props) => {
       lgHidden,
       vAlign,
       hAlign,
-      colPercent,
       rtl,
       cell,
       ...rest
     } = props;
 
-    const gridProps = {
-      size,
-      offset,
-      sm,
-      smOffset,
-      smHidden,
-      md,
-      mdOffset,
-      mdHidden,
-      lg,
-      lgOffset,
-      lgHidden,
-      vAlign,
-      hAlign,
-      colPercent,
-      rtl,
-      cell
-    };
-
     // top/flex-start is default
     const align_Y = (props.vAlign === 'middle' ? 'center' : (props.vAlign === 'bottom' ? 'flex-end' : (props.vAlign === 'space' ? 'space-between' : (props.vAlign === 'distribute' ? 'space-around' : 'flex-start'))))
     // left/flex-start is default
-    const align_X = (gridProps.colPercent === undefined && props.cell && !props.hAlign) ? 'stretch' :  (props.hAlign === 'fill' ? 'stretch' : (props.hAlign === 'center' ? 'center' : ((props.hAlign === 'right' || (props.rtl && props.hAlign !== 'left')) ? 'flex-end' : 'flex-start')))
+    const align_X = (props.hAlign === 'fill' ? 'stretch' : (props.hAlign === 'center' ? 'center' : ((props.hAlign === 'right' || (props.rtl && props.hAlign !== 'left')) ? 'flex-end' : 'flex-start')))
 
     const cloneElements = (props) => {
         return React.Children.map(props.children, (element) => {
@@ -58,7 +38,7 @@ const Column = (props) => {
         })
     }
 
-    if (isHidden(screenSize, gridProps)){
+    if (isHidden(screenSize, props)){
       return null;
     } else {
       try {
@@ -67,10 +47,10 @@ const Column = (props) => {
           {...rest}
           style={[
             props.style, {
-              width: (gridProps.colPercent === undefined && props.style && props.style.width !== undefined) ? props.style.width : getColumnWidth(screenSize, gridProps),
+              width: (props.style && props.style.width !== undefined) ? props.style.width : getColumnWidth(screenSize, props),
               flexDirection: 'column',
-              marginLeft: gridProps.rtl ? 0 : getColumnOffset(screenSize, gridProps),
-              marginRight: gridProps.rtl ? getColumnOffset(screenSize, gridProps) : 0,
+              marginLeft: props.rtl ? 0 : getColumnOffset(screenSize, props),
+              marginRight: props.rtl ? getColumnOffset(screenSize, props) : 0,
               alignItems: align_X,
               justifyContent: align_Y
             }]}>

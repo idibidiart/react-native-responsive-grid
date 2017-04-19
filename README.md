@@ -37,13 +37,11 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-**colPercent** may be supplied as prop to Row. Possible values are 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width. If not supplied on the row, the width of child Columns will default to 100% of the computed or absolute width of the row, unless the width of the column is defined in the style prop, which would be used (if it exists) in the absence of this prop.
-
-**size** may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines how many grid columns wide the given column element should be. If `size` is not supplied it defaults to 1. If the column is without a parent Row or colPercent is not specified on parent Row the width of the column will default to 100% of the computed or absolute width of its parent. Since `size` accepts any number from 0 to Infinity, you can make your layout column as many grid columns wide as you want, extending beyond the screen width if **norwarp** prop is set on the row. If **nowrap** is not set on the row, the column will wrap. 
+**size** may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines how wide the column as a percentage of its parent view's computed or absolute width. It defaults to 100%. Since `size` accepts any number from 0 to Infinity, you can make your layout column as many grid columns wide as you want, extending beyond the screen width if **norwarp** prop is set on the row. If **nowrap** is not set on the row, the column will wrap. 
 
 **sm**, **md**, and **lg** are device-size-dependent 'size' values that are applicable to columns.
 
-**offset**, **smOffset**, **mdOffset** and **lgOffset** - Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column in terms of the number of grid columns. Since grid columns have their parent row's justifyContent as flex-start (by design) and their alignItems set to flex-start (or flex-end for RTL mode) content in offsetted columns will snap to grid (in both LTR and RTL modes.) Offset values can also be negative, too. Column `offset` value defaults to 0. When using an offset rule in LTR or RTL modes, marginLeft and marginRight in style prop will be overridden, respectively.  
+**offset**, **smOffset**, **mdOffset** and **lgOffset** - Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or absolute width. Offset values can also be negative. Default is 0. Offsets in LTR mode apply to marginLeft whilre offsets in RTL mode apply to marginRight.   
 
 **vAlign** may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: middle, top, bottom, space and distribute. Default is top.
 
@@ -55,7 +53,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 **rtl** may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
-**cell** may be supplied as prop to Row. It sets the row's height to 100% of the computed or absolute height of the row's parent view. It sets vAlign to 'fill' on the row which vertically stretches the row's children to fill its height, unless vAlign is supplied explicity on the row with another value. Given the `cell` prop is only actionable when `colPercent` is undefined, the child column width will be 100% by default. The `cell` prop sets hAlign to 'fill' on the column which horizontally stretches the column's children to fill its width, unless hAlign is supplied explicity on the column with another value. 
+**cell** may be supplied as prop to Row. It sets the row's height to 100% of the computed or absolute height of the row's parent view. It also sets vAlign on the row to 'fill' which vertically stretches the row's children to fill its height, unless vAlign is supplied explicity on the row with another value.
 
 These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 

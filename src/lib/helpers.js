@@ -14,80 +14,80 @@ const isHidden = (screenSize, props) => {
 const toPercent = (num) => num + '%';
 
 const getColumnWidth = (screenSize, props) => {
-  
-  if (props.colPercent === undefined) {
-    return '100%'
-  }
 
   switch(screenSize) {
     case 'small':
       if (props.sm) {
-        return toPercent(Math.max(props.sm, 0) * props.colPercent);
+        return toPercent(Math.max(props.sm, 0));
       } else if (props.size !== undefined) {
-        return toPercent(Math.max(props.size, 0) * props.colPercent);
+        return toPercent(Math.max(props.size, 0));
       } else {
-        return toPercent(props.colPercent)
+        return toPercent(100)
       }
       break;
     case 'medium':
       if (props.md) {
-        return toPercent(Math.max(props.md, 0) * props.colPercent);
+        return toPercent(Math.max(props.md, 0));
       } else if (props.size !== undefined)  {
-        return toPercent(Math.max(props.size, 0) * props.colPercent);
+        return toPercent(Math.max(props.size, 0));
       } else {
-        return toPercent(props.colPercent)
+        return toPercent(100)
       }
       break;
     case 'large':
       if (props.lg) {
-        return toPercent(Math.max(props.lg, 0) * props.colPercent);
+        return toPercent(Math.max(props.lg, 0));
       } else if (props.size !== undefined) {
-        return toPercent(Math.max(props.size, 0) * props.colPercent);
+        return toPercent(Math.max(props.size, 0));
       } else {
-        return toPercent(props.colPercent)
+        return toPercent(100)
       }
       break;
     default:
-      return toPercent(props.colPercent)
+      if (props.size !== undefined) {
+        return toPercent(Math.max(props.size, 0));
+      } else {
+        return toPercent(100)
+      }
   }
 }
 
 const getColumnOffset = (screenSize, props) => {
 
-  if (props.colPercent === undefined) {
-    return 0
-  }
-
   switch(screenSize) {
     case 'small':
       if (props.smOffset) {
-        return toPercent(props.smOffset * props.colPercent);
+        return toPercent(props.smOffset)
       } else if (props.offset) {
-        return toPercent(props.offset * props.colPercent);
+        return toPercent(props.offset)
       } else {
         return 0;
       }
       break;
     case 'medium':
       if (props.mdOffset) {
-        return toPercent(props.mdOffset * props.colPercent);
+        return toPercent(props.mdOffset)
       } else if (props.offset){
-        return toPercent(props.offset * props.colPercent);
+        return toPercent(props.offset)
       } else {
         return 0;
       }
       break;
     case 'large':
       if (props.lgOffset) {
-        return toPercent(props.lgOffset * props.colPercent);
+        return toPercent(props.lgOffset);
       } else if (props.offset){
-        return toPercent(props.offset * props.colPercent);
+        return toPercent(props.offset)
       } else {
         return 0;
       }
       break;
     default:
-      return 0;
+      if (props.offset){
+        return toPercent(props.offset)
+      } else {
+        return 0
+      }
   }
 };
 
