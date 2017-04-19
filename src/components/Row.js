@@ -25,7 +25,7 @@ const Row = (props) => {
   // left/flex-start is default
   const align_X =  (props.hAlign === 'space' ? 'space-between' : (props.hAlign === 'distribute' ? 'space-around' : (props.hAlign === 'center' ? 'center' : (props.hAlign === 'right' ? 'flex-end' : 'flex-start'))))
   // top/flex-start is default
-  const align_Y = (props.cell && !props.vAlign) ? 'stretch' : props.vAlign === 'middle' ? 'center' : (props.vAlign === 'bottom' ? 'flex-end' : (props.vAlign === 'fill' ? 'stretch' : 'flex-start'))
+  const align_Y = props.vAlign === 'middle' ? 'center' : (props.vAlign === 'bottom' ? 'flex-end' : (props.vAlign === 'fill' ? 'stretch' : 'flex-start'))
 
   const colPercent = refineColPercent(props.colPercent)
 
@@ -40,7 +40,8 @@ const Row = (props) => {
                         flexWrap: props.nowrap ? 'nowrap' : 'wrap',
                         alignItems: align_Y,
                         justifyContent: align_X,
-                        height: props.cell ? '100%' : (props.style && props.style.height !== undefined) ? props.style.height : undefined
+                        height: (props.colPercent === undefined && props.cell) ? '100%' : props.style ? props.style.width : undefined,
+                        width: (props.colPercent === undefined && props.cell) ? '100%' : props.style ? props.style.width : undefined
                       }]}>
                 {cloneElements(props)}
             </View>
