@@ -7,7 +7,7 @@ Developing performant, responsive and fairly detailed 2D layouts with raw flexbo
 
 ## What?
 
-This Responsive Grid (for React Native) fixes the mental model for Grid based layouts by abandoning the format-based, columns-per-view approach (e.g. "12 column grid") and instead allowing the developer to specify the width of each grid column as a percentage of parent view's size, so 10% meams 10 column grid. There is no reason for a grid to be 11, 12, 14 or 16 columns. Grids can be any number of columns, including a fractional number, and that number should be determined by the desired width per column, not the other way around. Plus, all other style measurements are done by percentage when building responsive layouts, so why would we measure column width as N/12 while we measure everything else as N/100? That's form of cognitive impedence mismatch that we shouldn't have in our grid design.
+This Responsive Grid (for React Native) fixes the mental model for Grid based layouts by abandoning the format-based, columns-per-view approach (e.g. "12 column grid") and instead allowing the developer to specify the width of each grid column as a percentage of parent view's size, so 10% meams 10 column grid, and 8.333% means a 12 column grid, but let's not think in terms of columns per grid. That is a visual formatting model, not an actual layout model. There is no reason for a grid to be 11, 12, 13, 14, 15 or 16 columns. Grids can be any number of columns, including a non-integer number, and that number should be determined by actual layout needs, not by some fixed grid template. Plus, all other style measurements are done by percentage when building responsive layouts, so why would we measure column width as n:12 (or n:11) while we measure everything else as n:100? Time to fix this!
 
 One constraint I've added in this version of the grid to keep its structure and design simple is that Rows may not contain other Rows as children (they must be wrapped in a Column) and Columns may not contain other columns as children (they must be wrapped in a Row) 
 
@@ -23,13 +23,13 @@ LTR = "normal" left-to-right layout
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
-<Row colPercent={5}>
-    <Col size={5} offset={1}>
+<Row>
+    <Col size={25} offset={5}>
       <Text>
         First Column
       </Text>
     </Col>
-    <Col sm={6} md={4} mdOffset={2} lg={3} lgOffset={3} >
+    <Col sm={60} smOffset={10} md={40} mdOffset={30} lg={30} lgOffset={40} >
       <Text>
         Second Column
       </Text>
@@ -45,15 +45,15 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 **vAlign** may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: middle, top, bottom, space and distribute. Default is top.
 
-**vAlign** may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: top, middle, bottom or fill. Default is top.
+**vAlign** may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: top, middle, bottom and stretch. Default is top.
 
 **hAlign** may be supplied as prop to Row to align the columns within it in the horizontal direction. Possible values are: center, left, right, space and distribute. Default is left.
 
-**hAlign** may also be supplied as prop to Column to align its rows and/or elements within it in the horizontal direction. Possible values are: center, left, right, and fill. Default is left.
+**hAlign** may also be supplied as prop to Column to align its rows and/or elements within it in the horizontal direction. Possible values are: center, left, right, and stretch. Default is left.
 
 **rtl** may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
-**cell** may be supplied as prop to Row. It sets the row's height to 100% of the computed or absolute height of the row's parent view. It also sets vAlign on the row to 'fill' which vertically stretches the row's children to fill its height, unless vAlign is supplied explicity on the row with another value.
+**cell** may be supplied as prop to Row. It sets the row's height to 100% of the computed or absolute height of the row's parent view. It also sets vAlign on the row to 'stretch' which vertically stretches the row's children to fill its height, unless vAlign is supplied explicity on the row with another value.
 
 These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 
@@ -62,8 +62,8 @@ These make up the basic rules from which arbirarily complex layout behavior may 
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
-<Row colPercent={7}>
-    <Col sm={6} md={4} lg={3} smOffset={1} mdOffset={3} lgOffset={5}>
+<Row>
+    <Col sm={60} md={40} lg={30} smOffset={10} mdOffset={20} lgOffset={30}>
         <Text>First Column</Text>
     </Col>
 </Row>
@@ -74,10 +74,10 @@ There are currently four size props for `Column`. `size`, `sm`, `md`, and `lg`. 
 If you're nesting a column inside a row which is inside another column that is inside another row as below:
 
 ```
-<Row colPercent={5}>
-    <Col size={10}>
-      <Row colPercent={5}>
-        <Col size={10}>
+<Row>
+    <Col size={50}>
+      <Row>
+        <Col size={50}>
           <Text>
             This column is 25% of the width of the top level row
           </Text>
@@ -107,8 +107,8 @@ Example:
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
-<Row colPercent={10}>
-    <Col sm={5} md={3.3333} lg={2.5}>
+<Row>
+    <Col sm={50} md={33.333} lg={25}>
         <Text>First Column</Text>
     </Col>
 </Row>
@@ -123,7 +123,7 @@ On a big tablet the Column would take up 25% of the row's width.
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
-<Row colPercent={15}>
+<Row>
     <Col smHidden>
         <Text>First Column</Text>
     </Col>
@@ -350,95 +350,97 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
       visible={this.state.modalVisible}
       onRequestClose={() => this.close()}
       >
- <Row cell style={[{padding: 20}, modalBackgroundStyle]}>
-            <Col hAlign='center' style={{backgroundColor: "#f3f3f3", padding: 20}}>
-                  
-                  <Row nowrap style={{height: 80}}>
-                    <Col size={33.333} offset={33.333} hAlign='center' >
-                      <Text>
-                       <Image source={require('./assets/logo-login.png')} style={styles.logoImage}/>
+      <Row cell style={[{padding: 20}, modalBackgroundStyle]}>
+        <Col hAlign='center' style={{backgroundColor: "#f3f3f3", padding: 20}}>
+              
+              <Row nowrap style={{height: 80}}>
+                <Col size={33.333} offset={33.333} hAlign='center' >
+                  <Text>
+                    <Image source={require('./assets/logo-login.png')} style={styles.logoImage}/>
+                  </Text>
+                </Col>
+                <Col size={33.333} hAlign='right'>
+                  <TouchableHighlight activeOpacity={0.5} underlayColor='#f3f3f3' onPress={() => this.close()}>
+                      <FontAwesome
+                        name="close"
+                        size={28}
+                        color="#d0d0d0"
+                      />
+                  </TouchableHighlight>
+                </Col>
+              </Row>
+
+              <Row vAlign='middle' style={{height: 50}}>
+                <Text style={{fontFamily: 'lubalin-graph-regular', fontSize: 16}}>LOG IN TO YOUR ACCOUNT</Text>
+              </Row>
+
+              <Row nowrap vAlign='middle' style={{height: 55}}>
+                <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
+                  <Row>
+                    <Col size={10} >
+                        <FontAwesome name='envelope' size={20} color='#BD1206'/>
+                    </Col>
+                    <Col size={90}>
+                        <TextInput placeholder='Email' style={{flex: 1}}/>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+
+              <Row vAlign='middle' style={{height: 55}}>
+                <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
+                  <Row>
+                    <Col size={10} >
+                        <FontAwesome name='envelope' size={20} color='#BD1206'/>
+                    </Col>
+                    <Col size={90}>
+                        <TextInput secureTextEntry={true} placeholder='Password' style={{flex: 1}}/>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+
+              <Row hAlign='center' style={{height: 12}}>
+                <Text style={{color: '#BD1206', fontSize: 12}}>
+                Forgot password?
+                </Text>
+              </Row>
+
+              <Row style={{ height: 20}}></Row>
+
+              <Row nowrap vAlign='middle' style={{height: 60}}>
+                <Col hAlign='stretch'>
+                  <TouchableHighlight activeOpacity={0.5} underlayColor='transparent' onPress={() => this.login()}>
+                    <View>
+                      <Row hAlign='center' vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#BD1206'}}>
+                          <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>LOG IN</Text>
+                      </Row>
+                    </View>
+                  </TouchableHighlight>
+                </Col>
+              </Row>
+
+              <Row vAlign='middle' style={{height: 60}}>
+                <Col style={{height: 1,  backgroundColor: '#a0a0a0'}}>
+                </Col>
+              </Row>
+
+              <Row style={{height: 60}}>
+                <Col vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#3B5998'}}>
+                  <Row nowrap >
+                    <Col size={10} offset={6}>  
+                      <FontAwesome name='facebook' size={20} color='#f3f3f3'/>
+                    </Col> 
+                    <Col size={81} offset={3}>
+                      <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}> 
+                        LOG IN WITH FACEBOOK
                       </Text>
                     </Col>
-                    <Col size={33.333} hAlign='right'>
-                      <TouchableHighlight activeOpacity={0.5} underlayColor='#f3f3f3' onPress={() => this.close()}>
-                          <FontAwesome
-                            name="close"
-                            size={28}
-                            color="#d0d0d0"
-                          />
-                      </TouchableHighlight>
-                    </Col>
                   </Row>
+                </Col>
+              </Row>
 
-                  <Row vAlign='middle' style={{height: 50}}>
-                   <Text style={{fontFamily: 'lubalin-graph-regular', fontSize: 16}}>LOG IN TO YOUR ACCOUNT</Text>
-                  </Row>
-
-                  <Row nowrap vAlign='middle' style={{height: 55}}>
-                    <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
-                      <Row>
-                        <Col size={10} >
-                            <FontAwesome name='envelope' size={20} color='#BD1206'/>
-                        </Col>
-                        <Col size={90}>
-                            <TextInput placeholder='Email' style={{flex: 1}}/>
-                        </Col>
-                      </Row>
-                    </Col>
-                  </Row>
-
-                  <Row vAlign='middle' style={{height: 55}}>
-                    <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
-                      <Row>
-                        <Col size={10} >
-                            <FontAwesome name='envelope' size={20} color='#BD1206'/>
-                        </Col>
-                        <Col size={90}>
-                            <TextInput secureTextEntry={true} placeholder='Password' style={{flex: 1}}/>
-                        </Col>
-                      </Row>
-                    </Col>
-                  </Row>
-
-                  <Row hAlign='center' style={{height: 12}}>
-                    <Text style={{color: '#BD1206', fontSize: 12}}>
-                    Forgot password?
-                    </Text>
-                  </Row>
-
-                  <Row style={{ height: 20}}></Row>
-
-                  <Row nowrap vAlign='middle' style={{height: 60}}>
-                    <Col hAlign='fill'>
-                      <Row hAlign='center' vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#BD1206'}}>
-                        <TouchableHighlight activeOpacity={0.5} underlayColor='transparent' onPress={() => this.login()}>
-                          <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>LOG IN</Text>
-                        </TouchableHighlight>
-                      </Row>
-                    </Col>
-                  </Row>
-
-                  <Row vAlign='middle' style={{height: 60}}>
-                    <Col style={{height: 1,  backgroundColor: '#a0a0a0'}}>
-                    </Col>
-                  </Row>
-
-                  <Row style={{height: 60}}>
-                    <Col vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#3B5998'}}>
-                      <Row nowrap >
-                        <Col size={10} offset={6}>  
-                          <FontAwesome name='facebook' size={20} color='#f3f3f3'/>
-                        </Col> 
-                        <Col size={81} offset={3}>
-                          <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}> 
-                            LOG IN WITH FACEBOOK
-                          </Text>
-                        </Col>
-                      </Row>
-                    </Col>
-                  </Row>
-
-            </Col>
-          </Row>
+        </Col>
+      </Row>
     </Modal>
 ```
