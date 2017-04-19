@@ -37,7 +37,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-**colPercent** may be supplied as prop to Row. Possible values are 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width. If not supplied on the row, the width of child Columns will default to 100% of the computed or absolute width of the row. 
+**colPercent** may be supplied as prop to Row. Possible values are 0 to 100. This number defines the width of a single grid column as a percentage of the row element's width. If not supplied on the row, the width of child Columns will default to 100% of the computed or absolute width of the row, unless the width of the column is defined in the style prop, which would be used (if it exists) in the absence of this prop.
 
 **size** may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines how many grid columns wide the given column element should be. If `size` is not supplied it defaults to 1. If the column is without a parent Row or colPercent is not specified on parent Row the width of the column will default to 100% of the computed or absolute width of its parent. Since `size` accepts any number from 0 to Infinity, you can make your layout column as many grid columns wide as you want, extending beyond the screen width if **norwarp** prop is set on the row. If **nowrap** is not set on the row, the column will wrap. 
 
@@ -55,7 +55,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 **rtl** may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
-**cell** may be supplied as prop to Row. It sets the row's height to 100% of the computed or absolute height of the row's parent view. It sets the width of all child columns to 100% of the computed or absolute width of the row's parent view. The `cell` is ignored if colPercent is specified on Row. 
+**cell** may be supplied as prop to Row. It sets the row's height to 100% of the computed or absolute height of the row's parent view. It sets the width of all child columns to 100% of the computed or absolute width of the row. The `cell` is ignored if colPercent is specified on Row. 
 
 These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 
