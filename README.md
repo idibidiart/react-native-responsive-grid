@@ -9,7 +9,7 @@ Developing performant, responsive and fairly detailed 2D layouts with raw flexbo
 
 This Responsive Grid (for React Native) fixes the mental model for Grid based layouts by abandoning the format-based, columns-per-view approach (e.g. "12 column grid") and instead allowing the developer to specify the width of each grid column as a percentage of parent view's size, so 10% meams 10 column grid, and 8.333% means a 12 column grid, but let's not think in terms of columns per grid. That is a visual formatting model, not an actual layout model. There is no reason for a grid to be 11, 12, 13, 14, 15 or 16 columns. Grids can be any number of columns, including a non-integer number, and that number should be determined by actual layout needs, not by some fixed grid template. Plus, all other style measurements are done by percentage when building responsive layouts, so why would we measure column width as n:12 (or n:11) while we measure everything else as n:100? Time to fix this!
 
-One constraint I've added in this version of the grid to keep its structure and design simple is that Rows may not contain other Rows as children (they must be wrapped in a Column) and Columns may not contain other columns as children (they must be wrapped in a Row) 
+To keep the grid's structure and design simple (as well as logical) Rows may not contain other Rows as children (they must be wrapped in a Column) and Columns may not contain other columns as children (they must be wrapped in a Row) 
 
 I've also found that RTL (right-to-left) support (for Hebrew/Arabic apps) to be generally lacking in RN, so I added RTL layout support to this version. 
 
