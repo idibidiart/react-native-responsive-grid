@@ -7,7 +7,7 @@ In your project folder, `yarn add react-native-responsive-grid`
 
 ## Why?
 
-Developing performant, responsive and fairly detailed 2D layouts with raw flexbox in React Native (prior to v0.42) used to take me hours per screen and resulted in markup and styles that were almost unmaintainable. While Flexbox itself maybe confusing to new comers, the lack of perofmant way to encode relative size info was the real pain. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of those, namely, `react-native-flexbox-grid` by @rundmt, which is based on yet another library, `react-flexbox-grid`, and I made some major changes and enhancements to fit what I believe is a simpler mental model for 2D responsive layout, based entirely on percentages.
+Developing performant, responsive and fairly detailed 2D layouts with raw flexbox in React Native (prior to v0.42) used to take me hours per screen and resulted in markup and styles that were almost unmaintainable. While Flexbox itself is confusing to new comers and too low-level for building responsive 2D layouts, the lack of perofmant way to encode relative size info was the real obstacle. Then came React Native v0.42 on March 20, 2017 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of the simplest ones, namely, `react-native-flexbox-grid` by @rundmt, and made major changes and enhancements to it that yields a much simpler mental model for 2D responsive layout, one thast is based entirely on percentages, but still fits within the grid construct.
 
 ## What?
 
@@ -16,6 +16,7 @@ This Responsive Grid (for React Native) fixes the mental model for Grid based la
 To keep the grid's structure and design simple (as well as logical) Rows may not contain other Rows as children (they must be wrapped in a Column) and Columns may not contain other columns as children (they must be wrapped in a Row) 
 
 I've also found that RTL (right-to-left) support (for Hebrew/Arabic apps) to be generally lacking in RN, so I added RTL layout support to this version. 
+
 
 ## Terms:
 
