@@ -349,103 +349,101 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
 ![demo](https://s8.postimg.org/7t9wefrrp/Screen_Shot_2017-04-17_at_2.59.00_PM.png)
 
 ```
-    <Modal
-      animationType="fade"
-      transparent={true}
-      visible={this.state.modalVisible}
-      onRequestClose={() => this.close()}
-      >
-      <Row cell style={[{padding: 20}, modalBackgroundStyle]}>
-        <Col hAlign='center' style={{backgroundColor: "#f3f3f3", padding: 20}}>
-              
-              <Row nowrap style={{height: 80}}>
-                <Col size={33.333} offset={33.333} hAlign='center' >
-                  <Text>
-                    <Image source={require('./assets/logo-login.png')} style={styles.logoImage}/>
-                  </Text>
-                </Col>
-                <Col size={33.333} hAlign='right'>
-                  <TouchableHighlight activeOpacity={0.5} underlayColor='#f3f3f3' onPress={() => this.close()}>
-                      <FontAwesome
-                        name="close"
-                        size={28}
-                        color="#d0d0d0"
-                      />
-                  </TouchableHighlight>
-                </Col>
-              </Row>
-
-              <Row vAlign='middle' style={{height: 50}}>
-                <Text style={{fontFamily: 'lubalin-graph-regular', fontSize: 16}}>LOG IN TO YOUR ACCOUNT</Text>
-              </Row>
-
-              <Row nowrap vAlign='middle' style={{height: 55}}>
-                <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
-                  <Row>
-                    <Col size={10} >
-                        <FontAwesome name='envelope' size={20} color='#BD1206'/>
-                    </Col>
-                    <Col size={90}>
-                        <TextInput placeholder='Email' style={{flex: 1}}/>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-
-              <Row vAlign='middle' style={{height: 55}}>
-                <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
-                  <Row>
-                    <Col size={10} >
-                        <FontAwesome name='envelope' size={20} color='#BD1206'/>
-                    </Col>
-                    <Col size={90}>
-                        <TextInput secureTextEntry={true} placeholder='Password' style={{flex: 1}}/>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-
-              <Row hAlign='center' style={{height: 12}}>
-                <Text style={{color: '#BD1206', fontSize: 12}}>
-                Forgot password?
-                </Text>
-              </Row>
-
-              <Row style={{ height: 20}}></Row>
-
-              <Row nowrap vAlign='middle' style={{height: 60}}>
-                <Col hAlign='stretch'>
-                  <TouchableHighlight activeOpacity={0.5} underlayColor='transparent' onPress={() => this.login()}>
-                    <View>
-                      <Row hAlign='center' vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#BD1206'}}>
-                          <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>LOG IN</Text>
-                      </Row>
-                    </View>
-                  </TouchableHighlight>
-                </Col>
-              </Row>
-
-              <Row vAlign='middle' style={{height: 60}}>
-                <Col style={{height: 1,  backgroundColor: '#a0a0a0'}}>
-                </Col>
-              </Row>
-
-              <Row style={{height: 60}}>
-                <Col vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#3B5998'}}>
-                  <Row nowrap >
-                    <Col size={10} offset={6}>  
-                      <FontAwesome name='facebook' size={20} color='#f3f3f3'/>
-                    </Col> 
-                    <Col size={81} offset={3}>
-                      <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}> 
-                        LOG IN WITH FACEBOOK
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={this.state.modalVisible}
+          onRequestClose={() => this.close()}
+          >
+          <Row cell style={[{padding: 20}, modalBackgroundStyle]}>
+            <Col hAlign='center' style={{backgroundColor: "#f3f3f3", padding: 20}}>
+                  
+                  <Row nowrap style={{height: 80}}>
+                    <Col size={33.333} offset={33.333} hAlign='center' >
+                      <Text>
+                       <Image source={require('./assets/logo-login.png')} style={styles.logoImage}/>
                       </Text>
                     </Col>
+                    <Col size={33.333} hAlign='right'>
+                      <TouchableHighlight activeOpacity={0.5} underlayColor='#f3f3f3' onPress={() => this.close()}>
+                          <FontAwesome
+                            name="close"
+                            size={28}
+                            color="#d0d0d0"
+                          />
+                      </TouchableHighlight>
+                    </Col>
                   </Row>
-                </Col>
-              </Row>
 
-        </Col>
-      </Row>
-    </Modal>
+                  <Row vAlign='middle' style={{height: 50}}>
+                   <Text style={{fontFamily: 'lubalin-graph-regular', fontSize: 16}}>LOG IN TO YOUR ACCOUNT</Text>
+                  </Row>
+
+                  <Row nowrap vAlign='middle' style={{height: 55}}>
+                    <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
+                      <Row>
+                        <Col size={10} >
+                            <FontAwesome name='envelope' size={20} color='#BD1206'/>
+                        </Col>
+                        <Col size={90}>
+                            <TextInput placeholder='Email' style={{flex: 1}}/>
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
+
+                  <Row vAlign='middle' style={{height: 55}}>
+                    <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
+                      <Row>
+                        <Col size={10} >
+                            <FontAwesome name='envelope' size={20} color='#BD1206'/>
+                        </Col>
+                        <Col size={90}>
+                            <TextInput secureTextEntry={true} placeholder='Password' style={{flex: 1}}/>
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
+
+                  <Row hAlign='center' style={{height: 12}}>
+                    <Text style={{color: '#BD1206', fontSize: 12}}>
+                    Forgot password?
+                    </Text>
+                  </Row>
+
+                  <Row style={{ height: 20}}></Row>
+
+                  <Row nowrap vAlign='middle' style={{height: 60}}>
+                    <Col hAlign='stretch'>
+                      <TouchableHighlight activeOpacity={0.5} underlayColor='transparent' onPress={() => this.login()}>
+                          <Row hAlign='center' vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#BD1206'}}>
+                              <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>LOG IN</Text>
+                          </Row>
+                      </TouchableHighlight>
+                    </Col>
+                  </Row>
+
+                  <Row vAlign='middle' style={{height: 60}}>
+                    <Col style={{height: 1,  backgroundColor: '#a0a0a0'}}>
+                    </Col>
+                  </Row>
+
+                  <Row style={{height: 60}}>
+                    <Col vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#3B5998'}}>
+                      <Row nowrap >
+                        <Col size={10} offset={6}>  
+                          <FontAwesome name='facebook' size={20} color='#f3f3f3'/>
+                        </Col> 
+                        <Col size={81} offset={3}>
+                          <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}> 
+                            LOG IN WITH FACEBOOK
+                          </Text>
+                        </Col>
+                      </Row>
+                    </Col>
+                  </Row>
+
+            </Col>
+          </Row>
+        </Modal>
 ```
