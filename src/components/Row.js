@@ -16,35 +16,54 @@ const cloneElements = (props) => {
     })
 }
 
-const Row = (props) => {
-  // left/flex-start is default
-  const align_X =  (props.hAlign === 'space' ? 'space-between' : (props.hAlign === 'distribute' ? 'space-around' : (props.hAlign === 'center' ? 'center' : (props.hAlign === 'right' ? 'flex-end' : 'flex-start'))))
-  // top/flex-start is default
-  const align_Y = (props.cell && !props.vAlign) ? 'stretch' : props.vAlign === 'middle' ? 'center' : (props.vAlign === 'bottom' ? 'flex-end' : (props.vAlign === 'stretch' ? 'stretch' : 'flex-start'))
+export default class Row extends React.Component {
 
-  if (isHidden(screenSize, props)){
-    return null;
-  } else {
-    try {
-        return (
-            <View {...props}
-              style={[props.style,
-                      { flexDirection: 'row',
-                        flexWrap: props.nowrap ? 'nowrap' : 'wrap',
-                        alignItems: align_Y,
-                        justifyContent: align_X,
-                        height: (props.style && props.style.height !== undefined) ? props.style.height : (props.cell ? '100%' : undefined)
-                      }]}>
-                {cloneElements(props)}
-            </View>
-        )
-    } catch (e) {
-      if (__DEV__) { 
-        console.error(e)
+  setNativeProps = (nativeProps) => {
+    this._root.setNativeProps(nativeProps);
+  }
+
+  // left/flex-start is default
+  align_X =  (this.props.hAlign === 'space' ? 'space-between' : (this.props.hAlign === 'distribute' ? 'space-around' : (this.props.hAlign === 'center' ? 'center' : (this.props.hAlign === 'right' ? 'flex-end' : 'flex-start'))))
+  // top/flex-start is default
+  align_Y = (this.props.cell && !this.props.vAlign) ? 'stretch' : this.props.vAlign === 'middle' ? 'center' : (this.props.vAlign === 'bottom' ? 'flex-end' : (this.props.vAlign === 'stretch' ? 'stretch' : 'flex-start'))
+
+  render() {
+
+    const {
+      rtl,
+      cell,
+      nowrap,
+      smHidden,
+      mdHidden,
+      lgHidden,
+      hAlign,
+      vAlign,
+      ...rest
+    } = this.props
+
+    if (isHidden(screenSize, this.props)){
+      return null;
+    } else {
+      try {
+          return (
+              <View ref={component => this._root = component} {...rest}
+                style={[this.props.style,
+                        { flexDirection: 'row',
+                          flexWrap: this.props.nowrap ? 'nowrap' : 'wrap',
+                          alignItems: this.align_Y,
+                          justifyContent: this.align_X,
+                          height: (this.props.style && this.props.style.height !== undefined) ? this.props.style.height : (this.props.cell ? '100%' : undefined)
+                        }]}>
+                  {cloneElements(this.props)}
+              </View>
+          )
+      } catch (e) {
+        if (__DEV__) { 
+          console.error(e)
+        }
+        return null
       }
-      return null
     }
-    
   }
 }
 
@@ -56,7 +75,5 @@ Row.propTypes = {
   mdHidden: PropTypes.bool,
   lgHidden: PropTypes.bool,
   hAlign: PropTypes.string,
-  vAlign: PropTypes.string,
+  vAlign: PropTypes.string
 }
-
-export default Row;
