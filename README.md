@@ -7,7 +7,7 @@ In your project folder, `yarn add react-native-responsive-grid`
 
 ## Why?
 
-Developing performant, responsive and fairly detailed 2D layouts with raw flexbox in React Native (prior to v0.42) used to take me hours per screen and resulted in markup and styles that were almost unmaintainable. While Flexbox itself is confusing to new comers and too low-level for building responsive 2D layouts, the lack of perofmant way to encode relative size info was the real obstacle. Then came React Native v0.42 on March 20, 2017 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of the simplest ones, namely, `react-native-flexbox-grid` by @rundmt, and made major changes and enhancements to it that yields a much simpler mental model for 2D responsive layout, one thast is based entirely on percentages, but still fits within the grid construct.
+Developing performant, responsive and fairly detailed 2D layouts with raw flexbox in React Native used to take hours per screen and resulted in markup and styles that were almost unmaintainable. While Flexbox itself is confusing to new comers and too low-level for building responsive 2D layouts, the lack of a performant way in React Native to encode relative size info was the real obstacle. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of the simplest and best thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and I've made major changes and enhancements to it that result in a simpler mental model, one that is based entirely on percentages, yet fits within the grid Row+Column construct. I ended up with a light weight abstraction that dissolves all the needless complexity of Flexbox, while allowing arbitrarily complex, responsive 2D layouts.
 
 ## What?
 
@@ -44,7 +44,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-**size** may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines how wide the column as a percentage of its parent view's computed or absolute width. It defaults to 100%. Since `size` accepts any number from 0 to Infinity, you can make your layout column as many grid columns wide as you want, extending beyond the screen width if **norwarp** prop is set on the row. If **nowrap** is not set on the row, the column will wrap. 
+**size** may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or absolute width. It defaults to 100%, i.e. full width. Since `size` accepts any number from 0 to Infinity, you can make your layout column as many grid columns wide as you want, extending beyond the screen width if **norwarp** prop is set on the row. If **nowrap** is not set on the row, the column will wrap. 
 
 **sm**, **md**, and **lg** are device-size-dependent 'size' values that are applicable to columns.
 
@@ -60,7 +60,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 **rtl** may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
-**cell** may be supplied as prop to Row. It sets the row's height to 100% of the computed or absolute height of the row's parent view. It also sets vAlign on the row to 'stretch' which vertically stretches the row's children to fill its height, unless vAlign is supplied explicity on the row with another value.
+**cell** may be supplied as prop to Row. It sets the the row's height to 100% of the computed or absolute height of its parent view. It also sets vAlign on the row to 'stretch' which vertically stretches its children to fill its height, unless vAlign is explicitly supplied with another value.
 
 These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 
