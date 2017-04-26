@@ -46,25 +46,25 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-**size** may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or absolute width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
+`size` may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or absolute width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
 
-**sm**, **md**, and **lg** are device-size-dependent 'size' values that are applicable to columns.
+`sm`, `md`, and `lg` are device-size-dependent 'size' values that are applicable to columns.
 
-**offset**, **smOffset**, **mdOffset** and **lgOffset** - Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or absolute width. Offset values can also be negative. Default is 0. Offsets in LTR mode apply to marginLeft whereas offsets in RTL mode apply to marginRight.   
+`offset`, `smOffset`, `mdOffset` and `lgOffset` - Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or absolute width. Offset values can also be negative. Default is 0. Offsets in LTR mode apply to marginLeft whereas offsets in RTL mode apply to marginRight.   
 
-**vAlign** may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: middle, top, bottom, space and distribute. Default is top.
+`vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: middle, top, bottom, space and distribute. Default is top.
 
-**vAlign** may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: top, middle, bottom and stretch. Default is top.
+`vAlign` may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: top, middle, bottom and stretch. Default is top.
 
-**hAlign** may be supplied as prop to Row to align the columns within it in the horizontal direction. Possible values are: center, left, right, space and distribute. Default is left.
+`hAlign` may be supplied as prop to Row to align the columns within it in the horizontal direction. Possible values are: center, left, right, space and distribute. Default is left.
 
-**hAlign** may also be supplied as prop to Column to align its rows and/or elements within it in the horizontal direction. Possible values are: center, left, right, and stretch. Default is left.
+`hAlign` may also be supplied as prop to Column to align its rows and/or elements within it in the horizontal direction. Possible values are: center, left, right, and stretch. Default is left.
 
-**rtl** may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
+`rtl` may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
-**full** may be supplied as prop to Row. It sets the the row's height to 100% of the computed or absolute height of its parent view. It also sets vAlign on the row to 'stretch' which vertically stretches its children to fill its height, unless vAlign is explicitly supplied with another value.
+`full` may be supplied as prop to Row. It sets the the row's height to 100% of the computed or absolute height of its parent view. It also sets vAlign on the row to 'stretch' which vertically stretches its children to fill its height, unless vAlign is explicitly supplied with another value.
 
-**full** may be supplied as prop to Column. It sets the the column's width to 100% of the computed or absolute width of its parent view. It also sets hAlign on the column to 'stretch' which horizontally stretches its children to fill its width, unless hAlign is explicitly supplied with another value.
+`full` may be supplied as prop to Column. It sets the the column's width to 100% of the computed or absolute width of its parent view. It also sets hAlign on the column to 'stretch' which horizontally stretches its children to fill its width, unless hAlign is explicitly supplied with another value.
 
 These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 
