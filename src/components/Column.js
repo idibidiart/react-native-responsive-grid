@@ -19,6 +19,23 @@ export default class Column extends React.Component {
         super(props)
     }
 
+    static propTypes = {
+      sm: PropTypes.number,
+      smOffset: PropTypes.number,
+      smHidden: PropTypes.bool,
+      md: PropTypes.number,
+      mdOffset: PropTypes.number,
+      mdHidden: PropTypes.bool,
+      lg: PropTypes.number,
+      lgOffset: PropTypes.number,
+      lgHidden: PropTypes.bool,
+      size: PropTypes.number,
+      offset: PropTypes.number,
+      vAlign: PropTypes.string,
+      hAlign: PropTypes.string,
+      full: PropTypes.bool
+    }
+
     setNativeProps = (nativeProps) => {
       this._root.setNativeProps(nativeProps);
     }
@@ -82,20 +99,4 @@ export default class Column extends React.Component {
     }
 }
 
-Column.propTypes = {
-  sm: PropTypes.number,
-  smOffset: PropTypes.number,
-  smHidden: PropTypes.bool,
-  md: PropTypes.number,
-  mdOffset: PropTypes.number,
-  mdHidden: PropTypes.bool,
-  lg: PropTypes.number,
-  lgOffset: PropTypes.number,
-  lgHidden: PropTypes.bool,
-  size: PropTypes.number,
-  offset: PropTypes.number,
-  vAlign: PropTypes.string,
-  hAlign: PropTypes.string,
-  full: PropTypes.bool
-}
 

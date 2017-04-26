@@ -23,6 +23,17 @@ export default class Row extends React.Component {
     super(props)
   }
 
+  static propTypes = {
+    rtl: PropTypes.bool,
+    full: PropTypes.bool,
+    nowrap: PropTypes.bool,
+    smHidden: PropTypes.bool,
+    mdHidden: PropTypes.bool,
+    lgHidden: PropTypes.bool,
+    hAlign: PropTypes.string,
+    vAlign: PropTypes.string
+  }
+
   setNativeProps = (nativeProps) => {
     this._root.setNativeProps(nativeProps);
   }
@@ -69,15 +80,4 @@ export default class Row extends React.Component {
     }
 
   }
-}
-
-Row.propTypes = {
-  rtl: PropTypes.bool,
-  full: PropTypes.bool,
-  nowrap: PropTypes.bool,
-  smHidden: PropTypes.bool,
-  mdHidden: PropTypes.bool,
-  lgHidden: PropTypes.bool,
-  hAlign: PropTypes.string,
-  vAlign: PropTypes.string
 }
