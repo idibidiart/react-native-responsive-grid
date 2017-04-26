@@ -46,7 +46,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-**size** may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or absolute width. It defaults to 100%, i.e. full width. Since `size` accepts any number from 0 to Infinity, you can make your layout column as many grid columns wide as you want, extending beyond the screen width if **norwarp** prop is set on the row. If **nowrap** is not set on the row, the column will wrap. 
+**size** may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or absolute width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
 
 **sm**, **md**, and **lg** are device-size-dependent 'size' values that are applicable to columns.
 
@@ -202,7 +202,7 @@ Hidden props are all booleans. They default to false.
 Note that in the markup below the right arrow icons have padding on the right and left (they should not but I guess they were converted from vector to image and that's how they got their extra padding) so a good way to deal with that is not by using fractional offset value as that will change with screen size while the font remains the same size which would misalign the icons relative to the right-aligned text like SEE ALL, ADD MORE and the start icon (which has no padding in it) -- the right to compensate for icons that have padding in them is by using absolute pixels in the style prob, e.g. left: 6. That is unless your font is responsive, in which case using fractional offset would be the right way.
 
 ```
-    <Row style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row nowrap style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={60} offset={6} >
           <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
           PREVIOUS ORDERS
@@ -215,7 +215,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row nowrap style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={60} offset={6} >
           <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
           <Row >
@@ -234,7 +234,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row nowrap style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={60} offset={6}>
             <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 8, 2017</Text>
             <Row >
@@ -252,7 +252,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row nowrap style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={60} offset={6}>
             <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
             <Row>
@@ -270,7 +270,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row nowrap style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={60} offset={6}>
           <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
           FAVORITE ITEMS
@@ -283,7 +283,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row nowrap style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
       <Col size={60} offset={6}>
         <Text style={{fontSize: 16, color: 'black'}}>
         Linguini Alfredo
@@ -294,7 +294,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row nowrap style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
       <Col size={60} offset={6}>
         <Text style={{fontSize: 16, color: 'black'}}>
         Double Cheese Burger
