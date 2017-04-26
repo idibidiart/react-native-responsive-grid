@@ -19,4 +19,4 @@ function setScreenSize(){
   }
 }
 
-export const screenSize = setScreenSize();
+export const screenSize = setScreenSize

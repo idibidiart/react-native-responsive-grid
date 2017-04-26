@@ -22,32 +22,32 @@ const getColumnWidth = (screenSize, props) => {
       } else if (props.size !== undefined) {
         return toPercent(Math.max(props.size, 0));
       } else {
-        return toPercent(100)
+        return props.full ? toPercent(100) : undefined
       }
-      break;
+
     case 'medium':
       if (props.md) {
         return toPercent(Math.max(props.md, 0));
       } else if (props.size !== undefined)  {
         return toPercent(Math.max(props.size, 0));
       } else {
-        return toPercent(100)
+        return props.full ? toPercent(100) : undefined
       }
-      break;
+
     case 'large':
       if (props.lg) {
         return toPercent(Math.max(props.lg, 0));
       } else if (props.size !== undefined) {
         return toPercent(Math.max(props.size, 0));
       } else {
-        return toPercent(100)
+        return props.full ? toPercent(100) : undefined
       }
-      break;
+  
     default:
       if (props.size !== undefined) {
         return toPercent(Math.max(props.size, 0));
       } else {
-        return toPercent(100)
+        return props.full ? toPercent(100) : undefined
       }
   }
 }
