@@ -17,7 +17,7 @@ This "grid" abstracts away the Flexbox spec, including confusing terms like just
 
 I've also found that RTL (right-to-left) support (for Hebrew/Arabic apps) to be generally lacking in RN, so I added RTL layout support to this version. 
 
-Finally, to keep the grid's structure and design simple (as well as logical and consistent) I've added a constraint such that Rows may not contain other Rows (they must be wrapped in a Column) and Columns may not contain other columns (they must be wrapped in a Row) 
+Finally, to keep the grid's structure and design simple (as well as logical and consistent) I've added a constraint such that Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) 
 
 That's it. Enjoy, and please report any bugs and feature requests/enhacements.
 
