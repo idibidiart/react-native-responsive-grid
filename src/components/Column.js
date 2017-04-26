@@ -14,9 +14,13 @@ const cloneElements = (props) => {
 }
 
 export default class Column extends React.Component {
-
     constructor (props) {
         super(props)
+        this.state = {screenSize: screenSize()}
+    }
+
+    setNativeProps = (nativeProps) => {
+      this._root.setNativeProps(nativeProps);
     }
 
     static propTypes = {
@@ -36,16 +40,13 @@ export default class Column extends React.Component {
       full: PropTypes.bool
     }
 
-    setNativeProps = (nativeProps) => {
-      this._root.setNativeProps(nativeProps);
-    }
-
      // top/flex-start is default
      align_Y = (this.props.vAlign === 'middle' ? 'center' : (this.props.vAlign === 'bottom' ? 'flex-end' : (this.props.vAlign === 'space' ? 'space-between' : (this.props.vAlign === 'distribute' ? 'space-around' : 'flex-start'))))
     // left/flex-start is default
      align_X = ((this.props.hAlign === 'stretch' || (this.props.full && !this.props.hAlign)) ? 'stretch' : (this.props.hAlign === 'center' ? 'center' : ((this.props.hAlign === 'right' || (this.props.rtl && this.props.hAlign !== 'left')) ? 'flex-end' : 'flex-start')))
 
     render() {
+
       const {
         size,
         offset,
@@ -65,7 +66,7 @@ export default class Column extends React.Component {
         ...rest
       } = this.props;
 
-      const mediaSize = screenSize()
+      const mediaSize = this.state.screenSize
 
       if (isHidden(mediaSize, this.props)){
         return null;
@@ -74,6 +75,12 @@ export default class Column extends React.Component {
         try {
           return (
               <View 
+                onLayout={(e)=> {
+                    InteractionManager.runAfterInteractions((e)=> {
+                      this.setState({screenSize: screenSize()})
+                    })
+                  }
+                }
                 ref={component => this._root = component} {...rest}
                 style={[
                   this.props.style, {

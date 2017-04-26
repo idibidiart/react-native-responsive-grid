@@ -23,6 +23,10 @@ export default class Row extends React.Component {
     super(props)
   }
 
+  setNativeProps = (nativeProps) => {
+    this._root.setNativeProps(nativeProps);
+  }
+
   static propTypes = {
     rtl: PropTypes.bool,
     full: PropTypes.bool,
@@ -32,10 +36,6 @@ export default class Row extends React.Component {
     lgHidden: PropTypes.bool,
     hAlign: PropTypes.string,
     vAlign: PropTypes.string
-  }
-
-  setNativeProps = (nativeProps) => {
-    this._root.setNativeProps(nativeProps);
   }
 
   // left/flex-start is default
@@ -78,6 +78,5 @@ export default class Row extends React.Component {
       }
       return null
     }
-
   }
 }

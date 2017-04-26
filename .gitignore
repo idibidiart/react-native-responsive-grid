@@ -1,3 +1,5 @@
 npm-debug.log
 node_modules/
 .vscode
+.DS_Store
+**/.DS_Store
