@@ -208,14 +208,10 @@ Note that in the markup below the right arrow icons have padding on the right an
           PREVIOUS ORDERS
           </Text>
         </Col>
-        <Col size={34}>
-          <Row>
-            <Col offset={-12} hAlign='right' >
+        <Col size={34} offset={-6} hAlign='right'>
               <Text style={{ fontSize: 16, color: '#BD1206'}}>
                 SEE ALL
               </Text>
-            </Col>
-          </Row>
         </Col>
     </Row>
 
@@ -233,12 +229,8 @@ Note that in the markup below the right arrow icons have padding on the right an
           <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
           <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>                                                                             
         </Col>
-        <Col size={34}>
-          <Row>
-            <Col offset={-12} hAlign='right' >
+        <Col size={34} offset={-6} hAlign='right'>
               <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
-            </Col>
-          </Row>
         </Col>
     </Row>
 
@@ -255,12 +247,8 @@ Note that in the markup below the right arrow icons have padding on the right an
             </Row>
           <Text style={{fontSize: 16, color: '#0a0a0a'}}>Linguini Alfredo</Text>                                                                          
         </Col>
-        <Col size={34}>
-          <Row>
-            <Col offset={-12} hAlign='right' >
+        <Col size={34} offset={-6} hAlign='right'>
               <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
-            </Col>
-          </Row>
         </Col>
     </Row>
 
@@ -277,12 +265,8 @@ Note that in the markup below the right arrow icons have padding on the right an
             </Row>
           <Text style={{fontSize: 16, color: '#0a0a0a'}}>Double Cheese Burger</Text>                                                                          
         </Col>
-        <Col size={34}>
-          <Row>
-            <Col offset={-12} hAlign='right' >
+        <Col size={34} offset={-6} hAlign='right'>
               <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
-            </Col>
-          </Row>
         </Col>
     </Row>
 
@@ -292,14 +276,10 @@ Note that in the markup below the right arrow icons have padding on the right an
           FAVORITE ITEMS
           </Text>
         </Col>
-        <Col size={34}>
-          <Row>
-            <Col offset={-12} hAlign='right' >
+        <Col size={34} offset={-6} hAlign='right'>
               <Text style={{ fontSize: 16, color: '#BD1206'}}>
               ADD MORE
               </Text>
-            </Col>
-          </Row>
         </Col>
     </Row>
 
@@ -309,12 +289,8 @@ Note that in the markup below the right arrow icons have padding on the right an
         Linguini Alfredo
         </Text>
       </Col>
-        <Col size={34}>
-          <Row>
-            <Col offset={-12} hAlign='right' >
+        <Col size={34} offset={-6} hAlign='right'>
               <FontAwesome name='star' size={24} color='#BD1206'/>
-            </Col>
-          </Row>
         </Col>
     </Row>
 
@@ -324,12 +300,8 @@ Note that in the markup below the right arrow icons have padding on the right an
         Double Cheese Burger
         </Text>
       </Col>
-        <Col size={34}>
-          <Row>
-            <Col offset={-12} hAlign='right' >
+        <Col size={34} offset={-6} hAlign='right'>
               <FontAwesome name='star' size={24} color='#BD1206'/>
-            </Col>
-          </Row>
         </Col>
     </Row>
 ```
