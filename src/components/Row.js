@@ -22,14 +22,14 @@ export default class Row extends React.Component {
       this.sub = DeviceEventEmitter.addListener('layout_change', (e) => {
           cancelAnimationFrame(this.animationHandle)
           this.animationHandle = requestAnimationFrame(() => {
-              this.setState({_id: Math.random() * +new Date()})
+              this.setState({layoutTriggered: +new Date()})
           })
       })
   }
 
   componentWillUnmount() {
-      cancelAnimationFrame(this.animationHandle)
       this.sub.remove()
+      cancelAnimationFrame(this.animationHandle)
   }
 
   setNativeProps = (nativeProps) => {
