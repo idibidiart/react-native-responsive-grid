@@ -16,6 +16,7 @@ const cloneElements = (props) => {
 export default class Column extends React.Component {
     constructor (props) {
         super(props)
+        this.state = {_id: +new Date() * Math.random()}
     }
 
     setNativeProps = (nativeProps) => {
@@ -45,6 +46,7 @@ export default class Column extends React.Component {
      align_X = ((this.props.hAlign === 'stretch' || (this.props.full && !this.props.hAlign)) ? 'stretch' : (this.props.hAlign === 'center' ? 'center' : ((this.props.hAlign === 'right' || (this.props.rtl && this.props.hAlign !== 'left')) ? 'flex-end' : 'flex-start')))
 
     render() {
+
       const {
         size,
         offset,
@@ -74,9 +76,7 @@ export default class Column extends React.Component {
           return (
               <View 
                 onLayout={(e)=> {
-                    InteractionManager.runAfterInteractions((e)=> {
-                      this.setState({_id: +new Date() * Math.random()})
-                    })
+                       DeviceEventEmitter.emit('layout_change')
                   }
                 }
                 ref={component => this._root = component} {...rest}

@@ -7,7 +7,7 @@ In your project folder, `yarn add react-native-responsive-grid`
 
 ## Why?
 
-Developing performant, responsive and fairly detailed 2D layouts with raw flexbox in React Native used to take hours per screen and resulted in markup and styles that were almost unmaintainable. While Flexbox itself is confusing to new comers and too low-level for building responsive 2D layouts, the lack of a performant way in React Native to encode relative size info was the real obstacle. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of the simplest and best thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and I've made major changes and enhancements to it that result in a simpler mental model, one that is based entirely on percentages, yet fits within the grid construct. I ended up with a light weight abstraction that dissolves all the needless complexity of Flexbox, while allowing arbitrarily complex, responsive 2D layouts.
+Developing performant, responsive and fairly detailed 2D layouts with raw flexbox in React Native used to take hours per screen and resulted in markup and styles that were almost unmaintainable. While Flexbox itself is confusing to new comers and too low-level for building responsive 2D layouts, the lack of a performant way in React Native to encode relative size info was the real obstacle. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of the simplest and best thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and I've made major changes and enhancements to it that result in a simpler mental model, one that is based entirely on percentages, yet fits within the grid construct. I ended up with a light weight abstraction that dissolves all the needless complexity of Flexbox, while allowing arbitrarily complex, responsive 2D layouts. 
 
 ## What?
 
@@ -15,13 +15,13 @@ This grid fixes the mental model for grid based layouts by abandoning the format
 
 This "grid" abstracts away the Flexbox spec, including confusing terms like justifyContent and alignItems, which are dependent in their meaning on another part of the spec, namely, flexDirection. If flexDirection is 'row' then justifyContent operates horizontally. If it's 'column' then justifyContent operates vertically. The opposite for alignItems. This kind of 'semantic side effect' is rather strange and unexpected. So I've chosen to replace that with vAlign and hAlign where v stands for vertical and h for horizontal. Both can be applied to rows AND columns but they retain their meaning: hAlign will always align content horizontally and vAlign will always align content vertically. 
 
-With this layout system (aka "grid") we're able to build not only apps that adjust to the screen size of the device they're running on, but also ones that respond to layout changes, including layout changes resulting from rotating the device where the height becomes the width and vice versa, i.e. portrait vs landscape. See this video: 
+With this layout system (aka "grid") we're able to build not only apps that adjust to the screen size of the device they're running on, but also ones that respond to layout changes, including layout changes resulting from rotating the device where the height becomes the width and vice versa, i.e. portrait vs landscape. See this video: [demo](https://www.youtube.com/edit?o=U&video_id=Nghqc5QFln8)
 
 I've also found that RTL (right-to-left) support (for Hebrew/Arabic apps) to be generally lacking in RN, so I added RTL layout support to this version. 
 
-Finally, to keep the grid's structure and design simple (as well as logical and consistent) I've added a constraint such that Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) 
+Finally, to keep the grid's structure and design simple (as well as logical and consistent) I've added a constraint such that Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) If you'd like to build apps that respond to layout changes (due to device oriehtation changes or increase in the width of the row), Columns must be contained in a Row. The plan is to have a Grid container component (coming soon) so that nested rows won't end up doing extra rendering.
 
-That's it. Enjoy, and please report any bugs and feature requests/enhacements.
+Enjoy, and please report any issues.
 
 
 ## Terms:

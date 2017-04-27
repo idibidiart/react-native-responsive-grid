@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {screenSize} from '../lib/ScreenSize';
 import {isHidden} from '../lib/helpers';
-import {View, DeviceEventEmitter} from 'react-native';
+import {View, DeviceEventEmitter, InteractionManager} from 'react-native';
 
 const cloneElements = (props) => {
     const rtl = props.rtl 
@@ -15,12 +15,21 @@ const cloneElements = (props) => {
     })
 }
 
-const layoutSubscription = null;
-
 export default class Row extends React.Component {
+  constructor(props, context) {
+      super (props, context)
+      this.animationHandle 
+      this.sub = DeviceEventEmitter.addListener('layout_change', (e) => {
+          cancelAnimationFrame(this.animationHandle)
+          this.animationHandle = requestAnimationFrame(() => {
+              this.setState({_id: Math.random() * +new Date()})
+          })
+      })
+  }
 
-  constructor (props) {
-    super(props)
+  componentWillUnmount() {
+      cancelAnimationFrame(this.animationHandle)
+      this.sub.remove()
   }
 
   setNativeProps = (nativeProps) => {
