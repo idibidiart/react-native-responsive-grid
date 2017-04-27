@@ -17,9 +17,11 @@ This "grid" abstracts away the Flexbox spec, including confusing terms like just
 
 With this layout system (aka "grid") we're able to build not only apps that adjust to the screen size of the device they're running on, but also ones that respond to layout changes, including layout changes resulting from rotating the device where the height becomes the width and vice versa, i.e. portrait vs landscape. See this video: [demo](https://www.youtube.com/watch?v=Nghqc5QFln8)
 
+You may use this grid to design percentage based layouts that maintain their proportions on different screen sizes. You may also use this grid to decide what to hide/show for each screen sizes, using screen-width-based `hidden` props, and have specific alignments for each screen size, using screen-width-specific `offset` props. The demo above only uses `hidden` props to pick the image with the right aspect ratio for the current screen width, responding to all layout changes that affect the given column's calculated width.
+
 I've also found that RTL (right-to-left) support (for Hebrew/Arabic apps) to be generally lacking in RN, so I added RTL layout support to this version. 
 
-Finally, to keep the grid's structure and design simple (as well as logical and consistent) I've added a constraint such that Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) If you'd like to build apps that respond to layout changes (due to device oriehtation changes or increase in the width of the row), Columns must be contained in a Row. The plan is to have a Grid container component (coming soon) so that nested rows won't end up doing extra rendering.
+Finally, to keep the grid's structure and design simple (as well as logical and consistent) I've added a constraint such that Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) If you'd like to build apps that respond to layout changes (due to device oriehtation changes or increase in the width of the row), Columns must be contained in a Row. 
 
 Enjoy, and please report any issues.
 
@@ -50,9 +52,9 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 `size` may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or absolute width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
 
-`sm`, `md`, and `lg` are device-size-dependent 'size' values that are applicable to columns.
+`sm`, `md`, `lg` and `xl` are device-size-dependent 'size' values that are applicable to columns.
 
-`offset`, `smOffset`, `mdOffset` and `lgOffset` - Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or absolute width. Offset values can also be negative. Default is 0. Offsets in LTR mode apply to marginLeft whereas offsets in RTL mode apply to marginRight.   
+`offset`, `smOffset`, `mdOffset`, `lgOffset` and `xlOffset` - Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or absolute width. Offset values can also be negative. Default is 0. Offsets in LTR mode apply to marginLeft whereas offsets in RTL mode apply to marginRight.   
 
 `vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: middle, top, bottom, space and distribute. Default is top.
 
@@ -107,13 +109,12 @@ This nested percentages model affects offsets since they are a multiple of the g
 
 There are also four offset props for `Column`. `offset`, `smOffset`, `mdOffset`, and `lgOffset`. The first one, `offset`, applies to all screen sizes. Offset values can be negative, too, and that's often used when rightAlign is supplied as prop to the column, so that content of offsetted column will snap to grid in the right-to-left direction just as it would in the left-to-right direction with a positive offset value.
 
-The screen-size-prefixed size and offset props refer to the screen sizes they are active on (taking device pixel ratio into consideration.) 
+The `size`, `offset` and `hidden` props refer to the effective screen width (taking device pixel ratio into consideration and regardless of orientation) 
 
-|Prop |Screen Size|Real World Device   |
-|---|---|---|
-|sm | < 768px   | Phone (iPhone)  |
-|md | 768px -  1023px  | Normal Tablet (iPad)  |
-|lg | >=1024px  |  Big Tablet (iPad Pro)|
+sm: <= 480px
+md: > 480 && < 1024
+lg: >= 1024 && < 1366
+xl: >= 1366 
 
 Example: 
 
@@ -138,14 +139,17 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 <Row>
     <Col smHidden>
-        <Text>First Column</Text>
+        <Text>Phone Column</Text>
+    </Col>
+    <Col mdHidden lgHidden xlHidden>
+        <Text>Tablet Column</Text>
     </Col>
 </Row>
 ```
 
 In this example the column and all of it's children will be hidden on small screens like phones, but it will appear on bigger screens like tablets. The size-prefixed 'hidden' props may be applied to columns.
 
-Every screen size has a hidden prop associated with it.
+Every screen size (`sm`, `md`, `lg` and `xl`) has a hidden prop associated with it.
 
 Hidden props are all booleans. They default to false.
 
