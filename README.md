@@ -15,7 +15,7 @@ This grid fixes the mental model for grid based layouts by abandoning the format
 
 This "grid" abstracts away the Flexbox spec, including confusing terms like justifyContent and alignItems, which are dependent in their meaning on another part of the spec, namely, flexDirection. If flexDirection is 'row' then justifyContent operates horizontally. If it's 'column' then justifyContent operates vertically. The opposite for alignItems. This kind of 'semantic side effect' is rather strange and unexpected. So I've chosen to replace that with vAlign and hAlign where v stands for vertical and h for horizontal. Both can be applied to rows AND columns but they retain their meaning: hAlign will always align content horizontally and vAlign will always align content vertically. 
 
-With this layout system (aka "grid") we're able to build not only apps that adjust to the screen size of the device they're running on, but also ones that respond to layout changes, including layout changes resulting from rotating the device where the height becomes the width and vice versa, i.e. portrait vs landscape. See this video: [demo](https://www.youtube.com/edit?o=U&video_id=Nghqc5QFln8)
+With this layout system (aka "grid") we're able to build not only apps that adjust to the screen size of the device they're running on, but also ones that respond to layout changes, including layout changes resulting from rotating the device where the height becomes the width and vice versa, i.e. portrait vs landscape. See this video: [demo](https://www.youtube.com/watch?v=Nghqc5QFln8)
 
 I've also found that RTL (right-to-left) support (for Hebrew/Arabic apps) to be generally lacking in RN, so I added RTL layout support to this version. 
 
