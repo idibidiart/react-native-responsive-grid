@@ -9,17 +9,19 @@ In your project folder, `yarn add react-native-responsive-grid`
 
 Developing performant, responsive and fairly detailed 2D layouts with raw flexbox in React Native used to take hours per screen and resulted in markup and styles that were almost unmaintainable. While Flexbox itself is confusing to new comers and too low-level for building responsive 2D layouts, the lack of a performant way in React Native to encode relative size info was the real obstacle. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of the simplest and best thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and I've made major changes and enhancements to it that result in a simpler mental model, one that is based entirely on percentages, yet fits within the grid construct. I ended up with a light weight abstraction that dissolves all the needless complexity of Flexbox, while allowing arbitrarily complex, responsive 2D layouts. 
 
-## What?
+## Show & Tell
+
+With this layout system (aka "grid") we're able to build not only apps that adjust to the screen size of the device they're running on, but also ones that respond to layout changes, including layout changes resulting from rotating the device where the height becomes the width and vice versa, i.e. portrait vs landscape. See this video: [demo](https://www.youtube.com/watch?v=Nghqc5QFln8)
+
+You may use this grid to design percentage based layouts that maintain their proportions on different screen sizes. You may also use this grid to decide what to hide/show for each screen sizes, using screen-width-based `hidden` props, and have specific alignments for each screen size, using screen-width-specific `offset` props. The demo in the video above only uses `hidden` props to pick the image with the right aspect ratio for the current screen width, responding to all layout changes that affect the given column's calculated width. The images just get replaced with ones that fit the current aspect ratio so they don't get distorted when stretched. As for font, a font only needs to be legible and does not need to grow with the space around it. We are talking about a short distance between the reader and the display and so regardless of how big is the tablet or phone the font size just needs to be legible. It would only need to grow if we're projecting on TV screen and standing far away. But the grid gives you the possibility of having different offsets for different screen sizes so grouped text can remain visually coherent as opposed to spread apart as screen size grows.
+
+The demo in the video also uses a fixed/slightly modified version of Brent Vatne's (@brentvatne) react-native-fade-in-image, which you can find here: [repo](https://github.com/idibidiart/react-native-fade-in-image)  
+
+## Design 
 
 This grid fixes the mental model for grid based layouts by abandoning the format-based, columns-per-view approach (e.g. "12 column grid") and instead allowing the developer to specify the width of each grid column as a percentage of parent view's size, so 10% meams 10 column grid, and 8.333% means a 12 column grid etc. But let's not think in terms of columns per grid! That is a visual formatting model, not a layout system. There is no reason for a grid to be 11, 12, 13, 14, 15 or 16.6 columns. The number should be determined by actual layout needs, not by some fixed grid template. Plus, all other style measurements are done using percentage when making responsive layouts, so why should we measure column width as n:12 (or n:11 etc) but measure everything else as n:100? It's time to fix this decoherence and move beyond the grid, toward a free-form layout model that allows us to leverage grid behavior for responsive design in a mathematically consistent and precise way.
 
 This "grid" abstracts away the Flexbox spec, including confusing terms like justifyContent and alignItems, which are dependent in their meaning on another part of the spec, namely, flexDirection. If flexDirection is 'row' then justifyContent operates horizontally. If it's 'column' then justifyContent operates vertically. The opposite for alignItems. This kind of 'semantic side effect' is rather strange and unexpected. So I've chosen to replace that with vAlign and hAlign where v stands for vertical and h for horizontal. Both can be applied to rows AND columns but they retain their meaning: hAlign will always align content horizontally and vAlign will always align content vertically. 
-
-With this layout system (aka "grid") we're able to build not only apps that adjust to the screen size of the device they're running on, but also ones that respond to layout changes, including layout changes resulting from rotating the device where the height becomes the width and vice versa, i.e. portrait vs landscape. See this video: [demo](https://www.youtube.com/watch?v=Nghqc5QFln8)
-
-You may use this grid to design percentage based layouts that maintain their proportions on different screen sizes. You may also use this grid to decide what to hide/show for each screen sizes, using screen-width-based `hidden` props, and have specific alignments for each screen size, using screen-width-specific `offset` props. The demo in the video above only uses `hidden` props to pick the image with the right aspect ratio for the current screen width, responding to all layout changes that affect the given column's calculated width. The images just get replaced with ones that fit the current aspect ratio so they don't get distorted when stretched. As for font, I have a different view on that. A font only needs to be legible and does not need to grow with the space around it. We are talking about a short distance between the reader and the display and so regardless of how big is the tablet or phone the font size just needs to be legible. It would only need to grow if we're projecting on TV screen and standing far away. But the grid gives you the possibility of having different offsets for different screen sizes so grouped text can remain visually coherent as opposed to spread apart as screen size grows.
-
-The demo in the video also uses a fixed/slightly modified version of Brent Vatne's (@brentvatne) react-native-fade-in-image, which you can find here: [repo](https://github.com/idibidiart/react-native-fade-in-image)  
 
 I've also found that RTL (right-to-left) support (for Hebrew/Arabic apps) to be generally lacking in RN, so I added RTL layout support to this version. 
 
@@ -32,7 +34,7 @@ Enjoy, and please report any issues.
 RTL = right-to-left layout (Hebrew/Arabic)
 LTR = "normal" left-to-right layout
 
-## Relative and Responsive Layout
+## Usage
 
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
