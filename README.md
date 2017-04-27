@@ -17,14 +17,15 @@ This "grid" abstracts away the Flexbox spec, including confusing terms like just
 
 With this layout system (aka "grid") we're able to build not only apps that adjust to the screen size of the device they're running on, but also ones that respond to layout changes, including layout changes resulting from rotating the device where the height becomes the width and vice versa, i.e. portrait vs landscape. See this video: [demo](https://www.youtube.com/watch?v=Nghqc5QFln8)
 
-You may use this grid to design percentage based layouts that maintain their proportions on different screen sizes. You may also use this grid to decide what to hide/show for each screen sizes, using screen-width-based `hidden` props, and have specific alignments for each screen size, using screen-width-specific `offset` props. The demo in the video above only uses `hidden` props to pick the image with the right aspect ratio for the current screen width, responding to all layout changes that affect the given column's calculated width. The demo in the video also uses afixed/slightly modified version of Brent Vatne's (@brentvatne) react-native-fade-in-image, which you can find here: [repo](https://github.com/idibidiart/react-native-fade-in-image)  
+You may use this grid to design percentage based layouts that maintain their proportions on different screen sizes. You may also use this grid to decide what to hide/show for each screen sizes, using screen-width-based `hidden` props, and have specific alignments for each screen size, using screen-width-specific `offset` props. The demo in the video above only uses `hidden` props to pick the image with the right aspect ratio for the current screen width, responding to all layout changes that affect the given column's calculated width. The images just get replaced with ones that fit the current aspect ratio so they don't get distorted when stretched. As for font, I have a different view on that. A font only needs to be legible and does not need to grow with the space around it. We are talking about a short distance between the reader and the display and so regardless of how big is the tablet or phone the font size just needs to be legible. It would only need to grow if we're projecting on TV screen and standing far away. But the grid gives you the possibility of having different offsets for different screen sizes so grouped text can remain visually coherent as opposed to spread apart as screen size grows.
+
+The demo in the video also uses a fixed/slightly modified version of Brent Vatne's (@brentvatne) react-native-fade-in-image, which you can find here: [repo](https://github.com/idibidiart/react-native-fade-in-image)  
 
 I've also found that RTL (right-to-left) support (for Hebrew/Arabic apps) to be generally lacking in RN, so I added RTL layout support to this version. 
 
 Finally, to keep the grid's structure and design simple (as well as logical and consistent) I've added a constraint such that Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) If you'd like to build apps that respond to layout changes (due to device oriehtation changes or increase in the calculated width of the column), Columns must be contained in Row. 
 
 Enjoy, and please report any issues.
-
 
 ## Terms:
 
