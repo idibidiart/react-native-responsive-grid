@@ -6,6 +6,8 @@ const isHidden = (screenSize, props) => {
       return props.mdHidden ? true : false;
     case 'large':
       return props.lgHidden ? true : false;
+    case 'xlarge':
+      return props.xlHidden ? true : false;
     default:
       return false;
   }
@@ -42,6 +44,15 @@ const getColumnWidth = (screenSize, props) => {
       } else {
         return props.full ? toPercent(100) : undefined
       }
+
+    case 'xlarge':
+      if (props.xl) {
+        return toPercent(Math.max(props.xl, 0));
+      } else if (props.size !== undefined) {
+        return toPercent(Math.max(props.size, 0));
+      } else {
+        return props.full ? toPercent(100) : undefined
+      }
   
     default:
       if (props.size !== undefined) {
@@ -63,7 +74,7 @@ const getColumnOffset = (screenSize, props) => {
       } else {
         return 0;
       }
-      break;
+
     case 'medium':
       if (props.mdOffset) {
         return toPercent(props.mdOffset)
@@ -72,7 +83,7 @@ const getColumnOffset = (screenSize, props) => {
       } else {
         return 0;
       }
-      break;
+
     case 'large':
       if (props.lgOffset) {
         return toPercent(props.lgOffset);
@@ -81,7 +92,16 @@ const getColumnOffset = (screenSize, props) => {
       } else {
         return 0;
       }
-      break;
+
+    case 'xlarge':
+      if (props.xlOffset) {
+        return toPercent(props.xlOffset);
+      } else if (props.offset){
+        return toPercent(props.offset)
+      } else {
+        return 0;
+      }
+
     default:
       if (props.offset){
         return toPercent(props.offset)

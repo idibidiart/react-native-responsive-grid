@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {screenSize} from '../lib/ScreenSize';
 import {isHidden, getColumnWidth, getColumnOffset} from '../lib/helpers';
-import {View, DeviceEventEmitter, InteractionManager} from 'react-native';
+import {View, DeviceEventEmitter, InteractionManager, Dimensions} from 'react-native';
 
 const cloneElements = (props) => {
     return React.Children.map(props.children, (element) => {
@@ -16,7 +16,6 @@ const cloneElements = (props) => {
 export default class Column extends React.Component {
     constructor (props) {
         super(props)
-        this.state = {screenSize: screenSize()}
     }
 
     setNativeProps = (nativeProps) => {
@@ -46,7 +45,6 @@ export default class Column extends React.Component {
      align_X = ((this.props.hAlign === 'stretch' || (this.props.full && !this.props.hAlign)) ? 'stretch' : (this.props.hAlign === 'center' ? 'center' : ((this.props.hAlign === 'right' || (this.props.rtl && this.props.hAlign !== 'left')) ? 'flex-end' : 'flex-start')))
 
     render() {
-
       const {
         size,
         offset,
@@ -66,7 +64,7 @@ export default class Column extends React.Component {
         ...rest
       } = this.props;
 
-      const mediaSize = this.state.screenSize
+      const mediaSize = screenSize()
 
       if (isHidden(mediaSize, this.props)){
         return null;
@@ -77,7 +75,7 @@ export default class Column extends React.Component {
               <View 
                 onLayout={(e)=> {
                     InteractionManager.runAfterInteractions((e)=> {
-                      this.setState({screenSize: screenSize()})
+                      this.setState({_id: +new Date() * Math.random()})
                     })
                   }
                 }
