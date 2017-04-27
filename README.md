@@ -52,7 +52,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 `size` may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or absolute width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
 
-`sm`, `md`, `lg` and `xl` are device-size-dependent 'size' values that are applicable to columns.
+`sm`, `md`, `lg` and `xl` are device-dependent 'size' values that are applied to columns.
 
 `offset`, `smOffset`, `mdOffset`, `lgOffset` and `xlOffset` - Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or absolute width. Offset values can also be negative. Default is 0. Offsets in LTR mode apply to marginLeft whereas offsets in RTL mode apply to marginRight.   
 
@@ -84,7 +84,9 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-There are currently four size props for `Column`. `size`, `sm`, `md`, and `lg`. The first one, `size`, applies to all screen sizes. The values indicate how many columns wide the column should be. The intrinsic column width is defined by percentage relative to the row as parent. 
+There are currently four size props for `Column` that determine its width as a percentage. The values are indicated by `size`, `sm`, `md`, `lg` and `xl`. The first one, `size`, applies to all screen sizes. The others apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively. 
+
+There are also four offset props for `Column` that determine it's offset as a percentage (from left in case of LTR and from right in case of RTL.) The values are indicated by `offset`, `smOffset`, `mdOffset`, `lgOffset` and `xlOffset`. The first one, `offset`, applies to all screen sizes. The others apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively. Unlike size values, offset values can be positive _or_ negative.
 
 If you're nesting a column inside a row which is inside another column that is inside another row as below:
 
@@ -105,11 +107,9 @@ If you're nesting a column inside a row which is inside another column that is i
 
 The nested column's size will be the column size value (size, sm, md, lg) times the colPercent of its parent row, so, in effect, we get nested percentages, e.g. 50% of parent row's width which is 50% of its parent row's width means the nested column is 25% of the top level row's width. 
 
-This nested percentages model affects offsets since they are a multiple of the grid column width. 
+This nested percentages model applies to offsets, too.. 
 
-There are also four offset props for `Column`. `offset`, `smOffset`, `mdOffset`, and `lgOffset`. The first one, `offset`, applies to all screen sizes. Offset values can be negative, too, and that's often used when rightAlign is supplied as prop to the column, so that content of offsetted column will snap to grid in the right-to-left direction just as it would in the left-to-right direction with a positive offset value.
-
-The `size`, `offset` and `hidden` props refer to the effective screen width (taking device pixel ratio into consideration and regardless of orientation) 
+The `size`, `offset` and `hidden` props are based on the current screen width (taking device pixel ratio into consideration and orientation, i.e. width in portrait is treated as height in landscape, and vice versa.)
 
 sm: <= 480px
 md: > 480 && < 1024
