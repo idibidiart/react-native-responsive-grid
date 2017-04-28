@@ -39,7 +39,9 @@ I've also found that RTL (right-to-left) support (for Hebrew/Arabic apps) to be 
 
 ## _Logic Depends on Consistency_
 
-Finally, to keep the grid's structure and design simple (as well as logical and consistent) I've added a constraint such that Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) If you'd like to build apps that respond to layout changes (due to device oriehtation changes or increase in the calculated width of the column), Columns must be contained in Row. 
+Finally, to keep the grid's structure and design simple (as well as logical and consistent) I've added a constraint such that Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) 
+
+If you'd like to build apps that respond to layout changes (due to device oriehtation changes or increase in the calculated width of the column), Columns must be contained in Row (this latter requirement will be eliminated when we upgrade to React Native 0.43)
 
 Enjoy, and please report any issues.
 
