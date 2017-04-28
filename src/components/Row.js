@@ -60,7 +60,7 @@ export default class Row extends React.Component {
     const {
       rtl,
       full,
-      nowrap,
+      wrap,
       smHidden,
       mdHidden,
       lgHidden,
@@ -76,7 +76,7 @@ export default class Row extends React.Component {
               style={[this.props.style,
                       { 
                         flexDirection: 'row',
-                        flexWrap: !this.props.wrap ? 'nowrap' : 'wrap',
+                        flexWrap: this.props.wrap ? 'wrap' : 'nowrap',
                         alignItems: this.align_Y,
                         justifyContent: this.align_X,
                         height: (this.props.style && this.props.style.height !== undefined) ? this.props.style.height : (this.props.full ? '100%' : undefined)
