@@ -25,7 +25,7 @@ The demo in the video also uses a fixed/slightly modified version of Brent Vatne
 
 This grid fixes the mental model for grid based layouts by abandoning the format-based, columns-per-view approach (e.g. "12 column grid") and instead allowing the developer to specify the width of each grid column as a percentage of parent view's size, so 10% meams 10 column grid, and 8.333% means a 12 column grid etc. But let's not think in terms of columns per grid! That is a visual formatting model, not a layout system. There is no reason for a grid to be 11, 12, 13, 14, 15 or 16.6 columns. The number should be determined by actual layout needs, not by some fixed grid template. Plus, all other style measurements are done using percentage when making responsive layouts, so why should we measure column width as n:12 (or n:11 etc) but measure everything else as n:100? It's time to fix this decoherence and move beyond the fixed-column grid, toward a free-form layout model that allows us to leverage grid behavior for responsive design but in a fluid and mathematically simpler way.
 
-### _Flexbox: High Incidental Complexity_
+### _Eliminating Incidental Complexity_
 
 Every task has an essential complexity. We often over-complicate things, or, in other words, introduce incidental complexity. I believe the Flexbox specification introduces incidental complexity relative to the task of creating 2D responsive layouts.
 
@@ -33,7 +33,7 @@ So the reasons we would use a grid on top of Flexbox is to abstract away the inc
 
 While most React Native developers use `flex: n` (which is based on Facebook's Yoga layout algorithm) rather than the confusing mess of `flexGrow`, `flexShrink` and `flexBasis` (lots has been written about the Flexbox spec and its steep learning curve, e.g. [flex-grow is weird. Or is it?] (https://css-tricks.com/flex-grow-is-weird/)) there is still a fundamental problem with using `flex: n` since n is not a percentage of the view width or height but a comparative scale factor! It's much easier to say the View width or height is 100% and divide that however we like, e.g. 20%, 35% and 45%, than to specify n as 2, 3.5 and 4.5 because the latter set of values do not correspond to percentages. You can see that by adding a fourth item with some value, e.g. 5, which will cause all four elements to be contained in the full width or height of the parent (depending on parent's flexDirection) so n=2 no longer means 20% and n=5 no longer means 50%. It just means that the fourth item we added is 2.5 (5 divided by 2) times wider or taller than the first item. We lose perspective on the item sizes relative to the size of the parent as Flexbox is concerned with the item sizes relative to each other. It's like O(1) vs O(n^2) complexity. In other words, instead of relating the size of the item to the size of its parent as a percentage, with `flex: n` we relate the size of each item to the size of each other item, and we lose direct knowledge of the item's width or height as a percentage of the parent's width or height. Thinking in terms of related proportions, e.g. 5/2, 5/3.5 and 3.5/2, is clearly simpler when those proportions are measured as percentages (or as any n:x where x is fixed rather than variable)   
 
-## _Hebrew and Arabic Not Left Behind_
+## _Hebrew and Arabic_
 
 I've also found that RTL (right-to-left) support (for Hebrew/Arabic apps) to be generally lacking in grids, so I added support for it in this grid. 
 
