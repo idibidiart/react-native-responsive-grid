@@ -63,6 +63,7 @@ export default class Column extends React.Component {
         hAlign,
         rtl,
         full,
+        eventKey,
         ...rest
       } = this.props;
 
@@ -76,7 +77,7 @@ export default class Column extends React.Component {
           return (
               <View 
                 onLayout={(e)=> {
-                       DeviceEventEmitter.emit('layout_change')
+                       DeviceEventEmitter.emit('layout_change_' + this.props.eventKey)
                   }
                 }
                 ref={component => this._root = component} {...rest}

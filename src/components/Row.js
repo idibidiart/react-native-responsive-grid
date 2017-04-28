@@ -3,7 +3,7 @@ import {screenSize} from '../lib/ScreenSize';
 import {isHidden} from '../lib/helpers';
 import {View, DeviceEventEmitter, InteractionManager} from 'react-native';
 
-const cloneElements = (props) => {
+const cloneElements = (props, eventKey) => {
     const rtl = props.rtl 
 
     return React.Children.map((rtl ? React.Children.toArray(props.children).reverse() : props.children), (element) => {
@@ -11,15 +11,18 @@ const cloneElements = (props) => {
       if (element.type.name === 'Row') {
           throw new Error("Row may not contain other Rows as children. Child Rows must be wrapped in a Column.")
       }
-      return React.cloneElement(element, {rtl})
+      return React.cloneElement(element, {rtl, eventKey})
     })
 }
 
 export default class Row extends React.Component {
   constructor(props, context) {
       super (props, context)
+
+      this.eventKey = Math.random() * +new Date()
+
       this.animationHandle 
-      this.sub = DeviceEventEmitter.addListener('layout_change', (e) => {
+      this.sub = DeviceEventEmitter.addListener('layout_change_' + this.eventKey, (e) => {
           cancelAnimationFrame(this.animationHandle)
           this.animationHandle = requestAnimationFrame(() => {
               this.setState({layoutTriggered: +new Date()})
@@ -78,7 +81,7 @@ export default class Row extends React.Component {
                         justifyContent: this.align_X,
                         height: (this.props.style && this.props.style.height !== undefined) ? this.props.style.height : (this.props.full ? '100%' : undefined)
                       }]}>
-                {cloneElements(this.props)}
+                {cloneElements(this.props, this.eventKey)}
             </View>
         )
     } catch (e) {
