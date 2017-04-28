@@ -89,6 +89,8 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 `full` may be supplied as prop to Column. It sets the the column's width to 100% of the computed or absolute width of its parent view. It also sets hAlign on the column to 'stretch' which horizontally stretches its children to fill its width, unless hAlign is explicitly supplied with another value.
 
+`wrap` may be supplied as prop to Row. Currently, `flexWrap: 'wrap'` has known issues in React Native. So the default is 'nowrap' unless `wrap` is provided as prop on the row.
+
 These make up the basic rules from which arbirarily complex layout behavior may emerge. 
 
 ### Sizing & Offsets

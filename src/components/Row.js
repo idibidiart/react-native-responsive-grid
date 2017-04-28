@@ -42,7 +42,7 @@ export default class Row extends React.Component {
   static propTypes = {
     rtl: PropTypes.bool,
     full: PropTypes.bool,
-    nowrap: PropTypes.bool,
+    wrap: PropTypes.bool,
     smHidden: PropTypes.bool,
     mdHidden: PropTypes.bool,
     lgHidden: PropTypes.bool,
@@ -76,7 +76,7 @@ export default class Row extends React.Component {
               style={[this.props.style,
                       { 
                         flexDirection: 'row',
-                        flexWrap: this.props.nowrap ? 'nowrap' : 'wrap',
+                        flexWrap: !this.props.wrap ? 'nowrap' : 'wrap',
                         alignItems: this.align_Y,
                         justifyContent: this.align_X,
                         height: (this.props.style && this.props.style.height !== undefined) ? this.props.style.height : (this.props.full ? '100%' : undefined)
