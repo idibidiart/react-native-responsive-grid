@@ -40,10 +40,10 @@ export default class Column extends React.Component {
       full: PropTypes.bool
     }
 
-     // top/flex-start is default
-     align_Y = (this.props.vAlign === 'middle' ? 'center' : (this.props.vAlign === 'bottom' ? 'flex-end' : (this.props.vAlign === 'space' ? 'space-between' : (this.props.vAlign === 'distribute' ? 'space-around' : 'flex-start'))))
+    // top/flex-start is default
+    align_Y = (this.props.vAlign === 'middle' ? 'center' : (this.props.vAlign === 'bottom' ? 'flex-end' : (this.props.vAlign === 'space' ? 'space-between' : (this.props.vAlign === 'distribute' ? 'space-around' : 'flex-start'))))
     // left/flex-start is default
-     align_X = ((this.props.hAlign === 'stretch' || (this.props.full && !this.props.hAlign)) ? 'stretch' : (this.props.hAlign === 'center' ? 'center' : ((this.props.hAlign === 'right' || (this.props.rtl && this.props.hAlign !== 'left')) ? 'flex-end' : 'flex-start')))
+    align_X = this.props.hAlign == 'stretch' ? 'stretch' : this.props.hAlign === 'center' ? 'center' : (this.props.hAlign === 'right' ? 'flex-end' : 'flex-start')
 
     render() {
 
@@ -85,7 +85,7 @@ export default class Column extends React.Component {
                   this.props.style, {
                     width: (this.props.style && this.props.style.width !== undefined) ? 
                             this.props.style.width : 
-                            getColumnWidth(mediaSize, this.props),
+                            (this.props.full ? '100%' : getColumnWidth(mediaSize, this.props)),
                     flexDirection: 'column',
                     marginLeft: this.props.rtl ? 0 : getColumnOffset(mediaSize, this.props),
                     marginRight: this.props.rtl ? getColumnOffset(mediaSize, this.props) : 0,

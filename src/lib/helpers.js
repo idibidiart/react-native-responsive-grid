@@ -24,7 +24,7 @@ const getColumnWidth = (screenSize, props) => {
       } else if (props.size !== undefined) {
         return toPercent(Math.max(props.size, 0));
       } else {
-        return props.full ? toPercent(100) : undefined
+        return undefined
       }
 
     case 'medium':
@@ -33,7 +33,7 @@ const getColumnWidth = (screenSize, props) => {
       } else if (props.size !== undefined)  {
         return toPercent(Math.max(props.size, 0));
       } else {
-        return props.full ? toPercent(100) : undefined
+        return undefined
       }
 
     case 'large':
@@ -42,7 +42,7 @@ const getColumnWidth = (screenSize, props) => {
       } else if (props.size !== undefined) {
         return toPercent(Math.max(props.size, 0));
       } else {
-        return props.full ? toPercent(100) : undefined
+        return undefined
       }
 
     case 'xlarge':
@@ -51,14 +51,14 @@ const getColumnWidth = (screenSize, props) => {
       } else if (props.size !== undefined) {
         return toPercent(Math.max(props.size, 0));
       } else {
-        return props.full ? toPercent(100) : undefined
+        return undefined
       }
   
     default:
       if (props.size !== undefined) {
         return toPercent(Math.max(props.size, 0));
       } else {
-        return props.full ? toPercent(100) : undefined
+        return undefined
       }
   }
 }

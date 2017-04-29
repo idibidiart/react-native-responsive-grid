@@ -33,9 +33,9 @@ This includes confusing ideas like justifyContent and alignItems, which are depe
 
 While most React Native developers use `flex: n` (which is based on Facebook's Yoga layout algorithm) rather than the confusing mess of `flexGrow`, `flexShrink` and `flexBasis` (lots has been written about the Flexbox spec and its steep learning curve, e.g. [flex-grow is weird. Or is it?](https://css-tricks.com/flex-grow-is-weird/)) there is still a fundamental problem with using `flex: n` since n is not a percentage of the view width or height but a comparative scale factor! It's much easier to say the View width or height is 100% and divide that however we like, e.g. 20%, 35% and 45%, than to specify n as 2, 3.5 and 4.5 because the latter set of values do not correspond to percentages. You can see that by adding a fourth item with some value, e.g. 5, which will cause all four elements to be contained in the full width or height of the parent (depending on parent's flexDirection) so n=2 no longer means 20% and n=5 no longer means 50%. It just means that the fourth item we added is 2.5 (5 divided by 2) times wider or taller than the first item. We lose perspective on the item sizes relative to the size of the parent as Flexbox is concerned with the item sizes relative to each other rather that the size of each item relative to the common parent. It's like O(1) vs O(n^2) complexity in that instead of relating the size of the item to the size of its parent as a percentage (one step), with `flex: n` we relate the size of each item to the size of each other (sibling) item (n^2 steps.) Moreover, we lose direct knowledge of each item's width or height as a percentage of the parent's width or height. This is why I've chosen to use percentage based measurement as the basis for this grid.
 
-## _Hebrew and Arabic_
+## _Thinking in the Opposite Direction_
 
-I've also found that RTL (right-to-left) support (for Hebrew/Arabic apps) to be generally lacking in grids, so I added support for it in this grid. 
+Sometimes, we lay things out from left to right. Other times, we might find it easier to lay things out from right to left. I've found that RTL (right-to-left) support to be generally lacking in grids, so I added support for it in this grid. This can also be very useful for apps with right-to-left layouts like those containing text in Arabic, Aramaic, Azeri, Dhivehi/Maldivian, Hebrew, Kurdish (Sorani), Persian/Farsi, and Urdu...
 
 ## _Logic Depends on Consistency_
 
@@ -85,9 +85,9 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 `rtl` may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
-`full` may be supplied as prop to Row. It sets the the row's height to 100% of the computed or absolute height of its parent view. It also sets vAlign on the row to 'stretch' which vertically stretches its children to fill its height, unless vAlign is explicitly supplied with another value.
+`full` may be supplied as prop to Row. It sets the the row's height to 100% of the computed or absolute height of its parent view. 
 
-`full` may be supplied as prop to Column. It sets the the column's width to 100% of the computed or absolute width of its parent view. It also sets hAlign on the column to 'stretch' which horizontally stretches its children to fill its width, unless hAlign is explicitly supplied with another value.
+`full` may be supplied as prop to Column. It sets the the column's width to 100% of the computed or absolute width of its parent view. 
 
 `wrap` may be supplied as prop to Row. Currently, `flexWrap: 'wrap'` has known issues in React Native (see: [https://github.com/facebook/react-native/issues/8960](https://github.com/facebook/react-native/issues/8960)). So the default is '' unless `wrap` is provided as prop on the row.
 
@@ -188,18 +188,16 @@ Hidden props are all booleans. They default to false.
         title: 'Home',
         renderTitle: (route, props) => {
           return (
-          <Row full vAlign='center'>
+          <Row full vAlign='middle'>
             <Col full hAlign='center'>
               <Image style={styles.titleImage} source={require('./assets/logo.png')}/>
             </Col>
           </Row>)
         },
         renderRight: (route, props) => {
-
           const { config: { eventEmitter }  } = route;
-
-          return (<Row full vAlign='center'>
-            <Col full hAlign='right'>
+          return (<Row full rtl vAlign='middle'>
+            <Col offset={1}>
               <Button 
                 title="LOG IN"
                 color="#0A0A0A"
@@ -229,108 +227,108 @@ Hidden props are all booleans. They default to false.
 Note that in the markup below the right arrow icons have padding on the right and left (they should not but I guess they were converted from vector to image and that's how they got their extra padding) so a good way to deal with that is not by using fractional offset value as that will change with screen size while the font remains the same size which would misalign the icons relative to the right-aligned text like SEE ALL, ADD MORE and the start icon (which has no padding in it) -- the right to compensate for icons that have padding in them is by using absolute pixels in the style prob, e.g. left: 6. That is unless your font is responsive, in which case using fractional offset would be the right way.
 
 ```
-    <Row  style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={60} offset={6} >
-          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-          PREVIOUS ORDERS
-          </Text>
-        </Col>
-        <Col size={34} offset={-6} hAlign='right'>
-              <Text style={{ fontSize: 16, color: '#BD1206'}}>
-                SEE ALL
-              </Text>
-        </Col>
-    </Row>
+  <Row  style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={60} offset={6} >
+        <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+        PREVIOUS ORDERS
+        </Text>
+      </Col>
+      <Col size={34} offset={-6} hAlign='right'>
+            <Text style={{ fontSize: 16, color: '#BD1206'}}>
+              SEE ALL
+            </Text>
+      </Col>
+  </Row>
 
-    <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={60} offset={6} >
-          <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
+  <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={60} offset={6} >
+        <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
+        <Row >
+          <Col size={5}>
+            <FontAwesome name='shopping-cart' size={17} color='gray'/>
+          </Col>
+          <Col size={60} offset={2.5}>
+            <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
+          </Col>
+        </Row>
+        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
+        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>                                                                             
+      </Col>
+      <Col size={34} offset={-6} hAlign='right'>
+            <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
+      </Col>
+  </Row>
+
+  <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={60} offset={6}>
+          <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 8, 2017</Text>
           <Row >
             <Col size={5}>
-              <FontAwesome name='shopping-cart' size={17} color='gray'/>
+              <FontAwesome name='cutlery' size={17} color='gray'/>
+            </Col>
+            <Col size={60} offset={2.5}>
+              <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>DINE-IN ORDER</Text>
+            </Col>
+          </Row>
+        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Linguini Alfredo</Text>                                                                          
+      </Col>
+      <Col size={34} offset={-6} hAlign='right'>
+            <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
+      </Col>
+  </Row>
+
+  <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={60} offset={6}>
+          <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
+          <Row>
+            <Col size={5}>
+              <FontAwesome name='cutlery' size={17} color='gray'/>
             </Col>
             <Col size={60} offset={2.5}>
               <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
             </Col>
           </Row>
-          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
-          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>                                                                             
-        </Col>
-        <Col size={34} offset={-6} hAlign='right'>
-              <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
-        </Col>
-    </Row>
+        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Double Cheese Burger</Text>                                                                          
+      </Col>
+      <Col size={34} offset={-6} hAlign='right'>
+            <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
+      </Col>
+  </Row>
 
-    <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={60} offset={6}>
-            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 8, 2017</Text>
-            <Row >
-              <Col size={5}>
-                <FontAwesome name='cutlery' size={17} color='gray'/>
-              </Col>
-              <Col size={60} offset={2.5}>
-                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>DINE-IN ORDER</Text>
-              </Col>
-            </Row>
-          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Linguini Alfredo</Text>                                                                          
-        </Col>
-        <Col size={34} offset={-6} hAlign='right'>
-              <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
-        </Col>
-    </Row>
-
-    <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={60} offset={6}>
-            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
-            <Row>
-              <Col size={5}>
-                <FontAwesome name='cutlery' size={17} color='gray'/>
-              </Col>
-              <Col size={60} offset={2.5}>
-                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
-              </Col>
-            </Row>
-          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Double Cheese Burger</Text>                                                                          
-        </Col>
-        <Col size={34} offset={-6} hAlign='right'>
-              <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
-        </Col>
-    </Row>
-
-    <Row  style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={60} offset={6}>
-          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-          FAVORITE ITEMS
-          </Text>
-        </Col>
-        <Col size={34} offset={-6} hAlign='right'>
-              <Text style={{ fontSize: 16, color: '#BD1206'}}>
-              ADD MORE
-              </Text>
-        </Col>
-    </Row>
-
-    <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+  <Row  style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
       <Col size={60} offset={6}>
-        <Text style={{fontSize: 16, color: 'black'}}>
-        Linguini Alfredo
+        <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+        FAVORITE ITEMS
         </Text>
       </Col>
-        <Col size={34} offset={-6} hAlign='right'>
-              <FontAwesome name='star' size={24} color='#BD1206'/>
-        </Col>
-    </Row>
-
-    <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={60} offset={6}>
-        <Text style={{fontSize: 16, color: 'black'}}>
-        Double Cheese Burger
-        </Text>
+      <Col size={34} offset={-6} hAlign='right'>
+            <Text style={{ fontSize: 16, color: '#BD1206'}}>
+            ADD MORE
+            </Text>
       </Col>
-        <Col size={34} offset={-6} hAlign='right'>
-              <FontAwesome name='star' size={24} color='#BD1206'/>
-        </Col>
-    </Row>
+  </Row>
+
+  <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Col size={60} offset={6}>
+      <Text style={{fontSize: 16, color: 'black'}}>
+      Linguini Alfredo
+      </Text>
+    </Col>
+      <Col size={34} offset={-6} hAlign='right'>
+            <FontAwesome name='star' size={24} color='#BD1206'/>
+      </Col>
+  </Row>
+
+  <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Col size={60} offset={6}>
+      <Text style={{fontSize: 16, color: 'black'}}>
+      Double Cheese Burger
+      </Text>
+    </Col>
+      <Col size={34} offset={-6} hAlign='right'>
+            <FontAwesome name='star' size={24} color='#BD1206'/>
+      </Col>
+  </Row>
 ```
 
 ## RTL Support
@@ -388,10 +386,10 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
       visible={this.state.modalVisible}
       onRequestClose={() => this.close()}
       >
-      <Row full style={[{padding: 20}, modalBackgroundStyle]}>
+      <Row full vAlign='stretch' style={[{padding: 20}, modalBackgroundStyle]}>
         <Col full hAlign='center' style={{backgroundColor: "#f3f3f3", padding: 20}}>
               
-              <Row  style={{height: 80}}>
+              <Row style={{height: 80}}>
                 <Col size={33.333} offset={33.333} hAlign='center' >
                   <Text>
                     <Image source={require('./assets/logo-login.png')} style={styles.logoImage}/>
@@ -447,7 +445,7 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
               <Row style={{ height: 20}}></Row>
 
               <Row  vAlign='middle' style={{height: 60}}>
-                <Col full>
+                <Col full hAlign='stretch'>
                   <TouchableHighlight activeOpacity={0.5} underlayColor='transparent' onPress={() => this.login()}>
                       <Row hAlign='center' vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#BD1206'}}>
                           <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>LOG IN</Text>

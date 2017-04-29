@@ -53,7 +53,7 @@ export default class Row extends React.Component {
   // left/flex-start is default
   align_X =  (this.props.hAlign === 'space' ? 'space-between' : (this.props.hAlign === 'distribute' ? 'space-around' : (this.props.hAlign === 'center' ? 'center' : (this.props.hAlign === 'right' ? 'flex-end' : 'flex-start'))))
   // top/flex-start is default
-  align_Y = (this.props.full && !this.props.vAlign) ? 'stretch' : this.props.vAlign === 'middle' ? 'center' : (this.props.vAlign === 'bottom' ? 'flex-end' : (this.props.vAlign === 'stretch' ? 'stretch' : 'flex-start'))
+  align_Y = this.props.vAlign == 'stretch' ? 'stretch' : this.props.vAlign === 'middle' ? 'center' : (this.props.vAlign === 'bottom' ? 'flex-end' : 'flex-start')
   
   render() {
 
