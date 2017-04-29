@@ -56,12 +56,12 @@ LTR = "normal" left-to-right layout
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
 <Row>
-    <Col size={25} offset={5}>
+    <Col smOffset={10} smOffset={35} mdOffset={50} lgOffset={75}>
       <Text>
         First Column
       </Text>
     </Col>
-    <Col sm={60} smOffset={10} md={40} mdOffset={30} lg={30} lgOffset={40} >
+    <Col size={20} offset={5}>
       <Text>
         Second Column
       </Text>
@@ -98,10 +98,10 @@ These make up the basic rules. As you can see the number of rules is _far_ fewer
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
-<Row>
-    <Col sm={60} md={40} lg={30} smOffset={10} mdOffset={20} lgOffset={30}>
-        <Text>First Column</Text>
-    </Col>
+<Row style={{height: 20}}>
+  <Col smOffset={0} mdOffset={10} lgOffset={20} xlOffset={40}>
+    <Text>test</Text>
+  </Col>
 </Row>
 ```
 
