@@ -117,7 +117,8 @@ If you're nesting a column inside a row which is inside another column that is i
       <Row>
         <Col size={50}>
           <Text>
-            This column is 25% of the width of the top level row
+            This column is 25% of the outer view's width (or 25% of the screen width if
+            the top level Row has no parent)
           </Text>
         </Col>
       </Row>
@@ -126,9 +127,9 @@ If you're nesting a column inside a row which is inside another column that is i
 
 ```
 
-The nested column's size will be the column size value (size, sm, md, lg) times the colPercent of its parent row, so, in effect, we get nested percentages, e.g. 50% of parent row's width which is 50% of its parent row's width means the nested column is 25% of the top level row's width. 
+The nested column's size will be the column size value (size, sm, md, lg, xl) as a percentage of the width of the preceding column in the hierarchy . 
 
-This nested percentages model applies to offsets, too.. 
+This nested percentages model applies to offsets, too. 
 
 The `size`, `offset` and `hidden` props are based on the current screen width (taking device pixel ratio into consideration and orientation, i.e. width in portrait is treated as height in landscape, and vice versa.)
 
