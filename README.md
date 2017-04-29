@@ -1,5 +1,5 @@
 
-# Responsive Grid for React Native
+# Grid Layout for Device-Orientation-Aware and Universal React Native Apps
 
 ### Install
 
