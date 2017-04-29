@@ -95,16 +95,6 @@ These make up the basic rules. As you can see the number of rules is _far_ fewer
 
 ### Sizing & Offsets
 
-```
-import {Column as Col, Row} from 'react-native-responsive-grid';
-
-<Row style={{height: 20}}>
-  <Col smOffset={0} mdOffset={10} lgOffset={20} xlOffset={40}>
-    <Text>test</Text>
-  </Col>
-</Row>
-```
-
 There are currently four size props for `Column` that determine its width as a percentage. The values are indicated by `size`, `sm`, `md`, `lg` and `xl`. The first one, `size`, applies to all screen sizes. The others apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively. 
 
 There are also four offset props for `Column` that determine it's offset as a percentage (from left in case of LTR and from right in case of RTL.) The values are indicated by `offset`, `smOffset`, `mdOffset`, `lgOffset` and `xlOffset`. The first one, `offset`, applies to all screen sizes. The others apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively. Unlike size values, offset values can be positive _or_ negative.
@@ -138,7 +128,7 @@ md: > 480 && < 1024
 lg: >= 1024 && < 1366
 xl: >= 1366 
 
-Example: 
+Examples: 
 
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
@@ -153,6 +143,19 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 On a phone the Column would take up 50% of the row's width.
 On a normal tablet the Column would take up 33.333% of the row's width.
 On a big tablet the Column would take up 25% of the row's width.
+
+
+```
+import {Column as Col, Row} from 'react-native-responsive-grid';
+
+<Row style={{height: 20}}>
+  <Col smOffset={0} mdOffset={10} lgOffset={20} xlOffset={40}>
+    <Text>test</Text>
+  </Col>
+</Row>
+```
+
+This will move the text "test" further to the right for larger screen sizes.
 
 ### Hidden props
 
