@@ -89,7 +89,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 `full` may be supplied as prop to Column. It sets the the column's width to 100% of the computed or absolute width of its parent view. It also sets hAlign on the column to 'stretch' which horizontally stretches its children to fill its width, unless hAlign is explicitly supplied with another value.
 
-`wrap` may be supplied as prop to Row. Currently, `flexWrap: 'wrap'` has known issues in React Native (see: [https://github.com/facebook/react-native/issues/8960](https://github.com/facebook/react-native/issues/8960)). So the default is 'nowrap' unless `wrap` is provided as prop on the row.
+`wrap` may be supplied as prop to Row. Currently, `flexWrap: 'wrap'` has known issues in React Native (see: [https://github.com/facebook/react-native/issues/8960](https://github.com/facebook/react-native/issues/8960)). So the default is '' unless `wrap` is provided as prop on the row.
 
 These make up the basic rules. As you can see the number of rules is _far_ fewer than with bare-bone Flex. This makes it a much simpler task to create sophisticated dynamic layout behavior (fewer knobs and switches.) 
 
@@ -229,7 +229,7 @@ Hidden props are all booleans. They default to false.
 Note that in the markup below the right arrow icons have padding on the right and left (they should not but I guess they were converted from vector to image and that's how they got their extra padding) so a good way to deal with that is not by using fractional offset value as that will change with screen size while the font remains the same size which would misalign the icons relative to the right-aligned text like SEE ALL, ADD MORE and the start icon (which has no padding in it) -- the right to compensate for icons that have padding in them is by using absolute pixels in the style prob, e.g. left: 6. That is unless your font is responsive, in which case using fractional offset would be the right way.
 
 ```
-    <Row nowrap style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row  style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={60} offset={6} >
           <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
           PREVIOUS ORDERS
@@ -242,7 +242,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row nowrap style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={60} offset={6} >
           <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
           <Row >
@@ -261,7 +261,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row nowrap style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={60} offset={6}>
             <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 8, 2017</Text>
             <Row >
@@ -279,7 +279,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row nowrap style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={60} offset={6}>
             <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
             <Row>
@@ -297,7 +297,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row nowrap style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row  style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={60} offset={6}>
           <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
           FAVORITE ITEMS
@@ -310,7 +310,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row nowrap style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
       <Col size={60} offset={6}>
         <Text style={{fontSize: 16, color: 'black'}}>
         Linguini Alfredo
@@ -321,7 +321,7 @@ Note that in the markup below the right arrow icons have padding on the right an
         </Col>
     </Row>
 
-    <Row nowrap style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
       <Col size={60} offset={6}>
         <Text style={{fontSize: 16, color: 'black'}}>
         Double Cheese Burger
@@ -391,7 +391,7 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
       <Row full style={[{padding: 20}, modalBackgroundStyle]}>
         <Col full hAlign='center' style={{backgroundColor: "#f3f3f3", padding: 20}}>
               
-              <Row nowrap style={{height: 80}}>
+              <Row  style={{height: 80}}>
                 <Col size={33.333} offset={33.333} hAlign='center' >
                   <Text>
                     <Image source={require('./assets/logo-login.png')} style={styles.logoImage}/>
@@ -412,7 +412,7 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
                 <Text style={{fontFamily: 'lubalin-graph-regular', fontSize: 16}}>LOG IN TO YOUR ACCOUNT</Text>
               </Row>
 
-              <Row nowrap vAlign='middle' style={{height: 55}}>
+              <Row  vAlign='middle' style={{height: 55}}>
                 <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
                   <Row>
                     <Col size={10} >
@@ -446,7 +446,7 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
 
               <Row style={{ height: 20}}></Row>
 
-              <Row nowrap vAlign='middle' style={{height: 60}}>
+              <Row  vAlign='middle' style={{height: 60}}>
                 <Col full>
                   <TouchableHighlight activeOpacity={0.5} underlayColor='transparent' onPress={() => this.login()}>
                       <Row hAlign='center' vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#BD1206'}}>
@@ -463,7 +463,7 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
 
               <Row style={{height: 60}}>
                 <Col vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#3B5998'}}>
-                  <Row nowrap >
+                  <Row  >
                     <Col size={10} offset={6}>  
                       <FontAwesome name='facebook' size={20} color='#f3f3f3'/>
                     </Col> 
