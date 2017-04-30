@@ -5,11 +5,11 @@
 
 In your project folder, `yarn add react-native-responsive-grid`
 
-## Why?
+## Background
 
-Developing dynamic, responsive 2D layouts with Flexbox for Oriention-Aware and Universal React Native apps used to take hours per screen and resulted in code that was almost unmaintainable. 
+Developing dynamic, responsive 2D layouts with Flexbox and JS for oriention-aware and Universal React Native apps used to take hours per screen and resulted in code that was almost unmaintainable. 
 
-While Flexbox itself is confusing to new comers and too low-level for building dynamic, responsive 2D layouts, the lack of a performant way in React Native to encode relative size info was the real obstacle. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of the simplest and best thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and made dramatic changes and enhancements to it that have resulted in a simple but powerful layout model that eliminates Flexbox's incidental complexity and gives us a really easy and quick way to build dynamic, responsive layouts for Universal and orientation-aware apps.
+While Flexbox itself is confusing to new comers and too low-level for building dynamic, responsive 2D layouts, the lack of a performant, declaratuve way in React Native to encode relative size info was the real obstacle. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of the simplest and best thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and made dramatic changes and enhancements to it that have resulted in a simple but powerful layout model that eliminates Flexbox's incidental complexity and gives us a really easy and quick way to build dynamic, responsive layouts for Universal and orientation-aware apps.
 
 ## Show & Tell
 
