@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import {screenSize} from '../lib/ScreenSize';
+import {ScreenInfo} from '../lib/ScreenInfo';
 import {isHidden} from '../lib/helpers';
 import {View, DeviceEventEmitter, InteractionManager} from 'react-native';
 
@@ -47,7 +47,7 @@ export default class Row extends React.Component {
     mdHidden: PropTypes.bool,
     lgHidden: PropTypes.bool,
     hAlign: PropTypes.string,
-    vAlign: PropTypes.string
+    vAlign: PropTypes.string,
   }
 
   // left/flex-start is default

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import {screenSize} from '../lib/ScreenSize';
-import {isHidden, getColumnWidth, getColumnOffset} from '../lib/helpers';
+import {ScreenInfo} from '../lib/ScreenInfo';
+import {isHidden, isExcludedByAspectRatio, getColumnWidth, getColumnOffset} from '../lib/helpers';
 import {View, DeviceEventEmitter, InteractionManager, Dimensions} from 'react-native';
 
 const cloneElements = (props) => {
@@ -37,7 +37,8 @@ export default class Column extends React.Component {
       offset: PropTypes.number,
       vAlign: PropTypes.string,
       hAlign: PropTypes.string,
-      full: PropTypes.bool
+      full: PropTypes.bool,
+      aspectRatio: PropTypes.object 
     }
 
     // top/flex-start is default
@@ -63,16 +64,17 @@ export default class Column extends React.Component {
         hAlign,
         rtl,
         full,
+        aspectRatio,
         eventKey,
         ...rest
       } = this.props;
 
-      const mediaSize = screenSize()
+      const screenInfo = ScreenInfo()
 
-      if (isHidden(mediaSize, this.props)){
+      if (isHidden(screenInfo.mediaSize, this.props) || 
+          isExcludedByAspectRatio(screenInfo.aspectRatio, this.props)){
         return null;
       } else {
-        
         try {
           return (
               <View 
@@ -85,10 +87,10 @@ export default class Column extends React.Component {
                   this.props.style, {
                     width: (this.props.style && this.props.style.width !== undefined) ? 
                             this.props.style.width : 
-                            (this.props.full ? '100%' : getColumnWidth(mediaSize, this.props)),
+                            (this.props.full ? '100%' : getColumnWidth(screenInfo.mediaSize, this.props)),
                     flexDirection: 'column',
-                    marginLeft: this.props.rtl ? 0 : getColumnOffset(mediaSize, this.props),
-                    marginRight: this.props.rtl ? getColumnOffset(mediaSize, this.props) : 0,
+                    marginLeft: this.props.rtl ? 0 : getColumnOffset(screenInfo.mediaSize, this.props),
+                    marginRight: this.props.rtl ? getColumnOffset(screenInfo.mediaSize, this.props) : 0,
                     alignItems: this.align_X,
                     justifyContent: this.align_Y
                   }]}>

@@ -11,37 +11,93 @@ Developing dynamic, responsive 2D layouts with Flexbox used to take hours per sc
 
 ## Show & Tell
 
-With this layout system (aka "grid") we're able to build not only 2D layouts that adjust to the screen size of the device they're running to retain intended proportions, but also ones that respond to layout changes, including layout changes resulting from a change in device orientation. 
+With this grid we're able to build not only 2D layouts that adjust to the screen size of the device they're running to retain intended proportions, but also ones that respond to layout changes, including layout changes resulting from a change in device orientation. 
+
+You may use this grid to build 2D layouts that maintain their proportions on different screen sizes. You may also use this grid to decide what image sources to use for each screen size and orientation, using the `aspectRatio` prop, and have different offset of elements for each screen size, using screen-width-specific `offset` props. You may also hide and show elements based on screen size, screen-width-specific `hidden` props.
 
 See this video: [demo](https://www.youtube.com/watch?v=Nghqc5QFln8)
 
-You may use this grid to build 2D layouts that maintain their proportions on different screen sizes. You may also use this grid to decide what to hide/show for each screen sizes, using screen-width-based `hidden` props, and different positioning of elements for each screen size, using screen-width-specific `offset` values. The demo in the video above uses `hidden` props to pick the image with the right aspect ratio in response to all layout changes that affect the given column's calculated width, which in the case of this demo are device orientation changes. The images simply get replaced with ones that fit the current aspect ratio so they don't get distorted when stretched. As for font scaling, my thought is that a font only needs to be legible and does not need to grow with the space around it. That's because the mobile app user maintains the same relatively short distance from the display regardless of display size, so the font size simply needs to be legible, and does not need to grow or shrink with the screen. Having said that, there is nothing to prevent us from using a percentage value for font size so it would grow/shrink with the column width. 
+The demo in the video above uses only the `aspectRatio` prop to pick the image with the right aspect ratio in response to a layout change that affect the given column's computed styles, which in the case of this demo is a device orientation change that affects the column's computed width. The image simply get replaced with one that is cropped by the designer during the development process so that it fits the aspect ratio defined by the column and/or its parent row, which in the case of the demo is the full width and height of the screen. Since there could be many aspect ratios that correspond to different devices we should have multiple such images that are cropped at the right place (can only be determined by the designer) and in the right aspect ratio for each device. 
+
+The aspect ratio (width to height, in portrait mode) of iPhones is 1:1.5 for the older models and 1:1.78 for the recent models. The aspect ratio of iPad models is 1:1.33. These aspect ratios are reversed when the screen is rotated to landscape mode. 
+
+**iPhone**
+320 x 480 points --> 1:1.5	(iPhone 4, in portrait mode)
+480 x 320 points --> 1.5:1	(iPhone 4, in landscape mode)
+320 x 568 points --> 1:1.78	(iPhone 5, in portrait mode)
+568 x 320 points --> 1.78:1	(iPhone 5, in landscape mode)
+
+375 x 667 points --> 1:1.78 (iPhone 6/7, in portrait mode)
+667 x 375 points --> 1.78:1 (iPhone 6/7, in landscape mode)
+	
+414 x 736 points --> 1:1.78 (iPhone 6/7 Plus, in portrait mode)
+736 x 414 points --> 1.78:1 (iPhone 6/7 Plus, in portrait mode)
+
+**iPad**
+1024 x 768 points	--> 1.33:1 (iPad Mini, iPad Air and small iPad Pro, landscape)
+768 x 1024 points	--> 1:1.33 (iPad Mini, iPad Air and small iPad Pro, portrait)
+1366 x 1024 points --> 1.33:1 (Large iPad Pro, landscape)
+1024 x 1366 points --> 1:1.33 (Large iPad Pro, portrait)
+
+
+**Example**
+
+```
+    <Row aspectRatio={{w: 1, h: 1.5}}>
+      <Col>
+        <FadeIn>
+          <Image source={require('./assets/homepage hero-1-1.5.jpg')} style={styles.homeImage}></Image>
+        </FadeIn>
+      </Col>
+    </Row>
+    <Row aspectRatio={{w: 1.5, h: 1}}>
+      <Col>
+        <FadeIn>
+          <Image source={require('./assets/homepage hero-1.5-1.jpg')} style={styles.homeImage}></Image>
+        </FadeIn>
+      </Col>
+    </Row>
+    <Row aspectRatio={{w: 1, h: 1.78}}>
+      <Col>
+        <FadeIn>
+          <Image source={require('./assets/homepage hero-1-1.78.jpg')} style={styles.homeImage}></Image>
+        </FadeIn>
+      </Col>
+    </Row>
+    <Row aspectRatio={{w: 1.78, h: 1}}>
+      <Col >
+        <FadeIn>
+          <Image source={require('./assets/homepage hero-1.78-1.jpg')} style={styles.homeImage}></Image>
+        </FadeIn>
+      </Col>
+    </Row>
+```
+
+When it comes font scaling, a font only needs to be legible and does not need to grow with the space around it. That's because the mobile app user maintains the same relatively short distance from the display regardless of display size, so the font size simply needs to be legible, and does not need to grow or shrink with the screen. Having said that, there is nothing to prevent us from using a percentage value for font size so it would grow/shrink with the column width. 
 
 The demo in the video also uses a fixed/slightly modified version of Brent Vatne's (@brentvatne) react-native-fade-in-image, which you can find here: [repo](https://github.com/idibidiart/react-native-fade-in-image)  
 
 ## Design 
 
-## _Beyond the Fixed-Column Grid_
+## _Beyond Fixed-Column Grid_
 
 This grid fixes the mental model for grid based layouts by abandoning the format-based, columns-per-view approach (e.g. "12 column grid") and instead allowing the developer to specify the width of each grid column as a percentage of parent view's size, so 10% meams 10 column grid, and 8.333% means a 12 column grid etc. But let's not think in terms of columns per grid! That is a visual formatting model, not a layout system. There is no reason for a grid to be 11, 12, 13, 14, 15 or 16.6 columns. The number should be determined by actual layout needs, not by some fixed grid template. Plus, all other style measurements are done using percentage when making responsive layouts, so why should we measure column width as n:12 (or n:11 etc) but measure everything else as n:100? It's time to fix this decoherence and move beyond the fixed-column grid, toward a free-form layout model that allows us to leverage grid behavior for responsive design but in a fluid and mathematically simpler way.
 
-## _Minimizing Incidental Complexity_
+## _Hiding Flexbox's Complexity_
 
-Every task has an essential complexity, but we often over-complicate things, or, in other words, introduce additional incidental complexity. I believe the Flexbox specification introduces a lot of incidental complexity relative to the task of creating 2D responsive layouts.
+Every task has an essential degree of complexity, and we often introduce additional incidental complexity in how we perform that task. I believe that using Flexbox styling when creating 2D responsive layouts introduces a lot of incidental complexity.
 
-This includes confusing ideas like justifyContent and alignItems, which are dependent in their meaning on another part of the spec, namely, flexDirection. When flexDirection is 'row' then justifyContent operates horizontally. If it's 'column' then justifyContent operates vertically. The opposite for alignItems. This kind of 'semantic side effect' is rather strange and unexpected. So I've chosen to replace that with vAlign and hAlign where v stands for vertical and h for horizontal. Both can be applied to rows AND columns but they retain their meaning: hAlign will always align content horizontally and vAlign will always align content vertically. 
+While most React Native developers use `flex: n` (which is based on Facebook's Yoga layout algorithm) rather than the confusing mess of `flexGrow`, `flexShrink` and `flexBasis` (lots has been written about the Flexbox spec and its steep learning curve, e.g. [flex-grow is weird. Or is it?](https://css-tricks.com/flex-grow-is-weird/)) there is still a fundamental problem with using `flex: n` since n is not a percentage of the view width or height but a comparative size factor! It's much easier to say the View width or height is 100% and divide that however we like, e.g. 20%, 35% and 45%, than to specify n as 2, 3.5 and 4.5 because the latter set of values do not correspond to percentages. You can see that by adding a fourth item with some value, e.g. 5, which will cause all four elements to be contained in the full width or height of the parent (depending on parent's flexDirection) so n=2 no longer means 20% and n=5 no longer means 50%. It just means that the fourth item we added is 2.5 (5 divided by 2) times wider or taller than the first item. We lose perspective on the item sizes relative to the size of the parent as Flexbox is concerned with the item sizes relative to each other rather that the size of each item relative to the common parent. It's like O(1) vs O(n^2) complexity in that instead of relating the size of the item to the size of its parent as a percentage (one step), with `flex: n` we relate the size of each item to the size of each other (sibling) item (n^2 steps.) Moreover, we lose direct knowledge of each item's width or height as a percentage of the parent's width or height. Having said that, there are times when we'd like to use comparative size factor, so this grid does not take that away. A good example would be when using the 'hidden' props where we may hide and show items based on screen size, so that if some item gets hidden the other items will fill the space left by it. Nothing prevents us fron using `flex: n` with this grid, but we simply don't need growing/shrinking columns/rows in most cases. 
 
-While most React Native developers use `flex: n` (which is based on Facebook's Yoga layout algorithm) rather than the confusing mess of `flexGrow`, `flexShrink` and `flexBasis` (lots has been written about the Flexbox spec and its steep learning curve, e.g. [flex-grow is weird. Or is it?](https://css-tricks.com/flex-grow-is-weird/)) there is still a fundamental problem with using `flex: n` since n is not a percentage of the view width or height but a comparative scale factor! It's much easier to say the View width or height is 100% and divide that however we like, e.g. 20%, 35% and 45%, than to specify n as 2, 3.5 and 4.5 because the latter set of values do not correspond to percentages. You can see that by adding a fourth item with some value, e.g. 5, which will cause all four elements to be contained in the full width or height of the parent (depending on parent's flexDirection) so n=2 no longer means 20% and n=5 no longer means 50%. It just means that the fourth item we added is 2.5 (5 divided by 2) times wider or taller than the first item. We lose perspective on the item sizes relative to the size of the parent as Flexbox is concerned with the item sizes relative to each other rather that the size of each item relative to the common parent. It's like O(1) vs O(n^2) complexity in that instead of relating the size of the item to the size of its parent as a percentage (one step), with `flex: n` we relate the size of each item to the size of each other (sibling) item (n^2 steps.) Moreover, we lose direct knowledge of each item's width or height as a percentage of the parent's width or height. This is why this grid uses percentages as the basis for all measurement.
-
-## _Thinking in the Opposite Direction_
+## _Doing it in Both Directions_
 
 Sometimes, we lay things out from left to right. Other times, we might find it easier to lay things out from right to left. I've found that RTL (right-to-left) support to be generally lacking in grids, so I added support for it in this grid. This can also be very useful for apps with right-to-left layouts like those containing text in Arabic, Aramaic, Azeri, Dhivehi/Maldivian, Hebrew, Kurdish (Sorani), Persian/Farsi, and Urdu...
 
-## _Logic Depends on Consistency_
+## _Logic & Consistency_
 
 Finally, to keep the grid's structure and design simple (as well as logical and consistent) I've added a constraint such that Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) 
 
-If you'd like to build apps that respond to layout changes (due to device oriehtation changes or increase in the calculated width of the column), Columns must be contained in Row (this latter requirement will be eliminated when we upgrade to React Native 0.43)
+If you'd like to build apps that respond to layout changes (due to device oriehtation changes or increase in the calculated width of the column), Columns must be contained in a Row.
 
 Enjoy, and please report any issues.
 
@@ -50,30 +106,17 @@ Enjoy, and please report any issues.
 RTL = right-to-left layout (Hebrew/Arabic)
 LTR = "normal" left-to-right layout
 
-## Usage
-
-```
-import {Column as Col, Row} from 'react-native-responsive-grid';
-
-<Row>
-    <Col smOffset={10} smOffset={35} mdOffset={50} lgOffset={75}>
-      <Text>
-        First Column
-      </Text>
-    </Col>
-    <Col size={20} offset={5}>
-      <Text>
-        Second Column
-      </Text>
-    </Col>
-</Row>
-```
+## Props
 
 `size` may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or absolute width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
 
 `sm`, `md`, `lg` and `xl` are device-dependent 'size' values that are applied to columns.
 
-`offset`, `smOffset`, `mdOffset`, `lgOffset` and `xlOffset` - Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or absolute width. Offset values can also be negative. Default is 0. Offsets in LTR mode apply to marginLeft whereas offsets in RTL mode apply to marginRight.   
+`offset`, `smOffset`, `mdOffset`, `lgOffset` and `xlOffset` - may be applied to Column. Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or explicitly set width. Offset values can also be negative. Default is 0.
+
+`smHidden`, `mdHidden`, `lgHidden` and `xlHidden` - may be applied to Column. This tells the grid to hide certain columns based on the current width of the screen.  
+
+`aspectRatio` maybe applied to Column. The grid computes the current aspect ratio of the device (which reverses with orientation) and based on that excludes from display any columns that have an `aspectRatio` prop that has a different aspect ratio. If no `aspectRatio` is supplied the column will be displayed at all aspect ratios.
 
 `vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: middle, top, bottom, space and distribute. Default is top.
 
@@ -93,11 +136,67 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 These make up the basic rules. As you can see the number of rules is _far_ fewer than with bare-bone Flex. This makes it a much simpler task to create sophisticated dynamic layout behavior (fewer knobs and switches.) 
 
-### Sizing & Offsets
+## Usage
 
-There are currently four size props for `Column` that determine its width as a percentage. The values are indicated by `size`, `sm`, `md`, `lg` and `xl`. The first one, `size`, applies to all screen sizes. The others apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively. 
+There are five 'size' props for `Column` that determine its width as a percentage. The values are indicated by `size`, `sm`, `md`, `lg` and `xl`. The first one, `size`, applies to all screen sizes. The others apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively. 
 
-There are also four offset props for `Column` that determine it's offset as a percentage (from left in case of LTR and from right in case of RTL.) The values are indicated by `offset`, `smOffset`, `mdOffset`, `lgOffset` and `xlOffset`. The first one, `offset`, applies to all screen sizes. The others apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively. Unlike size values, offset values can be positive _or_ negative.
+There are five 'offset' props for `Column` that determine it's offset as a percentage (from left in case of LTR and from right in case of RTL.) The values are indicated by `offset`, `smOffset`, `mdOffset`, `lgOffset` and `xlOffset`. The first one, `offset`, applies to all screen sizes. The others apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively. Unlike size values, offset values can be positive _or_ negative.
+
+There are four 'hidden' props for `Column` that determine whether the column is displayed or not at the given screen size. This is indicated by `smHidden`, `mdHidden`, `lgHidden` and `xlHidden`.  
+
+The size-specific _size_ props (sm, md, lg, and xl), the size-specific _offset_ props (smOffset, mdOffset, lgOffset and xlOffset) and the size-specific _hidden_ props (smHidden, mdHidden, lgHidden, xlHidden) props refer to the effective screen width, which changes with orientation. 
+
+The following are the screen width thresholds for these props:
+
+sm: <= 480px 
+md: > 480 and < 1024
+lg: >= 1024 and < 1366
+xl: >= 1366 
+
+Examples: 
+
+```
+import {Column as Col, Row} from 'react-native-responsive-grid';
+
+<Row>
+    <Col sm={50} md={33.333} lg={25}>
+        <Text>First Column</Text>
+    </Col>
+</Row>
+```
+
+On a phone the Column would take up 50% of the row's width.
+On a normal tablet the Column would take up 33.333% of the row's width.
+On a big tablet the Column would take up 25% of the row's width.
+
+```
+import {Column as Col, Row} from 'react-native-responsive-grid';
+
+<Row style={{height: 20}}>
+  <Col smOffset={0} mdOffset={10} lgOffset={20} xlOffset={40}>
+    <Text>test</Text>
+  </Col>
+</Row>
+```
+
+In the example above, the text "test" will move further to the right with larger screen sizes.
+
+```
+import {Column as Col, Row} from 'react-native-responsive-grid';
+
+<Row>
+    <Col smHidden>
+        <Text>Column displayed when width is <= 480</Text>
+    </Col>
+    <Col mdHidden lgHidden xlHidden>
+        <Text>Column displayed when width is > 480</Text>
+    </Col>
+</Row>
+```
+
+In the example above, the column and all of it's children will be hidden on small screens like phones, but it will appear on bigger screens like tablets. The size-prefixed 'hidden' props may be applied to columns. Hidden props are all booleans. They default to false.
+
+## Nested Dimensions
 
 If you're nesting a column inside a row which is inside another column that is inside another row as below:
 
@@ -121,71 +220,13 @@ The nested column's size will be the column size value (size, sm, md, lg, xl) as
 
 This nested percentages model applies to offsets, too. 
 
-The `size`, `offset` and `hidden` props are based on the current screen width (taking device pixel ratio into consideration and orientation, i.e. width in portrait is treated as height in landscape, and vice versa.)
-
-sm: <= 480px
-md: > 480 && < 1024
-lg: >= 1024 && < 1366
-xl: >= 1366 
-
-Examples: 
-
-```
-import {Column as Col, Row} from 'react-native-responsive-grid';
-
-<Row>
-    <Col sm={50} md={33.333} lg={25}>
-        <Text>First Column</Text>
-    </Col>
-</Row>
-```
-
-On a phone the Column would take up 50% of the row's width.
-On a normal tablet the Column would take up 33.333% of the row's width.
-On a big tablet the Column would take up 25% of the row's width.
-
-
-```
-import {Column as Col, Row} from 'react-native-responsive-grid';
-
-<Row style={{height: 20}}>
-  <Col smOffset={0} mdOffset={10} lgOffset={20} xlOffset={40}>
-    <Text>test</Text>
-  </Col>
-</Row>
-```
-
-This will move the text "test" further to the right for larger screen sizes.
-
-### Hidden props
-
-```
-import {Column as Col, Row} from 'react-native-responsive-grid';
-
-<Row>
-    <Col smHidden>
-        <Text>Phone Column</Text>
-    </Col>
-    <Col mdHidden lgHidden xlHidden>
-        <Text>Tablet Column</Text>
-    </Col>
-</Row>
-```
-
-In this example the column and all of it's children will be hidden on small screens like phones, but it will appear on bigger screens like tablets. The size-prefixed 'hidden' props may be applied to columns.
-
-Every screen size (`sm`, `md`, `lg` and `xl`) has a hidden prop associated with it.
-
-Hidden props are all booleans. They default to false.
-
 ## Real world example using relative size and offset props:
 
 ![demo](https://s2.postimg.org/im8oxf195/Screen_Shot_2017-04-17_at_2.59.31_PM.png)
 
-### Navbar styles (for ex-navigation)
+### Navbar layout (for ex-navigation)
 
 ```
-  in route's HOC:
 
   static route = {
       navigationBar: {
@@ -228,7 +269,7 @@ Hidden props are all booleans. They default to false.
     }
 ```
 
-Note that in the markup below the right arrow icons have padding on the right and left (they should not but I guess they were converted from vector to image and that's how they got their extra padding) so a good way to deal with that is not by using fractional offset value as that will change with screen size while the font remains the same size which would misalign the icons relative to the right-aligned text like SEE ALL, ADD MORE and the start icon (which has no padding in it) -- the right to compensate for icons that have padding in them is by using absolute pixels in the style prob, e.g. left: 6. That is unless your font is responsive, in which case using fractional offset would be the right way.
+### main screen layout
 
 ```
   <Row  style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>

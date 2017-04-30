@@ -1,4 +1,9 @@
+'use strict';
+
+import { Dimensions } from 'react-native';
+
 const isHidden = (screenSize, props) => {
+
   switch(screenSize) {
     case 'small':
       return props.smHidden ? true : false;
@@ -10,6 +15,16 @@ const isHidden = (screenSize, props) => {
       return props.xlHidden ? true : false;
     default:
       return false;
+  }
+}
+
+const isExcludedByAspectRatio = ({w, h},  props) => {
+  if (props.aspectRatio) {
+    if (w !== String(props.aspectRatio.w) || h !== String(props.aspectRatio.h)) {
+      return true
+    }
+  } else {
+    return false
   }
 }
 
@@ -111,4 +126,4 @@ const getColumnOffset = (screenSize, props) => {
   }
 };
 
-module.exports = {isHidden, getColumnWidth, getColumnOffset}
+module.exports = {isHidden, isExcludedByAspectRatio, getColumnWidth, getColumnOffset}
