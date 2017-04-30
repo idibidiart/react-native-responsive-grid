@@ -31,7 +31,7 @@ The aspect ratio (width to height, in portrait mode) of iPhones is 1:1.5 for the
 - 375 x 667 points --> 1:1.78 (iPhone 6/7, in portrait mode)
 - 667 x 375 points --> 1.78:1 (iPhone 6/7, in landscape mode)
 - 414 x 736 points --> 1:1.78 (iPhone 6/7 Plus, in portrait mode)
-- 736 x 414 points --> 1.78:1 (iPhone 6/7 Plus, in portrait mode)
+- 736 x 414 points --> 1.78:1 (iPhone 6/7 Plus, in landscape mode)
 
 **iPad**
 - 1024 x 768 points	--> 1.33:1 (iPad Mini, iPad Air and small iPad Pro, landscape)
