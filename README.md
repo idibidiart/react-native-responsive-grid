@@ -75,7 +75,7 @@ When it comes font scaling, a font only needs to be legible and does not need to
 
 The demo in the video also uses a fixed/slightly modified version of Brent Vatne's (@brentvatne) react-native-fade-in-image, which you can find here: [repo](https://github.com/idibidiart/react-native-fade-in-image)  
 
-## Design Goals
+## Design
 
 ### _Beyond Fixed-Column Grid_
 
