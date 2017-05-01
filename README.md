@@ -103,8 +103,8 @@ _The technical reason for those interested in the grid's internals is that while
 
 ## Terms:
 
-RTL = right-to-left layout (Hebrew/Arabic)
-LTR = "normal" left-to-right layout
+- RTL = right-to-left layout (Hebrew/Arabic)
+- LTR = "normal" left-to-right layout
 
 ## Props
 
