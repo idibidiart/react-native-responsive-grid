@@ -150,10 +150,10 @@ The size-specific _size_ props (sm, md, lg, and xl), the size-specific _offset_ 
 
 The following are the screen width thresholds for these props:
 
-sm: <= 480px 
-md: > 480 and < 1024
-lg: >= 1024 and < 1366
-xl: >= 1366 
+- sm: <= 480px 
+- md: > 480 and < 1024
+- lg: >= 1024 and < 1366
+- xl: >= 1366 
 
 Examples: 
 
