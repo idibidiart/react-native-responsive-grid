@@ -142,7 +142,7 @@ There are five 'size' props for `Column` that determine its width as a percentag
 
 There are five 'offset' props for `Column` that determine it's offset as a percentage (from left in case of LTR and from right in case of RTL.) The values are indicated by `offset`, `smOffset`, `mdOffset`, `lgOffset` and `xlOffset`. The first one, `offset`, applies to all screen sizes. The others apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively. Unlike size values, offset values can be positive _or_ negative.
 
-There are four 'hidden' props for `Column` that determine whether the column is displayed or not at the given screen size. This is indicated by `smHidden`, `mdHidden`, `lgHidden` and `xlHidden`.  
+There are four 'hidden' props for `Column` that determine whether the column is displayed or not at the given screen size. This is indicated by `smHidden`, `mdHidden`, `lgHidden` and `xlHidden`.  They apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively.
 
 The size-specific _size_ props (sm, md, lg, and xl), the size-specific _offset_ props (smOffset, mdOffset, lgOffset and xlOffset) and the size-specific _hidden_ props (smHidden, mdHidden, lgHidden, xlHidden) props refer to the effective screen width, which changes with orientation. 
 
