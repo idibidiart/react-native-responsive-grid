@@ -95,7 +95,7 @@ Sometimes, we lay things out from left to right. Other times, we might find it e
 
 ### _A Consistent Pattern_
 
-Finally, to keep the grid's structure and design simple (as well as logical and consistent) I've added a constraint such that Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) 
+Finally, to keep the grid's structure and design simple (as well as logical and consistent) Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) 
 
 **Note**
 
