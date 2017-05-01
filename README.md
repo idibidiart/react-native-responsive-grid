@@ -13,7 +13,7 @@ While Flexbox itself may be confusing to new comers and too low-level for buildi
 
 ## About
 
-You may use this grid to build responsive 2D layouts that maintain _OR_ predictably change their relative proportions, basic structure and what content they display based on screen size, aspect ratio abd orientation.  
+You may use this grid to build responsive 2D layouts that maintain _OR_ predictably change their relative proportions, basic structure and what content they display based on screen size, aspect ratio and orientation.  
 
 See this video: [demo](https://www.youtube.com/watch?v=Nghqc5QFln8)
 
