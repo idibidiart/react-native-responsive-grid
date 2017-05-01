@@ -13,11 +13,13 @@ While Flexbox itself may be confusing to new comers and too low-level for buildi
 
 ## About
 
-You may use this grid to build 2D layouts that maintain their proportions on different screen sizes. You may also use this grid to decide what image sources to use for each screen size and orientation, using the `aspectRatio` prop, and have different offset of elements for each screen size, using screen-width-specific `offset` props. You may also hide and show elements based on screen size, screen-width-specific `hidden` props.
+You may use this grid to build responsive 2D layouts that maintain _OR_ predictably change their relative proportions, basic structure and what content they display based on screen size, aspect ratio abd orientation.  
 
 See this video: [demo](https://www.youtube.com/watch?v=Nghqc5QFln8)
 
-The demo in the video above uses the grid's percentage-based sizing to maintain the intended proportions and it uses the grid's `aspectRatio` feature to pick the image with the right aspect ratio in response to a layout change that affect the given column's computed styles, which in the case of this demo is a device orientation change that affects the column's computed width. The image simply get replaced with one that is prepared by the designer during the development process so that it fits the targetted aspect ratio. Since there could be many aspect ratios that correspond to different devices we should have multiple such images prepared by the designer for the supported aspect ratios (and their rotated versions, if the app supports both portrait and landscape.)
+The demo in the video above shows some of those abilities, and this grid is capable of far more (see Props and Usage sections.) 
+
+The demo uses the grid's percentage-based sizing model to maintain the intended proportions and it uses the grid's `aspectRatio` feature to pick the image with the right aspect ratio in response to a layout change that affect the given column's computed styles, which in the case of this demo is a device orientation change that affects the column's computed width. The image simply get replaced with one that is prepared by the designer during the development process so that it fits the targetted aspect ratio. Since there could be many aspect ratios that correspond to different devices we should have multiple such images prepared by the designer for the supported aspect ratios (and their rotated versions, if the app supports both portrait and landscape.)
 
 The aspect ratio (width to height, in portrait mode) of iPhones is 1:1.5 for the older models and 1:1.78 for the recent models. The aspect ratio of iPad models is 1:1.33. These aspect ratios are reversed when the screen is rotated to landscape mode. 
 
@@ -73,7 +75,7 @@ The aspect ratio (width to height, in portrait mode) of iPhones is 1:1.5 for the
 
 When it comes font scaling, a font only needs to be legible and does not need to grow with the space around it. That's because the mobile app user maintains the same relatively short distance from the display regardless of display size, so the font size simply needs to be legible, and does not need to grow or shrink with the screen. Having said that, there is nothing to prevent us from using a percentage value for font size so it would grow/shrink with the column width. 
 
-The demo in the video also uses a fixed/slightly modified version of Brent Vatne's (@brentvatne) react-native-fade-in-image, which you can find here: [repo](https://github.com/idibidiart/react-native-fade-in-image)  
+_p.s. the demo in the video uses a fixed/slightly modified version of Brent Vatne's (@brentvatne) react-native-fade-in-image, which you can find here: [repo](https://github.com/idibidiart/react-native-fade-in-image)_ 
 
 ## Design
 
