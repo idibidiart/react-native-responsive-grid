@@ -11,7 +11,7 @@ Developing dynamic, responsive 2D layouts with Flexbox and JS for oriention-awar
 
 While Flexbox itself may be confusing to new comers and too low-level for building dynamic, responsive 2D layouts, the lack of a performant, declaratuve way in React Native to encode relative size info was the real obstacle. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made flexbox based responsive grids. I've taken one of the simplest and best thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and made dramatic changes and enhancements to it that have resulted in a simple but powerful layout model that eliminates Flexbox's incidental complexity and gives us a really easy and quick way to build dynamic, responsive layouts for Universal and orientation-aware apps.
 
-## Show & Tell
+## About
 
 With this grid we're able to build not only 2D layouts that adjust to the screen size of the device they're running to retain intended proportions, but also ones that respond to layout changes, including layout changes resulting from a change in device orientation. 
 
@@ -93,7 +93,7 @@ While most React Native developers use `flex: n` (which is based on Facebook's Y
 
 Sometimes, we lay things out from left to right. Other times, we might find it easier to lay things out from right to left. I've found that RTL (right-to-left) support to be generally lacking in grids, so I added support for it in this grid. This can also be very useful for apps with right-to-left layouts like those containing text in Arabic, Aramaic, Azeri, Dhivehi/Maldivian, Hebrew, Kurdish (Sorani), Persian/Farsi, and Urdu...
 
-## _Logic & Consistency_
+## _A Consistent Pattern_
 
 Finally, to keep the grid's structure and design simple (as well as logical and consistent) I've added a constraint such that Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) 
 
