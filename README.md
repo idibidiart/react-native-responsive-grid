@@ -97,7 +97,7 @@ Sometimes, we lay things out from left to right. Other times, we might find it e
 
 Finally, to keep the grid's structure and design simple (as well as logical and consistent) I've added a constraint such that Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) 
 
-Technical Note:
+**Note**
 
 If you'd like to build apps that respond to layout changes (due to device oriehtation and aspect ratio changes or any change in the computed or explicit width of the column), Columns must be contained in a Row. 
 
