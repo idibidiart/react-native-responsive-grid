@@ -97,9 +97,11 @@ Sometimes, we lay things out from left to right. Other times, we might find it e
 
 Finally, to keep the grid's structure and design simple (as well as logical and consistent) I've added a constraint such that Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) 
 
-If you'd like to build apps that respond to layout changes (due to device oriehtation changes or increase in the calculated width of the column), Columns must be contained in a Row.
+Technical Note:
 
-Enjoy, and please report any issues.
+If you'd like to build apps that respond to layout changes (due to device oriehtation and aspect ratio changes or any change in the computed or explicit width of the column), Columns must be contained in a Row. 
+
+_The technical reason for those interested in the grid's internals is that while rendering Columns is possible without putting them inside a Row, when a Column is unmounted (as in the case where it satisfies a 'hidden' prop condition or does not satisfy an 'aspectRatio' condition) having a Row re-render that column means that that the column's conditions will be re-evaluated and the Column may get re-mounted. Otherwise, an unmounted column cannot re-evaluate its conditions.  When we move to React Native 0.43.x we'll be able to get rid of this requirement by allowing columns to be 'display: none' but remaining mounted, so they can react to changes in their conditions! It will also allow this grid to be used with FlatList which depends on React Native 0.43.x._  
 
 ## Terms:
 
