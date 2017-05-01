@@ -1,5 +1,5 @@
 
-# Dynamic, Responsive Grid-Based Layout for Universal and Orientation-Aware React Native Apps (works in Expo, XCode et al)
+# Dynamic, Responsive Grid-based Layout for Universal and Orientation-Aware React Native Apps (works in Expo, XCode et al)
 
 ### Install
 
