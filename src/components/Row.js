@@ -78,13 +78,13 @@ export default class Row extends React.Component {
               style={[this.props.style,
                       { 
                         flexDirection: 'row',
-                        alignContent: this.props.warpAlign === 'top' ? 
+                        /* alignContent: this.props.warpAlign === 'top' ? 
                                                           'flex-start' : 
                                                           this.props.warpAlign === 'bottom' ? 'flex-end' : 
                                                               this.props.warpAlign === 'middle' ? 'center' : 
                                                                 this.props.warpAlign === 'space' ? 'space-between' : 
                                                                   this.props.warpAlign === 'distribute' ? 'space-around' 
-                                                                    : 'stretch',
+                                                                    : 'stretch', */
                         flexWrap: this.props.wrap ? 'wrap' : 'nowrap',
                         alignItems: this.align_Y,
                         justifyContent: this.align_X,

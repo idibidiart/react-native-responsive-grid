@@ -134,6 +134,7 @@ _The technical reason for those interested in the grid's internals is that while
 
 `wrap` may be supplied as prop to Row to wrap any content that is fully beyond the width of the row's computed or explicitly set width.
 
+[The following prop will be supported after migrating to React Native 0.43]
 `wrapAlign` may be supplied as prop to Row to vertically align the wrapped lines within the Row. Possible values are: top, middle, bottom, space, distribute, stretch.  
 
 These make up the basic rules. As you can see the number of rules is _far_ fewer than with bare-bone Flex. This makes it a much simpler task to create sophisticated dynamic layout behavior (fewer knobs and switches.) 
