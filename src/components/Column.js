@@ -1,9 +1,10 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types'
 import {ScreenInfo} from '../lib/ScreenInfo';
 import {isHidden, isExcludedByAspectRatio, getColumnWidth, getColumnOffset} from '../lib/helpers';
 import {View, DeviceEventEmitter, InteractionManager, Dimensions} from 'react-native';
 
-const cloneElements = (props) => {
+const validateElements = (props) => {
     return React.Children.map(props.children, (element) => {
       if (!element) return null
       if (element.type.name === 'Column') {
@@ -94,7 +95,7 @@ export default class Column extends React.Component {
                     alignItems: this.align_X,
                     justifyContent: this.align_Y
                   }]}>
-                    {cloneElements(rest)}
+                    {validateElements(rest)}
               </View>
           )
         } catch (e) {

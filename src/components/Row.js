@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {ScreenInfo} from '../lib/ScreenInfo';
 import {isHidden} from '../lib/helpers';
 import {View, DeviceEventEmitter, InteractionManager} from 'react-native';
@@ -19,7 +20,7 @@ export default class Row extends React.Component {
   constructor(props, context) {
       super (props, context)
 
-      this.eventKey = Math.random() * +new Date()
+      this.eventKey =  +new Date() + "_" + Math.random()
 
       this.animationHandle 
       this.sub = DeviceEventEmitter.addListener('layout_change_' + this.eventKey, (e) => {
@@ -78,13 +79,13 @@ export default class Row extends React.Component {
               style={[this.props.style,
                       { 
                         flexDirection: 'row',
-                        /* alignContent: this.props.warpAlign === 'top' ? 
+                        alignContent: this.props.warpAlign === 'top' ? 
                                                           'flex-start' : 
                                                           this.props.warpAlign === 'bottom' ? 'flex-end' : 
                                                               this.props.warpAlign === 'middle' ? 'center' : 
                                                                 this.props.warpAlign === 'space' ? 'space-between' : 
                                                                   this.props.warpAlign === 'distribute' ? 'space-around' 
-                                                                    : 'stretch', */
+                                                                    : 'stretch', 
                         flexWrap: this.props.wrap ? 'wrap' : 'nowrap',
                         alignItems: this.align_Y,
                         justifyContent: this.align_X,

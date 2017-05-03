@@ -5,6 +5,8 @@
 
 In your project folder, `yarn add react-native-responsive-grid`
 
+*requires React Native 0.43.x or newer 
+
 ## Background
 
 Developing dynamic, responsive 2D layouts with Flexbox and JS for oriention-aware and Universal React Native apps used to take hours per screen and resulted in code that was almost unmaintainable. 
@@ -43,32 +45,24 @@ The aspect ratio of iPhones is 1:1.5 for the older models (iPhone 4) and 1:1.78 
 **Example**
 
 ```
-    <Row aspectRatio={{w: 1, h: 1.5}}>
-      <Col>
-        <FadeIn>
+    <Row>
+      <Col fullWidth aspectRatio={{w: 1, h: 1.5}}>
           <Image source={require('./assets/homepage hero-1-1.5.jpg')} style={styles.homeImage}></Image>
-        </FadeIn>
       </Col>
     </Row>
-    <Row aspectRatio={{w: 1.5, h: 1}}>
-      <Col>
-        <FadeIn>
+    <Row>
+      <Col fullWidth aspectRatio={{w: 1.5, h: 1}}>
           <Image source={require('./assets/homepage hero-1.5-1.jpg')} style={styles.homeImage}></Image>
-        </FadeIn>
       </Col>
     </Row>
-    <Row aspectRatio={{w: 1, h: 1.78}}>
-      <Col>
-        <FadeIn>
+    <Row>
+      <Col fullWidth aspectRatio={{w: 1, h: 1.78}}>
           <Image source={require('./assets/homepage hero-1-1.78.jpg')} style={styles.homeImage}></Image>
-        </FadeIn>
       </Col>
     </Row>
-    <Row aspectRatio={{w: 1.78, h: 1}}>
-      <Col >
-        <FadeIn>
+    <Row>
+      <Col fullWidth aspectRatio={{w: 1.78, h: 1}}>
           <Image source={require('./assets/homepage hero-1.78-1.jpg')} style={styles.homeImage}></Image>
-        </FadeIn>
       </Col>
     </Row>
 ```
@@ -112,7 +106,9 @@ _The technical reason for those interested in the grid's internals is that while
 
 `sm`, `md`, `lg` and `xl` are device-dependent 'size' values that are applied to columns.
 
-`offset`, `smOffset`, `mdOffset`, `lgOffset` and `xlOffset` - may be applied to Column. Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or explicitly set width. Offset values can also be negative. Default is 0.
+`offset`, `smOffset`, `mdOffset`, `lgOffset` and `xlOffset` - may be applied to Column. Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or explicitly set width. Offset values can also be negative. Default is 0. 
+
+_Using offset values in RTL mode moves things from right to left. Using them in normal LTR mode moves things from left to right. It's pretty normal to expect that. If you're working in both directions, this makes offsets more useful than using marginLeft or marginRight directly._
 
 `smHidden`, `mdHidden`, `lgHidden` and `xlHidden` - may be applied to Column. This tells the grid to hide certain columns based on the current width of the screen.  
 
@@ -134,10 +130,9 @@ _The technical reason for those interested in the grid's internals is that while
 
 `wrap` may be supplied as prop to Row to wrap any content that is fully beyond the width of the row's computed or explicitly set width.
 
-[The following prop will be supported after migrating to React Native 0.43]
 `wrapAlign` may be supplied as prop to Row to vertically align the wrapped lines within the Row. Possible values are: top, middle, bottom, space, distribute, stretch.  
 
-These make up the basic rules. As you can see the number of rules is _far_ fewer than with bare-bone Flex. This makes it a much simpler task to create sophisticated dynamic layout behavior (fewer knobs and switches.) 
+These make up the basic rules. As you can see the number of rules is far fewer than with bare-bone Flex. This makes it a much simpler task to create sophisticated dynamic layout behavior (fewer knobs and switches.) 
 
 ## Usage
 
