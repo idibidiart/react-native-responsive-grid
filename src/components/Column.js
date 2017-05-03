@@ -37,7 +37,7 @@ export default class Column extends React.Component {
       offset: PropTypes.number,
       vAlign: PropTypes.string,
       hAlign: PropTypes.string,
-      full: PropTypes.bool,
+      fullWidth: PropTypes.bool,
       aspectRatio: PropTypes.object 
     }
 
@@ -63,7 +63,7 @@ export default class Column extends React.Component {
         vAlign,
         hAlign,
         rtl,
-        full,
+        fullWidth,
         aspectRatio,
         eventKey,
         ...rest
@@ -87,7 +87,7 @@ export default class Column extends React.Component {
                   this.props.style, {
                     width: (this.props.style && this.props.style.width !== undefined) ? 
                             this.props.style.width : 
-                            (this.props.full ? '100%' : getColumnWidth(screenInfo.mediaSize, this.props)),
+                            (this.props.fullWidth ? '100%' : getColumnWidth(screenInfo.mediaSize, this.props)),
                     flexDirection: 'column',
                     marginLeft: this.props.rtl ? 0 : getColumnOffset(screenInfo.mediaSize, this.props),
                     marginRight: this.props.rtl ? getColumnOffset(screenInfo.mediaSize, this.props) : 0,

@@ -108,7 +108,7 @@ _The technical reason for those interested in the grid's internals is that while
 
 ## Props
 
-`size` may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or absolute width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
+`size` may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or explicitly set width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
 
 `sm`, `md`, `lg` and `xl` are device-dependent 'size' values that are applied to columns.
 
@@ -128,11 +128,13 @@ _The technical reason for those interested in the grid's internals is that while
 
 `rtl` may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
-`full` may be supplied as prop to Row. It sets the the row's height to 100% of the computed or absolute height of its parent view. 
+`fullHeight` may be supplied as prop to Row. It sets the the row's height to 100% of the computed or explicitly height of its parent view. 
 
-`full` may be supplied as prop to Column. It sets the the column's width to 100% of the computed or absolute width of its parent view. 
+`fullWidth` may be supplied as prop to Column. It sets the the column's width to 100% of the computed or explicitly set width of its parent view. 
 
-`wrap` may be supplied as prop to Row. Currently, `flexWrap: 'wrap'` has known issues in React Native (see: [https://github.com/facebook/react-native/issues/8960](https://github.com/facebook/react-native/issues/8960)). So the default is '' unless `wrap` is provided as prop on the row.
+`wrap` may be supplied as prop to Row to wrap any content that is fully beyond the width of the row's computed or explicitly set width.
+
+`wrapAlign` may be supplied as prop to Row to vertically align the wrapped lines within the Row. Possible values are: top, middle, bottom, space, distribute, stretch.  
 
 These make up the basic rules. As you can see the number of rules is _far_ fewer than with bare-bone Flex. This makes it a much simpler task to create sophisticated dynamic layout behavior (fewer knobs and switches.) 
 

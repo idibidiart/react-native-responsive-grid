@@ -41,13 +41,14 @@ export default class Row extends React.Component {
 
   static propTypes = {
     rtl: PropTypes.bool,
-    full: PropTypes.bool,
+    fullHeight: PropTypes.bool,
     wrap: PropTypes.bool,
     smHidden: PropTypes.bool,
     mdHidden: PropTypes.bool,
     lgHidden: PropTypes.bool,
     hAlign: PropTypes.string,
     vAlign: PropTypes.string,
+    wrapAlign: PropTypes.string
   }
 
   // left/flex-start is default
@@ -59,13 +60,14 @@ export default class Row extends React.Component {
 
     const {
       rtl,
-      full,
+      fullHeight,
       wrap,
       smHidden,
       mdHidden,
       lgHidden,
       hAlign,
       vAlign,
+      wrapAlign,
       ...rest
     } = this.props
 
@@ -76,10 +78,17 @@ export default class Row extends React.Component {
               style={[this.props.style,
                       { 
                         flexDirection: 'row',
+                        alignContent: props.warpAlign === 'top' ? 
+                                                          'flex-start' : 
+                                                          props.warpAlign === 'bottom' ? 'flex-end' : 
+                                                              props.warpAlign === 'middle' ? 'center' : 
+                                                                props.warpAlign === 'space' ? 'space-between' : 
+                                                                  props.warpAlign === 'distribute' ? 'space-around' 
+                                                                    : 'stretch',
                         flexWrap: this.props.wrap ? 'wrap' : 'nowrap',
                         alignItems: this.align_Y,
                         justifyContent: this.align_X,
-                        height: (this.props.style && this.props.style.height !== undefined) ? this.props.style.height : (this.props.full ? '100%' : undefined)
+                        height: (this.props.style && this.props.style.height !== undefined) ? this.props.style.height : (this.props.fullHeight ? '100%' : undefined)
                       }]}>
                 {cloneElements(this.props, this.eventKey)}
             </View>
