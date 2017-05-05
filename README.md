@@ -220,6 +220,8 @@ This nested percentages model applies to offsets, too.
 
 ![demo](https://s2.postimg.org/im8oxf195/Screen_Shot_2017-04-17_at_2.59.31_PM.png)
 
+
+
 ### Navbar layout (for ex-navigation)
 
 ```
@@ -461,7 +463,6 @@ Markup #2:
 ```
 
 ![bottom](https://s16.postimg.org/albdekc8l/bottom.png)
-
 
 ## Another Real-World Example
 
