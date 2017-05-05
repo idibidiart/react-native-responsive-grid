@@ -218,7 +218,7 @@ This nested percentages model applies to offsets, too.
 
 ## Real world example using relative size and offset props:
 
-<img src="https://s2.postimg.org/im8oxf195/Screen_Shot_2017-04-17_at_2.59.31_PM.png" width=320>
+<img src="https://s2.postimg.org/im8oxf195/Screen_Shot_2017-04-17_at_2.59.31_PM.png" width=480>
 
 _
 
@@ -384,7 +384,7 @@ This is intended for Hebrew and Arabic layouts, which are right to left.
 
 Notice the reversed order of the Text relative to the physical order in the markup. Also notice that columns are justified as flex-end within the row and their content is rightAligned (except for the second column which is explicitly leftAligned to mimic the rightAligned behavior in normal ltr layout)
 
-<img src="https://s18.postimg.org/gr89vaghl/Screen_Shot_2017-04-07_at_6.47.22_PM.png" width=320>
+<img src="https://s18.postimg.org/gr89vaghl/Screen_Shot_2017-04-07_at_6.47.22_PM.png" width=480>
 
 ### Normal LTR Markup 
 
@@ -444,7 +444,7 @@ Markup #1:
     </Row>
 ```
 
-<img src="https://s29.postimg.org/g5fmo0m8n/top.png" width=320>
+<img src="https://s29.postimg.org/g5fmo0m8n/top.png" width=480>
 
 Markup #2:
 ```
@@ -462,11 +462,11 @@ Markup #2:
     </Row>
 ```
 
-![bottom](https://s16.postimg.org/albdekc8l/bottom.png)
+<img src="https://s16.postimg.org/albdekc8l/bottom.png" width=480>
 
 ## Another Real-World Example
 
-<img src="https://s8.postimg.org/7t9wefrrp/Screen_Shot_2017-04-17_at_2.59.00_PM.png" width=320>
+<img src="https://s8.postimg.org/7t9wefrrp/Screen_Shot_2017-04-17_at_2.59.00_PM.png" width=480>
 
 ```
     <Modal
