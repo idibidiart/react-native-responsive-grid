@@ -218,7 +218,7 @@ This nested percentages model applies to offsets, too.
 
 ## Real world example using relative size and offset props:
 
-![demo](https://s2.postimg.org/im8oxf195/Screen_Shot_2017-04-17_at_2.59.31_PM.png)
+![demo](https://s2.postimg.org/im8oxf195/Screen_Shot_2017-04-17_at_2.59.31_PM.png width=200)
 
 _
 
