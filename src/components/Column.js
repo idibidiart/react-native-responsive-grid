@@ -1,13 +1,14 @@
+
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 import {ScreenInfo} from '../lib/ScreenInfo';
 import {isHidden, isExcludedByAspectRatio, getColumnWidth, getColumnOffset} from '../lib/helpers';
-import {View, DeviceEventEmitter, InteractionManager, Dimensions} from 'react-native';
+import {View, DeviceEventEmitter} from 'react-native';
 
 const validateElements = (props) => {
     return React.Children.map(props.children, (element) => {
       if (!element) return null
-      if (element.type.name === 'Column') {
+      if (element.type && element.type.name === 'Column') {
           throw new Error("Column may not contain other Columns as children. Child Columns must be wrapped in a Row.")
       }
       return element

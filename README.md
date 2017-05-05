@@ -91,9 +91,7 @@ Finally, to keep the grid's structure and design simple (as well as logical and 
 
 **Note**
 
-If you'd like to build apps that respond to layout changes (due to device oriehtation and aspect ratio changes or any change in the computed or explicit width of the column), Columns must be contained in a Row. This limitation will be lifted in the next major release.
-
-_The technical reason for those interested in the grid's internals is that while rendering Columns is possible without putting them inside a Row, when a Column is unmounted (as in the case where it satisfies a 'hidden' prop condition or does not satisfy an 'aspectRatio' condition) having a Row re-render that column means that the column's conditions will be re-evaluated and the Column may get re-mounted. Otherwise, an unmounted column cannot re-evaluate its conditions.  When we move to React Native 0.43.x we'll be able to get rid of this requirement by allowing columns to be 'display: none' but remaining mounted, so they can react to changes in their conditions! It will also allow this grid to be used with FlatList which depends on React Native 0.43.x._  
+If you'd like to build apps that respond to layout changes (due to device oriehtation and aspect ratio changes or any change in the computed or explicit width of the column), Columns must be contained in a Row. 
 
 ## Terms:
 
@@ -128,9 +126,9 @@ _Using offset values in RTL mode moves things from right to left. Using them in 
 
 `fullWidth` may be supplied as prop to Column. It sets the the column's width to 100% of the computed or explicitly set width of its parent view. 
 
-`wrap` may be supplied as prop to Row to wrap any content that is fully beyond the width of the row's computed or explicitly set width.
+`wrap` may be supplied as prop to Row to wrap any content that is fully beyond the width of the row's computed or explicitly set width. 
 
-`wrapAlign` may be supplied as prop to Row to vertically align the wrapped lines within the Row. Possible values are: top, middle, bottom, space, distribute, stretch.  
+`alignLines` may be supplied as prop to Row to vertically align the wrapped lines within the Row (not to be confused with the items that are inside each line.) Possible values are: top, middle, bottom, space, distribute, stretch. (See section on Aligning Wrapped Lines within Rows)
 
 These make up the basic rules. As you can see the number of rules is far fewer than with bare-bone Flex. This makes it a much simpler task to create sophisticated dynamic layout behavior (fewer knobs and switches.) 
 
@@ -422,7 +420,50 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
     </Row>
 ```
 
-## Another Real-World Example (Advanced)
+## Aligning Wrapped Lines within Rows
+
+By default, content in rows will extend beyond the width of the screen if the sum of the width values of the content is larger than 100% of the row's width. To wrap columns or any content within the row the content must be plural (i.e. not one really wide column as a single item won't wrap) and the Row must have the 'wrap' prop supplied. When rows are allowed to wrap what happens is the row will then contain multiple horizontal "lines" that hold the items within it. The lines themselves (as opposed to the items within them) may be aligned in the vertical direction using alignAlign prop (see Props section above for details) 
+
+Here are two screens illustrating the effect of wrap, vAlign and alignLines. The first tells the row that it can turn into a multi-line row that wraps the items. The second tells it how to vertically align the items. The third tells it how to vertically align the wrapped lines that contain the items. 
+
+Markup #1:
+```
+    <Row wrap vAlign='top' alignLines='stretch' style={{height: 100, backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={60} offset={0} style={{backgroundColor: 'pink'}}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+          PREVIOUS ORDERS
+          </Text>
+        </Col>
+        <Col size={80} offset={0} hAlign='right' style={{backgroundColor: 'yellow'}}>
+              <Text style={{ fontSize: 16, color: '#BD1206'}}>
+                SEE ALL
+              </Text>
+        </Col>
+    </Row>
+```
+
+[top](https://s29.postimg.org/g5fmo0m8n/top.png)
+
+Markup #2:
+```
+    <Row wrap vAlign='bottom' alignLines='stretch' style={{height: 100, backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={60} offset={0} style={{backgroundColor: 'pink'}}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+          PREVIOUS ORDERS
+          </Text>
+        </Col>
+        <Col size={80} offset={0} hAlign='right' style={{backgroundColor: 'yellow'}}>
+              <Text style={{ fontSize: 16, color: '#BD1206'}}>
+                SEE ALL
+              </Text>
+        </Col>
+    </Row>
+```
+
+[bottom](https://s16.postimg.org/albdekc8l/bottom.png)
+
+
+## Another Real-World Example
 
 ![demo](https://s8.postimg.org/7t9wefrrp/Screen_Shot_2017-04-17_at_2.59.00_PM.png)
 

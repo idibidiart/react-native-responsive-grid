@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {ScreenInfo} from '../lib/ScreenInfo';
 import {isHidden} from '../lib/helpers';
-import {View, DeviceEventEmitter, InteractionManager} from 'react-native';
+import {View, DeviceEventEmitter} from 'react-native';
 
 const cloneElements = (props, eventKey) => {
     const rtl = props.rtl 
@@ -49,7 +49,7 @@ export default class Row extends React.Component {
     lgHidden: PropTypes.bool,
     hAlign: PropTypes.string,
     vAlign: PropTypes.string,
-    wrapAlign: PropTypes.string
+    alignLines: PropTypes.string
   }
 
   // left/flex-start is default
@@ -57,6 +57,18 @@ export default class Row extends React.Component {
   // top/flex-start is default
   align_Y = this.props.vAlign == 'stretch' ? 'stretch' : this.props.vAlign === 'middle' ? 'center' : (this.props.vAlign === 'bottom' ? 'flex-end' : 'flex-start')
   
+  align_lines = this.props.wrap && this.props.alignLines && (this.props.alignLines === 'top' ? 
+                                                          'flex-start' : 
+                                                          (this.props.alignLines === 'bottom' ? 'flex-end' : 
+                                                              (this.props.alignLines === 'middle' ? 'center' : 
+                                                                (this.props.alignLines === 'space' ? 'space-between' : 
+                                                                  (this.props.alignLines === 'distribute' ? 'space-around' 
+                                                                    : 'stretch')))))
+
+  wrapState = this.props.wrap ? 'wrap' : 'nowrap'
+
+  height = (this.props.style && this.props.style.height !== undefined) ? this.props.style.height : (this.props.fullHeight ? '100%' : undefined)
+
   render() {
 
     const {
@@ -68,7 +80,7 @@ export default class Row extends React.Component {
       lgHidden,
       hAlign,
       vAlign,
-      wrapAlign,
+      alignLines,
       ...rest
     } = this.props
 
@@ -79,17 +91,11 @@ export default class Row extends React.Component {
               style={[this.props.style,
                       { 
                         flexDirection: 'row',
-                        alignContent: this.props.warpAlign === 'top' ? 
-                                                          'flex-start' : 
-                                                          this.props.warpAlign === 'bottom' ? 'flex-end' : 
-                                                              this.props.warpAlign === 'middle' ? 'center' : 
-                                                                this.props.warpAlign === 'space' ? 'space-between' : 
-                                                                  this.props.warpAlign === 'distribute' ? 'space-around' 
-                                                                    : 'stretch', 
-                        flexWrap: this.props.wrap ? 'wrap' : 'nowrap',
+                        alignContent: this.align_lines, 
+                        flexWrap: this.wrapState,
                         alignItems: this.align_Y,
                         justifyContent: this.align_X,
-                        height: (this.props.style && this.props.style.height !== undefined) ? this.props.style.height : (this.props.fullHeight ? '100%' : undefined)
+                        height: this.height
                       }]}>
                 {cloneElements(this.props, this.eventKey)}
             </View>
