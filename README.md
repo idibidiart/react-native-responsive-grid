@@ -442,7 +442,7 @@ Markup #1:
     </Row>
 ```
 
-[top](https://s29.postimg.org/g5fmo0m8n/top.png)
+![top](https://s29.postimg.org/g5fmo0m8n/top.png)
 
 Markup #2:
 ```
@@ -460,7 +460,7 @@ Markup #2:
     </Row>
 ```
 
-[bottom](https://s16.postimg.org/albdekc8l/bottom.png)
+![bottom](https://s16.postimg.org/albdekc8l/bottom.png)
 
 
 ## Another Real-World Example
