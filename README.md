@@ -27,20 +27,23 @@ The aspect ratio of iPhones is 1:1.5 for the older models (iPhone 4) and 1:1.78 
 
 **iPhone**
 - 320 x 480 points --> 1:1.5	(iPhone 4, in portrait mode)
-- 480 x 320 points --> 1.5:1	(iPhone 4, in landscape mode)
 - 320 x 568 points --> 1:1.78	(iPhone 5, in portrait mode)
-- 568 x 320 points --> 1.78:1	(iPhone 5, in landscape mode)
 - 375 x 667 points --> 1:1.78 (iPhone 6/7, in portrait mode)
-- 667 x 375 points --> 1.78:1 (iPhone 6/7, in landscape mode)
 - 414 x 736 points --> 1:1.78 (iPhone 6/7 Plus, in portrait mode)
+
+**iPhone (Landscape)**
+- 480 x 320 points --> 1.5:1	(iPhone 4, in landscape mode)
+- 568 x 320 points --> 1.78:1	(iPhone 5, in landscape mode)
+- 667 x 375 points --> 1.78:1 (iPhone 6/7, in landscape mode)
 - 736 x 414 points --> 1.78:1 (iPhone 6/7 Plus, in landscape mode)
 
 **iPad**
 - 1024 x 768 points	--> 1.33:1 (iPad Mini, iPad Air and small iPad Pro, landscape)
-- 768 x 1024 points	--> 1:1.33 (iPad Mini, iPad Air and small iPad Pro, portrait)
 - 1366 x 1024 points --> 1.33:1 (Large iPad Pro, landscape)
-- 1024 x 1366 points --> 1:1.33 (Large iPad Pro, portrait)
 
+**iPad (Portrait)**
+- 768 x 1024 points	--> 1:1.33 (iPad Mini, iPad Air and small iPad Pro, portrait)
+- 1024 x 1366 points --> 1:1.33 (Large iPad Pro, portrait)
 
 **Example**
 
