@@ -21,7 +21,7 @@ See this video: [demo](https://www.youtube.com/watch?v=Nghqc5QFln8)
 
 The demo in the video above shows some of those abilities, and this grid is capable of far more (see Props and Usage sections.) 
 
-The demo uses the grid's percentage-based sizing model to maintain the intended proportions and it uses this grid's `aspectRatio` feature to pick the image with the closest aspect ratio to the device aspect ratio, dynamically taking into account the device orientation. The images are prepared by the designer during the development process so that they fit the targetted device aspect ratios. Since there could be many aspect ratios that correspond to different devices we should have multiple such images (and their rotated versions, if the app supports both portrait and landscape.)
+The demo uses the grid's percentage-based sizing model to maintain the intended proportions and it uses this grid's `aspectRatio` feature to pick the image with the **closest aspect ratio** to the device aspect ratio, dynamically taking into account the device orientation. The images are prepared by the designer during the development process so that they fit the targetted device aspect ratios. Since there could be many aspect ratios that correspond to different devices we should have multiple such images (and their rotated versions, if the app supports both portrait and landscape.)
 
 The following is a table that maps known device aspect ratios (for iPhone and Android) to the ratio of width/height for both landscape and portrait device orientations. The width/height ratios below assume landscape mode. The device aspect ratio does not change with orientation, but we need to have two images per device aspect ratio, one for portrait mode and another for landscape mode.
 
