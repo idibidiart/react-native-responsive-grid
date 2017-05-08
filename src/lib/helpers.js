@@ -21,8 +21,6 @@ const isHidden = (screenSize, props) => {
 const isExcludedByAspectRatio = ({aspectRatio},  {currentNearestRatio, currentOrientation}) => {
   if (aspectRatio !== undefined) {
     if (aspectRatio.nearestRatio !== currentNearestRatio || aspectRatio.orientation.toLowerCase() !== currentOrientation) {
-      console.log(aspectRatio.nearestRatio, currentNearestRatio)
-      console.log(aspectRatio.orientation, aspectRatio.orientation)
       return true
     }
   }
