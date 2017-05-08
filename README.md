@@ -13,7 +13,7 @@ Developing dynamic, responsive 2D layouts with Flexbox and JS for oriention-awar
 
 While Flexbox itself is too low-level and time consuming whehn it comes to building responsive and Universal apps, the lack of a performant, declarative way in React Native to encode size values as percentages was the real obstacle. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made responsive grids that takle advantage of percentage-based layout. I've taken one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and made some significabnt changes and enhancements to it that have resulted in a simple yet powerful layout model.
 
-## About
+## Introduction
 
 You may use this grid to build responsive 2D layouts that maintain _OR_ predictably change their relative proportions, basic structure and what content they display based on screen size, aspect ratio and orientation.  
 
@@ -51,22 +51,22 @@ The following table maps some common device aspect ratios to the ratio of width/
 
 ```
     <Row>
-      <Col fullWidth aspectRatio={{nearestRatio: '3:2', orientation: "portrait"}}>
+      <Col fullWidth aspectRatio={{ratio: '3:2', orientation: "portrait"}}>
           <Image source={require('./assets/homepage hero-3-2-portrait.jpg')} style={styles.homeImage}></Image>
       </Col>
     </Row>
     <Row>
-      <Col fullWidth aspectRatio={{nearestRatio: '3:2', orientation: "landscape"}}>
+      <Col fullWidth aspectRatio={{ratio: '3:2', orientation: "landscape"}}>
           <Image source={require('./assets/homepage hero-3-2-landscape.jpg')} style={styles.homeImage}></Image>
       </Col>
     </Row>
     <Row>
-      <Col fullWidth aspectRatio={{nearestRatio: '16:9', orientation: "portrait"}}>
+      <Col fullWidth aspectRatio={{ratio: '16:9', orientation: "portrait"}}>
           <Image source={require('./assets/homepage hero-16-9-portrait.jpg')} style={styles.homeImage}></Image>
       </Col>
     </Row>
     <Row>
-      <Col fullWidth aspectRatio={{nearestRatio: '16:9', orientation: "landscape"}}
+      <Col fullWidth aspectRatio={{ratio: '16:9', orientation: "landscape"}}
           <Image source={require('./assets/homepage hero-16-9-landscape.jpg')} style={styles.homeImage}></Image>
       </Col>
     </Row>
@@ -106,6 +106,8 @@ If you'd like to build apps that respond to layout changes (due to device orieht
 - LTR = "normal" left-to-right layout
 
 ## Props
+
+`aspectRatio` (see Introduction)
 
 `size` may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or explicitly set width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
 

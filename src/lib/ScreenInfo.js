@@ -4,18 +4,21 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
 
-const nearestAspectRatio = (floatRatio, decimalRatios) => {
-   let i = 0
-   let decimalRatio = decimalRatios[i++];
-   let diff = Math.abs(floatRatio - decimalRatio);
-   for (; i < decimalRatios.length; i++) {
-      let newdiff = Math.abs(floatRatio - decimalRatios[i]);
-      if (newdiff < diff) {
-         diff = newdiff;
-         decimalRatio = decimalRatios[i];
-      }
-   }
-   return {index: --i, value: decimalRatio};
+const closest = (elem, array) => {
+    var minDelta = null;
+    var minIndex = null;
+    for (var i = 0 ; i<array.length; i++){
+        var delta = Math.abs(array[i]-elem);
+        if (minDelta == null || delta < minDelta){
+            minDelta = delta;
+            minIndex = i;
+        }
+        else {
+            return {value: array[i-1], index: i-1}
+        }
+
+    }
+    return {value: array[minIndex], index: minIndex}
 }
 
 const setScreenInfo = () => {
@@ -45,7 +48,7 @@ const setScreenInfo = () => {
   const aspectRatios = ['16:9', '16:10', '3:2', '4:3', '1:1','4:3', '3:2', '16:10', '16:9'];
   const decimalRatios = [1.77, 1.6, 1.5, 1.33, 1, 0.75, 0.66, 0.625, 0.56];
   const currentFloatRatio= SCREEN_WIDTH/SCREEN_HEIGHT;
-  const currentDecimalRatio = nearestAspectRatio(currentFloatRatio, decimalRatios)
+  const currentDecimalRatio = closest(currentFloatRatio, decimalRatios)
   const currentNearestRatio = aspectRatios[currentDecimalRatio.index];
   
   let currentOrientation;
