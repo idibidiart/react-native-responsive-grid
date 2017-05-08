@@ -27,24 +27,24 @@ The following table maps some common device aspect ratios to the ratio of width/
 
 | Aspect Ratio | Width | Height | Width/Height Ratio (landscape) | Devices 
 | :---: | :---: | :---: | :---: | :---: | 
-| '16:9' | 1.77 | 568 | 320 | iPhone 5
-| '16:9' | 1.77 | 667 | 375 | iPhone 6 & 7
-| '16:9' | 1.77 | 736 | 414 | iPhone 6 Plus & 7 Plus
-| '16:10' | 1.6 | ? | ? | ? 
-| '3:2' | 1.5 | 480 | 320 | iPhone 4
-| '4:3' | 1.33 | 1024 | 768 | iPad Mini, iPad Air and small iPad Pro
-| '4:3' | 1.33 | 1366 | 1024 | Large iPad Pro
+| '16:9' | 568 | 320 | 1.77 | iPhone 5
+| '16:9' | 667 | 375 | 1.77 | iPhone 6 & 7
+| '16:9' | 736 | 414 | 1.77 | iPhone 6 Plus & 7 Plus
+| '16:10' | ? | ? | 1.6 | ?
+| '3:2' | 480 | 320 | 1.5 | iPhone 4
+| '4:3' | 1024 | 768 |  1.33 | iPad Mini, iPad Air and small iPad Pro
+| '4:3' | 1366 | 1024 | 1.33 | Large iPad Pro
 | '1:1' | 1 | ? | ? | ?
 
 | Aspect Ratio | Width | Height | Width/Height Ratio (portrait) | Devices
 | :---: | :---: | :---: | :---: | :---: | 
-| '16:9' | 0.56 | 320 | 568 | iPhone 5
-| '16:9' | 0.56 | 375 | 667 | iPhone 6 & 7
-| '16:9' | 0.56 | 414 | 736 | iPhone 6 Plus & 7 Plus
-| '16:10' | 1.6 | ? | ? | ? 
-| '3:2' | 1.5 | 320 | 480 | iPhone 4
-| '4:3' | 1.33 | 768 | 1024 | iPad Mini, iPad Air and small iPad Pro
-| '4:3' | 1.33 | 1024 | 1366 | Large iPad Pro
+| '16:9' | 320 | 568 | 0.56 | iPhone 5
+| '16:9' | 375 | 667 | 0.56 | iPhone 6 & 7
+| '16:9' | 414 | 736 | 0.56 | iPhone 6 Plus & 7 Plus
+| '16:10' | ? | ? | 0.625| ? 
+| '3:2' | 320 | 480 | 0.66 | iPhone 4
+| '4:3' | 768 | 1024 | 0.75 | iPad Mini, iPad Air and small iPad Pro
+| '4:3' | 1024 | 1366 | 0.75 | Large iPad Pro
 | '1:1' | 1 | ? | ? | ?
 
 **Example**
