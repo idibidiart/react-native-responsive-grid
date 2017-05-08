@@ -11,7 +11,7 @@ In your project folder, `yarn add react-native-responsive-grid`
 
 Developing dynamic, responsive 2D layouts with Flexbox and JS for oriention-aware and Universal React Native apps used to take hours per screen and resulted in code that was almost unmaintainable. 
 
-While Flexbox itself may be confusing to new comers and too low-level for building 2D layouts, the lack of a performant, declarative way in React Native to encode size values as percentages was the real obstacle. Then came React Native v0.42 and solved that problem! Since then there have been several folks who have made flexbox based responsive grids. I've taken one of the simplest and best thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and made dramatic changes and enhancements to it that have resulted in a simple but powerful layout model.
+While Flexbox itself is too low-level and time consuming whehn it comes to building responsive and Universal apps, the lack of a performant, declarative way in React Native to encode size values as percentages was the real obstacle. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made responsive grids that takle advantage of percentage-based layout. I've taken one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and made some significabnt changes and enhancements to it that have resulted in a simple yet powerful layout tool.
 
 ## About
 
@@ -21,58 +21,72 @@ See this video: [demo](https://www.youtube.com/watch?v=Nghqc5QFln8)
 
 The demo in the video above shows some of those abilities, and this grid is capable of far more (see Props and Usage sections.) 
 
-The demo uses the grid's percentage-based sizing model to maintain the intended proportions and it uses the grid's `aspectRatio` feature to pick the image with the right aspect ratio in response to a layout change that affect the given column's computed styles, which in the case of this demo is a device orientation change that affects the column's computed width. The image simply get replaced with one that is prepared by the designer during the development process so that it fits the targetted aspect ratio. Since there could be many aspect ratios that correspond to different devices we should have multiple such images prepared by the designer for the supported aspect ratios (and their rotated versions, if the app supports both portrait and landscape.)
+The demo uses the grid's percentage-based sizing model to maintain the intended proportions and it uses this grid's `aspectRatio` feature to pick the image with the closest aspect ratio to the device aspect ratio, dynamically taking into account the device orientation. The images are prepared by the designer during the development process so that they fit the targetted device aspect ratios. Since there could be many aspect ratios that correspond to different devices we should have multiple such images (and their rotated versions, if the app supports both portrait and landscape.)
 
-The aspect ratio of iPhones is 1:1.5 for the older models (iPhone 4) and 1:1.78 for the recent models (IPhone 5, 6 and 7.) The aspect ratio of iPad models is 1:1.33. These aspect ratios are reversed when the screen is rotated to landscape mode. The phone manufacturers generally have to make sure they stick to one aspect ratio, and usually something that the rest of the industry uses, except for Apple, which has 3 aspect ratios (2 for iPhones and 1 for iPad) These are rounded figured. You can figure out what Android has in terms of aspect ratios and define those by dividing the larger dimension by the smaller dimension and rounding. For example, 1:1.5 is 1:(480/320). 
+The following is a table that maps known device aspect ratios (for iPhone and Android) to the ratio of width/height for both landscape and portrait device orientations. The width/height ratios below assume landscape mode. The device aspect ratio does not change with orientation, but we need to have two images per device aspect ratio, one for portrait mode and another for landscape mode.
 
-**iPhone**
-- 320 x 480 points --> 1:1.5	(iPhone 4, in portrait mode)
-- 320 x 568 points --> 1:1.78	(iPhone 5, in portrait mode)
-- 375 x 667 points --> 1:1.78 (iPhone 6/7, in portrait mode)
-- 414 x 736 points --> 1:1.78 (iPhone 6/7 Plus, in portrait mode)
+| Aspect Ratio | Width/Height Ratio (landscape) 
+| :---: | :---:
+| '16:9' | 1.77 
+| '16:10' | 1.6 
+| '3:2' | 1.5 
+| '4:3' | 1.33 
+| '1:1' | 1 
+
+| Aspect Ratio | Width/Height Ratio (portrait)
+| :---: | :---: 
+'16:9' | 0.56  
+'16:10' | 0.625 
+'3:2' | 0.66 
+'4:3' | 0.75 
+'1:1' | 1 
 
 **iPhone (Landscape)**
-- 480 x 320 points --> 1.5:1	(iPhone 4, in landscape mode)
-- 568 x 320 points --> 1.78:1	(iPhone 5, in landscape mode)
-- 667 x 375 points --> 1.78:1 (iPhone 6/7, in landscape mode)
-- 736 x 414 points --> 1.78:1 (iPhone 6/7 Plus, in landscape mode)
+- 480 x 320 points --> 3:2	(iPhone 4, in landscape mode)
+- 568 x 320 points --> 16:9	(iPhone 5, in landscape mode)
+- 667 x 375 points --> 16:9 (iPhone 6/7, in landscape mode)
+- 736 x 414 points --> 16:9 (iPhone 6/7 Plus, in landscape mode)
 
-**iPad**
-- 1024 x 768 points	--> 1.33:1 (iPad Mini, iPad Air and small iPad Pro, landscape)
-- 1366 x 1024 points --> 1.33:1 (Large iPad Pro, landscape)
+**iPhone (portrait)**
+- 320 x 480 points --> 3:2	(iPhone 4, in portrait mode)
+- 320 x 568 points --> 16:9	(iPhone 5, in portrait mode)
+- 375 x 667 points --> 16:9 (iPhone 6/7, in portrait mode)
+- 414 x 736 points --> 16:9 (iPhone 6/7 Plus, in portrait mode)
+
+**iPad (landscape)**
+- 1024 x 768 points	--> 4:3 (iPad Mini, iPad Air and small iPad Pro, landscape)
+- 1366 x 1024 points --> 4:3 (Large iPad Pro, landscape)
 
 **iPad (Portrait)**
-- 768 x 1024 points	--> 1:1.33 (iPad Mini, iPad Air and small iPad Pro, portrait)
-- 1024 x 1366 points --> 1:1.33 (Large iPad Pro, portrait)
+- 768 x 1024 points	--> 4:3 (iPad Mini, iPad Air and small iPad Pro, portrait)
+- 1024 x 1366 points --> 4:3 (Large iPad Pro, portrait)
 
 **Example**
 
 ```
     <Row>
-      <Col fullWidth aspectRatio={{w: 1, h: 1.5}}>
-          <Image source={require('./assets/homepage hero-1-1.5.jpg')} style={styles.homeImage}></Image>
+      <Col fullWidth aspectRatio={{nearestRatio: '3:2', orientation: "portrait"}}>
+          <Image source={require('./assets/homepage hero-3-2-portrait.jpg')} style={styles.homeImage}></Image>
       </Col>
     </Row>
     <Row>
-      <Col fullWidth aspectRatio={{w: 1.5, h: 1}}>
-          <Image source={require('./assets/homepage hero-1.5-1.jpg')} style={styles.homeImage}></Image>
+      <Col fullWidth aspectRatio={{nearestRatio: '3:2', orientation: "landscape"}}>
+          <Image source={require('./assets/homepage hero-3-2-landscape.jpg')} style={styles.homeImage}></Image>
       </Col>
     </Row>
     <Row>
-      <Col fullWidth aspectRatio={{w: 1, h: 1.78}}>
-          <Image source={require('./assets/homepage hero-1-1.78.jpg')} style={styles.homeImage}></Image>
+      <Col fullWidth aspectRatio={{nearestRatio: '16:9', orientation: "portrait"}}>
+          <Image source={require('./assets/homepage hero-16-9-portrait.jpg')} style={styles.homeImage}></Image>
       </Col>
     </Row>
     <Row>
-      <Col fullWidth aspectRatio={{w: 1.78, h: 1}}>
-          <Image source={require('./assets/homepage hero-1.78-1.jpg')} style={styles.homeImage}></Image>
+      <Col fullWidth aspectRatio={{nearestRatio: '16:9', orientation: "landscape"}}
+          <Image source={require('./assets/homepage hero-16-9-landscape.jpg')} style={styles.homeImage}></Image>
       </Col>
     </Row>
 ```
 
-When it comes font scaling, a font only needs to be legible and does not need to grow with the space around it. That's because the mobile app user maintains the same relatively short distance from the display regardless of display size, so the font size simply needs to be legible, and does not need to grow or shrink with the screen. Having said that, there is nothing to prevent us from using a percentage value for font size so it would grow/shrink with the column width. 
-
-_p.s. the demo in the video uses a fixed/slightly modified version of Brent Vatne's (@brentvatne) react-native-fade-in-image, which you can find here: [repo](https://github.com/idibidiart/react-native-fade-in-image)_ 
+-
 
 ## Design
 

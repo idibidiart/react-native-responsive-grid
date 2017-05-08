@@ -18,14 +18,15 @@ const isHidden = (screenSize, props) => {
   }
 }
 
-const isExcludedByAspectRatio = ({w, h},  props) => {
-  if (props.aspectRatio) {
-    if (w !== String(props.aspectRatio.w) || h !== String(props.aspectRatio.h)) {
+const isExcludedByAspectRatio = ({aspectRatio},  {currentNearestRatio, currentOrientation}) => {
+  if (aspectRatio !== undefined) {
+    if (aspectRatio.nearestRatio !== currentNearestRatio || aspectRatio.orientation.toLowerCase() !== currentOrientation) {
+      console.log(aspectRatio.nearestRatio, currentNearestRatio)
+      console.log(aspectRatio.orientation, aspectRatio.orientation)
       return true
     }
-  } else {
-    return false
   }
+  return false
 }
 
 const toPercent = (num) => num + '%';

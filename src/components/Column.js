@@ -74,7 +74,7 @@ export default class Column extends React.Component {
       const screenInfo = ScreenInfo()
 
       if (isHidden(screenInfo.mediaSize, this.props) || 
-          isExcludedByAspectRatio(screenInfo.aspectRatio, this.props)){
+          isExcludedByAspectRatio(this.props, screenInfo.aspectRatio)){
         return null;
       } else {
         try {
