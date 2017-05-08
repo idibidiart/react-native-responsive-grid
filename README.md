@@ -76,7 +76,7 @@ The following table maps some common device aspect ratios to the ratio of width/
 
 ## Design  
 
-### _Percentage-based Layout_
+### _Single Ratio Layout_
 
 This grid fixes the mental model for grid based layouts by abandoning the format-based, columns-per-view approach (e.g. "12 column grid") and instead allowing the developer to specify the width of each grid column as a percentage of parent view's size, so 10% meams 10 column grid, and 8.333% means a 12 column grid etc. But let's not think in terms of columns per grid! That is a visual formatting model, not a layout system. There is no reason for a grid to be 11, 12, 13, 14, 15 or 16.6 columns. The number should be determined by actual layout needs, not by some fixed grid template. Plus, all other style measurements are done using percentages when making responsive layouts, so why should we measure column width as n:12 (or n:11 etc) but measure everything else as n:100? It's time to fix this decoherence and move beyond the fixed-column grid, toward a free-form layout model that allows us to leverage grid behavior for responsive design but in a fluid and mathematically simpler way.
 
@@ -88,11 +88,11 @@ While most React Native developers use `flex: n` (which is based on Facebook's Y
 
 Sometimes, we lay things out from left to right (LTR.) Other times, we might find it easier to lay things out from right to left (RTL.) I've found that RTL support to be generally lacking in both React and React Native grids, so I've added support for it. React makes it really simple. This can be very useful for apps with right-to-left text, i.e. Arabic, Aramaic, Azeri, Dhivehi/Maldivian, Hebrew, Kurdish (Sorani), Persian/Farsi, and Urdu.
 
-### _Building Layouts with a Consistent, Repeatable and Nestable Pattern_
+### _Consistent, Repeatable, Nestable_
 
 To keep the grid's structure and design simple (as well as logical and consistent) Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) 
 
-### _Dynamic Response to Layout Changes_
+### _Dynamic Resoponse_
 
 Being able to readt to layout changes, including changes due to device rotation (for apps that allow it), is a key aspect of responsive design. This grid enables dynamic layouts (see the demos at the start of this Readme) 
 
