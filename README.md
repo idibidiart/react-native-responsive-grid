@@ -17,7 +17,7 @@ While Flexbox itself is too low-level and time consuming whehn it comes to build
 
 You may use this grid to build responsive 2D layouts that maintain _OR_ predictably change their relative proportions, basic structure and what content they display based on screen size, aspect ratio and orientation.  
 
-## [Checkout the aspectRatio demo](https://www.youtube.com/watch?v=Nghqc5QFln8)
+## [>> aspectRatio demo](https://www.youtube.com/watch?v=Nghqc5QFln8)
 
 The demo in the video above shows some of those abilities, and this grid is capable of far more (see Props and Usage sections.) 
 
