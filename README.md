@@ -23,43 +23,29 @@ The demo in the video above shows some of those abilities, and this grid is capa
 
 The demo uses the grid's percentage-based sizing model to maintain the intended proportions and it uses this grid's `aspectRatio` feature to pick the image with the **closest aspect ratio** to the device aspect ratio, dynamically taking into account the device orientation. The images are prepared by the designer during the development process so that they fit the targetted device aspect ratios. Since there could be many aspect ratios that correspond to different devices we should have multiple such images (and their rotated versions, if the app supports both portrait and landscape.)
 
-The following is a table that maps known device aspect ratios (for iPhone and Android) to the ratio of width/height for both landscape and portrait device orientations. The width/height ratios below assume landscape mode. The device aspect ratio does not change with orientation, but we need to have two images per device aspect ratio, one for portrait mode and another for landscape mode.
+The following is a table that maps some common device aspect ratios (for iPhone and Android) to the ratio of width/height for both landscape and portrait device orientations. The width/height ratios below assume landscape mode. The device aspect ratio does not change with orientation, but we need to have two images per device aspect ratio, one for portrait mode and another for landscape mode.
 
-| Aspect Ratio | Width/Height Ratio (landscape) 
-| :---: | :---:
-| '16:9' | 1.77 
-| '16:10' | 1.6 
-| '3:2' | 1.5 
-| '4:3' | 1.33 
-| '1:1' | 1 
+| Aspect Ratio | Width | Height | Width/Height Ratio (landscape) | Devices 
+| :---: | :---: | :---: | :---: | :---: | 
+| '16:9' | 1.77 | 568 | 320 | iPhone 5
+| '16:9' | 1.77 | 667 | 375 | iPhone 6 & 7
+| '16:9' | 1.77 | 736 | 414 | iPhone 6 Plus & 7 Plus
+| '16:10' | 1.6 | ? | ? | ? 
+| '3:2' | 1.5 | 480 | 320 | iPhone 4
+| '4:3' | 1.33 | 1024 | 768 | iPad Mini, iPad Air and small iPad Pro
+| '4:3' | 1.33 | 1366 | 1024 | Large iPad Pro
+| '1:1' | 1 | ? | ? | ?
 
-| Aspect Ratio | Width/Height Ratio (portrait)
-| :---: | :---: 
-'16:9' | 0.56  
-'16:10' | 0.625 
-'3:2' | 0.66 
-'4:3' | 0.75 
-'1:1' | 1 
-
-**iPhone (Landscape)**
-- 480 x 320 points --> 1.5 --> 3:2	(iPhone 4, in landscape mode)
-- 568 x 320 points --> 1.77 --> 16:9	(iPhone 5, in landscape mode)
-- 667 x 375 points --> 1.77 --> 16:9 (iPhone 6/7, in landscape mode)
-- 736 x 414 points --> 1.77 --> 16:9 (iPhone 6/7 Plus, in landscape mode)
-
-**iPhone (portrait)**
-- 320 x 480 points --> 0.66 --> 3:2	(iPhone 4, in portrait mode)
-- 320 x 568 points --> 0.56  --> 16:9	(iPhone 5, in portrait mode)
-- 375 x 667 points --> 0.56  --> 16:9 (iPhone 6/7, in portrait mode)
-- 414 x 736 points --> 0.56  --> 16:9 (iPhone 6/7 Plus, in portrait mode)
-
-**iPad (landscape)**
-- 1024 x 768 points	--> 1.33 --> 4:3 (iPad Mini, iPad Air and small iPad Pro, landscape)
-- 1366 x 1024 points --> 1.33 --> 4:3 (Large iPad Pro, landscape)
-
-**iPad (Portrait)**
-- 768 x 1024 points	--> 0.75 --> 4:3 (iPad Mini, iPad Air and small iPad Pro, portrait)
-- 1024 x 1366 points --> 0.75 --> 4:3 (Large iPad Pro, portrait)
+| Aspect Ratio | Width | Height | Width/Height Ratio (portrait) | Devices
+| :---: | :---: | :---: | :---: | :---: | 
+| '16:9' | 0.56 | 320 | 568 | iPhone 5
+| '16:9' | 0.56 | 375 | 667 | iPhone 6 & 7
+| '16:9' | 0.56 | 414 | 736 | iPhone 6 Plus & 7 Plus
+| '16:10' | 1.6 | ? | ? | ? 
+| '3:2' | 1.5 | 320 | 480 | iPhone 4
+| '4:3' | 1.33 | 768 | 1024 | iPad Mini, iPad Air and small iPad Pro
+| '4:3' | 1.33 | 1024 | 1366 | Large iPad Pro
+| '1:1' | 1 | ? | ? | ?
 
 **Example**
 
