@@ -67,7 +67,7 @@ export default class Row extends React.Component {
 
   wrapState = this.props.wrap ? 'wrap' : 'nowrap'
 
-  height = (this.props.style && this.props.style.height !== undefined) ? this.props.style.height : (this.props.fullHeight ? '100%' : undefined)
+  height = this.props.fullHeight ? '100%' : (this.props.style && this.props.style.height !== undefined) ? this.props.style.height : null
 
   render() {
 

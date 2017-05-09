@@ -13,13 +13,14 @@ When it comes to building responsive and Universal apps with React Native, the l
 
 ## Introduction
 
-You may use this grid to build responsive 2D layouts that maintain _OR_ predictably change their relative proportions, basic structure and what content they display based on screen size, aspect ratio and orientation.  
+You may use this grid to build responsive 2D layouts that maintain their relative proportions and predictable change their basic structure and what content they display, based on screen size, aspect ratio, and orientation.  
 
 ## [>> aspectRatio demo <<](https://www.youtube.com/watch?v=Nghqc5QFln8)
+## [>> responsive break points demo <<](https://www.youtube.com/watch?v=GZ1uxWEVAuQ)
 
-The demo in the video above shows some of those abilities, and this grid is capable of far more (see Props and Usage sections.) 
+The demos in the videos above show some of the possibilities, but this grid is capable of far more complex responsive behavior, using a sinmple set of rules (see Props and Usage sections.) 
 
-The grid can pick the image with the **closest aspect ratio** to the device aspect ratio, dynamically, taking into account the current device orientation. The images themselves must be cropped by the designer so that they match the common device aspect ratios (see below) while also showing the part of the image that the designer intends to show for each aspect ratio. Since there could be many aspect ratios that correspond to different devices we should have multiple such images (and, optionally, their rotated versions.)
+In the first demo, the grid picks the image with the **closest aspect ratio** to the device aspect ratio, dynamically, taking into account the current device orientation. The images themselves must be cropped by the designer so that they match the common device aspect ratios (see below) while also showing the part of the image that the designer intends to show for each aspect ratio. Since there could be many aspect ratios that correspond to different devices we should have multiple such images (and, optionally, their rotated versions.)
 
 The following table maps some common device aspect ratios to the ratio of width/height of devices known to this developer, for both landscape and portrait device orientations. The physical device aspect ratio does not change with device rotation (i.e. a device with 16:9 aspect ratio does not become one with a 9:16 aspect ratio when it's rotated, although it does mathematically), but since the width and height get flipped when changing orientation from portrait to lanscape and vice versa, we need to have two images per each physical device aspect ratio, one for portrait mode and the other for landscape. However, if our app only supports portrait or landscape mode then we only need to have the one corresponding to that orientation. 
 
@@ -69,16 +70,56 @@ The following table maps some common device aspect ratios to the ratio of width/
       </Col>
     </Row>
 ```
-
 -
+
+In the second demo, the grid folds columns in a row that has been tagged with 'wrap' prop using the, using the screen-device-depebdent `breakPoints` prop on the column. This means that different break points can be supplied for the different screen sizes. 
+
+The following are the screen width thresholds:
+
+- sm: <= 480px 
+- md: > 480 and < 1024
+- lg: >= 1024 and < 1366
+- xl: >= 1366 
+
+**Example**
+
+```
+    <Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={80} offset={6} >
+
+          <Row wrap>
+            <Col size={50} breakPoints={{sm: 200}}>
+              <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
+              <Row>
+                <Col size={5}>
+                  <FontAwesome name='shopping-cart' size={17} color='gray'/>
+                </Col>
+                <Col size={60} offset={2.5}>
+                  <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
+                </Col>
+              </Row>
+            </Col>
+            <Col size={50} breakPoints={{sm: 200}}>
+              <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
+              <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>
+            </Col> 
+          
+          </Row>    
+
+        </Col>
+        <Col size={14} offset={-6} hAlign='right'>
+              <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
+        </Col>
+    </Row>
+```
 
 ## Principles
 
-### _Embracing Simplicity_
+### _Percebntage-based Grid_
 
-This grid fixes the mental model for grid based layouts by abandoning the format-based, columns-per-view approach (e.g. "12 column grid") and instead allowing the developer to specify the width of each grid column as a percentage of parent view's size, so 10% meams 10 column grid, and 8.333% means a 12 column grid etc. But let's not think in terms of columns per grid! That is a visual formatting model, not a layout system. There is no reason for a grid to be 11, 12, 13, 14, 15 or 16.6 columns. The number should be determined by actual layout needs, not by some fixed grid template. Plus, all other style measurements are done using percentages when making layouts that respond [predictably] to layout change, so why should we measure column width as n:12 (or n:11 etc) and yet measure everything else as n:100? It's time to fix this decoherence and move beyond the fixed-column grid toward a free-form layout model, one that allows us to leverage grid behavior but in a simple way.
+This grid fixes the mental model for grid based layouts by abandoning the format-based, columns-per-view approach (e.g. "12 column grid") and instead allowing the developer to specify the width of each grid column as a percentage of parent view's size, so 10% meams 10 column grid, and 8.333% means a 12 column grid etc. But let's not think in terms of columns per grid! That is a visual formatting model, not a layout system. There is no reason for a grid to be 11, 12, 13, 14, 15 or 16.6 columns. The number should be determined by actual layout needs, not by some fixed grid template. Plus, all other style measurements are done using percentages when making layouts that respond [predictably] to layout change, so why should we measure column width as n:12 (or n:11 etc) and yet measure everything else as n:100? It's time to fix this decoherence and move beyond the fixed-column grid toward a free-form layout model, one that allows us to leverage the consistent, repeatable, and nestable grid structure of Rows and Columns, but in a more fluid and mathematically simple way. 
 
-### _Eschewing Complexity_
+### _Simplicity over Complexity_
 
 While most React Native developers use `flex: n` (which is based on Facebook's Yoga layout algorithm) rather than the confusing mess of `flexGrow`, `flexShrink` and `flexBasis` (lots has been written about the Flexbox spec and its steep learning curve, e.g. [flex-grow is weird. Or is it?](https://css-tricks.com/flex-grow-is-weird/)) there is still a fundamental problem with using `flex: n` since n is not a percentage of the parent view's computed or explicit width or height (as percentages are in CSS) but a comparative size factor! It's much easier to say the parent view's width or height is 100% and divide that however we like, e.g. 20%, 35% and 45% than to specify n as 0.2, 0.35 and 0.45 because the latter set of values do not correspond to percentages. You can see that by adding a fourth item with some value, e.g. 0.5, which will cause all four elements to be contained in the full width or full height of the parent (width or height depends on parent's flexDirection) so n=0.2 no longer means 20% and n=0.5 no longer means 50%. It just means that the fourth item we added is 2.5 (0.5 divided by 0.2) times wider or taller than the first item. We lose perspective on the item size relative to the size of its parent as Flexbox is concerned with the item sizes relative to each other rather that the size of each item relative to a single parent. It's like O(n) vs O(n^2) complexity for these two different sizing models in that instead of relating the size of each item to the size of its parent as a percentage (n steps), with `flex: n` we relate the size of each item to the size of each other (sibling) item (n^2 steps.) That's because we don't have a single scale (parent's width or height) to measure against. More importantly, we give up direct knowledge of each item's width as a percentage of the parent's width in favor of having comparative size factors for the sibling items. However, there are times when we'd like to have that, so this grid does not take that ability away from us. In fact, this grid relies heavily (under the hood) on Flexbox features like justifyContent, alignItems, and alignContent, but it uses combines them with a much simpler  percentage-based layout. This results in a layout system that is simple, predictable and powerful.
 
@@ -86,17 +127,18 @@ While most React Native developers use `flex: n` (which is based on Facebook's Y
 
 Sometimes, we lay things out from left to right (LTR.) Other times, we might find it easier to lay things out from right to left (RTL.) I've found that RTL support to be generally lacking in both React and React Native grids, so I've added support for it. React makes it really simple. This can be very useful for apps with right-to-left text, i.e. Arabic, Aramaic, Azeri, Dhivehi/Maldivian, Hebrew, Kurdish (Sorani), Persian/Farsi, and Urdu.
 
-### _Consistent, Repeatable, Nestable_
+### _Consistency, Repeatability, Nestability_
 
-To keep the grid's structure and design simple (as well as logical and consistent) Rows may not contain other Rows as children (they must be wrapped in a Column inside the row) and Columns may not contain other columns as children (they must be wrapped in a Row inside the column) 
+To keep the grid's structure and design simple (as well as logical and consistent) Rows may not contain other Rows as children. They must be wrapped in a Column inside the row) and Columns may not contain other columns as children. They must be wrapped in a Row inside the column.
 
-### _Dynamic Resoponse_
+Columns have `position: 'relative'` enforced by design to enforce the basic grid structure. They can be made to overlap in the row direction using negative offsets. Rows have `position: 'relative'` by default, but can also be positioned absolutely.   
 
-Being able to readt to layout changes, including changes due to device rotation (for apps that allow it), is a key aspect of responsive design. This grid enables dynamic layouts (see the demos at the start of this Readme) 
+If you'd like to build apps that respond to layout changes (due to device oriehtation and aspect ratio changes or any change in the computed or explicit width of the column), all responsive Columns must be contained in a Row. 
 
-**Note**
+### _Dynamic Structure_
 
-If you'd like to build apps that respond to layout changes (due to device oriehtation and aspect ratio changes or any change in the computed or explicit width of the column), Columns must be contained in a Row. 
+Being able to readt to layout changes, including changes due to device rotation (for apps that allow it), is a key aspect of responsive design. This grid is designed to enable dynamic response to layout changes (see the demos at the start of this Readme) 
+
 
 ## Terms:
 
@@ -105,19 +147,23 @@ If you'd like to build apps that respond to layout changes (due to device orieht
 
 ## Props
 
+All props are case sensitive.
+
 `aspectRatio` (see Introduction)
+
+`breakPoints` (see Introduction)
 
 `size` may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or explicitly set width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
 
-`sm`, `md`, `lg` and `xl` are device-dependent 'size' values that are applied to columns.
+`smSize`, `mdSize`, `lgSize` and `xlSize` are device-dependent size values that are applied to columns.
 
-`offset`, `smOffset`, `mdOffset`, `lgOffset` and `xlOffset` - may be applied to Column. Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or explicitly set width. Offset values can also be negative. Default is 0. 
+`offset` may be applied to Column. Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or explicitly set width. Offset values can also be negative. Default is 0. 
+
+`smOffset`, `mdOffset`, `lgOffset` and `xlOffset` are device-dependent offset values that are applied to columns.
 
 _Using offset values in RTL mode moves things from right to left. Using them in normal LTR mode moves things from left to right. It's pretty normal to expect that. If you're working in both directions, this makes offsets more useful than using marginLeft or marginRight directly._
 
 `smHidden`, `mdHidden`, `lgHidden` and `xlHidden` - may be applied to Column. This tells the grid to hide certain columns based on the current width of the screen.  
-
-`aspectRatio` maybe applied to Column. The grid computes the current aspect ratio of the device (which reverses with orientation) and based on that excludes from display any columns that have an `aspectRatio` prop that has a different aspect ratio. If no `aspectRatio` is supplied the column will be displayed at all aspect ratios.
 
 `vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: middle, top, bottom, space and distribute. Default is top.
 
@@ -141,13 +187,13 @@ These make up the basic rules. As you can see the number of rules is far fewer t
 
 ## Usage
 
-There are five 'size' props for `Column` that determine its width as a percentage. The values are indicated by `size`, `sm`, `md`, `lg` and `xl`. The first one, `size`, applies to all screen sizes. The others apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively. 
+There are five 'size' props for `Column` that determine its width as a percentage. The values are indicated by `size`, `smSize`, `mdSize`, `lgSize` and `xlSize`. The first one, `size`, applies to all screen sizes. The others apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively. 
 
 There are five 'offset' props for `Column` that determine it's offset as a percentage (from left in case of LTR and from right in case of RTL.) The values are indicated by `offset`, `smOffset`, `mdOffset`, `lgOffset` and `xlOffset`. The first one, `offset`, applies to all screen sizes. The others apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively. Unlike size values, offset values can be positive _or_ negative.
 
 There are four 'hidden' props for `Column` that determine whether the column is displayed or not at the given screen size. This is indicated by `smHidden`, `mdHidden`, `lgHidden` and `xlHidden`.  They apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively.
 
-The size-specific _size_ props (sm, md, lg, and xl), the size-specific _offset_ props (smOffset, mdOffset, lgOffset and xlOffset) and the size-specific _hidden_ props (smHidden, mdHidden, lgHidden, xlHidden) props refer to the effective screen width, which changes with orientation. 
+The screen-size-specific _size_ props (sm, md, lg, and xl), the screen-size-specific _offset_ props (smOffset, mdOffset, lgOffset and xlOffset) and the screen-size-specific _hidden_ props (smHidden, mdHidden, lgHidden, xlHidden) props refer to the effective screen width, which changes with orientation. 
 
 The following are the screen width thresholds for these props:
 
@@ -162,7 +208,7 @@ Examples:
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
 <Row>
-    <Col sm={50} md={33.333} lg={25}>
+    <Col smSize={50} mdSize={33.333} lgSize={25}>
         <Text>First Column</Text>
     </Col>
 </Row>

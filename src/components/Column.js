@@ -73,6 +73,34 @@ export default class Column extends React.Component {
 
       const screenInfo = ScreenInfo()
 
+      const flex =  this.props.style && this.props.style.flex !== undefined ? 
+                  this.props.style.flex : undefined
+
+      const width = this.props.fullWidth ? '100%' : 
+                (this.props.style && this.props.style.width !== undefined ? 
+                  this.props.style.width : undefined)
+
+      const minWidth =  this.props.style && this.props.style.minWidth !== undefined ? 
+                  this.props.style.minWidth : undefined
+
+      const style = {
+                    flex: this.props.breakPoints &&  
+                            this.props.breakPoints[screenInfo.mediaSize] !== undefined ? 
+                              -1 : flex,
+                    width: this.props.size || this.props[screenInfo.mediaSize + 'Size'] !== undefined ?
+                              getColumnWidth(screenInfo.mediaSize, this.props) : 
+                              width,
+                    minWidth: this.props.breakPoints && 
+                                this.props.breakPoints[screenInfo.mediaSize] !== undefined ? 
+                                  this.props.breakPoints[screenInfo.mediaSize] : minWidth,
+                    flexDirection: 'column',
+                    marginLeft: this.props.rtl ? 0 : getColumnOffset(screenInfo.mediaSize, this.props),
+                    marginRight: this.props.rtl ? getColumnOffset(screenInfo.mediaSize, this.props) : 0,
+                    alignItems: this.align_X,
+                    justifyContent: this.align_Y,
+                    position: 'relative'
+                  }
+
       if (isHidden(screenInfo.mediaSize, this.props) || 
           isExcludedByAspectRatio(this.props, screenInfo.aspectRatio)){
         return null;
@@ -85,17 +113,7 @@ export default class Column extends React.Component {
                   }
                 }
                 ref={component => this._root = component} {...rest}
-                style={[
-                  this.props.style, {
-                    width: (this.props.style && this.props.style.width !== undefined) ? 
-                            this.props.style.width : 
-                            (this.props.fullWidth ? '100%' : getColumnWidth(screenInfo.mediaSize, this.props)),
-                    flexDirection: 'column',
-                    marginLeft: this.props.rtl ? 0 : getColumnOffset(screenInfo.mediaSize, this.props),
-                    marginRight: this.props.rtl ? getColumnOffset(screenInfo.mediaSize, this.props) : 0,
-                    alignItems: this.align_X,
-                    justifyContent: this.align_Y
-                  }]}>
+                style={[this.props.style, style]}>
                     {validateElements(rest)}
               </View>
           )

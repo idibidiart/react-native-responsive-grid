@@ -5,13 +5,13 @@ import { Dimensions } from 'react-native';
 const isHidden = (screenSize, props) => {
 
   switch(screenSize) {
-    case 'small':
+    case 'sm':
       return props.smHidden ? true : false;
-    case 'medium':
+    case 'md':
       return props.mdHidden ? true : false;
-    case 'large':
+    case 'lg':
       return props.lgHidden ? true : false;
-    case 'xlarge':
+    case 'xl':
       return props.xlHidden ? true : false;
     default:
       return false;
@@ -32,36 +32,36 @@ const toPercent = (num) => num + '%';
 const getColumnWidth = (screenSize, props) => {
 
   switch(screenSize) {
-    case 'small':
-      if (props.sm) {
-        return toPercent(Math.max(props.sm, 0));
+    case 'sm':
+      if (props.smSize) {
+        return toPercent(Math.max(props.smSize, 0));
       } else if (props.size !== undefined) {
         return toPercent(Math.max(props.size, 0));
       } else {
         return undefined
       }
 
-    case 'medium':
-      if (props.md) {
-        return toPercent(Math.max(props.md, 0));
+    case 'md':
+      if (props.mdSize) {
+        return toPercent(Math.max(props.mdSize, 0));
       } else if (props.size !== undefined)  {
         return toPercent(Math.max(props.size, 0));
       } else {
         return undefined
       }
 
-    case 'large':
-      if (props.lg) {
-        return toPercent(Math.max(props.lg, 0));
+    case 'lg':
+      if (props.lgSize) {
+        return toPercent(Math.max(props.lgSize, 0));
       } else if (props.size !== undefined) {
         return toPercent(Math.max(props.size, 0));
       } else {
         return undefined
       }
 
-    case 'xlarge':
-      if (props.xl) {
-        return toPercent(Math.max(props.xl, 0));
+    case 'xl':
+      if (props.xlSize) {
+        return toPercent(Math.max(props.xlSize, 0));
       } else if (props.size !== undefined) {
         return toPercent(Math.max(props.size, 0));
       } else {
