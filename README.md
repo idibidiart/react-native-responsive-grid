@@ -340,57 +340,78 @@ Remember that paddingTop and marginTop when given as percentages are percentages
       </Col>
   </Row>
 
-  <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={60} offset={6} >
-        <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
-        <Row >
-          <Col size={5}>
-            <FontAwesome name='shopping-cart' size={17} color='gray'/>
+  <Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={80} offset={6} >
+
+        <Row wrap>
+          <Col size={50} breakPoints={{sm: 200}}>
+            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
+            <Row>
+              <Col size={5}>
+                <FontAwesome name='shopping-cart' size={17} color='gray'/>
+              </Col>
+              <Col size={60} offset={2.5}>
+                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
+              </Col>
+            </Row>
           </Col>
-          <Col size={60} offset={2.5}>
-            <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
+          <Col size={50} breakPoints={{sm: 200}}>
+            <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
+            <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>
+          </Col> 
+        
+        </Row>    
+
+      </Col>
+      <Col size={14} offset={-6} hAlign='right'>
+            <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
+      </Col>
+  </Row>
+
+  <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={80} offset={6}>
+        <Row wrap>
+          <Col size={50} breakPoints={{sm: 200}}>
+            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 8, 2017</Text>
+            <Row >
+              <Col size={5}>
+                <FontAwesome name='cutlery' size={17} color='gray'/>
+              </Col>
+              <Col size={60} offset={2.5}>
+                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>DINE-IN ORDER</Text>
+              </Col>
+            </Row>
+          </Col>
+          <Col size={50} breakPoints={{sm: 200}}>
+            <Text style={{fontSize: 16, color: '#0a0a0a'}}>Linguini Alfredo</Text> 
           </Col>
         </Row>
-        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
-        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>                                                                             
       </Col>
-      <Col size={34} offset={-6} hAlign='right'>
+      <Col size={14} offset={-6} hAlign='right'>
             <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
       </Col>
   </Row>
 
   <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={60} offset={6}>
-          <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 8, 2017</Text>
-          <Row >
-            <Col size={5}>
-              <FontAwesome name='cutlery' size={17} color='gray'/>
-            </Col>
-            <Col size={60} offset={2.5}>
-              <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>DINE-IN ORDER</Text>
-            </Col>
-          </Row>
-        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Linguini Alfredo</Text>                                                                          
+      <Col size={80} offset={6}>
+        <Row wrap>
+          <Col size={50} breakPoints={{sm: 200}}>      
+            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
+            <Row>
+              <Col size={5}>
+                <FontAwesome name='cutlery' size={17} color='gray'/>
+              </Col>
+              <Col size={60} offset={2.5}>
+                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
+              </Col>
+            </Row>
+          </Col>
+          <Col size={50} breakPoints={{sm: 200}}>
+            <Text style={{fontSize: 16, color: '#0a0a0a'}}>Double Cheese Burger</Text>                                                                          
+          </Col>
+        </Row>
       </Col>
-      <Col size={34} offset={-6} hAlign='right'>
-            <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
-      </Col>
-  </Row>
-
-  <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={60} offset={6}>
-          <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
-          <Row>
-            <Col size={5}>
-              <FontAwesome name='cutlery' size={17} color='gray'/>
-            </Col>
-            <Col size={60} offset={2.5}>
-              <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
-            </Col>
-          </Row>
-        <Text style={{fontSize: 16, color: '#0a0a0a'}}>Double Cheese Burger</Text>                                                                          
-      </Col>
-      <Col size={34} offset={-6} hAlign='right'>
+      <Col size={14} offset={-6} hAlign='right'>
             <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
       </Col>
   </Row>
