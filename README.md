@@ -9,7 +9,7 @@ In your project folder, `yarn add react-native-responsive-grid`
 
 ## Background
 
-When it comes to building responsive and Universal apps with React Native, the lack of a performant, declarative way for specifying relative size info used to be a major issue. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made responsive grids that take advantage of percentage-based layout. I've taken one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and made some significabnt changes and enhancements to it that have resulted in a simple yet powerful layout model.
+When it comes to building responsive and Universal apps with React Native, the lack of a performant, declarative way for specifying relative size info used to be a major issue. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made responsive grids that take advantage of its performant, percentage-based layout capability. I've taken one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and made some significabnt changes and enhancements to it that have resulted in a simple yet powerful layout model.
 
 ## Introduction
 
