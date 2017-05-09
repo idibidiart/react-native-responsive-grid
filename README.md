@@ -18,7 +18,7 @@ You may use this grid to build responsive 2D layouts that maintain their relativ
 ## [aspectRatio demo](https://www.youtube.com/watch?v=Nghqc5QFln8)
 [![>> aspectRatio demo <<](https://img.youtube.com/vi/Nghqc5QFln8/0.jpg)](https://www.youtube.com/watch?v=Nghqc5QFln8)
 
-## [responsive break points demo](https://www.youtube.com/watch?v=GZ1uxWEVAuQ) 
+## [breakPoints demo](https://www.youtube.com/watch?v=GZ1uxWEVAuQ) 
 [![>> responsive break points demo <<](https://img.youtube.com/vi/GZ1uxWEVAuQ/0.jpg)](https://www.youtube.com/watch?v=GZ1uxWEVAuQ)
 
 The demos in the videos above show some of the possibilities, but this grid is capable of far more complex responsive behavior, using a sinmple set of rules (see Props and Usage sections.) 
