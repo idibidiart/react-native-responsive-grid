@@ -1,5 +1,5 @@
 
-# Dynamic, Responsive Grid-based Layout for Universal and Orientation-Aware React Native Apps 
+# Dynamic, Responsive Layout for Universal and Orientation-Aware React Native Apps 
 
 ### Install
 
