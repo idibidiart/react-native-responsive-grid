@@ -134,7 +134,7 @@ Sometimes, we lay things out from left to right (LTR.) Other times, we might fin
 
 To keep the grid's structure and design simple (as well as logical and consistent) Rows may not contain other Rows as children. They must be wrapped in a Column inside the row) and Columns may not contain other columns as children. They must be wrapped in a Row inside the column.
 
-Columns have `position: 'relative'` enforced by design to enforce the basic grid structure. They can be made to overlap in the row direction using negative offsets. Rows have `position: 'relative'` by default, but can also be positioned absolutely.   
+Columns have `position: 'relative'` enforced by design to keep columns within the layout flow. They can be moved about within their parent row using margins and/or offsets. They can be made to overlap within the row using negative offsets, or across rows using negative margins. The intent is to allow movement of columns without taking the columns out of the layout flow. This is required to be able to react to layout changes. Rows, on the other hand, have `position: 'relative'` by default but can also be positioned absolutely.   
 
 If you'd like to build apps that respond to layout changes (due to device oriehtation and aspect ratio changes or any change in the computed or explicit width of the column), all responsive Columns must be contained in a Row. 
 
