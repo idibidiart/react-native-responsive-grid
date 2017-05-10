@@ -9,7 +9,7 @@ In your project folder, `yarn add react-native-responsive-grid`
 
 ## Background
 
-When it comes to building responsive and Universal apps with React Native, the lack of a performant, declarative way for specifying relative size info used to be a major issue. Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made responsive grids that take advantage of its performant, percentage-based layout capability. I've taken one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and made some significabnt changes and enhancements to it that have resulted in a simple yet powerful layout model.
+When it comes to building responsive and Universal apps with React Native, the lack of a performant, declarative way for specifying relative size info used to be the problem.Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made responsive grids that take advantage of its performant, percentage-based layout capability. I've taken one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and made some significabnt changes and enhancements to it that have resulted in a simple yet powerful layout model.
 
 ## Introduction
 
@@ -132,7 +132,7 @@ Sometimes, we lay things out from left to right (LTR.) Other times, we might fin
 
 ### _Consistency, Repeatability, Nestability_
 
-To keep the grid's structure and design simple (as well as logical and consistent) Rows may not contain other Rows as children. They must be wrapped in a Column inside the row) and Columns may not contain other columns as children. They must be wrapped in a Row inside the column. The "grid" construct has been redued to its essence here, which is a fractal pattern. 
+To keep the grid's structure and design simple (as well as logical and consistent) Rows may not contain other Rows as children. They must be wrapped in a Column inside the row) and Columns may not contain other columns as children. They must be wrapped in a Row inside the column. The "grid" construct has been redued to its essence here, which is a composition of Rows and Columns. We can even generate fractal shapes starting with a density matrix and using recursive replication. 
 
 ### _Dynamic Structure_
 
