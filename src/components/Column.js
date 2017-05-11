@@ -25,10 +25,6 @@ export default class Column extends React.Component {
       this._root.setNativeProps(nativeProps);
     }
 
-    componentWillUnmount() {
-      cancelAnimationFrame(this.props.parentAnimationFrame)
-    }
-
     static propTypes = {
       sm: PropTypes.number,
       smOffset: PropTypes.number,
