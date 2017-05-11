@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 import {ScreenInfo} from '../lib/ScreenInfo';
 import {isHidden, isExcludedByAspectRatio, getColumnWidth, getColumnOffset} from '../lib/helpers';
-import {View, DeviceEventEmitter} from 'react-native';
+import {View} from 'react-native';
 
 const validateElements = (props) => {
     return React.Children.map(props.children, (element) => {
@@ -23,6 +23,10 @@ export default class Column extends React.Component {
 
     setNativeProps = (nativeProps) => {
       this._root.setNativeProps(nativeProps);
+    }
+
+    componentWillUnmount() {
+      cancelAnimationFrame(this.props.parentAnimationFrame)
     }
 
     static propTypes = {
@@ -67,7 +71,6 @@ export default class Column extends React.Component {
         rtl,
         fullWidth,
         aspectRatio,
-        eventKey,
         ...rest
       } = this.props;
 
@@ -108,10 +111,6 @@ export default class Column extends React.Component {
         try {
           return (
               <View 
-                onLayout={(e)=> {
-                       DeviceEventEmitter.emit('layout_change_' + this.props.eventKey)
-                  }
-                }
                 ref={component => this._root = component} {...rest}
                 style={[this.props.style, style]}>
                     {validateElements(rest)}

@@ -2,38 +2,27 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {ScreenInfo} from '../lib/ScreenInfo';
 import {isHidden} from '../lib/helpers';
-import {View, DeviceEventEmitter} from 'react-native';
-
-const cloneElements = (props, eventKey) => {
-    const rtl = props.rtl 
-
-    return React.Children.map((rtl ? React.Children.toArray(props.children).reverse() : props.children), (element) => {
-      if (!element) return null
-      if (element.type.name === 'Row') {
-          throw new Error("Row may not contain other Rows as children. Child Rows must be wrapped in a Column.")
-      }
-      return React.cloneElement(element, {rtl, eventKey})
-    })
-}
+import {View, DeviceEventEmitter, InteractionManager} from 'react-native';
 
 export default class Row extends React.Component {
   constructor(props, context) {
       super (props, context)
-
-      this.eventKey =  +new Date() + "_" + Math.random()
-
-      this.animationHandle 
-      this.sub = DeviceEventEmitter.addListener('layout_change_' + this.eventKey, (e) => {
-          cancelAnimationFrame(this.animationHandle)
-          this.animationHandle = requestAnimationFrame(() => {
-              this.setState({layoutTriggered: +new Date()})
-          })
-      })
+      this.animationFrame
   }
 
-  componentWillUnmount() {
-      this.sub.remove()
-      cancelAnimationFrame(this.animationHandle)
+  cloneElements = (props) => {
+    const rtl = props.rtl 
+
+    return React.Children.map((rtl ? React.Children.toArray(props.children).reverse() : props.children), (element) => {
+      if (!element) return null
+      if (element.type && element.type.name === 'Row') {
+          throw new Error("Row may not contain other Rows as children. Child Rows must be wrapped in a Column.")
+      } else if (element.type && element.type.name !== 'Column') {
+        return element
+      } else {
+        return React.cloneElement(element, {rtl})
+      }
+    })
   }
 
   setNativeProps = (nativeProps) => {
@@ -87,6 +76,13 @@ export default class Row extends React.Component {
     try {
         return (
             <View 
+              onLayout={(e)=> {
+                  InteractionManager.runAfterInteractions(() => {
+                    this.setState({layoutTriggered: +new Date()})
+                    DeviceEventEmitter.emit("gridLayoutChange", ScreenInfo())
+                  })
+                }
+              }
               ref={component => this._root = component} {...rest}
               style={[this.props.style,
                       { 
@@ -97,7 +93,7 @@ export default class Row extends React.Component {
                         justifyContent: this.align_X,
                         height: this.height
                       }]}>
-                {cloneElements(this.props, this.eventKey)}
+                {this.cloneElements(this.props)}
             </View>
         )
     } catch (e) {

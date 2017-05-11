@@ -62,9 +62,18 @@ const setScreenInfo = (onlySize) => {
         currentOrientation = "portrait"
     }
 
-    return {mediaSize, aspectRatio: {currentNearestRatio, currentOrientation}}
+    return {
+            mediaSize, 
+            width: SCREEN_WIDTH, 
+            height: SCREEN_HEIGHT, 
+            aspectRatio: {currentNearestRatio, currentOrientation}
+          }
   } else {
-    return {mediaSize}
+    return {
+            mediaSize,
+            width: SCREEN_WIDTH, 
+            height: SCREEN_HEIGHT 
+        }
   }
 }
 
