@@ -7,7 +7,6 @@ import {View, DeviceEventEmitter, InteractionManager} from 'react-native';
 export default class Row extends React.Component {
   constructor(props, context) {
       super (props, context)
-      this.animationFrame
   }
 
   cloneElements = (props) => {

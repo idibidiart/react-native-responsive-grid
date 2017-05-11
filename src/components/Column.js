@@ -18,7 +18,6 @@ const validateElements = (props) => {
 export default class Column extends React.Component {
     constructor (props) {
         super(props)
-        this.state = {_id: +new Date() * Math.random()}
     }
 
     setNativeProps = (nativeProps) => {
