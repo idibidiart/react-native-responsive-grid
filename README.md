@@ -132,7 +132,7 @@ Sometimes, we lay things out from left to right (LTR.) Other times, we might fin
 
 ### _Consistency, Repeatability, Nestability_
 
-To keep the grid's structure and design simple (as well as logical and consistent) Rows may not contain other Rows as children. They must be wrapped in a Column inside the row) and Columns may not contain other columns as children. They must be wrapped in a Row inside the column. The "grid" construct has been redued to its essence here, which is a composition of Rows and Columns. We can even generate fractal shapes starting with a density matrix and using recursive replication. 
+To keep the grid's structure and design simple (as well as logical and consistent) Rows may not contain other Rows as children. They must be wrapped in a Column inside the row) and Columns may not contain other columns as children. They must be wrapped in a Row inside the column. The "grid" construct has been redued to its essence here, which is a composition of Rows and Columns. We can even generate fractal shapes starting with a binary matrix and using recursive replication. 
 
 ### _Dynamic Structure_
 
