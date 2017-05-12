@@ -25,77 +25,92 @@ export default class Column extends React.Component {
     }
 
     static propTypes = {
-      sm: PropTypes.number,
+      smSize: PropTypes.number,
       smOffset: PropTypes.number,
       smHidden: PropTypes.bool,
-      md: PropTypes.number,
+      mdSize: PropTypes.number,
       mdOffset: PropTypes.number,
       mdHidden: PropTypes.bool,
-      lg: PropTypes.number,
+      lgSize: PropTypes.number,
       lgOffset: PropTypes.number,
       lgHidden: PropTypes.bool,
+      xlSize: PropTypes.number,
+      xlOffset: PropTypes.number,
+      xlHidden: PropTypes.bool,
       size: PropTypes.number,
       offset: PropTypes.number,
       vAlign: PropTypes.string,
       hAlign: PropTypes.string,
       fullWidth: PropTypes.bool,
-      aspectRatio: PropTypes.object 
+      fullHeight: PropTypes.bool,
+      aspectRatio: PropTypes.object,
+      breakPoints: PropTypes.object 
     }
-
-    // top/flex-start is default
-    align_Y = (this.props.vAlign === 'middle' ? 'center' : (this.props.vAlign === 'bottom' ? 'flex-end' : (this.props.vAlign === 'space' ? 'space-between' : (this.props.vAlign === 'distribute' ? 'space-around' : 'flex-start'))))
-    // left/flex-start is default
-    align_X = this.props.hAlign == 'stretch' ? 'stretch' : this.props.hAlign === 'center' ? 'center' : (this.props.hAlign === 'right' ? 'flex-end' : 'flex-start')
 
     render() {
 
       const {
         size,
         offset,
-        sm,
+        smSize,
         smOffset,
         smHidden,
-        md,
+        mdSize,
         mdOffset,
         mdHidden,
-        lg,
+        lgSize,
         lgOffset,
         lgHidden,
+        xlSize,
+        xlOffset,
+        xlHidden,
         vAlign,
         hAlign,
         rtl,
         fullWidth,
+        fullHeight,
         aspectRatio,
+        breakPoints,
         ...rest
       } = this.props;
 
       const screenInfo = ScreenInfo()
 
-      const flex =  this.props.style && this.props.style.flex !== undefined ? 
+      this.flex =  this.props.style && this.props.style.flex !== undefined ? 
                   this.props.style.flex : undefined
 
-      const width = this.props.fullWidth ? '100%' : 
+      this.width = fullWidth ? '100%' : 
                 (this.props.style && this.props.style.width !== undefined ? 
                   this.props.style.width : undefined)
+        
+      this.height = fullHeight? '100%' : 
+                (this.props.style && this.props.style.height !== undefined ? 
+                  this.props.style.height : undefined)
 
-      const minWidth =  this.props.style && this.props.style.minWidth !== undefined ? 
+      // top/flex-start is default
+      this.alignY = vAlign === 'middle' ? 'center' : (vAlign === 'bottom' ? 'flex-end' : (vAlign === 'space' ? 'space-between' : (vAlign === 'distribute' ? 'space-around' : 'flex-start')))
+      // left/flex-start is default
+      this.alignX = hAlign === 'stretch' ? 'stretch' : hAlign === 'center' ? 'center' : (hAlign === 'right' ? 'flex-end' : 'flex-start')
+
+      this.minWidth =  this.props.style && this.props.style.minWidth !== undefined ? 
                   this.props.style.minWidth : undefined
 
       const style = {
-                    flex: this.props.breakPoints &&  
-                            this.props.breakPoints[screenInfo.mediaSize] !== undefined ? 
-                              -1 : flex,
-                    width: this.props.size || this.props[screenInfo.mediaSize + 'Size'] !== undefined ?
+                    flex: breakPoints &&  
+                            breakPoints[screenInfo.mediaSize] !== undefined ? 
+                              -1 : this.flex,
+                    width: size || this.props[screenInfo.mediaSize + 'Size'] !== undefined ?
                               getColumnWidth(screenInfo.mediaSize, this.props) : 
-                              width,
-                    minWidth: this.props.breakPoints && 
-                                this.props.breakPoints[screenInfo.mediaSize] !== undefined ? 
-                                  this.props.breakPoints[screenInfo.mediaSize] : minWidth,
+                              this.width,
+                    height: this.height,
+                    minWidth: breakPoints && 
+                                breakPoints[screenInfo.mediaSize] !== undefined ? 
+                                  breakPoints[screenInfo.mediaSize] : this.minWidth,
                     flexDirection: 'column',
-                    marginLeft: this.props.rtl ? 0 : getColumnOffset(screenInfo.mediaSize, this.props),
-                    marginRight: this.props.rtl ? getColumnOffset(screenInfo.mediaSize, this.props) : 0,
-                    alignItems: this.align_X,
-                    justifyContent: this.align_Y,
+                    marginLeft: rtl ? 0 : getColumnOffset(screenInfo.mediaSize, this.props),
+                    marginRight: rtl ? getColumnOffset(screenInfo.mediaSize, this.props) : 0,
+                    alignItems: this.alignX,
+                    justifyContent: this.alignY,
                     position: 'relative'
                   }
 

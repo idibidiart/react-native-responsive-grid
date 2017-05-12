@@ -31,66 +31,72 @@ export default class Row extends React.Component {
   static propTypes = {
     rtl: PropTypes.bool,
     fullHeight: PropTypes.bool,
+    fullWidth: PropTypes.bool,
     wrap: PropTypes.bool,
-    smHidden: PropTypes.bool,
-    mdHidden: PropTypes.bool,
-    lgHidden: PropTypes.bool,
     hAlign: PropTypes.string,
     vAlign: PropTypes.string,
-    alignLines: PropTypes.string
+    alignLines: PropTypes.string,
+    layoutEvent: PropTypes.string
   }
-
-  // left/flex-start is default
-  align_X =  (this.props.hAlign === 'space' ? 'space-between' : (this.props.hAlign === 'distribute' ? 'space-around' : (this.props.hAlign === 'center' ? 'center' : (this.props.hAlign === 'right' ? 'flex-end' : 'flex-start'))))
-  // top/flex-start is default
-  align_Y = this.props.vAlign == 'stretch' ? 'stretch' : this.props.vAlign === 'middle' ? 'center' : (this.props.vAlign === 'bottom' ? 'flex-end' : 'flex-start')
-  
-  align_lines = this.props.wrap && this.props.alignLines && (this.props.alignLines === 'top' ? 
-                                                          'flex-start' : 
-                                                          (this.props.alignLines === 'bottom' ? 'flex-end' : 
-                                                              (this.props.alignLines === 'middle' ? 'center' : 
-                                                                (this.props.alignLines === 'space' ? 'space-between' : 
-                                                                  (this.props.alignLines === 'distribute' ? 'space-around' 
-                                                                    : 'stretch')))))
-
-  wrapState = this.props.wrap ? 'wrap' : 'nowrap'
-
-  height = this.props.fullHeight ? '100%' : (this.props.style && this.props.style.height !== undefined) ? this.props.style.height : null
 
   render() {
 
     const {
       rtl,
       fullHeight,
+      fullWidth,
       wrap,
-      smHidden,
-      mdHidden,
-      lgHidden,
       hAlign,
       vAlign,
       alignLines,
+      layoutEvent,
       ...rest
     } = this.props
+
+    // expose these static props for testing
+    // left/flex-start is default
+    this.alignX =  (hAlign === 'space' ? 'space-between' : (hAlign === 'distribute' ? 'space-around' : (hAlign === 'center' ? 'center' : (hAlign === 'right' ? 'flex-end' : 'flex-start'))))
+    // top/flex-start is default
+    this.alignY = vAlign == 'stretch' ? 'stretch' : vAlign === 'middle' ? 'center' : (vAlign === 'bottom' ? 'flex-end' : 'flex-start')
+    this.alignLines = wrap && alignLines && (alignLines === 'top' ? 
+                                                            'flex-start' : 
+                                                            (alignLines === 'bottom' ? 'flex-end' : 
+                                                                (alignLines === 'middle' ? 'center' : 
+                                                                  (alignLines === 'space' ? 'space-between' : 
+                                                                    (alignLines === 'distribute' ? 'space-around' 
+                                                                      : 'stretch')))))
+    this.wrapState = wrap ? 'wrap' : 'nowrap'
+    this.height = fullHeight ? '100%' : (this.props.style && this.props.style.height !== undefined) ? this.props.style.height : undefined
+    this.width = fullWidth ? '100%' : (this.props.style && this.props.style.width !== undefined) ? this.props.style.width : undefined
 
     try {
         return (
             <View 
               onLayout={(e)=> {
-                  InteractionManager.runAfterInteractions(() => {
-                    this.setState({layoutTriggered: +new Date()})
-                    DeviceEventEmitter.emit("gridLayoutChange", ScreenInfo())
-                  })
+                    e.persist()
+                    InteractionManager.runAfterInteractions(() => {
+                        this.setState({layoutTriggered: +new Date()})
+                        if (layoutEvent) {
+                            DeviceEventEmitter.emit(layoutEvent, {
+                                                      screenInfo: ScreenInfo(), 
+                                                      elementInfo: e.nativeEvent.layout
+                                                      })
+                        }
+                    })
+   
                 }
               }
               ref={component => this._root = component} {...rest}
               style={[this.props.style,
                       { 
                         flexDirection: 'row',
-                        alignContent: this.align_lines, 
+                        alignContent: this.alignLines, 
                         flexWrap: this.wrapState,
-                        alignItems: this.align_Y,
-                        justifyContent: this.align_X,
-                        height: this.height
+                        alignItems: this.alignY,
+                        justifyContent: this.alignX,
+                        height: this.height,
+                        width: this.width,
+                        position: 'relative'
                       }]}>
                 {this.cloneElements(this.props)}
             </View>

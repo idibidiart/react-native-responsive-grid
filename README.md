@@ -21,6 +21,9 @@ You may use this grid to build responsive 2D layouts that maintain their relativ
 ## [breakPoints demo](https://www.youtube.com/watch?v=GZ1uxWEVAuQ) 
 [![>> responsive break points demo <<](https://img.youtube.com/vi/GZ1uxWEVAuQ/0.jpg)](https://www.youtube.com/watch?v=GZ1uxWEVAuQ)
 
+## [layoutEvent demo](https://www.youtube.com/watch?v=99J3c_Zn6QU) 
+[![>> layoutEvent demo <<](https://img.youtube.com/vi/99J3c_Zn6QU/0.jpg)](https://www.youtube.com/watch?v=99J3c_Zn6QU)
+
 The demos in the videos above show some of the possibilities, but this grid is capable of far more complex responsive behavior, using a sinmple set of rules (see Props and Usage sections.) 
 
 In the first demo, the grid picks the image with the **closest aspect ratio** to the device aspect ratio, dynamically, taking into account the current device orientation. The images themselves must be cropped by the designer so that they match the common device aspect ratios (see below) while also showing the part of the image that the designer intends to show for each aspect ratio. Since there could be many aspect ratios that correspond to different devices we should have multiple such images (and, optionally, their rotated versions.)
@@ -116,7 +119,93 @@ The following are the screen width thresholds:
     </Row>
 ```
 
-## Principles
+In the third demo, the grid emits an event from a specific row in the rendered component tree that is subscribed to by the root component (the Home route component in this case.) This allows the Home screen to determine what to render based on both the new screen dimensions and orientation as well as the new computed value for the dimensions and the new computed value parent-child x,y margins/padding for the given row in the rendered component tree. 
+
+**Example**
+
+```
+  import React, { Component} from 'react'
+  import {
+      View,
+      Text,
+      DeviceEventEmitter
+  } from 'react-native'
+
+  import { Row, Column as Col} from './grid'
+
+  export default class Home extends React.Component {
+    constructor (props) {
+      super(props)
+      this.sub = null
+    }
+
+    static route = {
+        navigationBar: {
+          title: 'Home',
+          renderTitle: "Layout Event Demo",
+          backgroundColor: "#fff"
+        }
+      }
+
+    componentWillMount() {
+      this.sub = DeviceEventEmitter.addListener("someEvent", (e) => {
+        this.setState(e)
+      })
+
+    }
+
+    componentWillUnmount() {
+      this.sub.remove()
+    }
+
+    contentReady = () => {
+              if (this.state && this.state.screenInfo && this.state.elementInfo) {
+                return (
+                    <Col fullWidth hAlign='center'>
+                      <Row>
+                        <Text style={{fontSize: 20}}>screen width: {this.state.screenInfo.width}</Text>
+                      </Row>
+                      <Row>
+                        <Text style={{fontSize: 20}}>screen height: {this.state.screenInfo.height}</Text>
+                      </Row>
+                      <Row>
+                        <Text style={{fontSize: 20}}>orientation: {this.state.screenInfo.aspectRatio.currentOrientation}</Text>
+                      </Row>
+                      <Row>
+                        <Text style={{fontSize: 20}}>aspect ratio: {this.state.screenInfo.aspectRatio.currentNearestRatio}</Text>
+                      </Row>
+                      <Row>
+                        <Text style={{fontSize: 20}}>element width: {this.state.elementInfo.width}</Text>
+                      </Row>
+                      <Row>
+                        <Text style={{fontSize: 20}}>element height: {this.state.elementInfo.height}</Text>
+                      </Row>
+                      <Row>
+                        <Text style={{fontSize: 20}}>element x: {this.state.elementInfo.x}</Text>
+                      </Row>
+                      <Row>
+                        <Text style={{fontSize: 20}}>element y: {this.state.elementInfo.y}</Text>
+                      </Row>
+                    </Col>)
+              } else {
+                return null
+              }
+    }
+
+    render() {
+      return (
+        <Row fullHeight fullWidth vAlign='middle' hAlign='center'>
+          <Col size={50} style={{backgroundColor: 'pink', padding: '5%'}}>
+            <Row layoutEvent="someEvent" style={{backgroundColor: 'yellow'}}> 
+              {this.contentReady()}
+            </Row>
+          </Col>
+        </Row>)
+    }
+  }
+``` 
+
+## Basic Principles
 
 ### _Simple Calculations_
 
@@ -132,15 +221,15 @@ Sometimes, we lay things out from left to right (LTR.) Other times, we might fin
 
 ### _Consistency, Repeatability, Nestability_
 
-To keep the grid's structure and design simple (as well as logical and consistent) Rows may not contain other Rows as children. They must be wrapped in a Column inside the row) and Columns may not contain other columns as children. They must be wrapped in a Row inside the column. The "grid" construct has been redued to its essence here, which is a composition of Rows and Columns. We can even generate fractal shapes starting with a binary matrix and using recursive replication. 
+To keep the grid's structure and design simple (as well as logical and consistent) Rows may not contain other Rows as children. They must be wrapped in a Column inside the row) and Columns may not contain other columns as children. They must be wrapped in a Row inside the column. The "grid" construct has been redued to its essence here, which is a composition of Rows and Columns. 
 
-### _Dynamic Structure_
+### _Predictable Dynamic Layout_
 
 Being able to readt to layout changes, including changes due to device rotation (for apps that allow it), is a key aspect of responsive design. This grid is designed to enable dynamic response to layout changes (see the demos at the start of this Readme) 
 
-Columns have `position: 'relative'` enforced by design to keep columns within the layout flow. They can be moved about within their parent row using margins and/or offsets. They can be made to overlap within the row using negative offsets, or across rows using negative margins. The intent is to allow movement of columns without taking the columns out of the layout flow. This is required to be able to react to layout changes. Rows, on the other hand, have `position: 'relative'` by default but can also be positioned absolutely.   
+Columns and Rows have `position: 'relative'` enforced by design to keep them within the layout flow. Each can be moved about within their parent Row and Column, respectively, using top and bottom margins and/or offsets. They can be made to overlap within the row using a negative offset, and overlap across rows using a negative top margin. The intent is to allow movement of rows and columns without taking them out of the layout flow. This is required to work around a Flexbox layout spec glitch/deviation in React Native and to react to make reaction to layout change more predictable.
 
-If you'd like to build apps that respond to layout changes (due to device oriehtation and aspect ratio changes or any change in the computed or explicit width of the column), all responsive Columns must be contained in a Row. 
+Elements, including Column elements, must be wapped in a Row in order for the grid to react to layout changes in those elements, including their mounting, un-mounting and re-mounting. You can decide where the re-rendering happens in the component subtree by placing the `layoutEvent` prop at the desired Row node (see layoutEvent demo markup in Introduction.)
 
 ## Terms:
 
@@ -177,11 +266,11 @@ _Using offset values in RTL mode moves things from right to left. Using them in 
 
 `rtl` may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
 
-`fullHeight` may be supplied as prop to Row. It sets the the row's height to 100% of the computed or explicitly height of its parent view. 
+`fullHeight` may be supplied as prop to Row or Column. It sets the the height to 100% of the computed or explicitly height of its parent view. 
 
-`fullWidth` may be supplied as prop to Column. It sets the the column's width to 100% of the computed or explicitly set width of its parent view. 
+`fullWidth` may be supplied as prop to Row or Column. It sets the the width to 100% of the computed or explicitly set width of its parent view. 
 
-`wrap` may be supplied as prop to Row to wrap any content that is fully beyond the width of the row's computed or explicitly set width. 
+`wrap` may be supplied as prop to Row to wrap any child element that is otherwise rendered fully outside of the width of the row's computed or explicitly set width. 
 
 `alignLines` may be supplied as prop to Row to vertically align the wrapped lines within the Row (not to be confused with the items that are inside each line.) Possible values are: top, middle, bottom, space, distribute, stretch. (See section on Aligning Wrapped Lines within Rows)
 
