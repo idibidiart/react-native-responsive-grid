@@ -1,5 +1,5 @@
 
-# Dynamic, Responsive Layout for Universal and Orientation-Aware React Native Apps 
+# Declarative Layout for Responsive and Adaptive UIs in React Native  
 
 ### Install
 
