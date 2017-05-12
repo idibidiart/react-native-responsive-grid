@@ -119,7 +119,7 @@ The following are the screen width thresholds:
     </Row>
 ```
 
-In the third demo, the grid emits an event from a specific row in the rendered component subtree that is subscribed to by the root component for that subtree (the Home route component in this case.) This allows the Home screen component to determine what and how to render based on both the new screen dimensions (due to orientation change) as well as the new computed value of the dimensions --and the new computed values for width, height and margins/padding-- of the given row in the component subtree. In other words, it enables the component to decide what and how to render its subtree when layout changes for any given node in the subtree.
+In the third demo, the grid emits an event from a specific row in the rendered component subtree that is subscribed to by the root component for that subtree (the Home route component in this case.) This allows the Home screen component to determine what and how to render based on both the new screen dimensions (due to orientation change) as well as the new computed value of the dimensions (incl. margins/padding) of the given row in the component subtree. In other words, it enables the component to decide what and how to render its subtree when layout changes for any given node in the subtree.
 
 **Example**
 
