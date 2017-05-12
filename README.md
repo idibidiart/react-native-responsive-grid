@@ -223,7 +223,7 @@ Sometimes, we lay things out from left to right (LTR.) Other times, we might fin
 
 To keep the grid's structure and design simple (as well as logical and consistent) Rows may not contain other Rows as children. They must be wrapped in a Column inside the row) and Columns may not contain other columns as children. They must be wrapped in a Row inside the column. The "grid" construct has been redued to its essence here, which is a composition of Rows and Columns. 
 
-### _Predictable Dynamic Layout_
+### _Predictable Dynamic Behavior_
 
 Being able to readt to layout changes, including changes due to device rotation (for apps that allow it), is a key aspect of responsive design. This grid is designed to enable dynamic response to layout changes (see the demos at the start of this Readme) 
 
