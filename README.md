@@ -1,5 +1,5 @@
 
-# Dynamic Grid Layout for Responsive and Adaptive UIs in React Native  
+# Responsive and Adaptive Grid-based Layout for React Native 
 
 ### Install
 
