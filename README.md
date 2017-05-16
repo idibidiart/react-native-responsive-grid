@@ -9,7 +9,11 @@ In your project folder, `yarn add react-native-responsive-grid`
 
 ## Background
 
-When it comes to building responsive and Universal apps with React Native, the lack of a performant, declarative way for specifying relative size info used to be the problem.Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made responsive grids that take advantage of its performant, percentage-based layout capability. I've taken one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and made some significabnt changes and enhancements to it that have resulted in a simple yet powerful layout model.
+Priot to React Native v0.42 we had no performant and declarative way for specifying percentage-based style values, and we had to do that in the layout event handler, i.e. post layout, which introduced unnecessary imperative logic and sluggishness. Then came React Native v0.42 with built-in support for percentage-based style values. Since then several open source contributors have made responsive grids that take advantage of this new capability. I've taken one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and made some significabnt changes and enhancements to it that have resulted in a simple and powerful layout model with predictable dynamic behavior. 
+
+## Design TL;DR
+
+This grid eschews Flexbox-based sizing in favor of percentage-based sizing while at the sane time relying on Flexbox for alignment. It delivers the predictability of the percentage-based model with the more sophisticated alignment capasbility of the Flexbox model.
 
 ## Examples
 
@@ -24,7 +28,7 @@ You may use this grid to build responsive 2D layouts that maintain their relativ
 ## [layoutEvent demo](https://www.youtube.com/watch?v=99J3c_Zn6QU) 
 [![>> layoutEvent demo <<](https://img.youtube.com/vi/99J3c_Zn6QU/0.jpg)](https://www.youtube.com/watch?v=99J3c_Zn6QU)
 
-The demos in the videos above show some of the possibilities, but this grid is capable of far more complex responsive behavior, using a sinmple set of rules (see Props and Usage sections.) 
+The demos in the videos above show some of the possibilities, but this grid is capable of more complex responsive and adaptive behavior.
 
 **Demo 1**
 
