@@ -11,9 +11,9 @@ In your project folder, `yarn add react-native-responsive-grid`
 
 When it comes to building responsive and Universal apps with React Native, the lack of a performant, declarative way for specifying relative size info used to be the problem.Then came React Native v0.42 and solved that problem. Since then there have been several folks who have made responsive grids that take advantage of its performant, percentage-based layout capability. I've taken one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and made some significabnt changes and enhancements to it that have resulted in a simple yet powerful layout model.
 
-## Introduction
+## Examples
 
-You may use this grid to build responsive 2D layouts that maintain their relative proportions and predictable change their basic structure and what content they display, based on screen size, aspect ratio, and orientation.  
+You may use this grid to build responsive 2D layouts that maintain their relative proportions, change their basic structure in a predictable way and dynamically decide what content to display, based on screen size, aspect ratio, and orientation.  
 
 ## [aspectRatio demo](https://www.youtube.com/watch?v=Nghqc5QFln8)
 [![>> aspectRatio demo <<](https://img.youtube.com/vi/Nghqc5QFln8/0.jpg)](https://www.youtube.com/watch?v=Nghqc5QFln8)
@@ -205,95 +205,7 @@ In the third demo, the grid emits an event from a specific row in the rendered c
   }
 ``` 
 
-## Basic Principles
-
-### _Simple Calculations_
-
-This grid fixes the mental model for grid based layouts by abandoning the format-based, columns-per-view approach (e.g. "12 column grid") and instead allowing the developer to specify the width of each grid column as a percentage of parent view's size, so 10% meams 10 column grid, and 8.333% means a 12 column grid etc. But let's not think in terms of columns per grid! That is a formatting model, not a layout system. There is no reason for a grid to be 11, 12, 13, 14, 15 or 16.6 columns. The number should be determined by actual layout needs, not by some fixed format. Plus, all other style measurements are done using percentages when making layouts that respond linearly to screen size changes, so why should we measure column width as n:12 (or n:11 etc) and yet measure everything else as n:100? It's time to fix this mental impedence mismatch and move beyond the fixed-column grid toward a free-form layout model, one that allows us to leverage the consistent, repeatable, and nestable pattern of Rows and Columns, but in a more fluid and mathematically simpler way. 
-
-### _Simple Layout_
-
-While most React Native developers use `flex: n` (which is based on Facebook's Yoga layout algorithm) rather than the confusing mess of `flexGrow`, `flexShrink` and `flexBasis` (lots has been written about the Flexbox spec and its steep learning curve, e.g. [flex-grow is weird. Or is it?](https://css-tricks.com/flex-grow-is-weird/)) there is still a fundamental problem with using `flex: n` since n is not a percentage of the parent view's computed or explicit width or height (as percentages are in CSS) but a comparative size factor! It's much easier to say the parent view's width or height is 100% and divide that however we like, e.g. 20%, 35% and 45% than to specify n as 0.2, 0.35 and 0.45 because the latter set of values do not correspond to percentages. You can see that by adding a fourth item with some value, e.g. 0.5, which will cause all four elements to be contained in the full width or full height of the parent (width or height depends on parent's flexDirection) so n=0.2 no longer means 20% and n=0.5 no longer means 50%. It just means that the fourth item we added is 2.5 (0.5 divided by 0.2) times wider or taller than the first item. We lose perspective on the item size relative to the size of its parent as Flexbox is concerned with the item sizes relative to each other rather that the size of each item relative to a single parent. It's like O(n) vs O(n^2) complexity for these two different sizing models in that instead of relating the size of each item to the size of its parent as a percentage (n steps), with `flex: n` we relate the size of each item to the size of each other (sibling) item (n^2 steps.) That's because we don't have a single scale (parent's width or height) to measure against. More importantly, we give up direct knowledge of each item's width as a percentage of the parent's width in favor of having comparative size factors for the sibling items. However, there are times when we'd like to have that, so this grid does not take that ability away from us. In fact, this grid relies heavily (under the hood) on Flexbox features like flexDirection, justifyContent, alignItems, and alignContent, but it uses them under the hood and combines them with a simple percentage-based layiut model. This results in a layout system that is simple and predictable, yet powerful.
-
-### _RTL Support_
-
-Sometimes, we lay things out from left to right (LTR.) Other times, we might find it easier to lay things out from right to left (RTL.) I've found that RTL support to be generally lacking in both React and React Native grids, so I've added support for it. React makes it really simple. This can be very useful for apps with right-to-left text, i.e. Arabic, Aramaic, Azeri, Dhivehi/Maldivian, Hebrew, Kurdish (Sorani), Persian/Farsi, and Urdu.
-
-### _Consistency, Repeatability, Nestability_
-
-To keep the grid's structure and design simple (as well as logical and consistent) Rows may not contain other Rows as children. They must be wrapped in a Column inside the row) and Columns may not contain other columns as children. They must be wrapped in a Row inside the column. The "grid" construct has been redued to its essence here, which is a composition of Rows and Columns. 
-
-### _Predictable Dynamic Layout_
-
-Being able to readt to layout changes, including changes due to device rotation (for apps that allow it), is a key aspect of responsive design. This grid is designed to enable dynamic response to layout changes (see the demos at the start of this Readme) 
-
-Columns and Rows have `position: 'relative'` enforced by design to keep them within the layout flow. Each can be moved about within their parent Row and Column, respectively, using top and bottom margins and/or offsets. They can be made to overlap within the row using a negative offset, and overlap across rows using a negative top margin. The intent is to allow movement of rows and columns without taking them out of the layout flow. This is required to work around a Flexbox layout spec glitch/deviation in React Native and to react to make reaction to layout change more predictable.
-
-Elements, including Column elements, must be wapped in a Row in order for the grid to react to layout changes in those elements, including their mounting, un-mounting and re-mounting. You can decide where the re-rendering happens in the component subtree by placing the `layoutEvent` prop at the desired Row node (see layoutEvent demo markup in Introduction.)
-
-## Terms:
-
-- RTL = right-to-left layout (Hebrew/Arabic)
-- LTR = "normal" left-to-right layout
-
-## Props
-
-All props are case sensitive.
-
-`aspectRatio` (see Introduction)
-
-`breakPoints` (see Introduction)
-
-`size` may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or explicitly set width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
-
-`smSize`, `mdSize`, `lgSize` and `xlSize` are device-dependent size values that are applied to columns.
-
-`offset` may be applied to Column. Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or explicitly set width. Offset values can also be negative. Default is 0. 
-
-`smOffset`, `mdOffset`, `lgOffset` and `xlOffset` are device-dependent offset values that are applied to columns.
-
-_Using offset values in RTL mode moves things from right to left. Using them in normal LTR mode moves things from left to right. It's pretty normal to expect that. If you're working in both directions, this makes offsets more useful than using marginLeft or marginRight directly._
-
-`smHidden`, `mdHidden`, `lgHidden` and `xlHidden` - may be applied to Column. This tells the grid to hide certain columns based on the current width of the screen.  
-
-`vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: middle, top, bottom, space and distribute. Default is top.
-
-`vAlign` may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: top, middle, bottom and stretch. Default is top.
-
-`hAlign` may be supplied as prop to Row to align the columns within it in the horizontal direction. Possible values are: center, left, right, space and distribute. Default is left.
-
-`hAlign` may also be supplied as prop to Column to align its rows and/or elements within it in the horizontal direction. Possible values are: center, left, right, and stretch. Default is left.
-
-`rtl` may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set alignX to 'right.' This is useful for Hebrew and Arabic layouts. 
-
-`fullHeight` may be supplied as prop to Row or Column. It sets the the height to 100% of the computed or explicitly height of its parent view. 
-
-`fullWidth` may be supplied as prop to Row or Column. It sets the the width to 100% of the computed or explicitly set width of its parent view. 
-
-`wrap` may be supplied as prop to Row to wrap any child element that is otherwise rendered fully outside of the width of the row's computed or explicitly set width. 
-
-`alignLines` may be supplied as prop to Row to vertically align the wrapped lines within the Row (not to be confused with the items that are inside each line.) Possible values are: top, middle, bottom, space, distribute, stretch. (See section on Aligning Wrapped Lines within Rows)
-
-These make up the basic rules. As you can see the number of rules is far fewer than with bare-bone Flex. This makes it a much simpler task to create sophisticated dynamic layout behavior (fewer knobs and switches.) 
-
-## Usage
-
-There are five 'size' props for `Column` that determine its width as a percentage. The values are indicated by `size`, `smSize`, `mdSize`, `lgSize` and `xlSize`. The first one, `size`, applies to all screen sizes. The others apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively. 
-
-There are five 'offset' props for `Column` that determine it's offset as a percentage (from left in case of LTR and from right in case of RTL.) The values are indicated by `offset`, `smOffset`, `mdOffset`, `lgOffset` and `xlOffset`. The first one, `offset`, applies to all screen sizes. The others apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively. Unlike size values, offset values can be positive _or_ negative.
-
-There are four 'hidden' props for `Column` that determine whether the column is displayed or not at the given screen size. This is indicated by `smHidden`, `mdHidden`, `lgHidden` and `xlHidden`.  They apply to screen widths of 0-480, 768-1023, 1024-1365, and 1366 and larger, respectively.
-
-The screen-size-specific _size_ props (sm, md, lg, and xl), the screen-size-specific _offset_ props (smOffset, mdOffset, lgOffset and xlOffset) and the screen-size-specific _hidden_ props (smHidden, mdHidden, lgHidden, xlHidden) props refer to the effective screen width, which changes with orientation. 
-
-The following are the screen width thresholds for these props:
-
-- sm: <= 480px 
-- md: > 480 and < 1024
-- lg: >= 1024 and < 1366
-- xl: >= 1366 
-
-Examples: 
+## More Examples
 
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
@@ -305,9 +217,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-On a phone the Column would take up 50% of the row's width.
-On a normal tablet the Column would take up 33.333% of the row's width.
-On a big tablet the Column would take up 25% of the row's width.
+In the example abovw, on a phone in portrait mode, the Column would take up 50% of the row's computed width. On a phone in landscape nmode or a normal tablet the Column would take up 33.333% of the row's width. On a big tablet the Column would take up 25% of the row's width.
 
 ```
 import {Column as Col, Row} from 'react-native-responsive-grid';
@@ -336,31 +246,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 In the example above, the column and all of it's children will be hidden on small screens like phones, but it will appear on bigger screens like tablets. The size-prefixed 'hidden' props may be applied to columns. Hidden props are all booleans. They default to false.
 
-## Nested Dimensions
-
-If you're nesting a column inside a row which is inside another column that is inside another row as below:
-
-```
-<Row>
-    <Col size={50}>
-      <Row>
-        <Col size={50}>
-          <Text>
-            This column is 25% of the outer view's width (or 25% of the screen width if
-            the top level Row has no parent)
-          </Text>
-        </Col>
-      </Row>
-    </Col>
-</Row>
-
-```
-
-The nested column's size will be the column size value (size, sm, md, lg, xl) as a percentage of the width of the preceding column in the hierarchy . 
-
-This nested percentages model applies to offsets, too. 
-
-## Real world example using relative size and offset props:
+# Even More Examples
 
 <img src="https://s2.postimg.org/im8oxf195/Screen_Shot_2017-04-17_at_2.59.31_PM.png" width=480>
 
@@ -543,7 +429,106 @@ Remember that paddingTop and marginTop when given as percentages are percentages
   </Row>
 ```
 
-## RTL Support
+
+## Design Principles
+
+### _Simple Calculations_
+
+This grid fixes the mental model for grid based layouts by abandoning the format-based, columns-per-view approach (e.g. "12 column grid") and instead allowing the developer to specify the width of each grid column as a percentage of parent view's size, so 10% meams 10 column grid, and 8.333% means a 12 column grid etc. But let's not think in terms of columns per grid! That is a formatting model, not a layout system. There is no reason for a grid to be 11, 12, 13, 14, 15 or 16.6 columns. The number should be determined by actual layout needs, not by some fixed format. Plus, all other style measurements are done using percentages when making layouts that respond linearly to screen size changes, so why should we measure column width as n:12 (or n:11 etc) and yet measure everything else as n:100? It's time to fix this mental impedence mismatch and move beyond the fixed-column grid toward a free-form layout model, one that allows us to leverage the consistent, repeatable, and nestable pattern of Rows and Columns, but in a more fluid and mathematically simpler way. 
+
+### _Simple Layout_
+
+While most React Native developers use `flex: n` (which is based on Facebook's Yoga layout algorithm) rather than the confusing mess of `flexGrow`, `flexShrink` and `flexBasis` (lots has been written about the Flexbox spec and its steep learning curve, e.g. [flex-grow is weird. Or is it?](https://css-tricks.com/flex-grow-is-weird/)) there is still a fundamental problem with using `flex: n` since n is not a percentage of the parent view's computed or explicit width or height (as percentages are in CSS) but a comparative size factor! It's much easier to say the parent view's width or height is 100% and divide that however we like, e.g. 20%, 35% and 45% than to specify n as 0.2, 0.35 and 0.45 because the latter set of values do not correspond to percentages. You can see that by adding a fourth item with some value, e.g. 0.5, which will cause all four elements to be contained in the full width or full height of the parent (width or height depends on parent's flexDirection) so n=0.2 no longer means 20% and n=0.5 no longer means 50%. It just means that the fourth item we added is 2.5 (0.5 divided by 0.2) times wider or taller than the first item. We lose perspective on the item size relative to the size of its parent as Flexbox is concerned with the item sizes relative to each other rather that the size of each item relative to a single parent. It's like O(n) vs O(n^2) complexity for these two different sizing models in that instead of relating the size of each item to the size of its parent as a percentage (n steps), with `flex: n` we relate the size of each item to the size of each other (sibling) item (n^2 steps.) That's because we don't have a single scale (parent's width or height) to measure against. More importantly, we give up direct knowledge of each item's width as a percentage of the parent's width in favor of having comparative size factors for the sibling items. However, there are times when we'd like to have that, so this grid does not take that ability away from us. In fact, this grid relies heavily (under the hood) on Flexbox features like flexDirection, justifyContent, alignItems, and alignContent, but it uses them under the hood and combines them with a simple percentage-based layiut model. This results in a layout system that is simple and predictable, yet powerful.
+
+### _RTL Support_
+
+Sometimes, we lay things out from left to right (LTR.) Other times, we might find it easier to lay things out from right to left (RTL.) I've found that RTL support to be generally lacking in both React and React Native grids, so I've added support for it. React makes it really simple. This can be very useful for apps with right-to-left text, i.e. Arabic, Aramaic, Azeri, Dhivehi/Maldivian, Hebrew, Kurdish (Sorani), Persian/Farsi, and Urdu.
+
+### _Consistency, Repeatability, Nestability_
+
+To keep the grid's structure and design simple (as well as logical and consistent) Rows may not contain other Rows as children. They must be wrapped in a Column inside the row) and Columns may not contain other columns as children. They must be wrapped in a Row inside the column. The "grid" construct has been redued to its essence here, which is a composition of Rows and Columns. 
+
+### _Predictable Dynamic Layout_
+
+Being able to readt to layout changes, including changes due to device rotation (for apps that allow it), is a key aspect of responsive design. This grid is designed to enable dynamic response to layout changes (see the demos at the start of this Readme) 
+
+Columns and Rows have `position: 'relative'` enforced by design to keep them within the layout flow. Each can be moved about within their parent Row and Column, respectively, using top and bottom margins and/or offsets. They can be made to overlap within the row using a negative offset, and overlap across rows using a negative top margin. The intent is to allow movement of rows and columns without taking them out of the layout flow. This is required to work around a Flexbox layout spec glitch/deviation in React Native and to react to make reaction to layout change more predictable.
+
+Elements, including Column elements, must be wapped in a Row in order for the grid to react to layout changes in those elements, including their mounting, un-mounting and re-mounting. You can decide where the re-rendering happens in the component subtree by placing the `layoutEvent` prop at the desired Row node (see layoutEvent demo markup in Introduction.)
+
+## Props
+
+All props are case sensitive.
+
+`aspectRatio` (see Examples)
+
+`breakPoints` (see Examoles)
+
+`size` may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or explicitly set width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
+
+`smSize`, `mdSize`, `lgSize` and `xlSize` are device-dependent size values that are applied to columns.
+
+`offset` may be applied to Column. Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or explicitly set width. Offset values can also be negative. Default is 0. 
+
+`smOffset`, `mdOffset`, `lgOffset` and `xlOffset` are device-dependent offset values that are applied to columns.
+
+_Using offset values in RTL mode moves things from right to left. Using them in normal LTR mode moves things from left to right. It's pretty normal to expect that. If you're working in both directions, this makes offsets more useful than using marginLeft or marginRight directly._
+
+`smHidden`, `mdHidden`, `lgHidden` and `xlHidden` - may be applied to Column. This tells the grid to hide certain columns based on the current width of the screen.  
+
+`vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: middle, top, bottom, space and distribute. Default is top.
+
+`vAlign` may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: top, middle, bottom and stretch. Default is top.
+
+`hAlign` may be supplied as prop to Row to align the columns within it in the horizontal direction. Possible values are: center, left, right, space and distribute. Default is left.
+
+`hAlign` may also be supplied as prop to Column to align its rows and/or elements within it in the horizontal direction. Possible values are: center, left, right, and stretch. Default is left.
+
+`rtl` may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set hAlign to 'right.' This is useful for right-to-left layouts. 
+
+`fullHeight` may be supplied as prop to Row or Column. It sets the the height to 100% of the computed or explicitly height of its parent view. 
+
+`fullWidth` may be supplied as prop to Row or Column. It sets the the width to 100% of the computed or explicitly set width of its parent view. 
+
+`wrap` may be supplied as prop to Row to wrap any child element that is otherwise rendered fully outside of the width of the row's computed or explicitly set width. 
+
+`alignLines` may be supplied as prop to Row to vertically align the wrapped lines within the Row (not to be confused with the items that are inside each line.) Possible values are: top, middle, bottom, space, distribute, stretch. (See section on Aligning Wrapped Lines within Rows)
+
+The screen-size-specific _size_ props (smSize, mdSize, lgSize, and xlSize), the screen-size-specific _offset_ props (smOffset, mdOffset, lgOffset and xlOffset) and the screen-size-specific _hidden_ props (smHidden, mdHidden, lgHidden, xlHidden) props refer to the effective screen width, which changes with orientation. 
+
+The following are the screen width thresholds for these props:
+
+- sm: <= 480px 
+- md: > 480 and < 1024
+- lg: >= 1024 and < 1366
+- xl: >= 1366 
+
+
+### Nesting
+
+If you're nesting a column inside a row which is inside another column that is inside another row as below:
+
+```
+<Row>
+    <Col size={50}>
+      <Row>
+        <Col size={50}>
+          <Text>
+            This column is 25% of the outer view's width (or 25% of the screen width if
+            the top level Row has no parent)
+          </Text>
+        </Col>
+      </Row>
+    </Col>
+</Row>
+
+```
+
+The nested column's size will be the column size value (size, sm, md, lg, xl) as a percentage of the width of the preceding column in the hierarchy . 
+
+This nested percentages model applies to offsets, too. 
+
+### RTL Support
 
 This is intended for Hebrew and Arabic layouts, which are right to left.
 
@@ -628,107 +613,3 @@ Markup #2:
 ```
 
 <img src="https://s16.postimg.org/albdekc8l/bottom.png" width=480>
-
-## Another Real-World Example
-
-<img src="https://s8.postimg.org/7t9wefrrp/Screen_Shot_2017-04-17_at_2.59.00_PM.png" width=480>
-
-```
-    <Modal
-      animationType="fade"
-      transparent={true}
-      visible={this.state.modalVisible}
-      onRequestClose={() => this.close()}
-      >
-      <Row full vAlign='stretch' style={[{padding: 20}, modalBackgroundStyle]}>
-        <Col full hAlign='center' style={{backgroundColor: "#f3f3f3", padding: 20}}>
-              
-              <Row style={{height: 80}}>
-                <Col size={33.333} offset={33.333} hAlign='center' >
-                  <Text>
-                    <Image source={require('./assets/logo-login.png')} style={styles.logoImage}/>
-                  </Text>
-                </Col>
-                <Col size={33.333} hAlign='right'>
-                  <TouchableHighlight activeOpacity={0.5} underlayColor='#f3f3f3' onPress={() => this.close()}>
-                      <FontAwesome
-                        name="close"
-                        size={28}
-                        color="#d0d0d0"
-                      />
-                  </TouchableHighlight>
-                </Col>
-              </Row>
-
-              <Row vAlign='middle' style={{height: 50}}>
-                <Text style={{fontFamily: 'lubalin-graph-regular', fontSize: 16}}>LOG IN TO YOUR ACCOUNT</Text>
-              </Row>
-
-              <Row  vAlign='middle' style={{height: 55}}>
-                <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
-                  <Row>
-                    <Col size={10} >
-                        <FontAwesome name='envelope' size={20} color='#BD1206'/>
-                    </Col>
-                    <Col size={90}>
-                        <TextInput placeholder='Email' style={{flex: 1}}/>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-
-              <Row vAlign='middle' style={{height: 55}}>
-                <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
-                  <Row>
-                    <Col size={10} >
-                        <FontAwesome name='envelope' size={20} color='#BD1206'/>
-                    </Col>
-                    <Col size={90}>
-                        <TextInput secureTextEntry={true} placeholder='Password' style={{flex: 1}}/>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-
-              <Row hAlign='center' style={{height: 12}}>
-                <Text style={{color: '#BD1206', fontSize: 12}}>
-                Forgot password?
-                </Text>
-              </Row>
-
-              <Row style={{ height: 20}}></Row>
-
-              <Row  vAlign='middle' style={{height: 60}}>
-                <Col full hAlign='stretch'>
-                  <TouchableHighlight activeOpacity={0.5} underlayColor='transparent' onPress={() => this.login()}>
-                      <Row hAlign='center' vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#BD1206'}}>
-                          <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>LOG IN</Text>
-                      </Row>
-                  </TouchableHighlight>
-                </Col>
-              </Row>
-
-              <Row vAlign='middle' style={{height: 60}}>
-                <Col style={{height: 1,  backgroundColor: '#a0a0a0'}}>
-                </Col>
-              </Row>
-
-              <Row style={{height: 60}}>
-                <Col vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#3B5998'}}>
-                  <Row  >
-                    <Col size={10} offset={6}>  
-                      <FontAwesome name='facebook' size={20} color='#f3f3f3'/>
-                    </Col> 
-                    <Col size={81} offset={3}>
-                      <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}> 
-                        LOG IN WITH FACEBOOK
-                      </Text>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-
-        </Col>
-      </Row>
-    </Modal>
-```
