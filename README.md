@@ -265,15 +265,15 @@ _
         title: 'Home',
         renderTitle: (route, props) => {
           return (
-          <Row full vAlign='middle'>
-            <Col full hAlign='center'>
+          <Row fullHeight vAlign='middle'>
+            <Col fullWidth hAlign='center'>
               <Image style={styles.titleImage} source={require('./assets/logo.png')}/>
             </Col>
           </Row>)
         },
         renderRight: (route, props) => {
           const { config: { eventEmitter }  } = route;
-          return (<Row full rtl vAlign='middle'>
+          return (<Row fullHeight rtl vAlign='middle'>
             <Col offset={1}>
               <Button 
                 title="LOG IN"
