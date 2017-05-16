@@ -380,5 +380,5 @@ In the example above, the column and all of it's children will be hidden on smal
 
 ## Even More Examples
 
-[Click here for modals, custom buttons, custom text fields, wrapped content alignment, and other examples...](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMoreExamples.md)
+[Click here for modals, nav bar, custom buttons, custom text fields, wrapped content alignment, and other examples...](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMoreExamples.md)
 
