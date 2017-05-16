@@ -21,13 +21,13 @@ This grid eschews Flexbox-based sizing in favor of percentage-based sizing while
 
 You may use this grid to build responsive 2D layouts that maintain their relative proportions, change their basic structure in a predictable way and dynamically decide what content to display, based on screen size, aspect ratio, and orientation.  
 
-## [aspectRatio demo](https://www.youtube.com/watch?v=Nghqc5QFln8)
+## [Example 1: aspectRatio](https://www.youtube.com/watch?v=Nghqc5QFln8)
 [![>> aspectRatio demo <<](https://img.youtube.com/vi/Nghqc5QFln8/0.jpg)](https://www.youtube.com/watch?v=Nghqc5QFln8)
 
-## [breakPoints demo](https://www.youtube.com/watch?v=GZ1uxWEVAuQ) 
+## [Example 2: breakPoints](https://www.youtube.com/watch?v=GZ1uxWEVAuQ) 
 [![>> responsive break points demo <<](https://img.youtube.com/vi/GZ1uxWEVAuQ/0.jpg)](https://www.youtube.com/watch?v=GZ1uxWEVAuQ)
 
-## [layoutEvent demo](https://www.youtube.com/watch?v=99J3c_Zn6QU) 
+## [Example 3: layoutEvent](https://www.youtube.com/watch?v=99J3c_Zn6QU) 
 [![>> layoutEvent demo <<](https://img.youtube.com/vi/99J3c_Zn6QU/0.jpg)](https://www.youtube.com/watch?v=99J3c_Zn6QU)
 
 The demos in the videos above show some of the possibilities, but this grid is capable of more complex responsive and adaptive behavior.
