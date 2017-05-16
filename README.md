@@ -211,47 +211,6 @@ In the third demo, the grid emits an event from a specific row in the rendered c
   }
 ``` 
 
-## More Examples
-
-```
-import {Column as Col, Row} from 'react-native-responsive-grid';
-
-<Row>
-    <Col smSize={50} mdSize={33.333} lgSize={25}>
-        <Text>First Column</Text>
-    </Col>
-</Row>
-```
-
-In the example abovw, on a phone in portrait mode, the Column would take up 50% of the row's computed width. On a phone in landscape nmode or a normal tablet the Column would take up 33.333% of the row's width. On a big tablet the Column would take up 25% of the row's width.
-
-```
-import {Column as Col, Row} from 'react-native-responsive-grid';
-
-<Row style={{height: 20}}>
-  <Col smOffset={0} mdOffset={10} lgOffset={20} xlOffset={40}>
-    <Text>test</Text>
-  </Col>
-</Row>
-```
-
-In the example above, the text "test" will move further to the right with larger screen sizes.
-
-```
-import {Column as Col, Row} from 'react-native-responsive-grid';
-
-<Row>
-    <Col smHidden>
-        <Text>Column displayed when width is <= 480</Text>
-    </Col>
-    <Col mdHidden lgHidden xlHidden>
-        <Text>Column displayed when width is > 480</Text>
-    </Col>
-</Row>
-```
-
-In the example above, the column and all of it's children will be hidden on small screens like phones, but it will appear on bigger screens like tablets. The size-prefixed 'hidden' props may be applied to columns. Hidden props are all booleans. They default to false.
-
 ## Props
 
 All props are case sensitive.
@@ -378,7 +337,48 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
     </Row>
 ```
 
+## More Examples
+
+```
+import {Column as Col, Row} from 'react-native-responsive-grid';
+
+<Row>
+    <Col smSize={50} mdSize={33.333} lgSize={25}>
+        <Text>First Column</Text>
+    </Col>
+</Row>
+```
+
+In the example abovw, on a phone in portrait mode, the Column would take up 50% of the row's computed width. On a phone in landscape nmode or a normal tablet the Column would take up 33.333% of the row's width. On a big tablet the Column would take up 25% of the row's width.
+
+```
+import {Column as Col, Row} from 'react-native-responsive-grid';
+
+<Row style={{height: 20}}>
+  <Col smOffset={0} mdOffset={10} lgOffset={20} xlOffset={40}>
+    <Text>test</Text>
+  </Col>
+</Row>
+```
+
+In the example above, the text "test" will move further to the right with larger screen sizes.
+
+```
+import {Column as Col, Row} from 'react-native-responsive-grid';
+
+<Row>
+    <Col smHidden>
+        <Text>Column displayed when width is <= 480</Text>
+    </Col>
+    <Col mdHidden lgHidden xlHidden>
+        <Text>Column displayed when width is > 480</Text>
+    </Col>
+</Row>
+```
+
+In the example above, the column and all of it's children will be hidden on small screens like phones, but it will appear on bigger screens like tablets. The size-prefixed 'hidden' props may be applied to columns. Hidden props are all booleans. They default to false.
+
 ## Even More Examples
 
-[More here!](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMoreExamples.md)
+[Click here for modals, custom buttons, custom text fields, wrapped content alignment, and other examples...](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMoreExamples.md)
 
