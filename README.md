@@ -1,5 +1,5 @@
 
-# Dynamic, Responsive Layout for Universal and Orientation-Aware React Native Apps 
+# Responsive and Adaptive Layout for React Native 
 
 ### Install
 
@@ -428,7 +428,6 @@ Remember that paddingTop and marginTop when given as percentages are percentages
       </Col>
   </Row>
 ```
-
 
 ## Design Principles
 
