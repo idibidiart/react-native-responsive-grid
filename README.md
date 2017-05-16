@@ -15,7 +15,7 @@ Priot to React Native v0.42 we had no performant and declarative way for specify
 
 This grid eschews Flexbox-based sizing in favor of percentage-based sizing while at the sane time relying on Flexbox for alignment. It delivers the predictability of the percentage-based model with the more sophisticated alignment capasbility of the Flexbox model.
 
-(for more details see [Design Principles](https://github.com/idibidiart/react-native-responsive-grid/DesignPrinciples.md))
+(for more details see [Design Principles](https://github.com/idibidiart/react-native-responsive-grid/blob/master/DesignPrinciples.md))
 
 ## Examples
 
@@ -252,7 +252,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 In the example above, the column and all of it's children will be hidden on small screens like phones, but it will appear on bigger screens like tablets. The size-prefixed 'hidden' props may be applied to columns. Hidden props are all booleans. They default to false.
 
-(see [Even More Examples](https://github.com/idibidiart/react-native-responsive-grid/EvenMorteExamples.md))
+(see [Even More Examples](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMorteExamples.md))
 
 ## Props
 
