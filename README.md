@@ -252,10 +252,6 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 In the example above, the column and all of it's children will be hidden on small screens like phones, but it will appear on bigger screens like tablets. The size-prefixed 'hidden' props may be applied to columns. Hidden props are all booleans. They default to false.
 
-## Even More Examples
-
-See [Even More Examples](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMoreExamples.md)
-
 ## Props
 
 All props are case sensitive.
@@ -304,7 +300,6 @@ The following are the screen width thresholds for these props:
 - md: > 480 and < 1024
 - lg: >= 1024 and < 1366
 - xl: >= 1366 
-
 
 ### Nesting
 
@@ -382,3 +377,8 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
         </Col>
     </Row>
 ```
+
+## Even More Examples
+
+See [here](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMoreExamples.md)
+
