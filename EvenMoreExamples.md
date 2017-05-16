@@ -2,9 +2,8 @@
 
 <img src="https://s2.postimg.org/im8oxf195/Screen_Shot_2017-04-17_at_2.59.31_PM.png" width=480>
 
-_
 
-### Navbar layout (for ex-navigation)
+## Navbar layout (for ex-navigation)
 
 ```
 
@@ -49,7 +48,7 @@ _
     }
 ```
 
-### main screen layout
+## main screen layout
 
 Note:
 
@@ -180,3 +179,149 @@ Remember that paddingTop and marginTop when given as percentages are percentages
       </Col>
   </Row>
 ```
+
+## Modal and buttons
+
+<img src="https://s8.postimg.org/7t9wefrrp/Screen_Shot_2017-04-17_at_2.59.00_PM.png" width=480>
+
+```
+    <Modal
+      animationType="fade"
+      transparent={true}
+      visible={this.state.modalVisible}
+      onRequestClose={() => this.close()}
+      >
+      <Row full vAlign='stretch' style={[{padding: 20}, modalBackgroundStyle]}>
+        <Col full hAlign='center' style={{backgroundColor: "#f3f3f3", padding: 20}}>
+              
+              <Row style={{height: 80}}>
+                <Col size={33.333} offset={33.333} hAlign='center' >
+                  <Text>
+                    <Image source={require('./assets/logo-login.png')} style={styles.logoImage}/>
+                  </Text>
+                </Col>
+                <Col size={33.333} hAlign='right'>
+                  <TouchableHighlight activeOpacity={0.5} underlayColor='#f3f3f3' onPress={() => this.close()}>
+                      <FontAwesome
+                        name="close"
+                        size={28}
+                        color="#d0d0d0"
+                      />
+                  </TouchableHighlight>
+                </Col>
+              </Row>
+
+              <Row vAlign='middle' style={{height: 50}}>
+                <Text style={{fontFamily: 'lubalin-graph-regular', fontSize: 16}}>LOG IN TO YOUR ACCOUNT</Text>
+              </Row>
+
+              <Row  vAlign='middle' style={{height: 55}}>
+                <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
+                  <Row>
+                    <Col size={10} >
+                        <FontAwesome name='envelope' size={20} color='#BD1206'/>
+                    </Col>
+                    <Col size={90}>
+                        <TextInput placeholder='Email' style={{flex: 1}}/>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+
+              <Row vAlign='middle' style={{height: 55}}>
+                <Col style={{height: 40, borderStyle: 'solid', borderColor: '#a0a0a0', borderWidth: 1, borderRadius: 2, padding: 10}}>
+                  <Row>
+                    <Col size={10} >
+                        <FontAwesome name='envelope' size={20} color='#BD1206'/>
+                    </Col>
+                    <Col size={90}>
+                        <TextInput secureTextEntry={true} placeholder='Password' style={{flex: 1}}/>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+
+              <Row hAlign='center' style={{height: 12}}>
+                <Text style={{color: '#BD1206', fontSize: 12}}>
+                Forgot password?
+                </Text>
+              </Row>
+
+              <Row style={{ height: 20}}></Row>
+
+              <Row  vAlign='middle' style={{height: 60}}>
+                <Col full hAlign='stretch'>
+                  <TouchableHighlight activeOpacity={0.5} underlayColor='transparent' onPress={() => this.login()}>
+                      <Row hAlign='center' vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#BD1206'}}>
+                          <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>LOG IN</Text>
+                      </Row>
+                  </TouchableHighlight>
+                </Col>
+              </Row>
+
+              <Row vAlign='middle' style={{height: 60}}>
+                <Col style={{height: 1,  backgroundColor: '#a0a0a0'}}>
+                </Col>
+              </Row>
+
+              <Row style={{height: 60}}>
+                <Col vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#3B5998'}}>
+                  <Row  >
+                    <Col size={10} offset={6}>  
+                      <FontAwesome name='facebook' size={20} color='#f3f3f3'/>
+                    </Col> 
+                    <Col size={81} offset={3}>
+                      <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}> 
+                        LOG IN WITH FACEBOOK
+                      </Text>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+
+        </Col>
+      </Row>
+    </Modal>
+```
+
+## Aligning Wrapped Lines within Rows
+
+By default, content in rows will extend beyond the width of the screen if the sum of the width values of the content is larger than 100% of the row's width. To wrap columns or any content within the row the content must be plural (i.e. not one really wide column as a single item won't wrap) and the Row must have the 'wrap' prop supplied. When rows are allowed to wrap what happens is the row will then contain multiple horizontal "lines" that hold the items within it. The lines themselves (as opposed to the items within them) may be aligned in the vertical direction using alignLines prop (see Props section above for details) 
+
+Here are two screens illustrating the effect of wrap, vAlign and alignLines. The first tells the row that it can turn into a multi-line row that wraps the items. The second tells it how to vertically align the items. The third tells it how to vertically align the wrapped lines that contain the items. 
+
+Markup #1:
+```
+    <Row wrap vAlign='top' alignLines='stretch' style={{height: 100, backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={60} offset={0} style={{backgroundColor: 'pink'}}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+          PREVIOUS ORDERS
+          </Text>
+        </Col>
+        <Col size={80} offset={0} hAlign='right' style={{backgroundColor: 'yellow'}}>
+              <Text style={{ fontSize: 16, color: '#BD1206'}}>
+                SEE ALL
+              </Text>
+        </Col>
+    </Row>
+```
+
+<img src="https://s29.postimg.org/g5fmo0m8n/top.png" width=480>
+
+Markup #2:
+```
+    <Row wrap vAlign='bottom' alignLines='stretch' style={{height: 100, backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={60} offset={0} style={{backgroundColor: 'pink'}}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+          PREVIOUS ORDERS
+          </Text>
+        </Col>
+        <Col size={80} offset={0} hAlign='right' style={{backgroundColor: 'yellow'}}>
+              <Text style={{ fontSize: 16, color: '#BD1206'}}>
+                SEE ALL
+              </Text>
+        </Col>
+    </Row>
+```
+
+<img src="https://s16.postimg.org/albdekc8l/bottom.png" width=480>

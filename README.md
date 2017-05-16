@@ -252,7 +252,9 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 In the example above, the column and all of it's children will be hidden on small screens like phones, but it will appear on bigger screens like tablets. The size-prefixed 'hidden' props may be applied to columns. Hidden props are all booleans. They default to false.
 
-(see [Even More Examples](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMoreExamples.md))
+## Even More Examples
+
+See [Even More Examples](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMoreExamples.md)
 
 ## Props
 
@@ -371,45 +373,3 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
         </Col>
     </Row>
 ```
-
-## Aligning Wrapped Lines within Rows
-
-By default, content in rows will extend beyond the width of the screen if the sum of the width values of the content is larger than 100% of the row's width. To wrap columns or any content within the row the content must be plural (i.e. not one really wide column as a single item won't wrap) and the Row must have the 'wrap' prop supplied. When rows are allowed to wrap what happens is the row will then contain multiple horizontal "lines" that hold the items within it. The lines themselves (as opposed to the items within them) may be aligned in the vertical direction using alignLines prop (see Props section above for details) 
-
-Here are two screens illustrating the effect of wrap, vAlign and alignLines. The first tells the row that it can turn into a multi-line row that wraps the items. The second tells it how to vertically align the items. The third tells it how to vertically align the wrapped lines that contain the items. 
-
-Markup #1:
-```
-    <Row wrap vAlign='top' alignLines='stretch' style={{height: 100, backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={60} offset={0} style={{backgroundColor: 'pink'}}>
-          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-          PREVIOUS ORDERS
-          </Text>
-        </Col>
-        <Col size={80} offset={0} hAlign='right' style={{backgroundColor: 'yellow'}}>
-              <Text style={{ fontSize: 16, color: '#BD1206'}}>
-                SEE ALL
-              </Text>
-        </Col>
-    </Row>
-```
-
-<img src="https://s29.postimg.org/g5fmo0m8n/top.png" width=480>
-
-Markup #2:
-```
-    <Row wrap vAlign='bottom' alignLines='stretch' style={{height: 100, backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={60} offset={0} style={{backgroundColor: 'pink'}}>
-          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-          PREVIOUS ORDERS
-          </Text>
-        </Col>
-        <Col size={80} offset={0} hAlign='right' style={{backgroundColor: 'yellow'}}>
-              <Text style={{ fontSize: 16, color: '#BD1206'}}>
-                SEE ALL
-              </Text>
-        </Col>
-    </Row>
-```
-
-<img src="https://s16.postimg.org/albdekc8l/bottom.png" width=480>
