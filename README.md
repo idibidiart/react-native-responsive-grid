@@ -76,7 +76,6 @@ The following table maps some common device aspect ratios to the ratio of width/
       </Col>
     </Row>
 ```
-.
 
 **Demo 2**
 
@@ -118,7 +117,6 @@ The following are the screen width thresholds:
         </Col>
     </Row>
 ```
-.
 
 **Demo 3**
 
