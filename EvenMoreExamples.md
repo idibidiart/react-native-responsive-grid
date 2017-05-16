@@ -182,7 +182,7 @@ Remember that paddingTop and marginTop when given as percentages are percentages
   </Row>
 ```
 
-## Custom Text Fields and Custom Buttons
+## Custom Components
 
 <img src="https://s8.postimg.org/7t9wefrrp/Screen_Shot_2017-04-17_at_2.59.00_PM.png" width=480>
 
