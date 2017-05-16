@@ -15,6 +15,8 @@ Priot to React Native v0.42 we had no performant and declarative way for specify
 
 This grid eschews Flexbox-based sizing in favor of percentage-based sizing while at the sane time relying on Flexbox for alignment. It delivers the predictability of the percentage-based model with the more sophisticated alignment capasbility of the Flexbox model.
 
+(for more details see [Design Principles](https://github.com/idibidiart/react-native-responsive-grid/DesignPrinciples.md))
+
 ## Examples
 
 You may use this grid to build responsive 2D layouts that maintain their relative proportions, change their basic structure in a predictable way and dynamically decide what content to display, based on screen size, aspect ratio, and orientation.  
@@ -30,7 +32,7 @@ You may use this grid to build responsive 2D layouts that maintain their relativ
 
 The demos in the videos above show some of the possibilities, but this grid is capable of more complex responsive and adaptive behavior.
 
-**Demo 1**
+### Example 1
 
 In the first demo, the grid picks the image with the **closest aspect ratio** to the device aspect ratio, dynamically, taking into account the current device orientation. The images themselves must be cropped by the designer so that they match the common device aspect ratios (see below) while also showing the part of the image that the designer intends to show for each aspect ratio. Since there could be many aspect ratios that correspond to different devices we should have multiple such images (and, optionally, their rotated versions.)
 
@@ -81,7 +83,7 @@ The following table maps some common device aspect ratios to the ratio of width/
     </Row>
 ```
 
-**Demo 2**
+### Example 2
 
 In the second demo, the grid folds columns in a row that has been tagged with 'wrap' prop using the, using the screen-device-depebdent `breakPoints` prop on the column. This means that different break points can be supplied for the different screen sizes. 
 
@@ -122,7 +124,7 @@ The following are the screen width thresholds:
     </Row>
 ```
 
-**Demo 3**
+### Example 3
 
 In the third demo, the grid emits an event from a specific row in the rendered component subtree that is subscribed to by the root component for that subtree (the Home route component in this case.) This allows the Home screen component to determine what and how to render based on both the new screen dimensions (due to orientation change) as well as the new computed value of the dimensions (incl. margins/padding) of the given row in the component subtree. In other words, it enables the component to decide what and how to render its subtree when layout changes for any given node in the subtree.
 
@@ -250,222 +252,17 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 In the example above, the column and all of it's children will be hidden on small screens like phones, but it will appear on bigger screens like tablets. The size-prefixed 'hidden' props may be applied to columns. Hidden props are all booleans. They default to false.
 
-# Even More Examples
-
-<img src="https://s2.postimg.org/im8oxf195/Screen_Shot_2017-04-17_at_2.59.31_PM.png" width=480>
-
-_
-
-### Navbar layout (for ex-navigation)
-
-```
-
-  static route = {
-      navigationBar: {
-        title: 'Home',
-        renderTitle: (route, props) => {
-          return (
-          <Row fullHeight vAlign='middle'>
-            <Col fullWidth hAlign='center'>
-              <Image style={styles.titleImage} source={require('./assets/logo.png')}/>
-            </Col>
-          </Row>)
-        },
-        renderRight: (route, props) => {
-          const { config: { eventEmitter }  } = route;
-          return (<Row fullHeight rtl vAlign='middle'>
-            <Col offset={1}>
-              <Button 
-                title="LOG IN"
-                color="#0A0A0A"
-                onPress={() => {
-                    eventEmitter.emit('openModal')
-                  }
-                }
-              ></Button>
-            </Col>
-          </Row>)
-        },
-        backgroundColor: "#fff"
-      }
-    }
-
-    ...
-    
-    // in styles:
-
-    titleImage: {
-      width: 120,
-      height: 24,
-      resizeMode: 'stretch' 
-    }
-```
-
-### main screen layout
-
-Note:
-
-Remember that paddingTop and marginTop when given as percentages are percentages of the parent view's width, not of its height. This is per the CSS spec.
-
-```
-  <Row  style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={60} offset={6} >
-        <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-        PREVIOUS ORDERS
-        </Text>
-      </Col>
-      <Col size={34} offset={-6} hAlign='right'>
-            <Text style={{ fontSize: 16, color: '#BD1206'}}>
-              SEE ALL
-            </Text>
-      </Col>
-  </Row>
-
-  <Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={80} offset={6} >
-
-        <Row wrap>
-          <Col size={50} breakPoints={{sm: 200}}>
-            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
-            <Row>
-              <Col size={5}>
-                <FontAwesome name='shopping-cart' size={17} color='gray'/>
-              </Col>
-              <Col size={60} offset={2.5}>
-                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
-              </Col>
-            </Row>
-          </Col>
-          <Col size={50} breakPoints={{sm: 200}}>
-            <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
-            <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>
-          </Col> 
-        
-        </Row>    
-
-      </Col>
-      <Col size={14} offset={-6} hAlign='right'>
-            <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
-      </Col>
-  </Row>
-
-  <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={80} offset={6}>
-        <Row wrap>
-          <Col size={50} breakPoints={{sm: 200}}>
-            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 8, 2017</Text>
-            <Row >
-              <Col size={5}>
-                <FontAwesome name='cutlery' size={17} color='gray'/>
-              </Col>
-              <Col size={60} offset={2.5}>
-                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>DINE-IN ORDER</Text>
-              </Col>
-            </Row>
-          </Col>
-          <Col size={50} breakPoints={{sm: 200}}>
-            <Text style={{fontSize: 16, color: '#0a0a0a'}}>Linguini Alfredo</Text> 
-          </Col>
-        </Row>
-      </Col>
-      <Col size={14} offset={-6} hAlign='right'>
-            <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
-      </Col>
-  </Row>
-
-  <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={80} offset={6}>
-        <Row wrap>
-          <Col size={50} breakPoints={{sm: 200}}>      
-            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
-            <Row>
-              <Col size={5}>
-                <FontAwesome name='cutlery' size={17} color='gray'/>
-              </Col>
-              <Col size={60} offset={2.5}>
-                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
-              </Col>
-            </Row>
-          </Col>
-          <Col size={50} breakPoints={{sm: 200}}>
-            <Text style={{fontSize: 16, color: '#0a0a0a'}}>Double Cheese Burger</Text>                                                                          
-          </Col>
-        </Row>
-      </Col>
-      <Col size={14} offset={-6} hAlign='right'>
-            <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
-      </Col>
-  </Row>
-
-  <Row  style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-      <Col size={60} offset={6}>
-        <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-        FAVORITE ITEMS
-        </Text>
-      </Col>
-      <Col size={34} offset={-6} hAlign='right'>
-            <Text style={{ fontSize: 16, color: '#BD1206'}}>
-            ADD MORE
-            </Text>
-      </Col>
-  </Row>
-
-  <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-    <Col size={60} offset={6}>
-      <Text style={{fontSize: 16, color: 'black'}}>
-      Linguini Alfredo
-      </Text>
-    </Col>
-      <Col size={34} offset={-6} hAlign='right'>
-            <FontAwesome name='star' size={24} color='#BD1206'/>
-      </Col>
-  </Row>
-
-  <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-    <Col size={60} offset={6}>
-      <Text style={{fontSize: 16, color: 'black'}}>
-      Double Cheese Burger
-      </Text>
-    </Col>
-      <Col size={34} offset={-6} hAlign='right'>
-            <FontAwesome name='star' size={24} color='#BD1206'/>
-      </Col>
-  </Row>
-```
-
-## Design Principles
-
-### _Simple Calculations_
-
-This grid fixes the mental model for grid based layouts by abandoning the format-based, columns-per-view approach (e.g. "12 column grid") and instead allowing the developer to specify the width of each grid column as a percentage of parent view's size, so 10% meams 10 column grid, and 8.333% means a 12 column grid etc. But let's not think in terms of columns per grid! That is a formatting model, not a layout system. There is no reason for a grid to be 11, 12, 13, 14, 15 or 16.6 columns. The number should be determined by actual layout needs, not by some fixed format. Plus, all other style measurements are done using percentages when making layouts that respond linearly to screen size changes, so why should we measure column width as n:12 (or n:11 etc) and yet measure everything else as n:100? It's time to fix this mental impedence mismatch and move beyond the fixed-column grid toward a free-form layout model, one that allows us to leverage the consistent, repeatable, and nestable pattern of Rows and Columns, but in a more fluid and mathematically simpler way. 
-
-### _Simple Layout_
-
-While most React Native developers use `flex: n` (which is based on Facebook's Yoga layout algorithm) rather than the confusing mess of `flexGrow`, `flexShrink` and `flexBasis` (lots has been written about the Flexbox spec and its steep learning curve, e.g. [flex-grow is weird. Or is it?](https://css-tricks.com/flex-grow-is-weird/)) there is still a fundamental problem with using `flex: n` since n is not a percentage of the parent view's computed or explicit width or height (as percentages are in CSS) but a comparative size factor! It's much easier to say the parent view's width or height is 100% and divide that however we like, e.g. 20%, 35% and 45% than to specify n as 0.2, 0.35 and 0.45 because the latter set of values do not correspond to percentages. You can see that by adding a fourth item with some value, e.g. 0.5, which will cause all four elements to be contained in the full width or full height of the parent (width or height depends on parent's flexDirection) so n=0.2 no longer means 20% and n=0.5 no longer means 50%. It just means that the fourth item we added is 2.5 (0.5 divided by 0.2) times wider or taller than the first item. We lose perspective on the item size relative to the size of its parent as Flexbox is concerned with the item sizes relative to each other rather that the size of each item relative to a single parent. It's like O(n) vs O(n^2) complexity for these two different sizing models in that instead of relating the size of each item to the size of its parent as a percentage (n steps), with `flex: n` we relate the size of each item to the size of each other (sibling) item (n^2 steps.) That's because we don't have a single scale (parent's width or height) to measure against. More importantly, we give up direct knowledge of each item's width as a percentage of the parent's width in favor of having comparative size factors for the sibling items. However, there are times when we'd like to have that, so this grid does not take that ability away from us. In fact, this grid relies heavily (under the hood) on Flexbox features like flexDirection, justifyContent, alignItems, and alignContent, but it uses them under the hood and combines them with a simple percentage-based layiut model. This results in a layout system that is simple and predictable, yet powerful.
-
-### _RTL Support_
-
-Sometimes, we lay things out from left to right (LTR.) Other times, we might find it easier to lay things out from right to left (RTL.) I've found that RTL support to be generally lacking in both React and React Native grids, so I've added support for it. React makes it really simple. This can be very useful for apps with right-to-left text, i.e. Arabic, Aramaic, Azeri, Dhivehi/Maldivian, Hebrew, Kurdish (Sorani), Persian/Farsi, and Urdu.
-
-### _Consistency, Repeatability, Nestability_
-
-To keep the grid's structure and design simple (as well as logical and consistent) Rows may not contain other Rows as children. They must be wrapped in a Column inside the row) and Columns may not contain other columns as children. They must be wrapped in a Row inside the column. The "grid" construct has been redued to its essence here, which is a composition of Rows and Columns. 
-
-### _Predictable Dynamic Layout_
-
-Being able to readt to layout changes, including changes due to device rotation (for apps that allow it), is a key aspect of responsive design. This grid is designed to enable dynamic response to layout changes (see the demos at the start of this Readme) 
-
-Columns and Rows have `position: 'relative'` enforced by design to keep them within the layout flow. Each can be moved about within their parent Row and Column, respectively, using top and bottom margins and/or offsets. They can be made to overlap within the row using a negative offset, and overlap across rows using a negative top margin. The intent is to allow movement of rows and columns without taking them out of the layout flow. This is required to work around a Flexbox layout spec glitch/deviation in React Native and to react to make reaction to layout change more predictable.
-
-Elements, including Column elements, must be wapped in a Row in order for the grid to react to layout changes in those elements, including their mounting, un-mounting and re-mounting. You can decide where the re-rendering happens in the component subtree by placing the `layoutEvent` prop at the desired Row node (see layoutEvent demo markup in Introduction.)
+(see [Even More Examples](https://github.com/idibidiart/react-native-responsive-grid/EvenMorteExamples.md))
 
 ## Props
 
 All props are case sensitive.
 
-`aspectRatio` (see Examples)
+`aspectRatio` (see [Example 1](https://github.com/idibidiart/react-native-responsive-grid#example-1))
 
-`breakPoints` (see Examoles)
+`breakPoints` (see [Example 2](https://github.com/idibidiart/react-native-responsive-grid#example-2))
+
+`layoutEvent` (see [Example 3](https://github.com/idibidiart/react-native-responsive-grid#example-3))
 
 `size` may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or explicitly set width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
 
