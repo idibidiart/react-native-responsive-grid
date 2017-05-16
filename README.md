@@ -332,7 +332,16 @@ This nested percentages model applies to offsets, too.
 
 ### RTL Support
 
-This is intended for Hebrew and Arabic layouts, which are right to left.
+This is intended for right-to-left (RTL) layouts and apps that have their text in any of the following languages: 
+
+- Arabic
+- Aramaic
+- Azeri
+- Dhivehi/Maldivian
+- Hebrew
+- Kurdish (Sorani)
+- Persian/Farsi
+- Urdu
 
 Notice the reversed order of the Text relative to the physical order in the markup. Also notice that columns are justified as flex-end within the row and their content is rightAligned (except for the second column which is explicitly leftAligned to mimic the rightAligned behavior in normal ltr layout)
 
