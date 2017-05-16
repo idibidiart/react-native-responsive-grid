@@ -26,6 +26,8 @@ You may use this grid to build responsive 2D layouts that maintain their relativ
 
 The demos in the videos above show some of the possibilities, but this grid is capable of far more complex responsive behavior, using a sinmple set of rules (see Props and Usage sections.) 
 
+**Demo 1**
+
 In the first demo, the grid picks the image with the **closest aspect ratio** to the device aspect ratio, dynamically, taking into account the current device orientation. The images themselves must be cropped by the designer so that they match the common device aspect ratios (see below) while also showing the part of the image that the designer intends to show for each aspect ratio. Since there could be many aspect ratios that correspond to different devices we should have multiple such images (and, optionally, their rotated versions.)
 
 The following table maps some common device aspect ratios to the ratio of width/height of devices known to this developer, for both landscape and portrait device orientations. The physical device aspect ratio does not change with device rotation (i.e. a device with 16:9 aspect ratio does not become one with a 9:16 aspect ratio when it's rotated, although it does mathematically), but since the width and height get flipped when changing orientation from portrait to lanscape and vice versa, we need to have two images per each physical device aspect ratio, one for portrait mode and the other for landscape. However, if our app only supports portrait or landscape mode then we only need to have the one corresponding to that orientation. 
@@ -52,8 +54,6 @@ The following table maps some common device aspect ratios to the ratio of width/
 | '4:3' | 1024 | 1366 | 0.75 | Large iPad Pro
 | '1:1' | 1 | ? | ? | ?
 
-**Example**
-
 ```
     <Row>
       <Col fullWidth aspectRatio={{ratio: '3:2', orientation: "portrait"}}>
@@ -78,6 +78,8 @@ The following table maps some common device aspect ratios to the ratio of width/
 ```
 -
 
+**Demo 2**
+
 In the second demo, the grid folds columns in a row that has been tagged with 'wrap' prop using the, using the screen-device-depebdent `breakPoints` prop on the column. This means that different break points can be supplied for the different screen sizes. 
 
 The following are the screen width thresholds:
@@ -86,8 +88,6 @@ The following are the screen width thresholds:
 - md: > 480 and < 1024
 - lg: >= 1024 and < 1366
 - xl: >= 1366 
-
-**Example**
 
 ```
     <Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
@@ -119,9 +119,10 @@ The following are the screen width thresholds:
     </Row>
 ```
 
+**Demo 3**
+
 In the third demo, the grid emits an event from a specific row in the rendered component subtree that is subscribed to by the root component for that subtree (the Home route component in this case.) This allows the Home screen component to determine what and how to render based on both the new screen dimensions (due to orientation change) as well as the new computed value of the dimensions (incl. margins/padding) of the given row in the component subtree. In other words, it enables the component to decide what and how to render its subtree when layout changes for any given node in the subtree.
 
-**Example**
 
 ```
   import React, { Component} from 'react'
