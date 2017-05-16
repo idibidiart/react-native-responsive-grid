@@ -380,5 +380,5 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
 
 ## Even More Examples
 
-See [here](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMoreExamples.md)
+[More here!](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMoreExamples.md)
 
