@@ -77,7 +77,7 @@ export default class Column extends React.Component {
       const screenInfo = ScreenInfo()
 
       this.flex =  this.props.style && this.props.style.flex !== undefined ? 
-                  this.props.style.flex : undefined
+                  this.props.style.flex : 0
 
       this.width = fullWidth ? '100%' : 
                 (this.props.style && this.props.style.width !== undefined ? 

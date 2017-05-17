@@ -30,6 +30,9 @@ You may use this grid to build responsive 2D layouts that maintain their relativ
 ## [Example 3: layoutEvent](https://www.youtube.com/watch?v=99J3c_Zn6QU) 
 [![>> layoutEvent demo <<](https://img.youtube.com/vi/99J3c_Zn6QU/0.jpg)](https://www.youtube.com/watch?v=99J3c_Zn6QU)
 
+## [Example 4: FlatList](https://www.youtube.com/watch?v=qLqxat3wX_8)
+[![>> FlatList Demo <<](https://img.youtube.com/vi/qLqxat3wX_8/0.jpg)](https://www.youtube.com/watch?v=qLqxat3wX_8)
+
 The demos in the videos above show some of the possibilities, but this grid is capable of more complex responsive and adaptive behavior.
 
 ### Example 1
@@ -126,7 +129,7 @@ The following are the screen width thresholds:
 
 ### Example 3
 
-In the third demo, the grid emits an event from a specific row in the rendered component subtree that is subscribed to by the root component for that subtree (the Home route component in this case.) This allows the Home screen component to determine what and how to render based on both the new screen dimensions (due to orientation change) as well as the new computed value of the dimensions (incl. margins/padding) of the given row in the component subtree. In other words, it enables the component to decide what and how to render its subtree when layout changes for any given node in the subtree.
+In the third demo, the grid normally propagates React Native's layout event from Rows as a generic event that is subscribed to by all Rows which causes all Rows and their child Columns to re-render whenever any Row experiences layout change. If 'layoutEvent' is supplied as a prop on a Row with a user-supplied event name the Row will only propagate the event (rather than re-render) and it will not cause it other Rows to re-render. This is useful when we wish to react to layout change on per-row basis. The example below shows how we may listen and react to such specific layout events in components that use the grid.
 
 
 ```
@@ -154,8 +157,9 @@ In the third demo, the grid emits an event from a specific row in the rendered c
       }
 
     componentWillMount() {
-      this.sub = DeviceEventEmitter.addListener("someEvent", (e) => {
-        this.setState(e)
+      this.sub = DeviceEventEmitter.addListener("someEventKey", (e) => {
+
+        this.setState({someEventKey: e})
       })
 
     }
@@ -165,32 +169,32 @@ In the third demo, the grid emits an event from a specific row in the rendered c
     }
 
     contentReady = () => {
-              if (this.state && this.state.screenInfo && this.state.elementInfo) {
+              if (this.state && this.state.someEventKey) {
                 return (
                     <Col fullWidth hAlign='center'>
                       <Row>
-                        <Text style={{fontSize: 20}}>screen width: {this.state.screenInfo.width}</Text>
+                        <Text style={{fontSize: 20}}>screen width: {this.state.someEventKey.screenInfo.width}</Text>
                       </Row>
                       <Row>
-                        <Text style={{fontSize: 20}}>screen height: {this.state.screenInfo.height}</Text>
+                        <Text style={{fontSize: 20}}>screen height: {this.state.someEventKey.screenInfo.height}</Text>
                       </Row>
                       <Row>
-                        <Text style={{fontSize: 20}}>orientation: {this.state.screenInfo.aspectRatio.currentOrientation}</Text>
+                        <Text style={{fontSize: 20}}>orientation: {this.state.someEventKey.screenInfo.aspectRatio.currentOrientation}</Text>
                       </Row>
                       <Row>
-                        <Text style={{fontSize: 20}}>aspect ratio: {this.state.screenInfo.aspectRatio.currentNearestRatio}</Text>
+                        <Text style={{fontSize: 20}}>aspect ratio: {this.state.someEventKey.screenInfo.aspectRatio.currentNearestRatio}</Text>
                       </Row>
                       <Row>
-                        <Text style={{fontSize: 20}}>element width: {this.state.elementInfo.width}</Text>
+                        <Text style={{fontSize: 20}}>element width: {this.state.someEventKey.rowInfo.width}</Text>
                       </Row>
                       <Row>
-                        <Text style={{fontSize: 20}}>element height: {this.state.elementInfo.height}</Text>
+                        <Text style={{fontSize: 20}}>element height: {this.state.someEventKey.rowInfo.height}</Text>
                       </Row>
                       <Row>
-                        <Text style={{fontSize: 20}}>element x: {this.state.elementInfo.x}</Text>
+                        <Text style={{fontSize: 20}}>element x: {this.state.someEventKey.rowInfo.x}</Text>
                       </Row>
                       <Row>
-                        <Text style={{fontSize: 20}}>element y: {this.state.elementInfo.y}</Text>
+                        <Text style={{fontSize: 20}}>element y: {this.state.someEventKey.rowInfo.y}</Text>
                       </Row>
                     </Col>)
               } else {
@@ -200,9 +204,9 @@ In the third demo, the grid emits an event from a specific row in the rendered c
 
     render() {
       return (
-        <Row fullHeight fullWidth vAlign='middle' hAlign='center'>
-          <Col size={50} style={{backgroundColor: 'pink', padding: '5%'}}>
-            <Row layoutEvent="someEvent" style={{backgroundColor: 'yellow'}}> 
+        <Row fullHeight fullWidth vAlign='middle' hAlign='center' style={{backgroundColor: 'orange'}}>
+          <Col size={50} style={{backgroundColor: 'pink', padding: '0%'}}>
+            <Row layoutEvent="someEventKey"  style={{backgroundColor: 'yellow'}}> 
               {this.contentReady()}
             </Row>
           </Col>
@@ -210,6 +214,110 @@ In the third demo, the grid emits an event from a specific row in the rendered c
     }
   }
 ``` 
+
+### Example 4
+
+FlatList is a virtualized replacement for React Native's old ListView component. Using FlatList as a container is supported by this grid. 
+
+```
+  import React, { Component } from 'react';
+  import {
+    FlatList,
+    Text,
+    ScrollView
+  } from 'react-native';
+
+  import { Row, Column as Col} from './grid'
+
+  import { MaterialIcons } from '@expo/vector-icons';
+
+  import faker from 'faker';
+
+  let j = 0
+  const randomUsers = (count = 100) => {
+    const arr = [];
+    for (let i = 0; i < count; i++) {
+      arr.push({
+        key: faker.random.uuid(),
+        date: faker.date.weekday(),
+        name: faker.name.firstName(),
+        job: faker.name.jobTitle(),
+        index: j++
+      })
+    }
+    return arr
+  }
+
+  export default class Home extends Component {
+    state = {
+      refreshing: true,
+      data: randomUsers(100),
+    };
+
+    onEndReached = () => {
+      const data = [
+          ...this.state.data,
+          ...randomUsers(100),
+        ]
+
+      this.setState(state => ({
+        data
+      }));
+    };
+
+    onRefresh = () => {
+      this.setState({
+        data: randomUsers(100),
+      });
+    }
+
+    render() {
+      return (
+        <ScrollView>
+          <FlatList
+            data={this.state.data}
+            initialNumToRender={100}
+            onEndReachedThreshold={.1}
+            onEndReached={this.onEndReached}
+            refreshing={this.state.refreshing}
+            onRefresh={this.onRefresh}
+            renderItem={({ item }) => {
+              return (
+                  <Row key={item.key} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+                      <Col size={80} offset={6} >
+
+                        <Row wrap>
+                          <Col size={60} breakPoints={{sm: 200}}>
+                            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>{String(item.date)}</Text>
+                            <Row>
+                              <Col size={10}>
+                                <MaterialIcons name='person' size={17} color='gray'/>
+                              </Col>
+                              <Col smSize={60} size={87.5} offset={2.5}>
+                                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>{item.job}</Text>
+                              </Col>
+                            </Row>
+                          </Col>
+                          <Col size={40} breakPoints={{sm: 200}}>
+                            <Text style={{fontSize: 16, color: '#0a0a0a'}}>{item.name}</Text>
+                          </Col> 
+                      
+                        </Row>    
+
+                      </Col>
+                      <Col size={14} offset={-6} hAlign='right'>
+                            <Text>{item.index}</Text>
+                      </Col>
+                  </Row>
+              );
+            }}
+          />
+        </ScrollView>
+      );
+    }
+  }
+```
+
 
 ## Props
 
@@ -219,7 +327,7 @@ All props are case sensitive.
 
 `breakPoints` (see [Example 2](https://github.com/idibidiart/react-native-responsive-grid#example-2))
 
-`layoutEvent` (see [Example 3](https://github.com/idibidiart/react-native-responsive-grid#example-3))
+`layoutEventKey` (see [Example 3](https://github.com/idibidiart/react-native-responsive-grid#example-3))
 
 `size` may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or explicitly set width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
 

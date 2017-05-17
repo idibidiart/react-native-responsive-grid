@@ -2,11 +2,31 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {ScreenInfo} from '../lib/ScreenInfo';
 import {isHidden} from '../lib/helpers';
-import {View, DeviceEventEmitter, InteractionManager} from 'react-native';
+import {View, DeviceEventEmitter} from 'react-native';
 
 export default class Row extends React.Component {
   constructor(props, context) {
       super (props, context)
+
+      this.sub = DeviceEventEmitter.addListener("layoutEvent", (e) => {
+          this.setState({layoutEvent: 1})
+      })
+  }
+
+  componentWillUnmount = () => {
+    this.sub.remove()
+  }
+
+  callback = (e) => {
+      const event = {
+                      screenInfo: ScreenInfo(), 
+                      rowInfo: e.nativeEvent.layout
+                    }
+      if (this.props.layoutEvent) {
+        DeviceEventEmitter.emit(this.props.layoutEvent, event)
+      } else {
+        DeviceEventEmitter.emit("layoutEvent", event)
+      }
   }
 
   cloneElements = (props) => {
@@ -53,7 +73,8 @@ export default class Row extends React.Component {
       ...rest
     } = this.props
 
-    // expose these static props for testing
+    this.flex =  this.props.style && this.props.style.flex !== undefined ? 
+            this.props.style.flex : 0
     // left/flex-start is default
     this.alignX =  (hAlign === 'space' ? 'space-between' : (hAlign === 'distribute' ? 'space-around' : (hAlign === 'center' ? 'center' : (hAlign === 'right' ? 'flex-end' : 'flex-start'))))
     // top/flex-start is default
@@ -72,23 +93,15 @@ export default class Row extends React.Component {
     try {
         return (
             <View 
-              onLayout={(e)=> {
-                    e.persist()
-                    InteractionManager.runAfterInteractions(() => {
-                        this.setState({layoutTriggered: +new Date()})
-                        if (layoutEvent) {
-                            DeviceEventEmitter.emit(layoutEvent, {
-                                                      screenInfo: ScreenInfo(), 
-                                                      elementInfo: e.nativeEvent.layout
-                                                      })
-                        }
-                    })
-   
-                }
-              }
+                onLayout={(e) => {
+                        e.persist()
+                        this.callback(e)
+                    }
+                  }
               ref={component => this._root = component} {...rest}
               style={[this.props.style,
                       { 
+                        flex: this.flex,
                         flexDirection: 'row',
                         alignContent: this.alignLines, 
                         flexWrap: this.wrapState,
