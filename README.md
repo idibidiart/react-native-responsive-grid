@@ -327,7 +327,7 @@ All props are case sensitive.
 
 `breakPoints` (see [Example 2](https://github.com/idibidiart/react-native-responsive-grid#example-2))
 
-`layoutEventKey` (see [Example 3](https://github.com/idibidiart/react-native-responsive-grid#example-3))
+`layoutEvent` (see [Example 3](https://github.com/idibidiart/react-native-responsive-grid#example-3))
 
 `size` may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or explicitly set width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
 
