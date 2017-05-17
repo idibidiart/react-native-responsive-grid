@@ -1,5 +1,5 @@
 
-# Responsive and Adaptive Layout for React Native 
+# Responsive, Adaptive Declarative Layout for React Native 
 
 ### Install
 
