@@ -63,27 +63,27 @@ The following table maps some common device aspect ratios to the ratio of width/
 | '4:3' | 1024 | 1366 | 0.75 | Large iPad Pro
 | '1:1' | 1 | ? | ? | ?
 
-```
-    <Row>
-      <Col fullWidth aspectRatio={{ratio: '3:2', orientation: "portrait"}}>
-          <Image source={require('./assets/homepage hero-3-2-portrait.jpg')} style={styles.homeImage}></Image>
-      </Col>
-    </Row>
-    <Row>
-      <Col fullWidth aspectRatio={{ratio: '3:2', orientation: "landscape"}}>
-          <Image source={require('./assets/homepage hero-3-2-landscape.jpg')} style={styles.homeImage}></Image>
-      </Col>
-    </Row>
-    <Row>
-      <Col fullWidth aspectRatio={{ratio: '16:9', orientation: "portrait"}}>
-          <Image source={require('./assets/homepage hero-16-9-portrait.jpg')} style={styles.homeImage}></Image>
-      </Col>
-    </Row>
-    <Row>
-      <Col fullWidth aspectRatio={{ratio: '16:9', orientation: "landscape"}}
-          <Image source={require('./assets/homepage hero-16-9-landscape.jpg')} style={styles.homeImage}></Image>
-      </Col>
-    </Row>
+```jsx
+<Row>
+  <Col fullWidth aspectRatio={{ratio: '3:2', orientation: "portrait"}}>
+      <Image source={require('./assets/homepage hero-3-2-portrait.jpg')} style={styles.homeImage}></Image>
+  </Col>
+</Row>
+<Row>
+  <Col fullWidth aspectRatio={{ratio: '3:2', orientation: "landscape"}}>
+      <Image source={require('./assets/homepage hero-3-2-landscape.jpg')} style={styles.homeImage}></Image>
+  </Col>
+</Row>
+<Row>
+  <Col fullWidth aspectRatio={{ratio: '16:9', orientation: "portrait"}}>
+      <Image source={require('./assets/homepage hero-16-9-portrait.jpg')} style={styles.homeImage}></Image>
+  </Col>
+</Row>
+<Row>
+  <Col fullWidth aspectRatio={{ratio: '16:9', orientation: "landscape"}}
+      <Image source={require('./assets/homepage hero-16-9-landscape.jpg')} style={styles.homeImage}></Image>
+  </Col>
+</Row>
 ```
 
 ### Example 2
@@ -97,34 +97,34 @@ The following are the screen width thresholds:
 - lg: >= 1024 and < 1366
 - xl: >= 1366 
 
-```
-    <Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={80} offset={6} >
+```jsx
+<Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Col size={80} offset={6} >
 
-          <Row wrap>
-            <Col size={50} breakPoints={{sm: 200}}>
-              <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
-              <Row>
-                <Col size={5}>
-                  <FontAwesome name='shopping-cart' size={17} color='gray'/>
-                </Col>
-                <Col size={60} offset={2.5}>
-                  <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
-                </Col>
-              </Row>
+      <Row wrap>
+        <Col size={50} breakPoints={{sm: 200}}>
+          <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
+          <Row>
+            <Col size={5}>
+              <FontAwesome name='shopping-cart' size={17} color='gray'/>
             </Col>
-            <Col size={50} breakPoints={{sm: 200}}>
-              <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
-              <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>
-            </Col> 
-          
-          </Row>    
+            <Col size={60} offset={2.5}>
+              <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
+            </Col>
+          </Row>
+        </Col>
+        <Col size={50} breakPoints={{sm: 200}}>
+          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
+          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>
+        </Col> 
 
-        </Col>
-        <Col size={14} offset={-6} hAlign='right'>
-              <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
-        </Col>
-    </Row>
+      </Row>    
+
+    </Col>
+    <Col size={14} offset={-6} hAlign='right'>
+          <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
+    </Col>
+</Row>
 ```
 
 ### Example 3
@@ -132,17 +132,17 @@ The following are the screen width thresholds:
 In the third demo, the grid normally propagates React Native's layout event from Rows as a generic event that is subscribed to by all Rows which causes all Rows and their child Columns to re-render whenever any Row experiences layout change. If 'layoutEvent' is supplied as a prop on a Row with a user-supplied event name the Row will only propagate the event (rather than re-render) and it will not cause it other Rows to re-render. This is useful when we wish to react to layout change on per-row basis. The example below shows how we may listen and react to such specific layout events in components that use the grid.
 
 
-```
-  import React, { Component} from 'react'
-  import {
-      View,
-      Text,
-      DeviceEventEmitter
-  } from 'react-native'
+```jsx
+import React, { Component} from 'react'
+import {
+  View,
+  Text,
+  DeviceEventEmitter
+} from 'react-native'
 
-  import { Row, Column as Col} from './grid'
+import { Row, Column as Col} from './grid'
 
-  export default class Home extends React.Component {
+export default class Home extends React.Component {
     constructor (props) {
       super(props)
       this.sub = null
@@ -154,14 +154,12 @@ In the third demo, the grid normally propagates React Native's layout event from
           renderTitle: "Layout Event Demo",
           backgroundColor: "#fff"
         }
-      }
+    }
 
     componentWillMount() {
       this.sub = DeviceEventEmitter.addListener("someEventKey", (e) => {
-
         this.setState({someEventKey: e})
       })
-
     }
 
     componentWillUnmount() {
@@ -169,37 +167,38 @@ In the third demo, the grid normally propagates React Native's layout event from
     }
 
     contentReady = () => {
-              if (this.state && this.state.someEventKey) {
-                return (
-                    <Col fullWidth hAlign='center'>
-                      <Row>
-                        <Text style={{fontSize: 20}}>screen width: {this.state.someEventKey.screenInfo.width}</Text>
-                      </Row>
-                      <Row>
-                        <Text style={{fontSize: 20}}>screen height: {this.state.someEventKey.screenInfo.height}</Text>
-                      </Row>
-                      <Row>
-                        <Text style={{fontSize: 20}}>orientation: {this.state.someEventKey.screenInfo.aspectRatio.currentOrientation}</Text>
-                      </Row>
-                      <Row>
-                        <Text style={{fontSize: 20}}>aspect ratio: {this.state.someEventKey.screenInfo.aspectRatio.currentNearestRatio}</Text>
-                      </Row>
-                      <Row>
-                        <Text style={{fontSize: 20}}>element width: {this.state.someEventKey.rowInfo.width}</Text>
-                      </Row>
-                      <Row>
-                        <Text style={{fontSize: 20}}>element height: {this.state.someEventKey.rowInfo.height}</Text>
-                      </Row>
-                      <Row>
-                        <Text style={{fontSize: 20}}>element x: {this.state.someEventKey.rowInfo.x}</Text>
-                      </Row>
-                      <Row>
-                        <Text style={{fontSize: 20}}>element y: {this.state.someEventKey.rowInfo.y}</Text>
-                      </Row>
-                    </Col>)
-              } else {
-                return null
-              }
+      if (this.state && this.state.someEventKey) {
+        return (
+            <Col fullWidth hAlign='center'>
+              <Row>
+                <Text style={{fontSize: 20}}>screen width: {this.state.someEventKey.screenInfo.width}</Text>
+              </Row>
+              <Row>
+                <Text style={{fontSize: 20}}>screen height: {this.state.someEventKey.screenInfo.height}</Text>
+              </Row>
+              <Row>
+                <Text style={{fontSize: 20}}>orientation: {this.state.someEventKey.screenInfo.aspectRatio.currentOrientation}</Text>
+              </Row>
+              <Row>
+                <Text style={{fontSize: 20}}>aspect ratio: {this.state.someEventKey.screenInfo.aspectRatio.currentNearestRatio}</Text>
+              </Row>
+              <Row>
+                <Text style={{fontSize: 20}}>element width: {this.state.someEventKey.rowInfo.width}</Text>
+              </Row>
+              <Row>
+                <Text style={{fontSize: 20}}>element height: {this.state.someEventKey.rowInfo.height}</Text>
+              </Row>
+              <Row>
+                <Text style={{fontSize: 20}}>element x: {this.state.someEventKey.rowInfo.x}</Text>
+              </Row>
+              <Row>
+                <Text style={{fontSize: 20}}>element y: {this.state.someEventKey.rowInfo.y}</Text>
+              </Row>
+            </Col>
+        )
+      } else {
+        return null
+      }
     }
 
     render() {
@@ -210,16 +209,17 @@ In the third demo, the grid normally propagates React Native's layout event from
               {this.contentReady()}
             </Row>
           </Col>
-        </Row>)
+        </Row>
+      )
     }
-  }
+}
 ``` 
 
 ### Example 4
 
 FlatList is a virtualized replacement for React Native's old ListView component. Using FlatList as a container is supported by this grid. 
 
-```
+```jsx
 import React, { Component } from 'react';
 import {
   FlatList,
@@ -372,7 +372,7 @@ The following are the screen width thresholds for these props:
 
 If you're nesting a column inside a row which is inside another column that is inside another row as below:
 
-```
+```jsx
 <Row>
     <Col size={50}>
       <Row>
@@ -411,43 +411,43 @@ Notice the reversed order of the Text relative to the physical order in the mark
 
 ### Normal LTR Markup 
 
-```
-    <Row style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={60} offset={6} >
-          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-          PREVIOUS ORDERS
-          </Text>
-        </Col>
-        <Col size={30} hAlign='right'>
-          <Text style={{ fontSize: 16, color: '#BD1206'}}>
-            SEE ALL
-          </Text>
-        </Col>
-    </Row>
+```jsx
+<Row style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Col size={60} offset={6} >
+      <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+      PREVIOUS ORDERS
+      </Text>
+    </Col>
+    <Col size={30} hAlign='right'>
+      <Text style={{ fontSize: 16, color: '#BD1206'}}>
+        SEE ALL
+      </Text>
+    </Col>
+</Row>
 ```
 
 ### RTL Markup
 
 Notice the offset values work in RTL direction now. The addition of .7 offset is to mimic the fact that the left margin in the LTR layout is smaller than the right margin in that layout, whereas it's the opposite in the RTL direction. So the .7 offset is used in RTL layout instead of the 1 offset, so alignment is identical. 
 
-```
-    <Row rtl style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-        <Col size={60} offset={4} >
-          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-          PREVIOUS ORDERS
-          </Text>
-        </Col>
-        <Col size={30} hAlign='left'>
-          <Text style={{ fontSize: 16, color: '#BD1206'}}>
-            SEE ALL
-          </Text>
-        </Col>
-    </Row>
+```jsx
+<Row rtl style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+    <Col size={60} offset={4} >
+      <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+      PREVIOUS ORDERS
+      </Text>
+    </Col>
+    <Col size={30} hAlign='left'>
+      <Text style={{ fontSize: 16, color: '#BD1206'}}>
+        SEE ALL
+      </Text>
+    </Col>
+</Row>
 ```
 
 ## More Examples
 
-```
+```jsx
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
 <Row>
@@ -459,7 +459,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 In the example abovw, on a phone in portrait mode, the Column would take up 50% of the row's computed width. On a phone in landscape nmode or a normal tablet the Column would take up 33.333% of the row's width. On a big tablet the Column would take up 25% of the row's width.
 
-```
+```jsx
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
 <Row style={{height: 20}}>
@@ -471,7 +471,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 
 In the example above, the text "test" will move further to the right with larger screen sizes.
 
-```
+```jsx
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
 <Row>
