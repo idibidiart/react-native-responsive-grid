@@ -14,7 +14,7 @@ Sometimes, we lay things out from left to right (LTR.) Other times, we might fin
 
 ### _Consistency, Repeatability, Nestability_
 
-To keep the grid's structure logical and consistent, Rows may not contain other Rows as children. They must be wrapped in a Column. Likewise, Columns may not contain other Columns as children. They must be wrapped in a Row. The "grid" construct is extended beyond its archetypal form as a regular 2D mesh and generalized as a hierarchical composition  of Rows containing one or more Columns and Columns containing one or more rows. Both Rows and Columns can be styled using predictable percentage-based dimensions, padding and margins. Rows can be aligned vertically inside Columns and Columns can be aligned horizontally inside rows. This gives us the ability to build the entire UI component tree using a consistent, repeatable and nestable pattern, one that has dynamic responsiveness and adaptability built in.
+The "grid" construct is extended beyond its archetypal form as a regular 2D mesh and generalized as a hierarchical composition  of Rows containing one or more Columns and Columns containing one or more rows. Both Rows and Columns can be styled using predictable percentage-based dimensions, padding and margins. Rows can be aligned vertically inside Columns and Columns can be aligned horizontally inside rows. This gives us the ability to build the entire UI component tree (or individual component subtrees) using a consistent, repeatable and nestable pattern, one that has dynamic responsiveness and adaptability built into it.
 
 ### _Predictable, Dynamic Layout Behavior_
 
