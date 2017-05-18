@@ -140,7 +140,7 @@ import {
   DeviceEventEmitter
 } from 'react-native'
 
-import { Row, Column as Col} from './grid'
+import { Row, Column as Col} from 'react-native-responsive-grid'
 
 export default class Home extends React.Component {
     constructor (props) {
