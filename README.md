@@ -227,7 +227,7 @@ import {
   ScrollView
 } from 'react-native';
 
-import { Row, Column as Col} from './grid'
+import { Row, Column as Col} from 'react-native-responsive-grid'
 
 import { MaterialIcons } from '@expo/vector-icons';
 
