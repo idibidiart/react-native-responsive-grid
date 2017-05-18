@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {ScreenInfo} from '../lib/ScreenInfo';
 import {isHidden} from '../lib/helpers';
-import {View, DeviceEventEmitter} from 'react-native';
+import {View, DeviceEventEmitter, InteractionManager} from 'react-native';
 
 export default class Row extends React.Component {
   constructor(props, context) {
@@ -95,7 +95,9 @@ export default class Row extends React.Component {
             <View 
                 onLayout={(e) => {
                         e.persist()
-                        this.callback(e)
+                        InteractionManager.runAfterInteractions(() => {
+                          this.callback(e)
+                        })
                     }
                   }
               ref={component => this._root = component} {...rest}
