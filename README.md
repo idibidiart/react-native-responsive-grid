@@ -273,47 +273,45 @@ export default class Home extends Component {
 
   render() {
     return (
-      <ScrollView>
-        <FlatList
-          data={this.state.data}
-          initialNumToRender={10}
-          onEndReachedThreshold={1}
-          onEndReached={this.onEndReached}
-          refreshing={this.state.refreshing}
-          onRefresh={this.onRefresh}
-          renderItem={({ item }) => {
-            return (
-                <Row key={item.key} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-                    <Col size={80} offset={6} >
+      <FlatList
+        data={this.state.data}
+        initialNumToRender={10}
+        onEndReachedThreshold={1}
+        onEndReached={this.onEndReached}
+        refreshing={this.state.refreshing}
+        onRefresh={this.onRefresh}
+        renderItem={({ item }) => {
+          return (
+              <Row key={item.key} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+                  <Col size={80} offset={6} >
 
-                      <Row wrap>
-                        <Col size={60} breakPoints={{sm: 200}}>
-                          <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>{String(item.date)}</Text>
-                          <Row>
-                            <Col size={10}>
-                              <MaterialIcons name='person' size={17} color='gray'/>
-                            </Col>
-                            <Col smSize={60} size={87.5} offset={2.5}>
-                              <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>{item.job}</Text>
-                            </Col>
-                          </Row>
-                        </Col>
-                        <Col size={40} breakPoints={{sm: 200}}>
-                          <Text style={{fontSize: 16, color: '#0a0a0a'}}>{item.name}</Text>
-                        </Col> 
-                     
-                      </Row>    
+                    <Row wrap>
+                      <Col size={60} breakPoints={{sm: 200}}>
+                        <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>{String(item.date)}</Text>
+                        <Row>
+                          <Col size={10}>
+                            <MaterialIcons name='person' size={17} color='gray'/>
+                          </Col>
+                          <Col smSize={60} size={87.5} offset={2.5}>
+                            <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>{item.job}</Text>
+                          </Col>
+                        </Row>
+                      </Col>
+                      <Col size={40} breakPoints={{sm: 200}}>
+                        <Text style={{fontSize: 16, color: '#0a0a0a'}}>{item.name}</Text>
+                      </Col> 
+                    
+                    </Row>    
 
-                    </Col>
-                    <Col size={14} offset={-6} hAlign='right'>
-                          <Text>{item.index}</Text>
-                    </Col>
-                </Row>
-            );
-          }}
-        />
-      </ScrollView>
-    );
+                  </Col>
+                  <Col size={14} offset={-6} hAlign='right'>
+                        <Text>{item.index}</Text>
+                  </Col>
+              </Row>
+          )
+        }}
+      />
+    )
   }
 }
 ```
