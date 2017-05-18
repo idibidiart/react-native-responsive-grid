@@ -11,11 +11,13 @@ In your project folder, `yarn add react-native-responsive-grid`
 
 ## Background
 
-Priot to React Native v0.42 we had no performant and declarative way for specifying percentage-based style values, and we had to do that in the layout event handler, i.e. post layout, which introduced unnecessary imperative logic and sluggishness. Then came React Native v0.42 with built-in support for percentage-based style values. Since then several open source contributors have made responsive grids that take advantage of this new capability. I've taken one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and made some significabnt changes and enhancements to it that have resulted in a simple and powerful layout model with predictable dynamic behavior. 
+Priot to React Native v0.42 there was no performant and declarative way of specifying percentage-based style values. Then came React Native v0.42 with performant support for percentage-based dimensions that may be declared in the style prop. Since then several open source contributors have made responsive grids that take advantage of this new capability. I've taken one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and made some significabnt changes and enhancements to it that have resulted in a simple and powerful layout model with predictable dynamic behavior. 
 
 ## Design TL;DR
 
 This grid eschews Flexbox-based sizing in favor of percentage-based sizing while at the sane time relying on Flexbox for alignment. It delivers the predictability of the percentage-based model with the more sophisticated alignment capasbility of the Flexbox model.
+
+_The "grid" construct is extended beyond its archetypal form as a regular 2D mesh and generalized as a nestable pattern of Rows containing one or more Columns and Columns containing one or more Rows. Both Rows and Columns can be styled using predictable percentage-based dimensions, padding and margins. Rows can be aligned vertically inside Columns and Columns can be aligned horizontally inside rows. [Additionally, the multiple lines created by wrapped Row content may be aligned vertically relative to the parent Column.] This gives us the ability to build the entire UI component tree (or an individual component's subtree) using a consistent, repeatable and nestable pattern, one that has dynamic --not only static-- responsiveness and row-level layout events (for adaptive UI) built into it._
 
 (for more details see [Design Principles](https://github.com/idibidiart/react-native-responsive-grid/blob/master/DesignPrinciples.md))
 
