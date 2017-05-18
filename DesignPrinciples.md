@@ -14,7 +14,7 @@ Sometimes, we lay things out from left to right (LTR.) Other times, we might fin
 
 ### _Consistency, Repeatability, Nestability_
 
-The "grid" construct is extended beyond its archetypal form as a regular 2D mesh and generalized as a hierarchical composition  of Rows containing one or more Columns and Columns containing one or more rows. Both Rows and Columns can be styled using predictable percentage-based dimensions, padding and margins. Rows can be aligned vertically inside Columns and Columns can be aligned horizontally inside rows. This gives us the ability to build the entire UI component tree (or individual component subtrees) using a consistent, repeatable and nestable pattern, one that has dynamic responsiveness and adaptability built into it.
+The "grid" construct is extended beyond its archetypal form as a regular 2D mesh and generalized as a nestable pattern of Rows containing one or more Columns and Columns containing one or more Rows. Both Rows and Columns can be styled using predictable percentage-based dimensions, padding and margins. Rows can be aligned vertically inside Columns and Columns can be aligned horizontally inside rows. [Additionally, the multiple lines created by wrapped Row content may be aligned vertically relative to the parent Column.] This gives us the ability to build the entire UI component tree (or an individual component's subtree) using a consistent, repeatable and nestable pattern, one that has dynamic --not only static-- responsiveness and row-level layout events (for adaptive UI) built into it.
 
 ### _Predictable, Dynamic Layout Behavior_
 
