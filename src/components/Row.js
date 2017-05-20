@@ -7,14 +7,6 @@ import {View, DeviceEventEmitter, InteractionManager} from 'react-native';
 export default class Row extends React.Component {
   constructor(props, context) {
       super (props, context)
-
-      this.sub = DeviceEventEmitter.addListener("layoutEvent", (e) => {
-          this.setState({layoutEvent: 1})
-      })
-  }
-
-  componentWillUnmount = () => {
-    this.sub.remove()
   }
 
   callback = (e) => {
@@ -25,7 +17,7 @@ export default class Row extends React.Component {
       if (this.props.layoutEvent) {
         DeviceEventEmitter.emit(this.props.layoutEvent, event)
       } else {
-        DeviceEventEmitter.emit("layoutEvent", event)
+        this.setState({layoutEvent: 1})
       }
   }
 
