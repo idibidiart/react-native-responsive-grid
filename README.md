@@ -98,9 +98,9 @@ The following table maps some common device aspect ratios to the ratio of width/
 
 ### Example 2
 
-In the second demo, the grid folds columns in a row that has been tagged with 'wrap' prop using the, using the screen-device-depebdent `breakPoints` prop on the column. This means that different break points can be supplied for the different screen sizes. 
+In the second demo, the grid folds columns in a row that has been tagged with 'wrap' prop using the, using the screen-device-depebdent `breakPoints` prop on the column. This means that different break points can be supplied for the different screen sizes. This example demonstrates how to get Row content (e.g. child Columns) to wrap at certain break points (which can be supplied per screen width)
 
-The following are the screen width thresholds:
+The following are the preset screen widths at which breakPoints maybe specified:
 
 - sm: <= 480px 
 - md: > 480 and < 1024
@@ -227,7 +227,7 @@ export default class Home extends React.Component {
 
 ### Example 4
 
-FlatList is a virtualized replacement for React Native's old ListView component. Using FlatList as a container is supported by this grid. 
+FlatList is a virtualized replacement for React Native's old ListView component. Using FlatList as a container is supported by this grid. This example also demonstrate wrapping Column content based on screen size. See ('size' prop under the [Props](https://github.com/idibidiart/react-native-responsive-grid#props) section)
 
 ```jsx
 import React, { Component } from 'react';
