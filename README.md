@@ -34,13 +34,13 @@ You may use this grid to build responsive 2D layouts that maintain their relativ
 ## [Example 1: aspectRatio](https://www.youtube.com/watch?v=Nghqc5QFln8)
 [![>> aspectRatio demo <<](https://img.youtube.com/vi/Nghqc5QFln8/0.jpg)](https://www.youtube.com/watch?v=Nghqc5QFln8)
 
-## [Example 2: breakPoints](https://www.youtube.com/watch?v=GZ1uxWEVAuQ) 
+## [Example 2: breakPoints (Row Wrapping)](https://www.youtube.com/watch?v=GZ1uxWEVAuQ) 
 [![>> responsive break points demo <<](https://img.youtube.com/vi/GZ1uxWEVAuQ/0.jpg)](https://www.youtube.com/watch?v=GZ1uxWEVAuQ)
 
 ## [Example 3: layoutEvent](https://www.youtube.com/watch?v=99J3c_Zn6QU) 
 [![>> layoutEvent demo <<](https://img.youtube.com/vi/99J3c_Zn6QU/0.jpg)](https://www.youtube.com/watch?v=99J3c_Zn6QU)
 
-## [Example 4: FlatList](https://www.youtube.com/watch?v=qLqxat3wX_8)
+## [Example 4: FlatList + Row & Column Wrapping](https://www.youtube.com/watch?v=qLqxat3wX_8)
 [![>> FlatList Demo <<](https://img.youtube.com/vi/qLqxat3wX_8/0.jpg)](https://www.youtube.com/watch?v=qLqxat3wX_8)
 
 The demos in the videos above show some of the possibilities, but this grid is capable of more complex responsive and adaptive behavior.
@@ -294,7 +294,7 @@ export default class Home extends Component {
               <Row key={item.key} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
                 <Col size={80} offset={6} >
                   <Row wrap>
-                    <Col size={60} breakPoints={{sm: 200}}>
+                    <Col size={60} >
                       <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>{String(item.date)}</Text>
                       <Row>
                         <Col size={10}>
@@ -310,7 +310,7 @@ export default class Home extends Component {
                     </Col> 
                   </Row>    
                 </Col>
-                <Col size={14} offset={-6} hAlign='right'>
+                <Col size={8} offset={-6} hAlign='right'>
                       <Text>{item.index}</Text>
                 </Col>
               </Row>
@@ -335,7 +335,7 @@ All props are case sensitive.
 
 `size` may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or explicitly set width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
 
-`smSize`, `mdSize`, `lgSize` and `xlSize` are device-dependent size values that are applied to columns.
+`smSize`, `mdSize`, `lgSize` and `xlSize` are device-dependent size values that are applied to columns. In addition to their utility in deciding the size of content based on screen size, they may are also used for defining column wrapping behavior based on screen size. For example, column content will wrap if column size is made smaller at smaller screen sizes.
 
 `offset` may be applied to Column. Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or explicitly set width. Offset values can also be negative. Default is 0. 
 
