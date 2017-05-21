@@ -27,7 +27,7 @@ With this grid, we don't lose any aspect of the normal rectilinear 2D grid. We j
 
 (for more details see [Design Principles](https://github.com/idibidiart/react-native-responsive-grid/blob/master/DesignPrinciples.md))
 
-## Examples
+## React Native Examples
 
 You may use this grid to build responsive 2D layouts that maintain their relative proportions, change their basic structure in a predictable way and dynamically decide what content to display, based on screen size, aspect ratio, and orientation.  
 
