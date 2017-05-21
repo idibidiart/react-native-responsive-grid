@@ -227,7 +227,7 @@ export default class Home extends React.Component {
 
 ### Example 4
 
-FlatList is a virtualized replacement for React Native's old ListView component. Using FlatList as a container is supported by this grid. This example also demonstrate wrapping Column content based on screen size. See ('size' prop under the [Props](https://github.com/idibidiart/react-native-responsive-grid#props) section)
+FlatList is a virtualized replacement for React Native's old ListView component. Using FlatList as a container is supported by this grid. This example also demonstrate wrapping Column content based on screen size. See ('size' prop under the [Props](https://github.com/idibidiart/react-native-responsive-grid#props) section.) It also demonstrates who to wrap Row content (e.g. child columns) based on screen size (also see [Example 2](https://github.com/idibidiart/react-native-responsive-grid#example-2) for more details)
 
 ```jsx
 import React, { Component } from 'react';
