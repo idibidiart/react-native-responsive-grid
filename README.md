@@ -141,7 +141,7 @@ The following are the preset screen widths at which breakPoints maybe specified:
 
 ### Example 3
 
-In the third demo, normally, each Row automatically rerenders itself upon receiving React Native's laYout event after running any other pending transitions (library user does not have to do anything.) If 'layoutEvent' exists as a prop on a Row with a user-supplied event name the Row will emit its own layout event rather than re-render. This is useful when we wish to react to layout change on per-row basis. The example below shows how we may listen and react to such specific layout events in components.
+In the third demo, normally, each Row automatically rerenders itself upon receiving React Native's layout change event after running any pending transitions (library we do not have to do anything.) If 'layoutEvent' is supplied as a prop on a Row with a Row-specific event name the Row will emit that event upon receiving React Native's layout change event rather than re-render. This is useful when we wish to react to layout change on per-row basis. The example below shows how we may listen and react to such specific layout events in components.
 
 ```jsx
 import React, { Component} from 'react'
