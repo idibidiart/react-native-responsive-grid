@@ -141,8 +141,7 @@ The following are the preset screen widths at which breakPoints maybe specified:
 
 ### Example 3
 
-In the third demo, the grid normally propagates React Native's layout event from Rows as a generic event that is subscribed to by all Rows which causes all Rows and their child Columns to re-render whenever any Row experiences layout change. If 'layoutEvent' is supplied as a prop on a Row with a user-supplied event name the Row will only propagate the event (rather than re-render) and it will not cause it other Rows to re-render. This is useful when we wish to react to layout change on per-row basis. The example below shows how we may listen and react to such specific layout events in components that use the grid.
-
+In the third demo, each Row rerenders itself upon receiving React Native's onLayout event. If 'layoutEvent' is supplied as a prop on a Row with a user-supplied event name the Row will emit such event rather than re-render. This is useful when we wish to react to layout change on per-row basis. The example below shows how we may listen and react to such specific layout events in components.
 
 ```jsx
 import React, { Component} from 'react'
