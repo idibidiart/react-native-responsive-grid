@@ -450,6 +450,14 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
 </Row>
 ```
 
+### Predictable, Dynamic Layout Behavior
+
+Being able to readt to layout changes, including changes due to device rotation (for apps that allow it), is a key aspect of responsive design. This grid is designed to enable dynamic response to layout changes (see the demos at the start of this Readme) 
+
+Columns and Rows have `position: 'relative'` enforced by design to keep them within the layout flow. Each can be moved about within their parent Row and Column, respectively, using top and bottom margins and/or offsets. Columns can be made to overlap horizontally within the row using a negative offset in LTR or RTL directions (see RTL support.) Rows can be made to overlap vertically within a column using a negative top and bottom margins. The intent is to allow the free positioning of rows and columns without taking them out of the layout flow. This is required to have a predictable response to layout change.
+
+Elements, including Column elements, must be wapped in a Row in order for the grid to react to layout changes in those elements, including their mounting, un-mounting and re-mounting. You can decide where the re-rendering happens in the component subtree by placing the `layoutEvent` prop at the desired Row node (see layoutEvent demo markup in Introduction.)
+
 ## More Examples
 
 ```jsx
