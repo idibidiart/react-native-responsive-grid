@@ -12,9 +12,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `baseline` value for `vAlign` when supplied to Row
 - This CHANGELOG.md
 
-### Changed
+### Changed (Non-breaking)
 - Fixed device-size-based offsets 
 - Fixed regression in item alignment for RTL mode 
 - Fixed handling of left/right margins (when set in style) rekative to offset value and RTL/LTR modes
 - Refactored code for clarity and correctness
 - Updated Readme to explain use of newly added features
+
+### Changed (Breaking)
+
+None.
