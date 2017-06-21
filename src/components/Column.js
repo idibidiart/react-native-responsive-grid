@@ -53,8 +53,7 @@ export default class Column extends React.Component {
       hAlign: PropTypes.string,
       fullWidth: PropTypes.bool,
       fullHeight: PropTypes.bool,
-      aspectRatio: PropTypes.object,
-      breakPoints: PropTypes.object 
+      aspectRatio: PropTypes.object 
     }
 
     render() {
@@ -89,7 +88,6 @@ export default class Column extends React.Component {
         fullWidth,
         fullHeight,
         aspectRatio,
-        breakPoints,
         ...rest
       } = this.props;
 
@@ -99,6 +97,7 @@ export default class Column extends React.Component {
       this.width = (this.props.style && this.props.style.width !== undefined) ? this.props.style.width : undefined
       this.height = (this.props.style && this.props.style.height !== undefined) ? this.props.style.height : undefined
       this.minWidth =  (this.props.style && this.props.style.minWidth !== undefined) ? this.props.style.minWidth : undefined
+      this.minHeight =  (this.props.style && this.props.style.minHeight !== undefined) ? this.props.style.minHeight : undefined
       this.marginLeft =  (this.props.style && this.props.style.marginLeft !== undefined) ? this.props.style.marginLeft : undefined
       this.marginRight =  (this.props.style && this.props.style.marginRight !== undefined) ? this.props.style.marginRight : undefined
 
@@ -134,7 +133,7 @@ export default class Column extends React.Component {
       }
 
       const style = {
-                    flex: (breakPoints && breakPoints[screenInfo.mediaSize] !== undefined) ? 
+                    flex: (this.minWidth !== undefined || this.minHeight !== undefined) ? 
                               -1 : this.flex,
                     width: this.props.fullWidth ? '100%' : 
                             (this.props.size !== undefined || 
@@ -144,8 +143,6 @@ export default class Column extends React.Component {
                                 getColumnWidth(screenInfo.mediaSize, this.props) : 
                                   this.width,
                     height: this.props.fullHeight ? '100%' : this.height,
-                    minWidth: (breakPoints && breakPoints[screenInfo.mediaSize] !== undefined) ? 
-                                  breakPoints[screenInfo.mediaSize] : this.minWidth,
                     flexDirection: 'column',
                     marginLeft: !this.props.rtl && (this.props.offset !== undefined || 
                                   this.props.offsetPoints ||

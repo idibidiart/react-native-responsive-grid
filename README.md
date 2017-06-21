@@ -36,7 +36,7 @@ You may use this grid to build responsive 2D layouts that maintain their relativ
 ## [Example 1: aspectRatio](https://www.youtube.com/watch?v=Nghqc5QFln8)
 [![>> aspectRatio demo <<](https://img.youtube.com/vi/Nghqc5QFln8/0.jpg)](https://www.youtube.com/watch?v=Nghqc5QFln8)
 
-## [Example 2: breakPoints (Row Wrapping)](https://www.youtube.com/watch?v=GZ1uxWEVAuQ) 
+## [Example 2: responsive break points (Row Wrapping)](https://www.youtube.com/watch?v=GZ1uxWEVAuQ) 
 [![>> responsive break points demo <<](https://img.youtube.com/vi/GZ1uxWEVAuQ/0.jpg)](https://www.youtube.com/watch?v=GZ1uxWEVAuQ)
 
 ## [Example 3: layoutEvent](https://www.youtube.com/watch?v=99J3c_Zn6QU) 
@@ -100,9 +100,9 @@ The following table maps some common device aspect ratios to the ratio of width/
 
 ### Example 2
 
-In the second demo, the grid folds columns in a row that has been tagged with 'wrap' prop using the, using the screen-device-depebdent `breakPoints` prop on the column. This means that different break points can be supplied for the different screen sizes. This example demonstrates how to get Row content (e.g. child Columns) to wrap at certain break points (which can be supplied per screen width)
+In the second demo, the grid folds columns in a row that has been tagged with 'wrap' prop using the, using the screen-device-depebdent `size` prop on the column (which can be percentage based, e.g. smSize, or point based, e.g. smSizePoints. This means that different break points can be supplied for the different screen sizes in both absolute and relative terms. This example demonstrates how to get Row content (e.g. child Columns) to wrap at certain break points (which can be supplied per screen width)
 
-The following are the preset screen widths at which breakPoints maybe specified:
+The following are the preset screen widths at which break points maybe specified:
 
 - sm: <= 480px 
 - md: > 480 and < 1024
@@ -110,33 +110,29 @@ The following are the preset screen widths at which breakPoints maybe specified:
 - xl: >= 1366 
 
 ```jsx
-<Row style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-    <Col size={80} offset={6} >
-
-      <Row wrap>
-        <Col size={50} breakPoints={{sm: 200}}>
-          <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>February 28, 2017</Text>
-          <Row>
-            <Col size={5}>
-              <FontAwesome name='shopping-cart' size={17} color='gray'/>
-            </Col>
-            <Col size={60} offset={2.5}>
-              <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
-            </Col>
-          </Row>
-        </Col>
-        <Col size={50} breakPoints={{sm: 200}}>
-          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Grilld Cheese Sandwich</Text>
-          <Text style={{fontSize: 16, color: '#0a0a0a'}}>Key Lime Pie</Text>
-        </Col> 
-
-      </Row>    
-
-    </Col>
-    <Col size={14} offset={-6} hAlign='right'>
-          <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
-    </Col>
-</Row>
+  <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+      <Col size={80} offset={6}>
+        <Row wrap>
+          <Col size={50} smSize={100}>      
+            <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
+            <Row>
+              <Col size={5}>
+                <FontAwesome name='cutlery' size={17} color='gray'/>
+              </Col>
+              <Col size={60} offset={2.5}>
+                <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>TAKEOUT ORDER</Text>
+              </Col>
+            </Row>
+          </Col>
+          <Col size={50} smSize={100}>
+            <Text style={{fontSize: 16, color: '#0a0a0a'}}>Double Cheese Burger</Text>                                                                          
+          </Col>
+        </Row>
+      </Col>
+      <Col size={14} offset={-6} hAlign='right'>
+            <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
+      </Col>
+  </Row>
 ```
 
 ### Example 3
@@ -295,7 +291,7 @@ export default class Home extends Component {
               <Row key={item.key} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
                 <Col size={80} offset={6} >
                   <Row wrap>
-                    <Col size={60} >
+                    <Col size={60} smSize={100}>
                       <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>{String(item.date)}</Text>
                       <Row>
                         <Col size={10}>
@@ -306,7 +302,7 @@ export default class Home extends Component {
                         </Col>
                       </Row>
                     </Col>
-                    <Col size={40} breakPoints={{sm: 200}}>
+                    <Col size={40} smSize={100}>
                       <Text style={{fontSize: 16, color: '#0a0a0a'}}>{item.name}</Text>
                     </Col> 
                   </Row>    
@@ -329,7 +325,7 @@ All props are case sensitive.
 
 `aspectRatio` (see [Example 1](https://github.com/idibidiart/react-native-responsive-grid#example-1))
 
-`breakPoints` (see [Example 2](https://github.com/idibidiart/react-native-responsive-grid#example-2))
+`responsive break points` (see [Example 2](https://github.com/idibidiart/react-native-responsive-grid#example-2))
 
 `layoutEvent` (see [Example 3](https://github.com/idibidiart/react-native-responsive-grid#example-3))
 

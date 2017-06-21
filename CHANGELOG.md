@@ -7,7 +7,14 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Released]
 
+## [0.30.0] - 2017-06-21
+
+### Removed (Breaking)
+
+- breakPoints prop was introduced as a screen-size-specific, point-valued _override_ for screen-size-specific percent-valued `size` props. Given that we have just added point-valued, screen-size-specific `size` and `offset` props in 0.29.88, we no longer need breakPoints. Mixing percent-valued and point-valued sizing info is an anti-pattern and it has been removed. Use of minWidth and minHeight is still supported as explicit override, but it's no longer exposed as a high level interface, since it's noth confusing and not necessary given the aforementioned additions. 
+
 ## [0.29.88 & 0.29.89] - 2017-06-20
+
 ### Added
 - Points-based `size` and `offset` props since absolute positioning is sometimes needed in a responsive layout, e.g. position of back arrow and hamburger menu on navigation bar. 
 - `baseline` value for `vAlign` when supplied to Row
