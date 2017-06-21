@@ -323,9 +323,13 @@ export default class Home extends Component {
 
 All props are case sensitive.
 
-`aspectRatio` (see [Example 1](https://github.com/idibidiart/react-native-responsive-grid#example-1))
+`wrap` may be supplied as prop to Row to wrap any child element that is otherwise rendered fully outside of the width of the row's computed or explicitly set width. 
+
+_Bootstrap users need to make a mental note of this since 'wrap' is default behavior in Bootstrap._
 
 `responsive break points` (see [Example 2](https://github.com/idibidiart/react-native-responsive-grid#example-2))
+
+`aspectRatio` (see [Example 1](https://github.com/idibidiart/react-native-responsive-grid#example-1))
 
 `layoutEvent` (see [Example 3](https://github.com/idibidiart/react-native-responsive-grid#example-3))
 
@@ -360,8 +364,6 @@ _Specifying an offset value in normal LTR mode means marginLeft (if specified in
 `fullHeight` may be supplied as prop to Row or Column. It sets the the height to 100% of the computed or explicitly height of its parent view. 
 
 `fullWidth` may be supplied as prop to Row or Column. It sets the the width to 100% of the computed or explicitly set width of its parent view. 
-
-`wrap` may be supplied as prop to Row to wrap any child element that is otherwise rendered fully outside of the width of the row's computed or explicitly set width. 
 
 `alignLines` may be supplied as prop to Row to vertically align the wrapped lines within the Row (not to be confused with the items that are inside each line.) Possible values are: top, middle, bottom, space, distribute, stretch. (See section on Aligning Wrapped Lines within Rows)
 
