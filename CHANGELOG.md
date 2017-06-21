@@ -13,8 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - This CHANGELOG.md
 
 ### Changed
-- Fixed regression in offset feature
-- Fixed regression in RTL feature
+- Fixed device-size-based offsets 
+- Fixed regression in item alignment for RTL mode 
 - Fixed handling of left/right margins (when set in style) rekative to offset value and RTL/LTR modes
 - Refactored code for clarity and correctness
-- Updated Readme 
+- Updated Readme to explain use of newly added features
