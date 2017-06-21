@@ -49,7 +49,7 @@ The demos in the videos above show some of the possibilities, but this grid is c
 
 ### Example 1
 
-In the first demo, the grid picks the image with the **closest aspect ratio** to the device aspect ratio, dynamically, taking into account the current device orientation. The images themselves must be cropped by the designer so that they match the common device aspect ratios (see below) while also showing the part of the image that the designer intends to show for each aspect ratio. Since there could be many aspect ratios that correspond to different devices we should have multiple such images (and, optionally, their rotated versions.)
+In the first demo, the grid picks the image with the **closest aspect ratio** to the device aspect ratio, dynamically, taking into account the current device orientation. The images themselves must be sized and cropped by the designer so that they match the common device aspect ratios (see below) while also showing the part of the image that the designer intends to show for each aspect ratio. Since there could be many aspect ratios that correspond to different devices we should have multiple such images (and, optionally, their rotated versions.)
 
 The following table maps some common device aspect ratios to the ratio of width/height of devices known to this developer, for both landscape and portrait device orientations. The physical device aspect ratio does not change with device rotation (i.e. a device with 16:9 aspect ratio does not become one with a 9:16 aspect ratio when it's rotated, although it does mathematically), but since the width and height get flipped when changing orientation from portrait to lanscape and vice versa, we need to have two images per each physical device aspect ratio, one for portrait mode and the other for landscape. However, if our app only supports portrait or landscape mode then we only need to have the one corresponding to that orientation. 
 
@@ -323,7 +323,6 @@ export default class Home extends Component {
 }
 ```
 
-
 ## Props
 
 All props are case sensitive.
@@ -338,21 +337,27 @@ All props are case sensitive.
 
 `smSize`, `mdSize`, `lgSize` and `xlSize` are device-dependent size values that are applied to columns. In addition to their utility in deciding the size of content based on screen size, they may are also used for defining column wrapping behavior based on screen size. For example, column content will wrap if column size is made smaller at smaller screen sizes.
 
+`sizePoints`, `mdSizePoints`, `lgSizePoints`, and `xlSizePoints` are like their percentage-based equivalents but use absolute value in points (Number) instead of relative value in percent (String.) 
+
 `offset` may be applied to Column. Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or explicitly set width. Offset values can also be negative. Default is 0. 
 
 `smOffset`, `mdOffset`, `lgOffset` and `xlOffset` are device-dependent offset values that are applied to columns.
 
+`offsetPoints`, `mdOffsetPoints`, `lgOffsetPoints`, and `xlOffsetPoints` are like their percentage-based equivalents but use absolute value in points (Number) instead of relative value in percent (String.) 
+
 _Using offset values in RTL mode moves things from right to left. Using them in normal LTR mode moves things from left to right. It's pretty normal to expect that. If you're working in both directions, this makes offsets more useful than using marginLeft or marginRight directly._
+
+_Specifying an offset value in normal LTR mode means marginLeft (if specified in style prop) will be overwritten by offset value. However, marginRight (if specified in style prop) will not be overwritten by the offset value. Specifying offset value in RTL mode means marginRight (if specified in style prop) will be overwritten by offset value. However, marginLeft (if specified in style prop) will not be overwritten by offset value._
 
 `smHidden`, `mdHidden`, `lgHidden` and `xlHidden` - may be applied to Column. This tells the grid to hide certain columns based on the current width of the screen.  
 
-`vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: middle, top, bottom, space and distribute. Default is top.
+`vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: `middle`, `top`, `bottom`, `space` and `distribute`. Default is top.
 
-`vAlign` may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: top, middle, bottom and stretch. Default is top.
+`vAlign` may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: `top`, `middle`, `bottom`, `baseline` and `stretch`. Default is top.
 
-`hAlign` may be supplied as prop to Row to align the columns within it in the horizontal direction. Possible values are: center, left, right, space and distribute. Default is left.
+`hAlign` may be supplied as prop to Row to align the columns within it in the horizontal direction. Possible values are: `center`, `left`, `right`, `space` and `distribute`. Default is left.
 
-`hAlign` may also be supplied as prop to Column to align its rows and/or elements within it in the horizontal direction. Possible values are: center, left, right, and stretch. Default is left.
+`hAlign` may also be supplied as prop to Column to align its rows and/or elements within it in the horizontal direction. Possible values are: `center`, `left`, `right`, and `stretch`. Default is left.
 
 `rtl` may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set hAlign to 'right.' This is useful for right-to-left layouts. 
 
@@ -364,7 +369,7 @@ _Using offset values in RTL mode moves things from right to left. Using them in 
 
 `alignLines` may be supplied as prop to Row to vertically align the wrapped lines within the Row (not to be confused with the items that are inside each line.) Possible values are: top, middle, bottom, space, distribute, stretch. (See section on Aligning Wrapped Lines within Rows)
 
-The screen-size-specific _size_ props (smSize, mdSize, lgSize, and xlSize), the screen-size-specific _offset_ props (smOffset, mdOffset, lgOffset and xlOffset) and the screen-size-specific _hidden_ props (smHidden, mdHidden, lgHidden, xlHidden) props refer to the effective screen width, which changes with orientation. 
+The screen-size-specific _size_, _offset_ and _hidden_ props refer to the effective screen width, which changes with orientation. 
 
 The following are the screen width thresholds for these props:
 

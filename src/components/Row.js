@@ -26,7 +26,7 @@ export default class Row extends React.Component {
 
     return React.Children.map((rtl ? React.Children.toArray(props.children).reverse() : props.children), (element) => {
       if (!element) return null
-      if (element.type && element.type.name === 'Row') {
+      if (element.type && (element.type.name === 'Row'|| (element.props.style && element.props.style.flexDirection === 'row'))) {
           throw new Error("Row may not contain other Rows as children. Child Rows must be wrapped in a Column.")
       } else if (element.type && element.type.name !== 'Column') {
         return element
@@ -48,6 +48,7 @@ export default class Row extends React.Component {
     hAlign: PropTypes.string,
     vAlign: PropTypes.string,
     alignLines: PropTypes.string,
+    alignSelf: PropTypes.string,
     layoutEvent: PropTypes.string
   }
 
@@ -65,23 +66,73 @@ export default class Row extends React.Component {
       ...rest
     } = this.props
 
-    this.flex =  this.props.style && this.props.style.flex !== undefined ? 
-            this.props.style.flex : 0
-    // left/flex-start is default
-    this.alignX =  (hAlign === 'space' ? 'space-between' : (hAlign === 'distribute' ? 'space-around' : (hAlign === 'center' ? 'center' : (hAlign === 'right' ? 'flex-end' : 'flex-start'))))
-    // top/flex-start is default
-    this.alignY = vAlign == 'stretch' ? 'stretch' : vAlign === 'middle' ? 'center' : (vAlign === 'bottom' ? 'flex-end' : 'flex-start')
-    this.alignLines = wrap && alignLines && (alignLines === 'top' ? 
-                                                            'flex-start' : 
-                                                            (alignLines === 'bottom' ? 'flex-end' : 
-                                                                (alignLines === 'middle' ? 'center' : 
-                                                                  (alignLines === 'space' ? 'space-between' : 
-                                                                    (alignLines === 'distribute' ? 'space-around' 
-                                                                      : 'stretch')))))
+    this.flex =  this.props.style && this.props.style.flex !== undefined ? this.props.style.flex : 0
     this.wrapState = wrap ? 'wrap' : 'nowrap'
     this.height = fullHeight ? '100%' : (this.props.style && this.props.style.height !== undefined) ? this.props.style.height : undefined
     this.width = fullWidth ? '100%' : (this.props.style && this.props.style.width !== undefined) ? this.props.style.width : undefined
 
+    if (rtl && !hAlign) {
+      this.hAlign = 'flex-end'
+    } else {
+      switch (hAlign) {
+        case 'space': 
+          this.hAlign = 'space-between' 
+          break;
+        case 'distribute':
+          this.hAlign = 'space-around'  
+          break;
+        case 'center': 
+          this.hAlign = 'center' 
+          break; 
+        case 'right': 
+          this.hAlign = 'flex-end' 
+          break;
+        default: 
+          this.hAlign = 'flex-start'
+      }
+    }
+
+    switch (vAlign) {
+      case 'stretch': 
+        this.vAlign = 'stretch' 
+        break;
+      case 'middle':
+        this.vAlign = 'center' 
+        break; 
+      case 'bottom': 
+        this.vAlign = 'flex-end' 
+        break;
+      case 'baseline':
+        this.vAlign = 'baseline'
+        break; 
+      default: 
+        this.vAlign = 'flex-start'
+    }
+
+    if (wrap && alignLines) {
+      switch (alignLines) {
+        case 'top': 
+          this.alignLines = 'flex-start' 
+          break;
+        case 'bottom':
+          this.alignLines = 'flex-end' 
+          break; 
+        case 'middle': 
+          this.alignLines = 'center'  
+          break;
+        case 'space': 
+          this.alignLines = 'space-between' 
+          break;  
+        case 'distribute': 
+          this.alignLines = 'space-around'
+          break;  
+        default: 
+          this.alignLines = 'stretch'
+      }
+    } else {
+      this.alignLines = undefined
+    }
+    
     try {
         return (
             <View 
@@ -99,8 +150,8 @@ export default class Row extends React.Component {
                         flexDirection: 'row',
                         alignContent: this.alignLines, 
                         flexWrap: this.wrapState,
-                        alignItems: this.alignY,
-                        justifyContent: this.alignX,
+                        alignItems: this.vAlign,
+                        justifyContent: this.hAlign,
                         height: this.height,
                         width: this.width,
                         position: 'relative'

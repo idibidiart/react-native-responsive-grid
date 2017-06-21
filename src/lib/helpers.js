@@ -33,44 +33,52 @@ const getColumnWidth = (screenSize, props) => {
 
   switch(screenSize) {
     case 'sm':
-      if (props.smSize) {
-        return toPercent(Math.max(props.smSize, 0));
-      } else if (props.size !== undefined) {
-        return toPercent(Math.max(props.size, 0));
+      if (props.smSize !== undefined || props.smSizePoints !== undefined) {
+        if (props.smSize !== undefined)
+          return toPercent(Math.max(props.smSize, 0));
+      } else if (props.size !== undefined || props.sizePoints !== undefined) {
+        if (props.size !== undefined)
+          return toPercent(Math.max(props.size, 0));
+        return props.sizePoints
       } else {
         return undefined
       }
 
     case 'md':
-      if (props.mdSize) {
-        return toPercent(Math.max(props.mdSize, 0));
-      } else if (props.size !== undefined)  {
-        return toPercent(Math.max(props.size, 0));
+      if (props.mdSize !== undefined || props.mdSizePoints) {
+        if (props.mdSize !== undefined)
+          return toPercent(Math.max(props.mdSize, 0));
+        return props.mdSizePoints
+      } else if (props.size !== undefined || props.sizePoints !== undefined) {
+        if (props.size !== undefined)
+          return toPercent(Math.max(props.size, 0));
+        return props.sizePoints
       } else {
         return undefined
       }
 
     case 'lg':
-      if (props.lgSize) {
-        return toPercent(Math.max(props.lgSize, 0));
-      } else if (props.size !== undefined) {
-        return toPercent(Math.max(props.size, 0));
+      if (props.lgSize !== undefined || props.lgSizePoints !== undefined) {
+        if (props.lgSize !== undefined)
+          return toPercent(Math.max(props.lgSize, 0));
+        return props.lgSizePoints
+      } else if (props.size !== undefined || props.sizePoints !== undefined) {
+        if (props.size !== undefined)
+          return toPercent(Math.max(props.size, 0));
+        return props.sizePoints
       } else {
         return undefined
       }
 
     case 'xl':
-      if (props.xlSize) {
-        return toPercent(Math.max(props.xlSize, 0));
-      } else if (props.size !== undefined) {
-        return toPercent(Math.max(props.size, 0));
-      } else {
-        return undefined
-      }
-  
-    default:
-      if (props.size !== undefined) {
-        return toPercent(Math.max(props.size, 0));
+      if (props.xlSize !== undefined || props.xlSizePoints !== undefined) {
+        if (props.xlSize !== undefined)
+          return toPercent(Math.max(props.xlSize, 0));
+        return props.xlSizePoints
+      } else if (props.size !== undefined || props.sizePoints !== undefined) {
+        if (props.size !== undefined)
+          return toPercent(Math.max(props.size, 0));
+        return props.sizePoints
       } else {
         return undefined
       }
@@ -80,47 +88,56 @@ const getColumnWidth = (screenSize, props) => {
 const getColumnOffset = (screenSize, props) => {
 
   switch(screenSize) {
-    case 'small':
-      if (props.smOffset) {
-        return toPercent(props.smOffset)
-      } else if (props.offset) {
-        return toPercent(props.offset)
+    case 'sm':
+      if (props.smOffset !== undefined || props.smOffsetPoints) {
+        if (props.smOffset !== undefined)
+          return toPercent(props.smOffset)
+        return props.smOffsetPoints
+      } else if (props.offset !== undefined || props.offsetPoints !== undefined) {
+        if (props.offset !== undefined)
+          return toPercent(props.offset)
+        return props.offsetPoints
       } else {
-        return 0;
+        return undefined;
       }
 
-    case 'medium':
-      if (props.mdOffset) {
-        return toPercent(props.mdOffset)
-      } else if (props.offset){
-        return toPercent(props.offset)
+    case 'md':
+      if (props.mdOffset !== undefined || props.mdOffsetPoints !== undefined) {
+        if (props.mdOffset !== undefined)
+          return toPercent(props.mdOffset)
+        return props.mdOffsetPoints
+       } else if (props.offset !== undefined || props.offsetPoints !== undefined) {
+        if (props.offset !== undefined)
+          return toPercent(props.offset)
+        return props.offsetPoints
       } else {
-        return 0;
+        return undefined;
       }
 
-    case 'large':
-      if (props.lgOffset) {
-        return toPercent(props.lgOffset);
-      } else if (props.offset){
-        return toPercent(props.offset)
+    case 'lg':
+      if (props.lgOffset !== undefined || props.lgOffsetPoints !== undefined) {
+        if (props.lgOffset !== undefined)
+          return toPercent(props.lgOffset);
+        return props.lgOffsetPoints
+      } else if (props.offset !== undefined || props.offsetPoints !== undefined) {
+        if (props.offset !== undefined)
+          return toPercent(props.offset)
+        return props.offsetPoints
       } else {
-        return 0;
+        return undefined;
       }
 
-    case 'xlarge':
-      if (props.xlOffset) {
-        return toPercent(props.xlOffset);
-      } else if (props.offset){
-        return toPercent(props.offset)
+    case 'xl':
+      if (props.xlOffset !== undefined || props.xlOffsetPoints !== undefined) {
+        if (props.xlOffset !== undefined)
+          return toPercent(props.xlOffset);
+        return props.xlOffsetPoints
+      } else if (props.offset !== undefined || props.offsetPoints !== undefined) {
+        if (props.offset !== undefined)
+          return toPercent(props.offset)
+        return props.offsetPoints
       } else {
-        return 0;
-      }
-
-    default:
-      if (props.offset){
-        return toPercent(props.offset)
-      } else {
-        return 0
+        return undefined;
       }
   }
 };
