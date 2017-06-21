@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [0.29.88 & 0.2.89] - 2017-06-20
+## [0.29.88 & 0.29.89] - 2017-06-20
 ### Added
 - Points-based `size` and `offset` props since absolute positioning is sometimes needed in a responsive layout, e.g. position of back arrow and hamburger menu on navigation bar. 
 - `baseline` value for `vAlign` when supplied to Row
