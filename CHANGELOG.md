@@ -9,6 +9,8 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [0.31.0] - 2017-06-26
 
+[Universal Tiles demo https://www.youtube.com/watch?v=x785Qib0ySg](https://www.youtube.com/watch?v=x785Qib0ySg)
+
 ### Removed (Breaking)
 
 - `fullHeight` may be supplied as prop to Row ONLY as a convenience to enable vAlign to work on child Column(s) -- fullWidth on Row has been removed since it can interfere with Column's offset prop. 
