@@ -36,8 +36,6 @@ You may use this grid to build responsive 2D layouts that maintain their relativ
 ## [Example 1: Reponsive Tiles for Universal Apps](https://www.youtube.com/watch?v=x785Qib0ySg)
 [![>> universal tiles demo <<](https://img.youtube.com/vi/x785Qib0ySg/0.jpg)](https://www.youtube.com/watch?v=x785Qib0ySg)
 
-[Explanation and Source Code for Example 1](https://github.com/idibidiart/react-native-responsive-grid/blob/master/UniversalTiles.md)
-
 ## [Example 2: selecting image with right aspect ratio](https://www.youtube.com/watch?v=Nghqc5QFln8)
 [![>> aspectRatio demo <<](https://img.youtube.com/vi/Nghqc5QFln8/0.jpg)](https://www.youtube.com/watch?v=Nghqc5QFln8)
 
@@ -53,6 +51,20 @@ You may use this grid to build responsive 2D layouts that maintain their relativ
 The demos in the videos above show some of the possibilities, but this grid is capable of more complex responsive and adaptive behavior.
 
 ### Example 1
+
+This examples showcases the grid's 'adaptive' behavior. The problem it solves is summarized below:
+
+How to make a tiled screen layout that is highly usable and looks consistent across all screen sizes and aspect ratios, and how to do that using this grid (react-native-responsive-grid.) This involves the following:
+
+1. How to size tiles such that they change size relative to the size of the screen *as well as* retain their shape (width/height aspect ratio)
+
+2. How do we hide/show tiles on demand and fill the void left by hidden tiles using Flexbox wrapping behavior 
+
+The goal is how to do the above in an elegant and declarative way that allows the average user to work without all the tedious implementation details of doing it in row Flexbox and JS. 
+
+[Explanation and Source Code for Example 1](https://github.com/idibidiart/react-native-responsive-grid/blob/master/UniversalTiles.md)
+
+### Example 2
 
 In the first demo, the grid picks the image with the **closest aspect ratio** to the device aspect ratio, dynamically, taking into account the current device orientation. The images themselves must be sized and cropped by the designer so that they match the common device aspect ratios (see below) while also showing the part of the image that the designer intends to show for each aspect ratio. Since there could be many aspect ratios that correspond to different devices we should have multiple such images (and, optionally, their rotated versions.)
 
@@ -103,7 +115,7 @@ The following table maps some common device aspect ratios to the ratio of width/
 </Row>
 ```
 
-### Example 2
+### Example 3
 
 In the second demo, the grid folds columns in rows based on the screen-device-depebdent `size` prop on the column (which can be percentage based, e.g. smSize, or point based, e.g. smSizePoints. This means that different break points can be supplied for the different screen sizes in both absolute and relative terms. This example demonstrates how to get Row content (e.g. child Columns) to wrap at certain break points (which can be supplied per screen width)
 
@@ -140,7 +152,7 @@ The following are the preset screen widths at which break points maybe specified
   </Row>
 ```
 
-### Example 3
+### Example 4
 
 If 'layoutEvent' is supplied as a prop on a Row with a Row-specific name the Row will emit that named event upon receiving React Native's onLayout event to signal to the higher order component (which must subscribe to that event) to re-render its tree. If no layoutEvent is specified the row will re-render its own subtree. This is useful when we wish to react to layout change on per-row basis, and where we need the row's layout info (height, width, etc) to determine the new dimensions of components within it or around it. The example below shows how we may listen and react to such specific layout events in components.
 
@@ -227,7 +239,7 @@ export default class Home extends React.Component {
 }
 ``` 
 
-### Example 4
+### Example 5
 
 FlatList is a virtualized replacement for React Native's old ListView component. Using FlatList as a container is supported by this grid. This example also demonstrate wrapping Column content based on screen size. See ('size' prop under the [Props](https://github.com/idibidiart/react-native-responsive-grid#props) section.) It also demonstrates who to wrap Row content (e.g. child columns) based on screen size (also see [Example 2](https://github.com/idibidiart/react-native-responsive-grid#example-2) for more details)
 

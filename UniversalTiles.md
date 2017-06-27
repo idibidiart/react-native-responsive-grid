@@ -1,15 +1,5 @@
 ## Universal Tiles
 
-This examples showcases the grid's 'adaptive' behavior. The problem it solves is summarized below:
-
-How to make a tiled screen layout that is highly usable and looks consistent across all screen sizes and aspect ratios, and how to do that using this grid (react-native-responsive-grid.) This involves the following:
-
-1. How to size tiles such that they change size relative to the size of the screen *as well as* retain their shape (width/height aspect ratio)
-
-2. How do we hide/show tiles on demand and fill the void left by hidden tiles using Flexbox wrapping behavior 
-
-The goal is how to do the above in an elegant and declarative way that allows the average user to work without all the tedious implementation details of doing it in row Flexbox and JS. 
-
 Below is the first stab at this... Suggestions are welcome.
 
 
