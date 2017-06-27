@@ -338,17 +338,15 @@ export default class Home extends Component {
 
 ## Methods
 
-Row and Column have .hide() and .show() instance methods. The instance reference you get from a ref callback will have these methods. See Example #1 for usage.
+Row and Column have `.hide()` and `.show()` instance methods. The instance reference you get from a ref callback will have these methods. See Example #1 for usage.
 
 ## Props
 
 All props are case sensitive.
 
-`responsive break points` (see [Example 2](https://github.com/idibidiart/react-native-responsive-grid#example-2))
-
 `aspectRatio` (see [Example 1](https://github.com/idibidiart/react-native-responsive-grid#example-1))
 
-`layoutEvent` (see [Example 3](https://github.com/idibidiart/react-native-responsive-grid#example-3))
+`layoutEvent` (see [Examples 4](https://github.com/idibidiart/react-native-responsive-grid#example-4))
 
 `size` may be supplied as prop to Column (width) or Row (height). This number defines the width of the column or height of a row as a percentage of its parent view's computed or explicit width or height, respectively.  
 
