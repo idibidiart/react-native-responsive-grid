@@ -33,16 +33,21 @@ With this grid, we don't lose any aspect of the normal rectilinear 2D grid. We j
 
 You may use this grid to build responsive 2D layouts that maintain their relative proportions, change their basic structure in a predictable way and dynamically decide what content to display, based on screen size, aspect ratio, and orientation.  
 
-## [Example 1: aspectRatio](https://www.youtube.com/watch?v=Nghqc5QFln8)
+## [Example 1: Reponsive Tiles for Universal Apps](http://youtube.com/)
+[![>> universal tiles demo <<](https://img.youtube.com/vi/Nghqc5QFln8/0.jpg)](https://www.youtube.com/)
+
+[Explanation and Source Code for Example 1](https://github.com/idibidiart/react-native-responsive-grid/blob/master/UniversalTiles.md)
+
+## [Example 2: selecting image with right aspect ratio](https://www.youtube.com/watch?v=Nghqc5QFln8)
 [![>> aspectRatio demo <<](https://img.youtube.com/vi/Nghqc5QFln8/0.jpg)](https://www.youtube.com/watch?v=Nghqc5QFln8)
 
-## [Example 2: responsive break points (Row Wrapping)](https://www.youtube.com/watch?v=GZ1uxWEVAuQ) 
+## [Example 3: responsive break points (Row Wrapping)](https://www.youtube.com/watch?v=GZ1uxWEVAuQ) 
 [![>> responsive break points demo <<](https://img.youtube.com/vi/GZ1uxWEVAuQ/0.jpg)](https://www.youtube.com/watch?v=GZ1uxWEVAuQ)
 
-## [Example 3: layoutEvent](https://www.youtube.com/watch?v=99J3c_Zn6QU) 
+## [Example 4: layout change info](https://www.youtube.com/watch?v=99J3c_Zn6QU) 
 [![>> layoutEvent demo <<](https://img.youtube.com/vi/99J3c_Zn6QU/0.jpg)](https://www.youtube.com/watch?v=99J3c_Zn6QU)
 
-## [Example 4: FlatList + Row & Column Wrapping](https://www.youtube.com/watch?v=qLqxat3wX_8)
+## [Example 5: FlatList + Row & Column Wrapping](https://www.youtube.com/watch?v=qLqxat3wX_8)
 [![>> FlatList Demo <<](https://img.youtube.com/vi/qLqxat3wX_8/0.jpg)](https://www.youtube.com/watch?v=qLqxat3wX_8)
 
 The demos in the videos above show some of the possibilities, but this grid is capable of more complex responsive and adaptive behavior.
@@ -100,7 +105,7 @@ The following table maps some common device aspect ratios to the ratio of width/
 
 ### Example 2
 
-In the second demo, the grid folds columns in a row that has been tagged with 'wrap' prop using the, using the screen-device-depebdent `size` prop on the column (which can be percentage based, e.g. smSize, or point based, e.g. smSizePoints. This means that different break points can be supplied for the different screen sizes in both absolute and relative terms. This example demonstrates how to get Row content (e.g. child Columns) to wrap at certain break points (which can be supplied per screen width)
+In the second demo, the grid folds columns in rows based on the screen-device-depebdent `size` prop on the column (which can be percentage based, e.g. smSize, or point based, e.g. smSizePoints. This means that different break points can be supplied for the different screen sizes in both absolute and relative terms. This example demonstrates how to get Row content (e.g. child Columns) to wrap at certain break points (which can be supplied per screen width)
 
 The following are the preset screen widths at which break points maybe specified:
 
@@ -112,7 +117,7 @@ The following are the preset screen widths at which break points maybe specified
 ```jsx
   <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
       <Col size={80} offset={6}>
-        <Row wrap>
+        <Row>
           <Col size={50} smSize={100}>      
             <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>March 9, 2017</Text>
             <Row>
@@ -137,7 +142,7 @@ The following are the preset screen widths at which break points maybe specified
 
 ### Example 3
 
-In the third demo, normally, each Row automatically rerenders itself upon receiving React Native's layout change event after running any pending transitions (library we do not have to do anything.) If 'layoutEvent' is supplied as a prop on a Row with a Row-specific event name the Row will emit that event upon receiving React Native's layout change event rather than re-render. This is useful when we wish to react to layout change on per-row basis. The example below shows how we may listen and react to such specific layout events in components.
+If 'layoutEvent' is supplied as a prop on a Row with a Row-specific name the Row will emit that named event upon receiving React Native's onLayout event to signal to the higher order component (which must subscribe to that event) to re-render its tree. If no layoutEvent is specified the row will re-render its own subtree. This is useful when we wish to react to layout change on per-row basis, and where we need the row's layout info (height, width, etc) to determine the new dimensions of components within it or around it. The example below shows how we may listen and react to such specific layout events in components.
 
 ```jsx
 import React, { Component} from 'react'
@@ -210,8 +215,8 @@ export default class Home extends React.Component {
 
     render() {
       return (
-        <Row fullHeight fullWidth vAlign='middle' hAlign='center' style={{backgroundColor: 'orange'}}>
-          <Col size={50} style={{backgroundColor: 'pink', padding: '0%'}}>
+        <Row fullHeight vAlign='middle' hAlign='center' style={{backgroundColor: 'orange'}}>
+          <Col fullWidth size={50} style={{backgroundColor: 'pink', padding: '0%'}}>
             <Row layoutEvent="someEventKey"  style={{backgroundColor: 'yellow'}}> 
               {this.contentReady()}
             </Row>
@@ -290,7 +295,7 @@ export default class Home extends Component {
             return (
               <Row key={item.key} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
                 <Col size={80} offset={6} >
-                  <Row wrap>
+                  <Row>
                     <Col size={60} smSize={100}>
                       <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>{String(item.date)}</Text>
                       <Row>
@@ -319,13 +324,13 @@ export default class Home extends Component {
 }
 ```
 
+## Methods
+
+Row and Column have .hide() and .show() instance methods. The instance reference you get from a ref callback will have these methods. See Example #1 for usage.
+
 ## Props
 
 All props are case sensitive.
-
-`wrap` may be supplied as prop to Row to wrap any child element that is otherwise rendered fully outside of the width of the row's computed or explicitly set width. 
-
-_Bootstrap users need to make a mental note of this since 'wrap' is default behavior in Bootstrap._
 
 `responsive break points` (see [Example 2](https://github.com/idibidiart/react-native-responsive-grid#example-2))
 
@@ -333,13 +338,15 @@ _Bootstrap users need to make a mental note of this since 'wrap' is default beha
 
 `layoutEvent` (see [Example 3](https://github.com/idibidiart/react-native-responsive-grid#example-3))
 
-`size` may be supplied as prop to Column. Possible values is 0 to Infinity. This number defines the width of the column is as a percentage of its parent view's computed or explicitly set width. It defaults to content width (or no width.) Since `size` accepts any number from 0 to Infinity (or horizontal scroll limit), you can make the column as wide as you want. 
+`size` may be supplied as prop to Column (width) or Row (height). This number defines the width of the column or height of a row as a percentage of its parent view's computed or explicit width or height, respectively.  
 
 `smSize`, `mdSize`, `lgSize` and `xlSize` are device-dependent size values that are applied to columns. In addition to their utility in deciding the size of content based on screen size, they may are also used for defining column wrapping behavior based on screen size. For example, column content will wrap if column size is made smaller at smaller screen sizes.
 
-`sizePoints`, `mdSizePoints`, `lgSizePoints`, and `xlSizePoints` are like their percentage-based equivalents but use absolute value in points (Number) instead of relative value in percent (String.) 
+`sizePoints` may be supplied as prop to Column (width) or Row (height). This number defines the width of the column or height of a row as an asolute value in points.
 
-`offset` may be applied to Column. Accepts any number. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or explicitly set width. Offset values can also be negative. Default is 0. 
+`smSizePoints`, `mdSizePoints`, `lgSizePoints`, and `xlSizePoints` are like their percentage-based equivalents but use absolute value. 
+
+`offset` may be applied to Column. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or explicitly set width. Offset values can also be negative. Default is 0. 
 
 `smOffset`, `mdOffset`, `lgOffset` and `xlOffset` are device-dependent offset values that are applied to columns.
 
@@ -361,11 +368,15 @@ _Specifying an offset value in normal LTR mode means marginLeft (if specified in
 
 `rtl` may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set hAlign to 'right.' This is useful for right-to-left layouts. 
 
-`fullHeight` may be supplied as prop to Row or Column. It sets the the height to 100% of the computed or explicitly height of its parent view. 
+`fullHeight` may be supplied as prop to Row as a convenience to enable vAlign to work on child Column(s) -- fullWidth on Row is not desired since it would interfere with Column's offset prop. 
 
-`fullWidth` may be supplied as prop to Row or Column. It sets the the width to 100% of the computed or explicitly set width of its parent view. 
+`fullWidth` may be supplied as prop to Column as a convenience to enable hAlign to work on child Row(s) -- fullHeight on Column is not desired since it would interfere with Row's size prop. 
+
+_Note, if row (or column) is a child of ScrollView you need to set the height (or width) explicitly, and if you wish to set it explicitly relative to container see Example # 1 which uses layoutEvent to get container size at runtime._
 
 `alignLines` may be supplied as prop to Row to vertically align the wrapped lines within the Row (not to be confused with the items that are inside each line.) Possible values are: top, middle, bottom, space, distribute, stretch. (See section on Aligning Wrapped Lines within Rows)
+
+`noWrap` may be supplied as prop to Row prevent child elements from wrapping. 
 
 The screen-size-specific _size_, _offset_ and _hidden_ props refer to the effective screen width, which changes with orientation. 
 
@@ -452,6 +463,10 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
     </Col>
 </Row>
 ```
+
+### Utils
+
+You may import ScreenInfo from grid and invoke inside of render() of your component to get current screen diemsnions and orientation. 
 
 ### Predictable, Dynamic Layout Behavior
 

@@ -7,6 +7,34 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Released]
 
+## [0.31.0] - 2017-06-26
+
+### Removed (Breaking)
+
+- `fullHeight` may be supplied as prop to Row ONLY as a convenience to enable vAlign to work on child Column(s) -- fullWidth on Row has been removed since it can interfere with Column's offset prop. 
+
+- `fullWidth` may be supplied as prop to Column ONLY as a convenience to enable hAlign to work on child Row(s) -- fullHeight on Column has been removed since it can interfere with Row's size prop. 
+
+### Added
+
+- Rows can have size props to set high, both in percent and absolute points. See updated Readme.
+
+- Example of Universal Tiles: responsive tiles with hide/show for Universal Apps. See updated Readme.
+
+- Column and Row now have show() and hide() methods. See Example #1 in updated Readme for usage. 
+
+### Changed (Breaking)
+
+- Simplified interaction of props and styles: except for position, styles take precedence over props.
+
+- 'wrap` is now the default behavior for Row. You must specify 'noWrap' to disable wrapping. 
+
+### Changed (non-breaking)
+
+- Updated Readme
+
+- Fixed regression with non-grid props propagation 
+
 ## [0.30.0] - 2017-06-21
 
 ### Removed (Breaking)

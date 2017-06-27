@@ -5,7 +5,7 @@
 <img src="https://s2.postimg.org/im8oxf195/Screen_Shot_2017-04-17_at_2.59.31_PM.png" width=480>
 
 
-### Navbar (ExNavigation)
+### Navbar (ExNavigation - Todo: switch exampe to React Navigation)
 
 ```
 

@@ -29,13 +29,14 @@ const isExcludedByAspectRatio = ({aspectRatio},  {currentNearestRatio, currentOr
 
 const toPercent = (num) => num + '%';
 
-const getColumnWidth = (screenSize, props) => {
+const getSize = (screenSize, props) => {
 
   switch(screenSize) {
     case 'sm':
       if (props.smSize !== undefined || props.smSizePoints !== undefined) {
         if (props.smSize !== undefined)
           return toPercent(Math.max(props.smSize, 0));
+        return props.smSizePoints
       } else if (props.size !== undefined || props.sizePoints !== undefined) {
         if (props.size !== undefined)
           return toPercent(Math.max(props.size, 0));
@@ -85,7 +86,7 @@ const getColumnWidth = (screenSize, props) => {
   }
 }
 
-const getColumnOffset = (screenSize, props) => {
+const getOffset = (screenSize, props) => {
 
   switch(screenSize) {
     case 'sm':
@@ -142,4 +143,4 @@ const getColumnOffset = (screenSize, props) => {
   }
 };
 
-module.exports = {isHidden, isExcludedByAspectRatio, getColumnWidth, getColumnOffset}
+module.exports = {isHidden, isExcludedByAspectRatio, getSize, getOffset}
