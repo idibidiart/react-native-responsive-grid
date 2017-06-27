@@ -33,8 +33,8 @@ With this grid, we don't lose any aspect of the normal rectilinear 2D grid. We j
 
 You may use this grid to build responsive 2D layouts that maintain their relative proportions, change their basic structure in a predictable way and dynamically decide what content to display, based on screen size, aspect ratio, and orientation.  
 
-## [Example 1: Reponsive Tiles for Universal Apps](http://youtube.com/)
-[![>> universal tiles demo <<](https://img.youtube.com/vi/Nghqc5QFln8/0.jpg)](https://www.youtube.com/)
+## [Example 1: Reponsive Tiles for Universal Apps](https://www.youtube.com/watch?v=x785Qib0ySg)
+[![>> universal tiles demo <<](https://img.youtube.com/vi/x785Qib0ySg/0.jpg)](https://www.youtube.com/watch?v=x785Qib0ySg)
 
 [Explanation and Source Code for Example 1](https://github.com/idibidiart/react-native-responsive-grid/blob/master/UniversalTiles.md)
 
