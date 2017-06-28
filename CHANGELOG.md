@@ -25,7 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [0.31.0] - 2017-06-26
 
-[Universal Tiles demo https://www.youtube.com/watch?v=x785Qib0ySg](https://www.youtube.com/watch?v=x785Qib0ySg)
+[Universal Tiles demo https://www.youtube.com/watch?v=OPUKz9wQ1Ks](https://www.youtube.com/watch?v=OPUKz9wQ1Ks)
 
 ### Removed (Breaking)
 
