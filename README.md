@@ -33,8 +33,8 @@ With this grid, we don't lose any aspect of the normal rectilinear 2D grid. We j
 
 You may use this grid to build responsive 2D layouts that maintain their relative proportions, change their basic structure in a predictable way and dynamically decide what content to display, based on screen size, aspect ratio, and orientation.  
 
-## [Example 1: Reponsive Tiles for Universal Apps](https://www.youtube.com/watch?v=x785Qib0ySg)
-[![>> universal tiles demo <<](https://img.youtube.com/vi/x785Qib0ySg/0.jpg)](https://www.youtube.com/watch?v=x785Qib0ySg)
+## [Example 1: Reponsive Tiles for Universal Apps](https://www.youtube.com/watch?v=OPUKz9wQ1Ks)
+[![>> universal tiles demo <<](https://img.youtube.com/vi/OPUKz9wQ1Ks/0.jpg)](https://www.youtube.com/watch?v=OPUKz9wQ1Ks)
 
 ## [Example 2: selecting image with right aspect ratio](https://www.youtube.com/watch?v=Nghqc5QFln8)
 [![>> aspectRatio demo <<](https://img.youtube.com/vi/Nghqc5QFln8/0.jpg)](https://www.youtube.com/watch?v=Nghqc5QFln8)
