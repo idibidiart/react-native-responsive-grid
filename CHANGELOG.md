@@ -7,6 +7,16 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Released]
 
+## [0.32.0] - 2017-06-27
+
+### Added 
+
+- `alignSelf` for Row and Column. See Readme. 
+
+### Changed (non-breaking)
+
+- updated the Universal Tiles demo show the number of each tile at the center so it's clear what is happening when tiles are removed and re-inserted and when orientation changes.  
+
 ## [0.31.0] - 2017-06-26
 
 [Universal Tiles demo https://www.youtube.com/watch?v=x785Qib0ySg](https://www.youtube.com/watch?v=x785Qib0ySg)

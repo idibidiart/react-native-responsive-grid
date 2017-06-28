@@ -386,6 +386,10 @@ _Note, if row (or column) is a child of ScrollView you need to set the height (o
 
 `alignLines` may be supplied as prop to Row to vertically align the wrapped lines within the Row (not to be confused with the items that are inside each line.) Possible values are: top, middle, bottom, space, distribute, stretch. (See section on Aligning Wrapped Lines within Rows)
 
+`alignSelf` maybe supplied as prop to Row to override the hAlign prop of the parent Column for that Row.
+
+`alignSelf` maybe supplied as prop to Column to override the vAlign prop of the parent Row for that Column.
+
 `noWrap` may be supplied as prop to Row prevent child elements from wrapping. 
 
 The screen-size-specific _size_, _offset_ and _hidden_ props refer to the effective screen width, which changes with orientation. 

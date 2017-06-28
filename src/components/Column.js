@@ -61,9 +61,10 @@ export default class Column extends React.Component {
       xlHidden: PropTypes.bool,
       vAlign: PropTypes.oneOf(['space', 'distribute', 'middle', 'bottom', 'top']),
       hAlign: PropTypes.oneOf(['stretch', 'center', 'right', 'left']),
+      alignSelf: PropTypes.oneOf(['auto', 'top', 'bottom', 'middle', 'stretch', 'baseline']),
       fullWidth: PropTypes.bool,
       aspectRatio: PropTypes.object,
-      layoutEvent: PropTypes.string
+      layoutEvent: PropTypes.string,   
     }
 
     render() {
@@ -95,6 +96,7 @@ export default class Column extends React.Component {
         xlHidden,
         vAlign,
         hAlign,
+        alignSelf,
         rtl,
         fullWidth,
         aspectRatio,
@@ -149,6 +151,26 @@ export default class Column extends React.Component {
         }
       }
 
+      switch (alignSelf) {
+        case 'stretch': 
+          this.alignSelf = 'stretch' 
+          break;
+        case 'middle':
+          this.alignSelf = 'center' 
+          break; 
+        case 'top': 
+          this.alignSelf = 'flex-start' 
+          break;
+        case 'bottom': 
+          this.alignSelf = 'flex-end' 
+          break;
+        case 'baseline': 
+          this.alignSelf = 'baseline' 
+          break;
+        default: 
+          this.alignSelf = 'auto'
+      }
+
       this.style = {
                     flex: this.flex,
                     width: this.width !== undefined ? this.width : 
@@ -174,6 +196,7 @@ export default class Column extends React.Component {
                                       getOffset(this.screenInfo.mediaSize, this.props) : undefined,
                     alignItems: this.hAlign,
                     justifyContent: this.vAlign,
+                    alignSelf: this.alignSelf,
                     position: 'relative'
                   }
 

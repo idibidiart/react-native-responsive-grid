@@ -60,6 +60,7 @@ export default class Row extends React.Component {
     noWrap: PropTypes.bool,
     hAlign: PropTypes.oneOf(['space', 'distribute', 'center', 'left', 'right']),
     vAlign: PropTypes.oneOf(['stretch', 'middle', 'right', 'left']),
+    alignSelf: PropTypes.oneOf(['auto', 'left', 'right', 'center', 'stretch']),
     fullHeight: PropTypes.bool,
     alignLines: PropTypes.string,
     layoutEvent: PropTypes.string
@@ -75,6 +76,7 @@ export default class Row extends React.Component {
       vAlign,
       alignLines,
       layoutEvent,
+      alignSelf,
       ...rest
     } = this.props
 
@@ -149,6 +151,23 @@ export default class Row extends React.Component {
       default: 
         this.alignLines = 'flex-start' 
     }
+
+    switch (alignSelf) {
+      case 'left': 
+        this.alignSelf = 'flex-start' 
+        break;
+      case 'right':
+        this.alignSelf = 'flex-end' 
+        break; 
+      case 'center': 
+        this.alignSelf = 'center'  
+        break;
+      case 'stretch': 
+        this.alignLines = 'stretch'
+        break;
+      default: 
+        this.alignSelf = 'auto' 
+    }
     
     try {
         return (
@@ -177,6 +196,7 @@ export default class Row extends React.Component {
                   flexWrap: this.wrapState,
                   alignItems: this.vAlign,
                   justifyContent: this.hAlign,
+                  alignSelf: this.alignSelf,
                   position: 'relative'
                 }]}
               >

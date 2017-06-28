@@ -1,8 +1,5 @@
 ## Universal Tiles
 
-Below is the first stab at this... Suggestions are welcome.
-
-
 ```js
 import React, { Component} from 'react'
 
@@ -22,8 +19,6 @@ import { Row, Column as Col} from './grid'
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import Login from './Login'
-
 export default class Home extends React.Component {
 
   constructor (props) {
@@ -32,7 +27,6 @@ export default class Home extends React.Component {
     this.hidden = {}
   }
 
-  // todo: migrate ExNavigation to React Navigation
   static route = {
       navigationBar: {
         title: 'Home',
@@ -83,16 +77,19 @@ export default class Home extends React.Component {
     return (
       <Row fullHeight layoutEvent="updateLayout" style={{backgroundColor: 'lightgray'}}> 
        <ScrollView removeClippedSubviews={true} >
-         <TouchableOpacity activeOpacity={1} onPress={(e) => this.showAll(e)} underlayColor='transparent'>
+         <TouchableOpacity activeOpacity={1} onPress={(e) => this.showAll(e)}>
           <Row>
-            <Col ref={(col) => this.hidden['some_id_1'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} style={{backgroundColor: 'yellow'}} >
+            <Col ref={(col) => this.hidden['some_id_1'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} 
+            style={{backgroundColor: colors[0]}} >
               <Row 
                   smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0} 
                   mdSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 2 : 0} 
                   lgSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 3 : 0} 
-                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}>
-                  <Col> 
-                    <Row fullHeight rtl>
+                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}
+                  alignLines="stretch"
+              >
+                  <Col fullWidth> 
+                    <Row rtl>
                       <Col fullWidth offsetPoints={10}>
                         <TouchableOpacity onPress={() => { this.hide('some_id_1')}}>
                           <Text style={{fontSize: 22, marginTop: 5}}>
@@ -101,18 +98,25 @@ export default class Home extends React.Component {
                         </TouchableOpacity>
                       </Col>
                     </Row>
-                    
+                  </Col>
+                  <Col fullWidth hAlign='center'> 
+                    <Text style={{fontSize: 48, marginTop: 5}}>
+                      1
+                    </Text>
                   </Col>
               </Row>
             </Col>
-            <Col ref={(col) => this.hidden['some_id_2'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} style={{backgroundColor: 'orange'}} >
+            <Col ref={(col) => this.hidden['some_id_2'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} 
+            style={{backgroundColor: colors[1]}} >
               <Row 
                   smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0} 
                   mdSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 2 : 0} 
                   lgSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 3 : 0} 
-                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}>
-                  <Col> 
-                    <Row fullHeight rtl>
+                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}
+                  alignLines="stretch"
+              >
+                  <Col fullWidth> 
+                    <Row rtl>
                       <Col fullWidth offsetPoints={10}>
                         <TouchableOpacity onPress={() => { this.hide('some_id_2')}}>
                           <Text style={{fontSize: 22, marginTop: 5}}>
@@ -121,18 +125,25 @@ export default class Home extends React.Component {
                         </TouchableOpacity>
                       </Col>
                     </Row>
-                    
+                  </Col>
+                  <Col fullWidth hAlign='center'> 
+                    <Text style={{fontSize: 48, marginTop: 5}}>
+                      2
+                    </Text>
                   </Col>
               </Row>
             </Col>
-            <Col ref={(col) => this.hidden['some_id_3'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} style={{backgroundColor: 'pink'}} >
+            <Col ref={(col) => this.hidden['some_id_3'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} 
+            style={{backgroundColor: colors[2]}} >
               <Row 
                   smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0} 
                   mdSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 2 : 0} 
                   lgSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 3 : 0} 
-                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}>
-                  <Col> 
-                    <Row fullHeight rtl>
+                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}
+                  alignLines="stretch"
+              >
+                  <Col fullWidth> 
+                    <Row rtl>
                       <Col fullWidth offsetPoints={10}>
                         <TouchableOpacity onPress={() => { this.hide('some_id_3')}}>
                           <Text style={{fontSize: 22, marginTop: 5}}>
@@ -141,18 +152,25 @@ export default class Home extends React.Component {
                         </TouchableOpacity>
                       </Col>
                     </Row>
-                    
+                  </Col>
+                  <Col fullWidth hAlign='center'> 
+                    <Text style={{fontSize: 48, marginTop: 5}}>
+                      3
+                    </Text>
                   </Col>
               </Row>
             </Col>
-            <Col ref={(col) => this.hidden['some_id_4'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} style={{backgroundColor: 'red'}} >
+            <Col ref={(col) => this.hidden['some_id_4'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} 
+            style={{backgroundColor: colors[3]}} >
               <Row 
-                  smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0}  
+                  smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0} 
                   mdSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 2 : 0} 
                   lgSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 3 : 0} 
-                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}>
-                  <Col> 
-                    <Row fullHeight rtl>
+                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}
+                  alignLines="stretch"
+              >
+                  <Col fullWidth> 
+                    <Row rtl>
                       <Col fullWidth offsetPoints={10}>
                         <TouchableOpacity onPress={() => { this.hide('some_id_4')}}>
                           <Text style={{fontSize: 22, marginTop: 5}}>
@@ -161,18 +179,25 @@ export default class Home extends React.Component {
                         </TouchableOpacity>
                       </Col>
                     </Row>
-                    
+                  </Col>
+                  <Col fullWidth hAlign='center'> 
+                    <Text style={{fontSize: 48, marginTop: 5}}>
+                      4
+                    </Text>
                   </Col>
               </Row>
             </Col>
-            <Col ref={(col) => this.hidden['some_id_5'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} style={{backgroundColor: 'lightgreen'}} >
+            <Col ref={(col) => this.hidden['some_id_5'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} 
+            style={{backgroundColor: colors[4]}} >
               <Row 
-                  smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0}  
+                  smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0} 
                   mdSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 2 : 0} 
                   lgSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 3 : 0} 
-                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}>
-                  <Col> 
-                    <Row fullHeight rtl>
+                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}
+                  alignLines="stretch"
+              >
+                  <Col fullWidth> 
+                    <Row rtl>
                       <Col fullWidth offsetPoints={10}>
                         <TouchableOpacity onPress={() => { this.hide('some_id_5')}}>
                           <Text style={{fontSize: 22, marginTop: 5}}>
@@ -181,18 +206,25 @@ export default class Home extends React.Component {
                         </TouchableOpacity>
                       </Col>
                     </Row>
-                    
+                  </Col>
+                  <Col fullWidth hAlign='center'> 
+                    <Text style={{fontSize: 48, marginTop: 5}}>
+                      5
+                    </Text>
                   </Col>
               </Row>
             </Col>
-            <Col ref={(col) => this.hidden['some_id_6'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} style={{backgroundColor: 'purple'}} >
+            <Col ref={(col) => this.hidden['some_id_6'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} 
+            style={{backgroundColor: colors[5]}} >
               <Row 
                   smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0} 
                   mdSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 2 : 0} 
                   lgSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 3 : 0} 
-                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}>
-                  <Col> 
-                    <Row fullHeight rtl>
+                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}
+                  alignLines="stretch"
+              >
+                  <Col fullWidth> 
+                    <Row rtl>
                       <Col fullWidth offsetPoints={10}>
                         <TouchableOpacity onPress={() => { this.hide('some_id_6')}}>
                           <Text style={{fontSize: 22, marginTop: 5}}>
@@ -201,18 +233,25 @@ export default class Home extends React.Component {
                         </TouchableOpacity>
                       </Col>
                     </Row>
-                    
+                  </Col>
+                  <Col fullWidth hAlign='center'> 
+                    <Text style={{fontSize: 48, marginTop: 5}}>
+                      6
+                    </Text>
                   </Col>
               </Row>
             </Col>
-            <Col ref={(col) => this.hidden['some_id_7'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} style={{backgroundColor: 'lightsalmon'}} >
+            <Col ref={(col) => this.hidden['some_id_7'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} 
+            style={{backgroundColor: colors[6]}} >
               <Row 
-                  smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0}  
+                  smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0} 
                   mdSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 2 : 0} 
                   lgSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 3 : 0} 
-                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}>
-                  <Col> 
-                    <Row fullHeight rtl>
+                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}
+                  alignLines="stretch"
+              >
+                  <Col fullWidth> 
+                    <Row rtl>
                       <Col fullWidth offsetPoints={10}>
                         <TouchableOpacity onPress={() => { this.hide('some_id_7')}}>
                           <Text style={{fontSize: 22, marginTop: 5}}>
@@ -221,18 +260,25 @@ export default class Home extends React.Component {
                         </TouchableOpacity>
                       </Col>
                     </Row>
-                    
+                  </Col>
+                  <Col fullWidth hAlign='center'> 
+                    <Text style={{fontSize: 48, marginTop: 5}}>
+                      7
+                    </Text>
                   </Col>
               </Row>
             </Col>
-            <Col ref={(col) => this.hidden['some_id_8'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} style={{backgroundColor: 'magenta'}} >
+            <Col ref={(col) => this.hidden['some_id_8'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} 
+            style={{backgroundColor: colors[7]}} >
               <Row 
                   smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0} 
                   mdSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 2 : 0} 
                   lgSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 3 : 0} 
-                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}>
-                  <Col> 
-                    <Row fullHeight rtl>
+                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}
+                  alignLines="stretch"
+              >
+                  <Col fullWidth> 
+                    <Row rtl>
                       <Col fullWidth offsetPoints={10}>
                         <TouchableOpacity onPress={() => { this.hide('some_id_8')}}>
                           <Text style={{fontSize: 22, marginTop: 5}}>
@@ -241,18 +287,25 @@ export default class Home extends React.Component {
                         </TouchableOpacity>
                       </Col>
                     </Row>
-                    
+                  </Col>
+                  <Col fullWidth hAlign='center'> 
+                    <Text style={{fontSize: 48, marginTop: 5}}>
+                      8
+                    </Text>
                   </Col>
               </Row>
             </Col>
-            <Col ref={(col) => this.hidden['some_id_9'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} style={{backgroundColor: 'lavender'}} >
+            <Col ref={(col) => this.hidden['some_id_9'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} 
+            style={{backgroundColor: colors[8]}} >
               <Row 
-                  smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0}  
+                  smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0} 
                   mdSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 2 : 0} 
                   lgSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 3 : 0} 
-                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}>
-                  <Col> 
-                    <Row fullHeight rtl>
+                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}
+                  alignLines="stretch"
+              >
+                  <Col fullWidth> 
+                    <Row rtl>
                       <Col fullWidth offsetPoints={10}>
                         <TouchableOpacity onPress={() => { this.hide('some_id_9')}}>
                           <Text style={{fontSize: 22, marginTop: 5}}>
@@ -261,18 +314,25 @@ export default class Home extends React.Component {
                         </TouchableOpacity>
                       </Col>
                     </Row>
-                    
+                  </Col>
+                  <Col fullWidth hAlign='center'> 
+                    <Text style={{fontSize: 48, marginTop: 5}}>
+                      9
+                    </Text>
                   </Col>
               </Row>
             </Col>
-            <Col ref={(col) => this.hidden['some_id_10'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} style={{backgroundColor: 'lightseagreen'}} >
+            <Col ref={(col) => this.hidden['some_id_10'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} 
+            style={{backgroundColor: colors[9]}} >
               <Row 
-                  smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0}  
+                  smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0} 
                   mdSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 2 : 0} 
                   lgSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 3 : 0} 
-                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}>
-                  <Col> 
-                    <Row fullHeight rtl>
+                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}
+                  alignLines="stretch"
+              >
+                  <Col fullWidth> 
+                    <Row rtl>
                       <Col fullWidth offsetPoints={10}>
                         <TouchableOpacity onPress={() => { this.hide('some_id_10')}}>
                           <Text style={{fontSize: 22, marginTop: 5}}>
@@ -281,18 +341,25 @@ export default class Home extends React.Component {
                         </TouchableOpacity>
                       </Col>
                     </Row>
-                    
+                  </Col>
+                  <Col fullWidth hAlign='center'> 
+                    <Text style={{fontSize: 48, marginTop: 5}}>
+                      10
+                    </Text>
                   </Col>
               </Row>
             </Col>
-            <Col ref={(col) => this.hidden['some_id_11'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} style={{backgroundColor: 'chartreuse'}} >
+            <Col ref={(col) => this.hidden['some_id_11'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} 
+            style={{backgroundColor: colors[10]}} >
               <Row 
-                  smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0}  
+                  smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0} 
                   mdSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 2 : 0} 
                   lgSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 3 : 0} 
-                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}>
-                  <Col> 
-                    <Row fullHeight rtl>
+                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}
+                  alignLines="stretch"
+              >
+                  <Col fullWidth> 
+                    <Row rtl>
                       <Col fullWidth offsetPoints={10}>
                         <TouchableOpacity onPress={() => { this.hide('some_id_11')}}>
                           <Text style={{fontSize: 22, marginTop: 5}}>
@@ -301,18 +368,25 @@ export default class Home extends React.Component {
                         </TouchableOpacity>
                       </Col>
                     </Row>
-                    
+                  </Col>
+                  <Col fullWidth hAlign='center'> 
+                    <Text style={{fontSize: 48, marginTop: 5}}>
+                      11
+                    </Text>
                   </Col>
               </Row>
             </Col>
-            <Col ref={(col) => this.hidden['some_id_12'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} style={{backgroundColor: 'gold'}} >
+            <Col ref={(col) => this.hidden['some_id_12'] = col} smSize={100} mdSize={50} lgSize={33.333} xlSize={25} 
+            style={{backgroundColor: colors[11]}} >
               <Row 
-                  smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0}  
+                  smSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.height / 2 : 0} 
                   mdSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 2 : 0} 
                   lgSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 3 : 0} 
-                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}>
-                  <Col> 
-                    <Row fullHeight rtl>
+                  xlSizePoints={this.state.layoutInfo ? this.state.layoutInfo.rowInfo.width / 4 : 0}
+                  alignLines="stretch"
+              >
+                  <Col fullWidth> 
+                    <Row rtl>
                       <Col fullWidth offsetPoints={10}>
                         <TouchableOpacity onPress={() => { this.hide('some_id_12')}}>
                           <Text style={{fontSize: 22, marginTop: 5}}>
@@ -321,7 +395,11 @@ export default class Home extends React.Component {
                         </TouchableOpacity>
                       </Col>
                     </Row>
-                    
+                  </Col>
+                  <Col fullWidth hAlign='center'> 
+                    <Text style={{fontSize: 48, marginTop: 5}}>
+                      12
+                    </Text>
                   </Col>
               </Row>
             </Col>
@@ -341,4 +419,7 @@ const styles = StyleSheet.create({
     resizeMode: 'stretch' 
   }
 })
+
+const colors = ['lightyellow', 'lightsalmon', 'lightseagreen', 'lightskyblue', 'pink',
+                'orange', 'yellow', 'lime', 'lightgreen', 'purple', 'magenta', 'gold']
 ```
