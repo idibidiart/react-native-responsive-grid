@@ -3,7 +3,7 @@
 
 [![NPM](https://nodei.co/npm/react-native-responsive-grid.png?compact=false)](https://npmjs.org/package/react-native-responsive-grid)
 
-# Responsive and Adaptive Layout for React Native 
+# React Native Library for Responsive and Universal iOS/Android Apps
 
 ### Install
 
