@@ -344,7 +344,7 @@ Row and Column have `.hide()` and `.show()` instance methods. The instance refer
 
 All props are case sensitive.
 
-`aspectRatio` (see [Example 1](https://github.com/idibidiart/react-native-responsive-grid#example-1))
+`aspectRatio` (see [Example 2](https://github.com/idibidiart/react-native-responsive-grid#example-2))
 
 `layoutEvent` (see [Examples 4](https://github.com/idibidiart/react-native-responsive-grid#example-4))
 
