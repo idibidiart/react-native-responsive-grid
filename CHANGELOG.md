@@ -23,9 +23,11 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 - updated the Universal Tiles demo show the number of each tile at the center so it's clear what is happening when tiles are removed and re-inserted and when orientation changes.  
 
+[*Updated* Universal Tiles demo https://www.youtube.com/watch?v=OPUKz9wQ1Ks](https://www.youtube.com/watch?v=OPUKz9wQ1Ks)
+
 ## [0.31.0] - 2017-06-26
 
-[Universal Tiles demo https://www.youtube.com/watch?v=OPUKz9wQ1Ks](https://www.youtube.com/watch?v=OPUKz9wQ1Ks)
+[Universal Tiles demo https://www.youtube.com/watch?v=x785Qib0ySg](https://www.youtube.com/watch?v=x785Qib0ySg)
 
 ### Removed (Breaking)
 
