@@ -27,7 +27,7 @@ export default class Row extends React.Component {
       if (this.props.layoutEvent) {
         DeviceEventEmitter.emit(this.props.layoutEvent, event)
       } else {
-        //this.setState({layoutEvent: event})
+        this.setState({layoutEvent: event})
       }
   }
 

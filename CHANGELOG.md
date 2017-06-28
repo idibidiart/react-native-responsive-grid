@@ -7,6 +7,12 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Released]
 
+## [0.32.01] - 2017-06-27
+
+### Changed (non-breaking)
+
+- fixed regression with Row update when no layoutEvent is specified
+
 ## [0.32.0] - 2017-06-27
 
 ### Added 
