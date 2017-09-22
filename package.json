@@ -3,6 +3,7 @@
   "version": "0.32.04",
   "description": "Responsive grid for React Native based on react-native-flexbox-grid",
   "main": "src/index.js",
+  "types": "src/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/idibidiart/react-native-responsive-grid.git"
