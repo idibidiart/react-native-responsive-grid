@@ -59,7 +59,7 @@ export default class Row extends React.Component {
     rtl: PropTypes.bool,
     noWrap: PropTypes.bool,
     hAlign: PropTypes.oneOf(['space', 'distribute', 'center', 'left', 'right']),
-    vAlign: PropTypes.oneOf(['stretch', 'middle', 'right', 'left']),
+    vAlign: PropTypes.oneOf(['stretch', 'middle', 'top', 'bottom', 'baseline']),
     alignSelf: PropTypes.oneOf(['auto', 'left', 'right', 'center', 'stretch']),
     fullHeight: PropTypes.bool,
     alignLines: PropTypes.string,
