@@ -172,14 +172,6 @@ export default class Home extends React.Component {
       this.sub = null
     }
 
-    static route = {
-        navigationBar: {
-          title: 'Home',
-          renderTitle: "Layout Event Demo",
-          backgroundColor: "#fff"
-        }
-    }
-
     componentWillMount() {
       this.sub = DeviceEventEmitter.addListener("someEventKey", (e) => {
         this.setState({someEventKey: e})
@@ -368,13 +360,13 @@ _Specifying an offset value in normal LTR mode means marginLeft (if specified in
 
 `smHidden`, `mdHidden`, `lgHidden` and `xlHidden` - may be applied to Column. This tells the grid to hide certain columns based on the current width of the screen.  
 
-`vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: `middle`, `top`, `bottom`, `space` and `distribute`. Default is top.
+`vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: `middle` | `center`, `top`, `bottom`, `space` and `distribute`. Default is top.
 
-`vAlign` may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: `top`, `middle`, `bottom`, `baseline` and `stretch`. Default is top.
+`vAlign` may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: `top`, `middle` | `center`, `bottom`, `baseline` and `stretch`. Default is top.
 
-`hAlign` may be supplied as prop to Row to align the columns within it in the horizontal direction. Possible values are: `center`, `left`, `right`, `space` and `distribute`. Default is left.
+`hAlign` may be supplied as prop to Row to align the columns within it in the horizontal direction. Possible values are: `center` | `middle`, `left`, `right`, `space` and `distribute`. Default is left.
 
-`hAlign` may also be supplied as prop to Column to align its rows and/or elements within it in the horizontal direction. Possible values are: `center`, `left`, `right`, and `stretch`. Default is left.
+`hAlign` may also be supplied as prop to Column to align its rows and/or elements within it in the horizontal direction. Possible values are: `center` | `middle`, `left`, `right`, and `stretch`. Default is left.
 
 `rtl` may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set hAlign to 'right.' This is useful for right-to-left layouts. 
 
@@ -387,8 +379,10 @@ _Note, if row (or column) is a child of ScrollView you need to set the height (o
 `alignLines` may be supplied as prop to Row to vertically align the wrapped lines within the Row (not to be confused with the items that are inside each line.) Possible values are: top, middle, bottom, space, distribute, stretch. (See section on Aligning Wrapped Lines within Rows)
 
 `alignSelf` maybe supplied as prop to Row to override the hAlign prop of the parent Column for that Row.
+Possible values are: `auto`, `left`, `right`, `center` | `middle`, `stretch`
 
 `alignSelf` maybe supplied as prop to Column to override the vAlign prop of the parent Row for that Column.
+Possible values are: `auto`, `top`, `bottom`, `middle` | `center`, `stretch`, `baseline`
 
 `noWrap` may be supplied as prop to Row prevent child elements from wrapping. 
 

@@ -11,11 +11,11 @@ export default class Row extends React.Component {
   }
 
   hide = () => {
-    this.setState({height: 0})
+    this.setState({display: 'none'})
   }
 
   show = () => {
-    this.setState({height: undefined}) // yield to size prop
+    this.setState({display: 'flex'})
   }
 
   callback = (e) => {
@@ -38,7 +38,7 @@ export default class Row extends React.Component {
       if (!element) return null
       if (element.type && (element.type.name === 'Row')) {
           throw new Error("Row may not contain other Rows as children. Child rows must be wrapped in a Column.")
-      } else if (element.type.name === 'Column') {
+      } else if (element.type && element.type.name === 'Column') {
         if (isHidden(this.screenInfo.mediaSize, element.props) || 
             isExcludedByAspectRatio(element.props, this.screenInfo.aspectRatio)) {
           return null;
@@ -58,9 +58,9 @@ export default class Row extends React.Component {
   static propTypes = {
     rtl: PropTypes.bool,
     noWrap: PropTypes.bool,
-    hAlign: PropTypes.oneOf(['space', 'distribute', 'center', 'left', 'right']),
-    vAlign: PropTypes.oneOf(['stretch', 'middle', 'top', 'bottom', 'baseline']),
-    alignSelf: PropTypes.oneOf(['auto', 'left', 'right', 'center', 'stretch']),
+    hAlign: PropTypes.oneOf(['space', 'distribute', 'center', 'middle', 'left', 'right']),
+    vAlign: PropTypes.oneOf(['stretch', 'middle', 'center', 'top', 'bottom', 'baseline']),
+    alignSelf: PropTypes.oneOf(['auto', 'left', 'right', 'center', 'middle', 'stretch']),
     fullHeight: PropTypes.bool,
     alignLines: PropTypes.string,
     layoutEvent: PropTypes.string
@@ -97,6 +97,7 @@ export default class Row extends React.Component {
           this.hAlign = 'space-around'  
           break;
         case 'center': 
+        case 'middle':
           this.hAlign = 'center' 
           break; 
         case 'right': 
@@ -115,6 +116,7 @@ export default class Row extends React.Component {
         this.vAlign = 'stretch' 
         break;
       case 'middle':
+      case 'center':
         this.vAlign = 'center' 
         break; 
       case 'bottom': 
@@ -137,6 +139,7 @@ export default class Row extends React.Component {
         this.alignLines = 'flex-end' 
         break; 
       case 'middle': 
+      case 'center':
         this.alignLines = 'center'  
         break;
       case 'space': 
@@ -160,6 +163,7 @@ export default class Row extends React.Component {
         this.alignSelf = 'flex-end' 
         break; 
       case 'center': 
+      case 'middle':
         this.alignSelf = 'center'  
         break;
       case 'stretch': 
@@ -197,7 +201,8 @@ export default class Row extends React.Component {
                   alignItems: this.vAlign,
                   justifyContent: this.hAlign,
                   alignSelf: this.alignSelf,
-                  position: 'relative'
+                  position: 'relative',
+                  overflow: 'hidden'
                 }]}
               >
                 {this.cloneElements()}

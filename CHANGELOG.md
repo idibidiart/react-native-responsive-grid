@@ -7,6 +7,19 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Released]
 
+## [0.33.0] - 2017-06-27
+
+### Changed (non-breaking)
+
+- fixed hide() and show() for columns in wrapped rows 
+- made 'center' synonomous with 'middle' throughout
+
+### Changed (breaking)
+
+- columns and rows have overflow: 'hidden' by design 
+
+## [Released]
+
 ## [0.32.01] - 2017-06-27
 
 ### Changed (non-breaking)

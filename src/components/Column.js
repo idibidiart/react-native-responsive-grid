@@ -5,7 +5,6 @@ import {ScreenInfo} from '../lib/ScreenInfo';
 import {getSize, getOffset} from '../lib/helpers';
 import {View, DeviceEventEmitter} from 'react-native';
 
-
 export default class Column extends React.Component {
     constructor (props) {
         super(props)
@@ -17,11 +16,11 @@ export default class Column extends React.Component {
     }
 
     hide = () => {
-      this.setState({width: 0})
+      this.setState({display: 'none'})
     }
 
     show = () => {
-      this.setState({width: undefined}) // yield to size prop
+      this.setState({display: 'flex'})
     }
 
     cloneElements = () => {
@@ -59,9 +58,9 @@ export default class Column extends React.Component {
       xlOffset: PropTypes.number,
       xlOffsetPoints: PropTypes.number,
       xlHidden: PropTypes.bool,
-      vAlign: PropTypes.oneOf(['space', 'distribute', 'middle', 'bottom', 'top']),
-      hAlign: PropTypes.oneOf(['stretch', 'center', 'right', 'left']),
-      alignSelf: PropTypes.oneOf(['auto', 'top', 'bottom', 'middle', 'stretch', 'baseline']),
+      vAlign: PropTypes.oneOf(['space', 'distribute', 'middle', 'center', 'bottom', 'top']),
+      hAlign: PropTypes.oneOf(['stretch', 'center', 'middle', 'right', 'left']),
+      alignSelf: PropTypes.oneOf(['auto', 'top', 'bottom', 'middle', 'center', 'stretch', 'baseline']),
       fullWidth: PropTypes.bool,
       aspectRatio: PropTypes.object,
       layoutEvent: PropTypes.string,   
@@ -120,7 +119,8 @@ export default class Column extends React.Component {
         case 'distribute':
           this.vAlign = 'space-around'  
           break;
-        case 'middle': 
+        case 'middle':
+        case 'center': 
           this.vAlign = 'center' 
           break; 
         case 'bottom': 
@@ -138,6 +138,7 @@ export default class Column extends React.Component {
             this.hAlign = 'stretch' 
             break;
           case 'center':
+          case 'middle':
             this.hAlign = 'center' 
             break; 
           case 'left': 
@@ -156,6 +157,7 @@ export default class Column extends React.Component {
           this.alignSelf = 'stretch' 
           break;
         case 'middle':
+        case 'center':
           this.alignSelf = 'center' 
           break; 
         case 'top': 
@@ -171,7 +173,10 @@ export default class Column extends React.Component {
           this.alignSelf = 'auto'
       }
 
+      console.log(this.state.display)
+
       this.style = {
+                    display: this.state.display,
                     flex: this.flex,
                     width: this.width !== undefined ? this.width : 
                             (this.props.size !== undefined || 
@@ -197,7 +202,8 @@ export default class Column extends React.Component {
                     alignItems: this.hAlign,
                     justifyContent: this.vAlign,
                     alignSelf: this.alignSelf,
-                    position: 'relative'
+                    position: 'relative',
+                    overflow: 'hidden'
                   }
 
         try {
