@@ -188,6 +188,7 @@ export default class Row extends React.Component {
               ref={component => this._root = component} 
               style={[this.props.style,
                 { 
+                  display: this.state.display || 'flex',
                   flex: this.flex,
                   flexDirection: 'row',
                   height: this.height !== undefined ? this.height : 

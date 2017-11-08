@@ -173,10 +173,8 @@ export default class Column extends React.Component {
           this.alignSelf = 'auto'
       }
 
-      console.log(this.state.display)
-
       this.style = {
-                    display: this.state.display,
+                    display: this.state.display || 'flex',
                     flex: this.flex,
                     width: this.width !== undefined ? this.width : 
                             (this.props.size !== undefined || 
