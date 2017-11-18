@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {ScreenInfo} from '../lib/ScreenInfo';
 import {View, DeviceEventEmitter, InteractionManager} from 'react-native';
@@ -8,14 +8,25 @@ export default class Row extends React.Component {
   constructor(props, context) {
       super (props, context)
       this.state = {}
+      this.hidden = false
+      this.shown = true
+      this.animFrame
   }
 
   hide = () => {
-    this.setState({display: 'none'})
+    this.setState((state) => {
+      this.hidden = true
+      this.shown = false
+      return {...state, display: 'none'}
+    })
   }
 
   show = () => {
-    this.setState({display: 'flex'})
+    this.setState((state) => {
+      this.shown = true
+      this.hidden = false
+      return {...state, display: 'flex'}
+    })
   }
 
   callback = (e) => {
@@ -53,6 +64,10 @@ export default class Row extends React.Component {
 
   setNativeProps = (nativeProps) => {
     this._root.setNativeProps(nativeProps);
+  }
+
+  componentWillUnmount = () => {
+    cancelAnimationFrame(this.animFrame)
   }
 
   static propTypes = {
@@ -179,7 +194,7 @@ export default class Row extends React.Component {
               onLayout={(e) => {
                   e.persist()
                   InteractionManager.runAfterInteractions(() => {
-                    requestAnimationFrame(() => {
+                    this.animFrame = requestAnimationFrame(() => {
                       this.callback(e)
                     })
                   })

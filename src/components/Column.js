@@ -1,5 +1,5 @@
 
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types'
 import {ScreenInfo} from '../lib/ScreenInfo';
 import {getSize, getOffset} from '../lib/helpers';
@@ -16,11 +16,17 @@ export default class Column extends React.Component {
     }
 
     hide = () => {
-      this.setState({display: 'none'})
+      this.setState((state) => {
+        this.hidden = true
+        return {...state, display: 'none'}
+      })
     }
-
+  
     show = () => {
-      this.setState({display: 'flex'})
+      this.setState((state) => {
+        this.shown = true
+        return {...state, display: 'flex'}
+      })
     }
 
     cloneElements = () => {
