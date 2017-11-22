@@ -73,7 +73,7 @@ export default class Grid extends React.Component {
             >
                 {this.props.children({
                     state: this.state,
-                    setState: (...args) => this.setState.bind(this, ...args),
+                    setState: (...args) => this.setState(...args),
                 })}
             </View>)
     }
