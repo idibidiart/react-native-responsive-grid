@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import {ScreenInfo} from '../lib/ScreenInfo';
 import {getSize, getOffset} from '../lib/helpers';
-import {View, DeviceEventEmitter} from 'react-native';
+import {View} from 'react-native';
 
 export default class Column extends React.Component {
     constructor (props) {
@@ -68,8 +68,7 @@ export default class Column extends React.Component {
       hAlign: PropTypes.oneOf(['stretch', 'center', 'middle', 'right', 'left']),
       alignSelf: PropTypes.oneOf(['auto', 'top', 'bottom', 'middle', 'center', 'stretch', 'baseline']),
       fullWidth: PropTypes.bool,
-      aspectRatio: PropTypes.object,
-      layoutEvent: PropTypes.string,   
+      aspectRatio: PropTypes.object  
     }
 
     render() {
@@ -105,7 +104,6 @@ export default class Column extends React.Component {
         rtl,
         fullWidth,
         aspectRatio,
-        layoutEvent,
         ...rest
       } = this.props;
 
