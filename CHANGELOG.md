@@ -7,6 +7,31 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Released]
 
+## [0.34.0] - 2017-11-22
+
+### Changed (non-breaking)
+
+- exposed .shown and .hidden as instance variables on Row and Col components
+
+### Changed (breaking)
+
+- replaced layoutEvent prop and having to build stateful components (and the ambiguity around where in the component tree to place layoutEvent) with a Grid component that sits at the very top of the UI component tree, above ScrollView, ListView and FlatList et al as an optional component for when managing state is necessary (e.g. adaptive layouts) 
+
+## [Released]
+
+## [0.33.0] - 2017-06-27
+
+### Changed (non-breaking)
+
+- fixed hide() and show() for columns in wrapped rows 
+- made 'center' synonomous with 'middle' throughout
+
+### Changed (breaking)
+
+- columns and rows have overflow: 'hidden' by design 
+
+## [Released]
+
 ## [0.32.01] - 2017-06-27
 
 ### Changed (non-breaking)

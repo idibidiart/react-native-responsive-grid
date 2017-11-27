@@ -290,7 +290,7 @@ Remember that paddingTop and marginTop when given as percentages are percentages
 
 ## Wrapped Alignment
 
-By default, content in rows will extend beyond the width of the screen if the sum of the width values of the content is larger than 100% of the row's width. To wrap columns or any content within the row the content must be plural (i.e. not one really wide column as a single item won't wrap) and the Row must have the 'wrap' prop supplied. When rows are allowed to wrap what happens is the row will then contain multiple horizontal "lines" that hold the items within it. The lines themselves (as opposed to the items within them) may be aligned in the vertical direction using alignLines prop (see Props section above for details) 
+By default, content (plural) in rows will wrap if the sum of the width values of the content is larger than 100% of the row's width. To prevent wrapping of content (plural) the Row must have the 'noWrap' prop supplied. When rows are allowed to wrap the row will then contain two or more horizontal "lines" that hold the items within it. The lines themselves (as opposed to the items within them) may be aligned in the vertical direction using alignLines prop (see Props section above for details) 
 
 Here are two screens illustrating the effect of wrap, vAlign and alignLines. The first tells the row that it can turn into a multi-line row that wraps the items. The second tells it how to vertically align the items. The third tells it how to vertically align the wrapped lines that contain the items. 
 
