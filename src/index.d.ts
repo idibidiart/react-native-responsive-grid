@@ -2,6 +2,10 @@ declare module "react-native-responsive-grid" {
     import { Component } from "react";
     import { ViewProperties } from "react-native";
 
+    export interface GridProps {
+
+    }
+
     export interface ColumnProps {
         size?: number,
         sizePoints?: number,
@@ -31,8 +35,7 @@ declare module "react-native-responsive-grid" {
         hAlign?: 'stretch' | 'center' | 'right' | 'left',
         alignSelf?: 'auto' | 'top' | 'bottom' | 'middle' | 'stretch' | 'baseline',
         fullWidth?: boolean,
-        aspectRatio?: object,
-        layoutEvent?: string,
+        aspectRatio?: object
     }
 
     export interface RowProps {
@@ -43,22 +46,29 @@ declare module "react-native-responsive-grid" {
         alignSelf?: 'auto' | 'left' | 'right' | 'center' | 'stretch',
         fullHeight?: boolean,
         alignLines?: string,
-        layoutEvent?: string
+        size?: number,
+        sizePoints?: number
+        smSizePoints?: number,
+        mdSizePoints?: number,
+        lgSizePoints?: number,
+        xlSizePoints?: number
     }
+
+    export type AspectRatio = '16:9' | '16:10' | '3:2' | '4:3' | '1:1' |'4:3' | '3:2' | '16:10' | '16:9'
 
     export class Row extends Component<ViewProperties & RowProps, any> { }
     export class Column extends Component<ViewProperties & ColumnProps, any> { }
+    export class Grid extends Component<ViewProperties & GridProps, any> { }
 
     export interface ScreenParams {
         mediaSize: 'sm' | 'md' | 'lg' | 'xl',
         width: number,
         height: number,
         aspectRatio?: {
-            currentNearestRatio: string,
+            currentNearestRatio: AspectRatio,
             currentOrientation: 'square' | 'landscape' | 'portrait'
         }
     }
 
     export function ScreenInfo(onlySize?: boolean): ScreenParams;
 }
-

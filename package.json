@@ -21,5 +21,8 @@
     "url": "https://github.com/idibidiart/react-native-responsive-grid/issues"
   },
   "homepage": "https://github.com/idibidiart/react-native-responsive-grid#readme",
-  "dependencies": {}
+  "dependencies": {
+    "@types/react": "^16.0.25",
+    "@types/react-native": "^0.50.7"
+  }
 }
