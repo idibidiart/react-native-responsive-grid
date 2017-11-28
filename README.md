@@ -51,6 +51,41 @@ You may use this grid to build responsive 2D layouts that maintain their relativ
 
 The demos in the videos above show some of the possibilities, but this grid is capable of more complex responsive and adaptive behavior.
 
+## Components
+
+- Row: Flexbox View with flexDirection set to 'row' and less confusing names for flex styles. 
+
+- Col: Flexbox View with flexDirection set to 'column' and less confusing names for flex styles. 
+
+- Grid: a stateful top level component (at root, above ScrollView, ListView, FlatList et al but below a Modal) and does not nest (will warn and nullify nested instances.) It uses the children-as-funnction pattern and passes its state to its childre which can be declared in its props, and which will have the latest screen and grid info after orientation changes. It also passes it's async render-causing setState method to its children. 
+
+GRID MUST NOT TO BE USED MORE THAN ONCE AT THE ROOT OF THE CURRENT SCREEN'S VIEW HIERARCHY. DO NOT NEST.
+
+Below is an example:
+
+```jsx 
+export const Home = () => (
+  <Grid>{({state, setState}) => (
+       {/*  possibly other JSX here */}
+        <Row fullHeight style={{backgroundColor: 'lightgray'}}> 
+        <ScrollView removeClippedSubviews={true} >
+            <Row >
+              {layout(state)}
+            </Row>
+          </ScrollView>
+        </Row>
+      )}
+  </Grid>)
+```
+
+## Methods
+
+Row and Column have `.hide()` and `.show()` instance methods. The instance reference you get from a ref callback will have these methods. See Example #1 for usage.
+
+## Instance Variables
+
+These are provided mainly for unit tests, except for componentInstance.hidden and componentInstance.shown which can be used to tell the state of the component.
+
 ### Example 1
 
 This examples showcases 2-dimensional Constraint-Based Layout using a custom layout in a few lines of code. Flexbox fails us here in that it does not support a 2-dimensional constraint layout. This is precisely why React Native needs native support for display:'grid' Until then you may use this grid with your own constraint-based layout. This example shows a simplified Pinterest-like layout. You may extend it to build a masonry effect using a box packing algorithm and Flexbox's 1-dimensional constraint-based elastic layout. One thing this grid is not designed to do is to implement transitions but it can be forked and extended to do that (would happy take a PR.) 
@@ -100,26 +135,31 @@ The following table maps some common device aspect ratios to the ratio of width/
 | '1:1' | 1 | ? | ? | ?
 
 ```jsx
-<Row>
-  <Col fullWidth aspectRatio={{ratio: '3:2', orientation: "portrait"}}>
-      <Image source={require('./assets/homepage hero-3-2-portrait.jpg')} style={styles.homeImage}></Image>
-  </Col>
-</Row>
-<Row>
-  <Col fullWidth aspectRatio={{ratio: '3:2', orientation: "landscape"}}>
-      <Image source={require('./assets/homepage hero-3-2-landscape.jpg')} style={styles.homeImage}></Image>
-  </Col>
-</Row>
-<Row>
-  <Col fullWidth aspectRatio={{ratio: '16:9', orientation: "portrait"}}>
-      <Image source={require('./assets/homepage hero-16-9-portrait.jpg')} style={styles.homeImage}></Image>
-  </Col>
-</Row>
-<Row>
-  <Col fullWidth aspectRatio={{ratio: '16:9', orientation: "landscape"}}
-      <Image source={require('./assets/homepage hero-16-9-landscape.jpg')} style={styles.homeImage}></Image>
-  </Col>
-</Row>
+<Grid>{({state, setState}) => (
+  {/*  possibly other JSX here */}
+      <Row>
+    <Col fullWidth aspectRatio={{ratio: '3:2', orientation: "portrait"}}>
+        <Image source={require('./assets/homepage hero-3-2-portrait.jpg')} style={styles.homeImage}></Image>
+    </Col>
+  </Row>
+  <Row>
+    <Col fullWidth aspectRatio={{ratio: '3:2', orientation: "landscape"}}>
+        <Image source={require('./assets/homepage hero-3-2-landscape.jpg')} style={styles.homeImage}></Image>
+    </Col>
+  </Row>
+  <Row>
+    <Col fullWidth aspectRatio={{ratio: '16:9', orientation: "portrait"}}>
+        <Image source={require('./assets/homepage hero-16-9-portrait.jpg')} style={styles.homeImage}></Image>
+    </Col>
+  </Row>
+  <Row>
+    <Col fullWidth aspectRatio={{ratio: '16:9', orientation: "landscape"}}>
+        <Image source={require('./assets/homepage hero-16-9-landscape.jpg')} style={styles.homeImage}></Image>
+    </Col>
+  </Row>
+  )
+}
+</Grid>
 ```
 
 ### Example 4
@@ -136,6 +176,8 @@ The following are the preset screen widths at which break points maybe specified
 - xl: >= 1366 
 
 ```jsx
+<Grid>{({state, setState}) => (
+  {/*  possibly other JSX here */}
   <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
       <Col size={80} offset={6}>
         <Row>
@@ -158,7 +200,9 @@ The following are the preset screen widths at which break points maybe specified
       <Col size={14} offset={-6} hAlign='right'>
             <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
       </Col>
-  </Row>
+  </Row>)
+}
+</Grid>
 ```
 
 ### Example 5
@@ -173,7 +217,7 @@ import {
   ScrollView
 } from 'react-native';
 
-import { Row, Column as Col} from 'react-native-responsive-grid'
+import { Row, Column as Col, Grid} from 'react-native-responsive-grid'
 import { MaterialIcons } from '@expo/vector-icons';
 import faker from 'faker';
 
@@ -217,78 +261,49 @@ export default class Home extends Component {
 
   render() {
     return (
-      <FlatList
-        data={this.state.data}
-        initialNumToRender={10}
-        onEndReachedThreshold={1}
-        onEndReached={this.onEndReached}
-        refreshing={this.state.refreshing}
-        onRefresh={this.onRefresh}
-        renderItem={
-          ({ item }) => {
-            return (
-              <Row key={item.key} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-                <Col size={80} offset={6} >
-                  <Row>
-                    <Col size={60} smSize={100}>
-                      <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>{String(item.date)}</Text>
-                      <Row>
-                        <Col size={10}>
-                          <MaterialIcons name='person' size={17} color='gray'/>
-                        </Col>
-                        <Col smSize={60} size={87.5} offset={2.5}>
-                          <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>{item.job}</Text>
-                        </Col>
-                      </Row>
-                    </Col>
-                    <Col size={40} smSize={100}>
-                      <Text style={{fontSize: 16, color: '#0a0a0a'}}>{item.name}</Text>
-                    </Col> 
-                  </Row>    
-                </Col>
-                <Col size={8} offset={-6} hAlign='right'>
-                      <Text>{item.index}</Text>
-                </Col>
-              </Row>
-            )
-          }
+      <Grid>{({state, setState}) => (
+        {/*  possibly other JSX here */}
+        <FlatList
+          data={this.state.data}
+          initialNumToRender={10}
+          onEndReachedThreshold={1}
+          onEndReached={this.onEndReached}
+          refreshing={this.state.refreshing}
+          onRefresh={this.onRefresh}
+          renderItem={
+            ({ item }) => {
+              return (
+                <Row key={item.key} style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+                  <Col size={80} offset={6} >
+                    <Row>
+                      <Col size={60} smSize={100}>
+                        <Text style={{fontSize: 15, color: '#BD1206', fontWeight:'bold'}}>{String(item.date)}</Text>
+                        <Row>
+                          <Col size={10}>
+                            <MaterialIcons name='person' size={17} color='gray'/>
+                          </Col>
+                          <Col smSize={60} size={87.5} offset={2.5}>
+                            <Text style={{fontSize: 12, color: 'gray', lineHeight: 20}}>{item.job}</Text>
+                          </Col>
+                        </Row>
+                      </Col>
+                      <Col size={40} smSize={100}>
+                        <Text style={{fontSize: 16, color: '#0a0a0a'}}>{item.name}</Text>
+                      </Col> 
+                    </Row>    
+                  </Col>
+                  <Col size={8} offset={-6} hAlign='right'>
+                        <Text>{item.index}</Text>
+                  </Col>
+                </Row>
+              )
+            }}
+        />)
       }
-    />)
+      </Grid>
   }
 }
 ```
-
-## Components
-
-- Row: Flexbox View with flexDirection set to 'row' and less confusing names for flex styles. Rows will automatically re-render their children when the Row's layout changes, unless a child has its componentShouldUpdate lifecycle method returning false.
-
-- Col: Flexbox View with flexDirection set to 'column' and less confusing names for flex styles. Columns must be enclosed in Row (or there must be a Grid component at the root of the UI component tree) for them to update when screen orientation change. For all other layout changes, make sure the Col(s) in question is/are wrapped in a Row whose dimensions will change when a child Col changes in dimensions or is unmounted.
-
-- Grid: a stateful top level component (at root, above ScrollView, ListView, FlatList et al) and does not nest by design (will warn and remove nested instances,) It passes its state (which can be declared in its props, and which will have the latest screen and grid info after orientation changes) to its children, using the children-as-funnction pattern. It also passes it's async render-causing state mutation method (the component's setState) to its children as a fumction argument. Below is an example:
-
-```jsx 
-export const Home = () => (
-  <Grid
-    state={someInitialState: 'xyz'}  
-  >{({state, setState}) => (
-        <Row fullHeight style={{backgroundColor: 'lightgray'}}> 
-        <ScrollView removeClippedSubviews={true} >
-            <Row >
-              {layout(state)}
-            </Row>
-          </ScrollView>
-        </Row>
-      )}
-  </Grid>)
-```
-
-## Methods
-
-Row and Column have `.hide()` and `.show()` instance methods. The instance reference you get from a ref callback will have these methods. See Example #1 for usage.
-
-## Instance Variables
-
-These are provided mainly for unit tests, except for componentInstance.hidden and componentInstance.shown which can be used to tell the state of the component.
 
 ## Props
 
@@ -358,19 +373,22 @@ The following are the screen width thresholds for these props:
 If you're nesting a column inside a row which is inside another column that is inside another row as below:
 
 ```jsx
-<Row>
-    <Col size={50}>
-      <Row>
+  <Grid>{({state, setState}) => (
+       {/*  possibly other JSX here */}
+    <Row>
         <Col size={50}>
-          <Text>
-            This column is 25% of the outer view's width (or 25% of the screen width if
-            the top level Row has no parent)
-          </Text>
+          <Row>
+            <Col size={50}>
+              <Text>
+                This column is 25% of the outer view's width (or 25% of the screen width if
+                the top level Row has no parent)
+              </Text>
+            </Col>
+          </Row>
         </Col>
-      </Row>
-    </Col>
-</Row>
-
+    </Row>
+      )}
+  </Grid>)
 ```
 
 The nested column's size will be the column size value (size, sm, md, lg, xl) as a percentage of the width of the preceding column in the hierarchy . 
@@ -397,18 +415,22 @@ Notice the reversed order of the Text relative to the physical order in the mark
 ### Normal LTR Markup 
 
 ```jsx
-<Row style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-    <Col size={60} offset={6} >
-      <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-      PREVIOUS ORDERS
-      </Text>
-    </Col>
-    <Col size={30} hAlign='right'>
-      <Text style={{ fontSize: 16, color: '#BD1206'}}>
-        SEE ALL
-      </Text>
-    </Col>
-</Row>
+  <Grid>{({state, setState}) => (
+    {/*  possibly other JSX here */}
+    <Row style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={60} offset={6} >
+          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+          PREVIOUS ORDERS
+          </Text>
+        </Col>
+        <Col size={30} hAlign='right'>
+          <Text style={{ fontSize: 16, color: '#BD1206'}}>
+            SEE ALL
+          </Text>
+          </Col>
+    </Row>
+          )}
+  </Grid>)
 ```
 
 ### RTL Markup
@@ -416,18 +438,22 @@ Notice the reversed order of the Text relative to the physical order in the mark
 Notice the offset values work in RTL direction now. The addition of .7 offset is to mimic the fact that the left margin in the LTR layout is smaller than the right margin in that layout, whereas it's the opposite in the RTL direction. So the .7 offset is used in RTL layout instead of the 1 offset, so alignment is identical. 
 
 ```jsx
-<Row rtl style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
-    <Col size={60} offset={4} >
-      <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-      PREVIOUS ORDERS
-      </Text>
-    </Col>
-    <Col size={30} hAlign='left'>
-      <Text style={{ fontSize: 16, color: '#BD1206'}}>
-        SEE ALL
-      </Text>
-    </Col>
-</Row>
+  <Grid>{({state, setState}) => (
+    {/*  possibly other JSX here */}
+    <Row rtl style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
+        <Col size={60} offset={4} >
+          <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
+          PREVIOUS ORDERS
+          </Text>
+        </Col>
+        <Col size={30} hAlign='left'>
+          <Text style={{ fontSize: 16, color: '#BD1206'}}>
+            SEE ALL
+          </Text>
+        </Col>
+    </Row>
+     )}
+  </Grid>)
 ```
 
 ### Utils
@@ -440,20 +466,20 @@ Being able to readt to layout changes, including changes due to device rotation 
 
 Columns and Rows have `position: 'relative'` enforced by design to keep them within the layout flow. Each can be moved about within their parent Row and Column, respectively, using top and bottom margins and/or offsets. Columns can be made to overlap horizontally within the row using a negative offset in LTR or RTL directions (see RTL support.) Rows can be made to overlap vertically within a column using a negative top and bottom margins. The intent is to allow the free positioning of rows and columns without taking them out of the layout flow. This is required to have a predictable response to layout change.
 
-The <Grid> component may be used at the very top of the UI component tree, above ScrollView, ListView and FlatList et al as an optional component for when relaying state to all descedants in response to orientation changes. Grid passes state and setState to its descendants as an argument, using the children-as-fumction pattern. Please see the section above on Components.
-
-For non-orientation-related layout changes, use Row component to wrap any columns that may change in dimensions or unmount.
+ The Grid component is a stateful top level component (at root, above ScrollView, ListView, FlatList et al but below a Modal) and does not nest (will warn and nullify nested instances.) It responds to orientation changes and uses the children-as-funnction pattern to pass its state, including its dimensions and any user-defined state, along with screen dimensions, to its children. The user may define Grid state in its props. The Grid also passes it's async render-causing setState method to its children.
 
 ## More Examples
 
 ```jsx
 import {Column as Col, Row} from 'react-native-responsive-grid';
-
-<Row>
-    <Col smSize={50} mdSize={33.333} lgSize={25}>
-        <Text>First Column</Text>
-    </Col>
-</Row>
+<Grid>{({state, setState}) => (
+  {/*  possibly other JSX here */}
+  <Row>
+      <Col smSize={50} mdSize={33.333} lgSize={25}>
+          <Text>First Column</Text>
+      </Col>
+  </Row>)}
+</Grid>
 ```
 
 In the example abovw, on a phone in portrait mode, the Column would take up 50% of the row's computed width. On a phone in landscape nmode or a normal tablet the Column would take up 33.333% of the row's width. On a big tablet the Column would take up 25% of the row's width.
@@ -461,11 +487,14 @@ In the example abovw, on a phone in portrait mode, the Column would take up 50% 
 ```jsx
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
-<Row style={{height: 20}}>
-  <Col smOffset={0} mdOffset={10} lgOffset={20} xlOffset={40}>
-    <Text>test</Text>
-  </Col>
-</Row>
+<Grid>{({state, setState}) => (
+  {/*  possibly other JSX here */}
+  <Row style={{height: 20}}>
+    <Col smOffset={0} mdOffset={10} lgOffset={20} xlOffset={40}>
+      <Text>test</Text>
+    </Col>
+  </Row>)}
+</Grid>
 ```
 
 In the example above, the text "test" will move further to the right with larger screen sizes.
@@ -473,14 +502,17 @@ In the example above, the text "test" will move further to the right with larger
 ```jsx
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
-<Row>
-    <Col smHidden>
-        <Text>Column displayed when width is <= 480</Text>
-    </Col>
-    <Col mdHidden lgHidden xlHidden>
-        <Text>Column displayed when width is > 480</Text>
-    </Col>
-</Row>
+<Grid>{({state, setState}) => (
+  {/*  possibly other JSX here */}
+  <Row>
+      <Col smHidden>
+          <Text>Column displayed when width is <= 480</Text>
+      </Col>
+      <Col mdHidden lgHidden xlHidden>
+          <Text>Column displayed when width is > 480</Text>
+      </Col>
+  </Row>)}
+</Grid>
 ```
 
 In the example above, the column and all of it's children will be hidden on small screens like phones, but it will appear on bigger screens like tablets. The size-prefixed 'hidden' props may be applied to columns. Hidden props are all booleans. They default to false.

@@ -32,8 +32,10 @@ export default class Column extends React.Component {
     cloneElements = () => {
       return React.Children.map(this.props.children, (element) => {
         if (!element) return null
-        if (element.type && (element.type.name === 'Column' || (element.props.style && element.props.style.flexDirection === 'column')))  {
-            throw new Error("Column may not contain other Columns as children. Child columns must be wrapped in a Row.")
+        if (element.type && element.type.name === 'Column')  {
+            if (__DEV__) 
+              console.error("Column may not contain other Columns as children. Child columns must be wrapped in a Row.")
+            return null
         }
         return element
       })

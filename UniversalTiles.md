@@ -60,29 +60,28 @@ const Item = (props) => (
             </Col>)
 
 export const Home = () =>(
-        <Grid>{({state, setState}) => {
-            console.log(state)
-            return (
-            <Row fullHeight style={{backgroundColor: 'lightgray'}}> 
-                <ScrollView removeClippedSubviews={true} >
-                    <TouchableOpacity activeOpacity={1} onPress={(e) => showAll(e)}>
-                    <Row >
-                        {
-                            data.map((i) => {
-                                return (<Item 
-                                    key={i}
-                                    id={i} 
-                                    els={els}
-                                    hide={hide}
-                                    state={state}
-                                />)
-                            })
-                        }
-                    </Row>
-                    </TouchableOpacity>
-            </ScrollView>
-            </Row>)}
-        }
+        <Grid>{
+            ({state, setState}) => (
+                <Row fullHeight style={{backgroundColor: 'lightgray'}}> 
+                    <ScrollView removeClippedSubviews={true} >
+                        <TouchableOpacity activeOpacity={1} onPress={(e) => showAll(e)}>
+                        <Row >
+                            {
+                                data.map((i) => {
+                                    return (<Item 
+                                        key={i}
+                                        id={i} 
+                                        els={els}
+                                        hide={hide}
+                                        state={state}
+                                    />)
+                                })
+                            }
+                        </Row>
+                        </TouchableOpacity>
+                </ScrollView>
+                </Row>)
+            }
         </Grid>
     )
 

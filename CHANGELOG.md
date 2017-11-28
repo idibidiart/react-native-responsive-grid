@@ -7,6 +7,12 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Released]
 
+## [0.35.0] 2017-11-28
+
+### Changed (breaking)
+
+- Removed Row's reaction to its own layout changes. Screens must contain Grid at top of view hierarchy in order to respond to orientation changes. Non-orientation layout changes should be handled with Flexbox contsraints, no longer from JS. Simplifies code, usage and improves performance.
+
 ## [0.34.0] - 2017-11-22
 
 ### Changed (non-breaking)

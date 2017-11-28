@@ -10,15 +10,6 @@ export default class Row extends React.Component {
       this.state = {}
       this.hidden = false
       this.shown = true
-      this.animFrame
-  }
-
-  componentWillUnmount = () => {
-    cancelAnimationFrame(this.animFrame)
-  }
-
-  callback = () => {
-    this.setState({layoutUpdated: +new Date()})
   }
 
   hide = () => {
@@ -182,13 +173,6 @@ export default class Row extends React.Component {
     return (
         <View {...rest}
           ref={component => this._root = component} 
-          onLayout={(e) => {
-            InteractionManager.runAfterInteractions(() => {
-                this.animFrame = requestAnimationFrame(() => {
-                  this.callback()
-                })
-            })
-          }}
           style={[this.props.style,
             { 
               display: this.state.display || 'flex',
