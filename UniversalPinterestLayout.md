@@ -14,7 +14,7 @@ import {
 
 import { Row, Column as Col, ScreenInfo, Grid} from './grid'
 
-// column width (relative to screen size)
+// column width (relative to screen siez)
 const sizes = {sm: 100, md: 50, lg: 25, xl: 20}  
 
 const layout = (state) => {
@@ -63,7 +63,7 @@ const Item = (props) => {
   if (!props.colWidth)  return null
 
     return (
-            <Row key={props.id}
+            <Row 
                 style={{
                   backgroundColor: 'white',
                   margin: props.margin, borderRadius: 15, borderWidth: 1, borderColor: 'black'
