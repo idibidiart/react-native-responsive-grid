@@ -60,7 +60,6 @@ The demos in the videos above show some of the possibilities, but this grid is c
 - Grid: an optional, stateful, top-level component (at root, above ScrollView, ListView, FlatList et al but below a Modal) that is not meant to be nested. The Grid uses the children-as-funnction pattern and passes its state to its childre which can be declared in its props, and which will have the latest screen and grid info after orientation changes. It also passes it's async render-causing setState method to its children. 
 
 IMPORTANT:
-
 Response to orientation change in layout requires use of Grid component (many examples here.) Response to non-orientation change in layout requires flall back to Flexbox 'flex' contraint setting (e.g. to fill empty space after some node is unmounted, no JS involved (todo: provide an example.)
 
 Below is an example:
