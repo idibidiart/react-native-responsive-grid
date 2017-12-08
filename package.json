@@ -3,6 +3,7 @@
   "version": "0.35.0",
   "description": "Responsive grid for React Native based on react-native-flexbox-grid",
   "main": "src/index.js",
+  "types": "src/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/idibidiart/react-native-responsive-grid.git"
@@ -20,5 +21,8 @@
     "url": "https://github.com/idibidiart/react-native-responsive-grid/issues"
   },
   "homepage": "https://github.com/idibidiart/react-native-responsive-grid#readme",
-  "dependencies": {}
+  "dependencies": {
+    "@types/react": "^16.0.25",
+    "@types/react-native": "^0.50.7"
+  }
 }
