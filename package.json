@@ -20,5 +20,15 @@
     "url": "https://github.com/idibidiart/react-native-responsive-grid/issues"
   },
   "homepage": "https://github.com/idibidiart/react-native-responsive-grid#readme",
-  "dependencies": {}
+  "dependencies": {
+    "opencollective": "^1.0.3"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/react-native-responsive-grid",
+    "logo": "https://opencollective.com/opencollective/logo.txt"
+  },
+  "scripts": {
+    "postinstall": "opencollective postinstall"
+  }
 }
