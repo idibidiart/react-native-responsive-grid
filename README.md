@@ -57,10 +57,10 @@ The demos in the videos above show some of the possibilities, but this grid is c
 
 - Col: Flexbox View with flexDirection set to 'column' and less confusing names for flex styles. 
 
-- Grid: an optional, stateful, top-level component (at root, above ScrollView, ListView, FlatList et al but below a Modal) that is not meant to be nested. The Grid uses the children-as-funnction pattern and passes its state to its childre which can be declared in its props, and which will have the latest screen and grid info after orientation changes. It also passes it's async render-causing setState method to its children. 
+- Grid: an optional, stateful, top-level component (at root, above ScrollView, ListView, FlatList et al but below a Modal) that is not meant to be nested. The Grid uses the children-as-funnction pattern and passes its state to its children, and allows state to be declared in its props, which will have the latest screen and grid info after orientation changes. It also passes it's async render-causing setState method to its children. 
 
-IMPORTANT:
-Response to orientation change in layout requires use of Grid component (many examples here.) Response to non-orientation change in layout requires flall back to Flexbox 'flex' contraint setting (e.g. to fill empty space after some node is unmounted, no JS involved (todo: provide an example.)
+Important:
+Re-running the React render() function in response to orientation and layout change requires use of Grid component (many examples here.) 
 
 Below is an example:
 
@@ -467,7 +467,7 @@ Being able to readt to layout changes, including changes due to device rotation 
 
 Columns and Rows have `position: 'relative'` enforced by design to keep them within the layout flow. Each can be moved about within their parent Row and Column, respectively, using top and bottom margins and/or offsets. Columns can be made to overlap horizontally within the row using a negative offset in LTR or RTL directions (see RTL support.) Rows can be made to overlap vertically within a column using a negative top and bottom margins. The intent is to allow the free positioning of rows and columns without taking them out of the layout flow. This is required to have a predictable response to layout change.
 
- The Grid component is a stateful top level component (at root, above ScrollView, ListView, FlatList et al but below a Modal) and does not nest (will warn and nullify nested instances.) It responds to orientation changes and uses the children-as-funnction pattern to pass its state, including its dimensions and any user-defined state, along with screen dimensions, to its children. The user may define Grid state in its props. The Grid also passes it's async render-causing setState method to its children.
+ The Grid component is a stateful top level component (at root, above ScrollView, ListView, FlatList et al but below a Modal) and does not nest (will warn and nullify nested instances.) It is needed if you wish to respond to orientation and layout changes by re-running the render() function. It uses the children-as-funnction pattern to pass its state, including its dimensions and any user-defined state, along with screen dimensions, to its children. The user may define Grid state in its props. The Grid also passes it's async render-causing setState method to its children.
 
 ## More Examples
 
