@@ -57,7 +57,7 @@ The demos in the videos above show some of the possibilities, but this grid is c
 
 - Col: Flexbox View with flexDirection set to 'column' and less confusing names for flex styles. 
 
-- Grid: an optional, stateful, top-level component (at root, above ScrollView, ListView, FlatList et al but below a Modal) that is not meant to be nested. The Grid uses the children-as-funnction pattern and passes its state to its children, and allows state to be declared in its props, which will have the latest screen and grid info after orientation changes. It also passes it's async render-causing setState method to its children. 
+- Grid: an optional, stateful, top-level component (at root, above ScrollView, ListView, FlatList et al but below a Modal or Drawer) that is not meant to be nested. The Grid uses the children-as-funnction pattern and passes its state to its children, and allows state to be declared in its props, which will have the latest screen and grid info after orientation changes. It also passes it's async render-causing setState method to its children. 
 
 Important:
 Re-running the React render() function in response to orientation and layout change requires use of Grid component (many examples here.) 
