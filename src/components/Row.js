@@ -74,6 +74,16 @@ export default class Row extends React.Component {
       vAlign,
       alignLines,
       alignSelf,
+      size,
+      smSize,
+      mdSize,
+      lgSize,
+      xlSize,
+      sizePoints,
+      smSizePoints,
+      mdSizePoints,
+      lgSizePoints,
+      xlSizePoints, 
       ...rest
     } = this.props
 
