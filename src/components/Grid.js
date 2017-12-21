@@ -45,10 +45,10 @@ export default class Grid extends React.Component {
         return (
             <View
                 style={[
-                    this.props.style,
                     {
                         flex: 1
-                    }
+                    },
+                    this.props.style
                 ]}
                 
                 onLayout={(e) => {

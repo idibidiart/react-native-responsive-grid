@@ -154,7 +154,7 @@ export default class Column extends React.Component {
             this.hAlign = 'flex-end' 
             break;
           default: 
-            this.hAlign = 'flex-start'
+            this.hAlign = 'stretch'
         }
       }
 

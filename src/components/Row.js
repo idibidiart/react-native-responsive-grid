@@ -135,7 +135,7 @@ export default class Row extends React.Component {
       case 'top':
         this.vAlign = 'flex-start'
       default: 
-        this.vAlign = 'flex-start'
+        this.vAlign = 'stretch'
     }
 
     switch (alignLines) {

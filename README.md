@@ -338,17 +338,17 @@ _Specifying an offset value in normal LTR mode means marginLeft (if specified in
 
 `vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: `middle` | `center`, `top`, `bottom`, `space` and `distribute`. Default is top.
 
-`vAlign` may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: `top`, `middle` | `center`, `bottom`, `baseline` and `stretch`. Default is top.
+`vAlign` may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: `top`, `middle` | `center`, `bottom`, `baseline` and `stretch`. Default is `stretch`.
 
 `hAlign` may be supplied as prop to Row to align the columns within it in the horizontal direction. Possible values are: `center` | `middle`, `left`, `right`, `space` and `distribute`. Default is left.
 
-`hAlign` may also be supplied as prop to Column to align its rows and/or elements within it in the horizontal direction. Possible values are: `center` | `middle`, `left`, `right`, and `stretch`. Default is left.
+`hAlign` may also be supplied as prop to Column to align its rows and/or elements within it in the horizontal direction. Possible values are: `center` | `middle`, `left`, `right`, and `stretch`. Default is `stretch`.
 
 `rtl` may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set hAlign to 'right.' This is useful for right-to-left layouts. 
 
-`fullHeight` may be supplied as prop to Row as a convenience to enable vAlign to work on child Column(s) -- fullWidth on Row is not desired since it would interfere with Column's offset prop. 
+`fullHeight` may be supplied as prop to Row in place of size (height) of '100%' -- fullWidth on Row is not desired since it would interfere with Column's offset prop. 
 
-`fullWidth` may be supplied as prop to Column as a convenience to enable hAlign to work on child Row(s) -- fullHeight on Column is not desired since it would interfere with Row's size prop. 
+`fullWidth` may be supplied as prop to Column in place of size (width) of '100% -- fullHeight on Column is not desired since it would interfere with Row's size prop. 
 
 _Note, if row (or column) is a child of ScrollView you need to set the height (or width) explicitly, and if you wish to set it explicitly relative to container see Example # 1 which uses layoutEvent to get container size at runtime._
 

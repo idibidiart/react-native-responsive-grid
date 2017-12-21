@@ -7,6 +7,14 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Released]
 
+## [0.37.0]
+
+### Changed (breaking)
+
+- default value for vAlign on Row is now `stretch`
+- default value for hAlign on Col is now `stretch`
+- Grid is {flex: 1} by default and Grid's style can be fully overriden with user styles
+
 ## [0.35.0] 2017-11-28
 
 ### Changed (breaking)
