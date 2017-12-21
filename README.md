@@ -10,7 +10,7 @@
 
 In your project folder, `yarn add react-native-responsive-grid`
 
-*requires React Native 0.43.x or newer 
+*For best results, use React Native 0.50 or later 
 
 ## Background
 

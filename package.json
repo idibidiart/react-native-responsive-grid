@@ -1,6 +1,6 @@
 {
   "name": "react-native-responsive-grid",
-  "version": "0.36.0",
+  "version": "0.36.01",
   "description": "Responsive grid for React Native based on react-native-flexbox-grid",
   "main": "src/index.js",
   "repository": {
