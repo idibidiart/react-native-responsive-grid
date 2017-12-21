@@ -47,18 +47,7 @@ export default class Grid extends React.Component {
                 style={[
                     this.props.style,
                     {
-                        flex: 0, 
-                        height: '100%', 
-                        width: '100%',
-                        top: 0,
-                        left: 0,
-                        bottom: 0,
-                        right: 0,
-                        marginLeft: 0,
-                        marginTop: 0,
-                        marginRight: 0,
-                        marginBottom: 0,
-                        overflow: 'hidden'
+                        flex: 1
                     }
                 ]}
                 
