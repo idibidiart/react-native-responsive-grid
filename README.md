@@ -69,7 +69,12 @@ Below is an example:
 
 ```jsx 
 export const Home = () => (
-  <Grid>{({state, setState}) => (
+  <Grid state={
+    {
+      someState: 'yyz', 
+      anotherState: 'abc'
+    }}>
+  {({state, setState}) => (
        {/*  possibly other JSX here */}
         <Col fullHeight style={{backgroundColor: 'lightgray'}}> 
           <ScrollView removeClippedSubviews={true} >
