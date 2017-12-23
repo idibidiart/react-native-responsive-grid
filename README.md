@@ -63,9 +63,9 @@ The demos in the videos above show some of the possibilities, but this grid is c
 
 **Important:**
 
-Grid is required if you need to re-run the render() function in response to orientation change (many examples here) 
+**Grid is required if you need to re-run the render() function in response to orientation change (many examples here)** 
 
-Grid is also required if you use aspectRatio prop on Rows or Columns since the selection of content of the closest aspect ratio requires re-running the render function after orientation change.
+**Grid is also required if you use aspectRatio prop on Rows or Columns since the selection of content of the closest aspect ratio requires re-running the render function after orientation change.**
 
 Below is an example:
 
@@ -136,7 +136,7 @@ The problem it solves is how to make a tiled screen layout that looks consistent
 
 The goal is how to do the above in an elegant and declarative way that allows the average user to work without all the tedious implementation details of doing it in row Flexbox and JS. 
 
-_This example also showes how to use alignLines='stretch' for wrapped row content to have the wrapped lines fill the whole screen. It's the right way to partition a box in 1/n tall lines where n is the number of wrapping-stacked fullWidth columns._ 
+_This example also showes how to use alignLines='stretch' for wrapped row content to have the wrapped lines fill the whole screen. It's the right way to partition a Row vertically in 1/n tall lines where n is the number of wrapping-stacked fullWidth columns._ 
 
 [Source Code for Example 2](https://github.com/idibidiart/react-native-responsive-grid/blob/master/UniversalTiles.md)
 
