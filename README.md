@@ -355,7 +355,7 @@ _Specifying an offset value in normal LTR mode means marginLeft (if specified in
 
 `smHidden`, `mdHidden`, `lgHidden` and `xlHidden` - may be applied to Column or Row which tells the parent Row or Column, respectively, to hide the affected child Column or child Row based on the current width (for child Columns) or height (for child Rows) of the screen.  
 
-The screen-size-specific _size_ and _hidden_ props refer to the current screen width in case of Columns and current screen height in case of Rows, which changes with orientation. The _offset_ props only apply to Columns so they refer to the curret screen width. 
+The screen-size-specific _size_ and _hidden_ props refer to the current screen width in case of Columns and current screen height in case of Rows, which changes with orientation. The _offset_ props only apply to Columns so they refer to the current screen width. 
 
 The following are the device width (for Columns) and height (for Rows) thresholds for these props:
 
