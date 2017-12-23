@@ -7,26 +7,31 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Released]
 
-## [0.38.0]
+## [0.39.0]
 
 ### Changed (breaking)
-
-- Previously, fullHeight applied to Row and meant style={{height: '100%'}}, now it applies to Column and means style={{flex: 1}} 
-- Previously, fullWidth applied to Column and meant style={{width: '100%'}}, now it applies to Row and means style={{flex: 1}}
 
 - Screen-size-specific _size_ and _hidden_ props now reference both the current screen width in case of Columns and the current screen height in case of Rows, both of which change with orientation. The _offset_ props only apply to Columns so they still refer to the curret screen width. 
 
 The following are the thresholds for these props:
 
-  - SMALL Width = 320 
-  - MEDIUM Width = 414 
-  - LARGE Width = 768
-  - XLARGE Width = 1024 
+  - SMALL_Width = 375 
+  - MEDIUM_Width = 414 
+  - LARGE_Width = 768
+  - XLARGE_Width = 1024 
 
-  - SMALL Height = 480
-  - MEDIUM Height = 568
-  - LARGE Height = 736 
-  - XLARGE Height = 1366 
+  - SMALL_Height = 667
+  - MEDIUM_Height = 736
+  - LARGE_Height = 1024 
+  - XLARGE_Height = 1366 
+
+### Changed (non-breaking)
+
+- Rows and Cols can have position absolute (use for creating overlays, see Eample 2 for 2D positioning technique)
+
+## [0.38.0]
+
+- Do not use this release (design regression fied in 0.39.0) 
 
 ## [0.37.0]
 

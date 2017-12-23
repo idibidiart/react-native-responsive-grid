@@ -33,7 +33,9 @@ export default class Grid extends React.Component {
           screen: ScreenInfo(), 
           grid: e.nativeEvent.layout
         }
-        this.setState({...this.state, layout})
+        this.setState((state) => {
+            return {...state, layout}
+        })
     }
 
     render() {

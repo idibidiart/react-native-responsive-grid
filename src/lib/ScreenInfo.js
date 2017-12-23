@@ -45,23 +45,22 @@ const closest = (value, list) => {
     return {index: resultIndex, value: list[resultIndex]}
 }
 
+let mediaSizeWidth, mediaSizeHeight;
+
 const setScreenInfo = (onlySize) => {
   const SCREEN_WIDTH = Dimensions.get('window').width
   const SCREEN_HEIGHT = Dimensions.get('window').height
 
-  const SMALL_Width = 320 
+  const SMALL_Width = 375 
   const MEDIUM_Width = 414 
   const LARGE_Width = 768
   const XLARGE_Width = 1024 
 
-  const SMALL_Height = 480
-  const MEDIUM_Height = 568
-  const LARGE_Height = 736 
+  const SMALL_Height = 667
+  const MEDIUM_Height = 736
+  const LARGE_Height = 1024 
   const XLARGE_Height = 1366 
-  
-  let mediaSizeWidth, mediaSizeHeight;
-
-  if (SCREEN_WIDTH <= SCREEN_HEIGHT) {
+ 
     if (SCREEN_WIDTH <= SMALL_Width){
         mediaSizeWidth = 'sm'
     }
@@ -74,7 +73,6 @@ const setScreenInfo = (onlySize) => {
     if (SCREEN_WIDTH >= XLARGE_Width){
         mediaSizeWidth = 'xl'
     }
-  } else {
     if (SCREEN_HEIGHT <= SMALL_Height){
         mediaSizeHeight = 'sm'
     }
@@ -87,8 +85,6 @@ const setScreenInfo = (onlySize) => {
     if (SCREEN_HEIGHT >= XLARGE_Height){
         mediaSizeHeight = 'xl'
     }
-
-  }
   
   if (!onlySize) {
     // sorted ascending order
@@ -110,6 +106,7 @@ const setScreenInfo = (onlySize) => {
     }
 
     return {
+            mediaSize: mediaSizeWidth,
             mediaSizeWidth,
             mediaSizeHeight, 
             width: SCREEN_WIDTH, 
@@ -118,6 +115,7 @@ const setScreenInfo = (onlySize) => {
           }
   } else {
     return {
+            mediaSize: mediaSizeWidth,
             mediaSizeWidth,
             mediaSizeHeight, 
             width: SCREEN_WIDTH, 

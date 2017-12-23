@@ -16,7 +16,7 @@ import { Row, Column as Col, Grid} from './grid'
 
 const data = [...new Array(12).keys()]
 
-// column width (relative to screen size)
+// column width (relative to screen siez)
 const sizes = {sm: 100, md: 50, lg: 33.333, xl: 25}  
 
 let els = {}
@@ -31,9 +31,10 @@ const showAll = (e) => {
     })
 }
 
-const Item = (props) => (
+const Item = (props) => {
+     return (
               <Col ref={(col) => props.els[props.id] = col} smSize={sizes.sm} mdSize={sizes.md} lgSize={sizes.lg} xlSize={sizes.xl} 
-            style={{backgroundColor: colors[props.id]}} >
+              style={{backgroundColor: colors[props.id]}}>
               <Row 
                   smSizePoints={props.state.layout.grid ? props.state.layout.grid.height / 2 : 0} 
                   mdSizePoints={props.state.layout.grid ? props.state.layout.grid.width / 2 : 0} 
@@ -44,7 +45,7 @@ const Item = (props) => (
                     <Row rtl>
                       <Col fullWidth offsetPoints={10}>
                         <TouchableOpacity onPress={() => { props.hide(props.id)}}>
-                          <Text style={{fontSize: 22, marginTop: 5}}>
+                          <Text style={{fontSize: 22, marginTop: 15}}>
                             X
                           </Text>
                         </TouchableOpacity>
@@ -57,31 +58,36 @@ const Item = (props) => (
                     </Text>
                   </Col>
               </Row>
-            </Col>)
+            </Col>)}
+
+const layout = (state) => {
+    return  data.map((i) => {
+        return ([<Item 
+            key={i}
+            id={i} 
+            els={els}
+            hide={hide}
+            state={state}
+        />])
+    })
+}
 
 export const Home = () =>(
-        <Grid>{
-            ({state, setState}) => (
-                <Row fullHeight style={{backgroundColor: 'lightgray'}}> 
-                    <ScrollView removeClippedSubviews={true} >
-                        <TouchableOpacity activeOpacity={1} onPress={(e) => showAll(e)}>
-                        <Row >
-                            {
-                                data.map((i) => {
-                                    return (<Item 
-                                        key={i}
-                                        id={i} 
-                                        els={els}
-                                        hide={hide}
-                                        state={state}
-                                    />)
-                                })
-                            }
-                        </Row>
-                        </TouchableOpacity>
-                </ScrollView>
-                </Row>)
-            }
+        <Grid>{({state, setState}) => {
+            console.log(state)
+            return (
+            <Col fullHeight style={{backgroundColor: 'lightgray'}}> 
+                <ScrollView removeClippedSubviews={true} >
+                    <TouchableOpacity activeOpacity={1} onPress={(e) => showAll(e)}>
+                    <Row>
+                        {
+                            layout(state)
+                        }
+                    </Row>
+                    </TouchableOpacity>
+            </ScrollView>
+            </Col>)}
+        }
         </Grid>
     )
 

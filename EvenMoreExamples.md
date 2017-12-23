@@ -14,8 +14,8 @@
       title: 'Home',
       renderTitle: (route, props) => {
         return (
-        <Row fullWidth vAlign='middle'>
-          <Col fullHeight hAlign='center'>
+        <Row fullHeight vAlign='middle'>
+          <Col fullWidth hAlign='center'>
             <Image style={styles.titleImage} source={require('./assets/logo.png')}/>
           </Col>
         </Row>)
@@ -192,14 +192,14 @@ Remember that paddingTop and marginTop when given as percentages are percentages
 <img src="https://s8.postimg.org/7t9wefrrp/Screen_Shot_2017-04-17_at_2.59.00_PM.png" width=480>
 
 ```jsx
-    <Modal
+<Modal
       animationType="fade"
       transparent={true}
       visible={this.state.modalVisible}
       onRequestClose={() => this.close()}
       >
-        <Row fullWidth vAlign='stretch' style={[{padding: 20}, modalBackgroundStyle]}>
-          <Col fullHeight hAlign='center' style={{backgroundColor: "#f3f3f3", padding: 20}}>
+        <Row fullHeight vAlign='stretch' style={[{padding: 20}, modalBackgroundStyle]}>
+          <Col fullWidth hAlign='center' style={{backgroundColor: "#f3f3f3", padding: 20}}>
                 
                 <Row style={{height: 80}}>
                   <Col size={33.333} offset={33.333} hAlign='center' >
@@ -257,7 +257,7 @@ Remember that paddingTop and marginTop when given as percentages are percentages
                 <Row style={{ height: 20}}></Row>
 
                 <Row  vAlign='middle' style={{height: 60}}>
-                  <Col fullHeight hAlign='stretch'>
+                  <Col fullWidth hAlign='stretch'>
                     <TouchableHighlight activeOpacity={0.5} underlayColor='transparent' onPress={() => this.login()}>
                         <Row hAlign='center' vAlign='middle' style={{height: 36, borderRadius: 20, backgroundColor: '#BD1206'}}>
                             <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>LOG IN</Text>

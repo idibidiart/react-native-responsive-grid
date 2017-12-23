@@ -59,7 +59,7 @@ const layout = (state) => {
 }
 
 const Item = (props) => {
-
+  console.log(props)
   if (!props.colWidth)  return null
 
     return (

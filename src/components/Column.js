@@ -74,7 +74,7 @@ export default class Column extends React.Component {
       vAlign: PropTypes.oneOf(['space', 'distribute', 'middle', 'center', 'bottom', 'top']),
       hAlign: PropTypes.oneOf(['stretch', 'center', 'middle', 'right', 'left']),
       alignSelf: PropTypes.oneOf(['auto', 'top', 'bottom', 'middle', 'center', 'stretch', 'baseline']),
-      fullWHeight: PropTypes.bool,
+      fullWidtht: PropTypes.bool,
       aspectRatio: PropTypes.object  
     }
 
@@ -109,14 +109,14 @@ export default class Column extends React.Component {
         hAlign,
         alignSelf,
         rtl,
-        fullHeight,
+        fullWidth,
         aspectRatio,
         ...rest
       } = this.props;
 
       this.screenInfo = ScreenInfo()
 
-      this.flex =  this.props.fullHeight ? 1 : this.props.style && this.props.style.flex !== undefined ? this.props.style.flex : 0
+      this.flex =  this.props.style && this.props.style.flex !== undefined ? this.props.style.flex : 0
 
       switch (vAlign) {
         case 'space': 
@@ -182,7 +182,7 @@ export default class Column extends React.Component {
       this.style = {
                     display: this.state.display || 'flex',
                     flex: this.flex,
-                    width: this.props.style && this.props.style.width !== undefined ? this.props.style.width : 
+                    width: this.props.fullWidth ? '100%' : this.props.style && this.props.style.width !== undefined ? this.props.style.width : 
                             (this.props.size !== undefined || 
                               this.props.sizePoints !== undefined ||
                               this.props[this.screenInfo.mediaSizeWidth + 'Size'] !== undefined ||
@@ -206,7 +206,7 @@ export default class Column extends React.Component {
                     alignItems: this.hAlign,
                     justifyContent: this.vAlign,
                     alignSelf: this.alignSelf,
-                    position: 'relative',
+                    position: this.props.style && this.props.style.position ? this.props.style.position : 'relative',
                     overflow: 'hidden'
                   }       
 

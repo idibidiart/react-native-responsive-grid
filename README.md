@@ -63,7 +63,9 @@ The demos in the videos above show some of the possibilities, but this grid is c
 
 **Important:**
 
-Re-running the React render() function in response to orientation and layout change requires use of Grid component (many examples here) Grid is also required if you use aspectRatio prop on Rows or Columns since the selection of content of the closest aspect ratio requires re-running the render function after orientation change.s
+Grid is required if you need to re-run the render() function in response to orientation change (many examples here) 
+
+Grid is also required if you use aspectRatio prop on Rows or Columns since the selection of content of the closest aspect ratio requires re-running the render function after orientation change.
 
 Below is an example:
 
@@ -76,9 +78,9 @@ export const Home = () => (
     }}>
   {({state, setState}) => (
        {/*  possibly other JSX here */}
-        <Col fullHeight style={{backgroundColor: 'lightgray'}}> 
+        <Col fullWidth style={{backgroundColor: 'lightgray'}}> 
           <ScrollView removeClippedSubviews={true} >
-            <Row >
+            <Row fullHeight>
               {layout(state)}
             </Row>
           </ScrollView>
@@ -87,9 +89,30 @@ export const Home = () => (
   </Grid>)
 ```
 
+## Utils
+
+import { Row, Column as Col, ScreenInfo, Grid} from './grid'
+
+`ScreenInfo(sizeOnly: Boolean)` This will return the following data:
+
+```js
+{
+  mediaSize: mediaSizeWidth,
+  mediaSizeWidth,
+  mediaSizeHeight, 
+  width: SCREEN_WIDTH, 
+  height: SCREEN_HEIGHT, 
+  aspectRatio: {currentNearestRatio, currentOrientation}
+}
+``` 
+- mediaSize is one of `sm`, `md`, `lg`, `xl` screen width categories and is aliased to mediaSizeWidth
+- mediaSizeHeight is the same but for screen height. It's used for hiding/showing Rows wit `hidden` prop based on screen height category and for Row `size` props.  
+
+if `sizeOnly` is true it will drop aspectRatio and its 'nearest match' calculation (shaves a few ms)
+
 ## Methods
 
-Row and Column have `.hide()` and `.show()` instance methods. The instance reference you get from a ref callback will have these methods. See Example #1 for usage.
+Row and Column both have `.hide()` and `.show()` instance methods. The instance reference you get from a ref callback will have these methods. See Example #1 for usage.
 
 ## Instance Variables
 
@@ -112,6 +135,8 @@ The problem it solves is how to make a tiled screen layout that looks consistent
 2. How do we hide/show tiles on demand and fill the void left by hidden tiles.
 
 The goal is how to do the above in an elegant and declarative way that allows the average user to work without all the tedious implementation details of doing it in row Flexbox and JS. 
+
+_This example also showes how to use alignLines='stretch' for wrapped row content to have the wrapped lines fill the whole screen. It's the right way to partition a box in 1/n tall lines where n is the number of wrapping-stacked fullWidth columns._ 
 
 [Source Code for Example 2](https://github.com/idibidiart/react-native-responsive-grid/blob/master/UniversalTiles.md)
 
@@ -145,21 +170,21 @@ The following table maps some common device aspect ratios to the ratio of width/
 
 ```jsx
 <Grid>{(state, setState) => (
-    <Col fullHeight aspectRatio={{ratio: '3:2', orientation: "portrait"}}>
+    <Row fullHeight aspectRatio={{ratio: '3:2', orientation: "portrait"}}>
         <Image source={require('./assets/homepage hero-3-2-portrait.jpg')} style={styles.homeImage}></Image>
-    </Col>
+    </Row>
 
-    <Col fullHeight aspectRatio={{ratio: '3:2', orientation: "landscape"}}>
+    <Row fullHeight aspectRatio={{ratio: '3:2', orientation: "landscape"}}>
         <Image source={require('./assets/homepage hero-3-2-landscape.jpg')} style={styles.homeImage}></Image>
-    </Col>
+    </Row>
 
-    <Col fullHeight aspectRatio={{ratio: '16:9', orientation: "portrait"}}>
+    <Row fullHeight aspectRatio={{ratio: '16:9', orientation: "portrait"}}>
         <Image source={require('./assets/homepage hero-16-9-portrait.jpg')} style={styles.homeImage}></Image>
-    </Col>
+    </Row>
 
-    <Col fullHeight aspectRatio={{ratio: '16:9', orientation: "landscape"}}>
+    <Row fullHeight aspectRatio={{ratio: '16:9', orientation: "landscape"}}>
         <Image source={require('./assets/homepage hero-16-9-landscape.jpg')} style={styles.homeImage}></Image>
-    </Col>
+    </Row>
   )}
 </Grid>
 ```
@@ -172,10 +197,10 @@ In the second demo, the grid folds columns in rows based on the screen-device-de
 
 The following are the preset screen widths (in points) at which breaks maybe specified (where row wraps columns within it into new horozintal lines):
 
-  - SMALL = 320 
-  - MEDIUM = 414 
-  - LARGE = 768
-  - XLARGE = 1024 
+  - SMALL_Width = 375 
+  - MEDIUM_Width = 414 
+  - LARGE_Width = 768
+  - XLARGE_Width = 1024 
 
 ```jsx
   <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
@@ -308,9 +333,9 @@ All props are case sensitive.
 
 `size` may be supplied as prop to Column (width) or Row (height). This number defines the width of the column or height of a row as a percentage of its parent view's computed or explicit width or height, respectively.  
 
-`smSize`, `mdSize`, `lgSize` and `xlSize` are device-dependent size values that are applied to Columns (width) and Rows (height.) In addition to their utility in deciding the size of content based on screen size (width in case of Columns and height in case of Rows), they may are also used for defining column wrapping behavior based on screen size. For example, Columns in as Row will wrap if Row width becomes smaller at smaller screen sizes.
+`smSize`, `mdSize`, `lgSize` and `xlSize` are device-dependent size values that are applied to Columns (which map to width percent) and Rows (which map to height percent.) In addition to their utility in deciding the size of content based on screen size (width in case of Columns and height in case of Rows), they may are also used for defining column wrapping behavior based on screen size. For example, Columns in as Row will wrap if Row width becomes smaller at smaller screen sizes.
 
-`sizePoints` may be supplied as prop to Column (width) or Row (height). This number defines the width of the column or height of a row as an asolute value in points.
+`sizePoints` may be supplied as prop to Column (which map to width points) or Row (which map to height points). This number defines the width of the column or height of a row as an asolute value in points.
 
 `smSizePoints`, `mdSizePoints`, `lgSizePoints`, and `xlSizePoints` are like their percentage-based equivalents but use point values. 
 
@@ -326,6 +351,20 @@ _Specifying an offset value in normal LTR mode means marginLeft (if specified in
 
 `smHidden`, `mdHidden`, `lgHidden` and `xlHidden` - may be applied to Column or Row which tells the parent Row or Column, respectively, to hide the affected child Column or child Row based on the current width (for child Columns) or height (for child Rows) of the screen.  
 
+The screen-size-specific _size_ and _hidden_ props refer to the current screen width in case of Columns and current screen height in case of Rows, which changes with orientation. The _offset_ props only apply to Columns so they refer to the curret screen width. 
+
+The following are the device width (for Columns) and height (for Rows) thresholds for these props:
+
+  - SMALL_Width = 375 
+  - MEDIUM_Width = 414 
+  - LARGE_Width = 768
+  - XLARGE_Width = 1024 
+
+  - SMALL_Height = 667
+  - MEDIUM_Height = 736
+  - LARGE_Height = 1024 
+  - XLARGE_Height = 1366 
+
 `vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: `middle` | `center`, `top`, `bottom`, `space` and `distribute`. Default is top.
 
 `vAlign` may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: `top`, `middle` | `center`, `bottom`, `baseline` and `stretch`. Default is `stretch`.
@@ -336,9 +375,9 @@ _Specifying an offset value in normal LTR mode means marginLeft (if specified in
 
 `rtl` may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set hAlign to 'right.' This is useful for right-to-left layouts. 
 
-`fullHeight` may be supplied as prop to Column in place of style={{flex: 1}}  -- note that Columns have 0 height and width and must specify this explicitly if you like it to behave like a regular View with `style={{flex: 1}}` or set the height and width using the `size` props
+`fullHeight` may be supplied as prop to Row in place of size={100} or style={{height: '100%'}}  -- note that Rows have 0 height and width by default, but a fullHeight Row inside of a fullWidth Column will have height and width of 100% 
 
-`fullWidth` may be supplied as prop to Rowin in place of style={{flex: 1}}  -- note that Rowss have 0 height and width and must specify this explicitly if you like it to behave like a regular View with `style={{flex: 1, fleDirection: 'row'}}` or set the height and width using the `size` props 
+`fullWidth` may be supplied as prop to Column in place of size={100} or style={{width: '100%'}} -- note that Columns have 0 height and width by default, but a fullWidth Column inside of a fullHeight Row will have height and width of 100%
 
 `alignLines` may be supplied as prop to Row to vertically align the wrapped lines within the Row (not to be confused with the items that are inside each line.) Possible values are: top, middle, bottom, space, distribute, stretch. (See section on Aligning Wrapped Lines within Rows)
 
@@ -349,20 +388,6 @@ Possible values are: `auto`, `left`, `right`, `center` | `middle`, `stretch`
 Possible values are: `auto`, `top`, `bottom`, `middle` | `center`, `stretch`, `baseline`
 
 `noWrap` may be supplied as prop to Row prevent child elements from wrapping. 
-
-The screen-size-specific _size_ and _hidden_ props refer to the current screen width in case of Columns and current screen height in case of Rows, which changes with orientation. The _offset_ props only apply to Columns so they refer to the curret screen width. 
-
-The following are the thresholds for these props:
-
-  - SMALL Width = 320 
-  - MEDIUM Width = 414 
-  - LARGE Width = 768
-  - XLARGE Width = 1024 
-
-  - SMALL Height = 480
-  - MEDIUM Height = 568
-  - LARGE Height = 736 
-  - XLARGE Height = 1366 
 
 ### Nesting
 
@@ -464,7 +489,7 @@ import {Column as Col, Row} from 'react-native-responsive-grid';
 </Row>
 ```
 
-In the example abovw, on a phone in portrait mode, the Column would take up 50% of the row's computed width. On a phone in landscape nmode or a normal tablet the Column would take up 33.333% of the row's width. On a big tablet the Column would take up 25% of the row's width.
+In the example above, on a phone in portrait mode, the Column would take up 50% of the row's computed width. On a phone in landscape nmode or a normal tablet the Column would take up 33.333% of the row's width. On a big tablet the Column would take up 25% of the row's width.
 
 ```jsx
 import {Column as Col, Row} from 'react-native-responsive-grid';
