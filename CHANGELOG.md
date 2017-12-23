@@ -31,7 +31,7 @@ The following are the thresholds for these props:
 
 ## [0.38.0]
 
-- Do not use this release (design regression fied in 0.39.0) 
+- Do not use this release (design regression fixed in 0.39.0) 
 
 ## [0.37.0]
 
