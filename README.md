@@ -26,7 +26,7 @@ _The tree nodes are represented by Rows and their children are represented by Co
 
 Note: 
 
-In some cases, as when having a points-sized view followed by a view that needs to take the remaining space, you'll need to use a Col (for vertical layout) and Row (for horizontal layout) with style={{flex: 1}} but such miing of absolute and Flexbox sizing is not fully responsive.
+In some cases, as when having a points-sized view followed by a view that needs to take the remaining space, you'll need to use a Column (to wrap vertical layout) and Row (to wrap horizontal layout) with style={{flex: 1}} but such mixing of absolute and Flexbox sizing is not fully responsive.
 
 ### A grid or a tree?
 
