@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ### Changed (breaking)
 
-- Screen-size-specific _size_ and _hidden_ props now reference both the current screen width in case of Columns and the current screen height in case of Rows, both of which change with orientation. The _offset_ props only apply to Columns so they still refer to the curret screen width. 
+- Screen-size-specific _size_ and _hidden_ props now reference both the current screen width in case of Columns and the current screen height in case of Rows, both of which change with orientation. The _offset_ props only apply to Columns so they still refer to the current screen width. 
 
 The following are the thresholds for these props:
 

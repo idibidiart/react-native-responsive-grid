@@ -26,7 +26,7 @@ _The tree nodes are represented by Rows and their children are represented by Co
 
 Note: 
 
-In some cases, as when having a points-sized view followed by a view that needs to take the remaining space, you'll need to use a Column (to wrap vertical layout) and Row (to wrap horizontal layout) with style={{flex: 1}} but such mixing of absolute and Flexbox sizing is not fully responsive.
+In some cases when having a points-sized view followed by a view that needs to take the remaining space, you'll need to use a Column (to wrap vertical layout) and Row (to wrap horizontal layout) with style={{flex: 1}} on the wrapping Column or Row and same on the wrapped variable size element. However, such mixing of absolute and Flexbox sizing is not recommended as it's not fully responsive.
 
 ### A grid or a tree?
 
@@ -475,11 +475,11 @@ You may import ScreenInfo from grid and invoke inside of render() of your compon
 
 ### Predictable, Dynamic Layout Behavior
 
-Being able to readt to layout changes, including changes due to device rotation (for apps that allow it), is a key aspect of responsive design. This grid is designed to enable dynamic response to layout changes (see the demos at the start of this Readme) 
+Being able to readt to layout changes, including changes due to device rotation (for apps that allow it), is a key aspect of responsive design. This grid is designed to enable dynamic response to layout changes (see the demos at the start of this Readme)
 
-Columns and Rows have `position: 'relative'` by default to keep them within the layout flow, but they can have position absolute specified in style for overlays and such, in which case they should be wrapped in Grid component if you'd like to re-run your component's render() function upon orientation change. 
+Columns and Rows have `position: 'relative'` by default to keep them within the layout flow, but they can have position absolute specified in style for overlays and such. 
 
-The Grid component is a stateful top-level component (at root, above ScrollView, ListView, FlatList et al but below a Modal and Drawer) It is needed if you wish to respond to orientation and layout changes by re-running the render() function. It uses the children-as-funnction pattern to pass its state, including its dimensions and any user-defined state, along with screen dimensions, to its children. The user may define Grid state in its props. The Grid also passes it's async render-causing setState method to its children.
+The Grid component is a stateful top-level component (at root, above ScrollView, ListView, FlatList et al but below a Modal and Drawer) Grid should not be inside another Grid and it is only needed if you wish to respond to orientation and layout changes by re-running the render() function. It uses the children-as-funnction pattern to pass its state, including its dimensions and any user-defined state, along with screen dimensions, to its children. The user may define Grid state in its props. The Grid also passes it's async render-causing setState method to its children.
 
 ## More Examples
 
