@@ -14,7 +14,7 @@ import {
 
 import { Row, Column as Col, ScreenInfo, Grid} from './grid'
 
-// column width (relative to screen siez)
+// column width (relative to screen size)
 const sizes = {sm: 100, md: 50, lg: 25, xl: 20}  
 
 const layout = (state) => {

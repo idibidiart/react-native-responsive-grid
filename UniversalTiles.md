@@ -16,7 +16,7 @@ import { Row, Column as Col, Grid} from './grid'
 
 const data = [...new Array(12).keys()]
 
-// column width (relative to screen siez)
+// column width (relative to screen size)
 const sizes = {sm: 100, md: 50, lg: 33.333, xl: 25}  
 
 let els = {}
