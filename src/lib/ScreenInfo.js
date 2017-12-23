@@ -48,25 +48,46 @@ const closest = (value, list) => {
 const setScreenInfo = (onlySize) => {
   const SCREEN_WIDTH = Dimensions.get('window').width
   const SCREEN_HEIGHT = Dimensions.get('window').height
-  const SMALL = 480 
-  const MEDIUM = 768 
-  const LARGE = 1024
-  const XLARGE = 1366
+
+  const SMALL_Width = 320 
+  const MEDIUM_Width = 414 
+  const LARGE_Width = 768
+  const XLARGE_Width = 1024 
+
+  const SMALL_Height = 480
+  const MEDIUM_Height = 568
+  const LARGE_Height = 736 
+  const XLARGE_Height = 1366 
   
-  let mediaSize;
+  let mediaSizeWidth, mediaSizeHeight;
 
-  if (SCREEN_WIDTH <= SMALL){
-    mediaSize = 'sm'
-  }
+  if (SCREEN_WIDTH <= SCREEN_HEIGHT) {
+    if (SCREEN_WIDTH <= SMALL_Width){
+        mediaSizeWidth = 'sm'
+    }
+    if (SCREEN_WIDTH > SMALL_Width  && SCREEN_WIDTH < LARGE_Width){
+        mediaSizeWidth =  'md'
+    }
+    if (SCREEN_WIDTH >= LARGE_Width && SCREEN_WIDTH < XLARGE_Width){
+        mediaSizeWidth = 'lg'
+    }
+    if (SCREEN_WIDTH >= XLARGE_Width){
+        mediaSizeWidth = 'xl'
+    }
+  } else {
+    if (SCREEN_HEIGHT <= SMALL_Height){
+        mediaSizeHeight = 'sm'
+    }
+    if (SCREEN_HEIGHT > SMALL_Height  && SCREEN_HEIGHT < LARGE_Height){
+        mediaSizeHeight =  'md'
+    }
+    if (SCREEN_HEIGHT >= LARGE_Height && SCREEN_HEIGHT < XLARGE_Height){
+        mediaSizeHeight = 'lg'
+    }
+    if (SCREEN_HEIGHT >= XLARGE_Height){
+        mediaSizeHeight = 'xl'
+    }
 
-  if (SCREEN_WIDTH > SMALL  && SCREEN_WIDTH < LARGE){
-    mediaSize =  'md'
-  }
-  if (SCREEN_WIDTH >= LARGE && SCREEN_WIDTH < XLARGE){
-    mediaSize = 'lg'
-  }
-  if (SCREEN_WIDTH >= XLARGE){
-    mediaSize = 'xl'
   }
   
   if (!onlySize) {
@@ -89,14 +110,16 @@ const setScreenInfo = (onlySize) => {
     }
 
     return {
-            mediaSize, 
+            mediaSizeWidth,
+            mediaSizeHeight, 
             width: SCREEN_WIDTH, 
             height: SCREEN_HEIGHT, 
             aspectRatio: {currentNearestRatio, currentOrientation}
           }
   } else {
     return {
-            mediaSize,
+            mediaSizeWidth,
+            mediaSizeHeight, 
             width: SCREEN_WIDTH, 
             height: SCREEN_HEIGHT 
         }

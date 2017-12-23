@@ -55,14 +55,15 @@ The demos in the videos above show some of the possibilities, but this grid is c
 
 ## Components
 
-- Row: Flexbox View with flexDirection set to 'row' and less confusing names for flex styles. 
+- Row: Flexbox View with flexDirection set to 'row' and convenient props 
 
-- Col: Flexbox View with flexDirection set to 'column' and less confusing names for flex styles. 
+- Col: Flexbox View with flexDirection set to 'column' and convenient props 
 
 - Grid: an optional, stateful, top-level component (at root, above ScrollView, ListView, FlatList et al but below a Modal or Drawer) that is not meant to be nested. The Grid uses the children-as-funnction pattern and passes its state to its children, and allows state to be declared in its props, which will have the latest screen and grid info after orientation changes. It also passes it's async render-causing setState method to its children. 
 
-Important:
-Re-running the React render() function in response to orientation and layout change requires use of Grid component (many examples here.) 
+**Important:**
+
+Re-running the React render() function in response to orientation and layout change requires use of Grid component (many examples here) Grid is also required if you use aspectRatio prop on Rows or Columns since the selection of content of the closest aspect ratio requires re-running the render function after orientation change.s
 
 Below is an example:
 
@@ -70,13 +71,13 @@ Below is an example:
 export const Home = () => (
   <Grid>{({state, setState}) => (
        {/*  possibly other JSX here */}
-        <Row fullHeight style={{backgroundColor: 'lightgray'}}> 
-        <ScrollView removeClippedSubviews={true} >
+        <Col fullHeight style={{backgroundColor: 'lightgray'}}> 
+          <ScrollView removeClippedSubviews={true} >
             <Row >
               {layout(state)}
             </Row>
           </ScrollView>
-        </Row>
+        </Col>
       )}
   </Grid>)
 ```
@@ -87,7 +88,7 @@ Row and Column have `.hide()` and `.show()` instance methods. The instance refer
 
 ## Instance Variables
 
-These are provided mainly for unit tests, except for componentInstance.hidden and componentInstance.shown which can be used to tell the state of the component.
+These are provided mainly for unit tests, except for componentInstance`.hidden` and componentInstance`.shown` which can be used to tell the state of the component.
 
 ### Example 1
 
@@ -138,30 +139,23 @@ The following table maps some common device aspect ratios to the ratio of width/
 | '1:1' | 1 | ? | ? | ?
 
 ```jsx
-<Grid>{({state, setState}) => (
-  {/*  possibly other JSX here */}
-      <Row>
-    <Col fullWidth aspectRatio={{ratio: '3:2', orientation: "portrait"}}>
+<Grid>{(state, setState) => (
+    <Col fullHeight aspectRatio={{ratio: '3:2', orientation: "portrait"}}>
         <Image source={require('./assets/homepage hero-3-2-portrait.jpg')} style={styles.homeImage}></Image>
     </Col>
-  </Row>
-  <Row>
-    <Col fullWidth aspectRatio={{ratio: '3:2', orientation: "landscape"}}>
+
+    <Col fullHeight aspectRatio={{ratio: '3:2', orientation: "landscape"}}>
         <Image source={require('./assets/homepage hero-3-2-landscape.jpg')} style={styles.homeImage}></Image>
     </Col>
-  </Row>
-  <Row>
-    <Col fullWidth aspectRatio={{ratio: '16:9', orientation: "portrait"}}>
+
+    <Col fullHeight aspectRatio={{ratio: '16:9', orientation: "portrait"}}>
         <Image source={require('./assets/homepage hero-16-9-portrait.jpg')} style={styles.homeImage}></Image>
     </Col>
-  </Row>
-  <Row>
-    <Col fullWidth aspectRatio={{ratio: '16:9', orientation: "landscape"}}>
+
+    <Col fullHeight aspectRatio={{ratio: '16:9', orientation: "landscape"}}>
         <Image source={require('./assets/homepage hero-16-9-landscape.jpg')} style={styles.homeImage}></Image>
     </Col>
-  </Row>
-  )
-}
+  )}
 </Grid>
 ```
 
@@ -171,16 +165,14 @@ A more basic example of he grid's 1-Dimensional Constraint-Based Layout using Fl
 
 In the second demo, the grid folds columns in rows based on the screen-device-depebdent `xxSize` prop provided on the column (which can be percentage based, e.g. smSize, or point based, e.g. smSizePoints. This means that different break points can be supplied for the different screen sizes in both absolute and relative terms. This example demonstrates how to get Row content (e.g. child Columns) to wrap at certain break points (which can be supplied per screen width)
 
-The following are the preset screen widths at which break points maybe specified:
+The following are the preset screen widths (in points) at which breaks maybe specified (where row wraps columns within it into new horozintal lines):
 
-- sm: <= 480px 
-- md: > 480 and < 1024
-- lg: >= 1024 and < 1366
-- xl: >= 1366 
+  - SMALL = 320 
+  - MEDIUM = 414 
+  - LARGE = 768
+  - XLARGE = 1024 
 
 ```jsx
-<Grid>{({state, setState}) => (
-  {/*  possibly other JSX here */}
   <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
       <Col size={80} offset={6}>
         <Row>
@@ -203,14 +195,12 @@ The following are the preset screen widths at which break points maybe specified
       <Col size={14} offset={-6} hAlign='right'>
             <MaterialIcons name="keyboard-arrow-right" size={28} color="#BD1206" style={{left: 5}} />
       </Col>
-  </Row>)
-}
-</Grid>
+  </Row>
 ```
 
 ### Example 5
 
-FlatList is a virtualized replacement for React Native's old ListView component. Using FlatList as a container is supported by this grid. This example also demonstrate wrapping Column content based on screen size. See ('size' prop under the [Props](https://github.com/idibidiart/react-native-responsive-grid#props) section.) It also demonstrates who to wrap Row content (e.g. child columns) based on screen size (also see [Example 2](https://github.com/idibidiart/react-native-responsive-grid#example-2) for more details)
+FlatList is a virtualized replacement for React Native's old ListView component. Using FlatList as a container is supported by this grid. This example also demonstrate wrapping Column content based on screen size. See ('size' prop under the [Props](https://github.com/idibidiart/react-native-responsive-grid#props) section.) It also demonstrates who to wrap Row content (e.g. child columns) based on screen size (also see [Example 4](https://github.com/idibidiart/react-native-responsive-grid#example-4))
 
 ```jsx
 import React, { Component } from 'react';
@@ -264,8 +254,6 @@ export default class Home extends Component {
 
   render() {
     return (
-      <Grid>{({state, setState}) => (
-        {/*  possibly other JSX here */}
         <FlatList
           data={this.state.data}
           initialNumToRender={10}
@@ -301,9 +289,8 @@ export default class Home extends Component {
                 </Row>
               )
             }}
-        />)
-      }
-      </Grid>
+        />
+    )
   }
 }
 ```
@@ -312,45 +299,41 @@ export default class Home extends Component {
 
 All props are case sensitive.
 
-`aspectRatio` (see [Example 2](https://github.com/idibidiart/react-native-responsive-grid#example-2))
-
-`layoutEvent` (see [Examples 4](https://github.com/idibidiart/react-native-responsive-grid#example-4))
+`aspectRatio` (see [Example 3](https://github.com/idibidiart/react-native-responsive-grid#example-3))
 
 `size` may be supplied as prop to Column (width) or Row (height). This number defines the width of the column or height of a row as a percentage of its parent view's computed or explicit width or height, respectively.  
 
-`smSize`, `mdSize`, `lgSize` and `xlSize` are device-dependent size values that are applied to columns. In addition to their utility in deciding the size of content based on screen size, they may are also used for defining column wrapping behavior based on screen size. For example, column content will wrap if column size is made smaller at smaller screen sizes.
+`smSize`, `mdSize`, `lgSize` and `xlSize` are device-dependent size values that are applied to Columns (width) and Rows (height.) In addition to their utility in deciding the size of content based on screen size (width in case of Columns and height in case of Rows), they may are also used for defining column wrapping behavior based on screen size. For example, Columns in as Row will wrap if Row width becomes smaller at smaller screen sizes.
 
 `sizePoints` may be supplied as prop to Column (width) or Row (height). This number defines the width of the column or height of a row as an asolute value in points.
 
-`smSizePoints`, `mdSizePoints`, `lgSizePoints`, and `xlSizePoints` are like their percentage-based equivalents but use absolute value. 
+`smSizePoints`, `mdSizePoints`, `lgSizePoints`, and `xlSizePoints` are like their percentage-based equivalents but use point values. 
 
 `offset` may be applied to Column. This number defines the marginLeft (or marginRight in csase of RTL mode) for the column as a percentage of its parent view's computed or explicitly set width. Offset values can also be negative. Default is 0. 
 
 `smOffset`, `mdOffset`, `lgOffset` and `xlOffset` are device-dependent offset values that are applied to columns.
 
-`offsetPoints`, `mdOffsetPoints`, `lgOffsetPoints`, and `xlOffsetPoints` are like their percentage-based equivalents but use absolute value in points (Number) instead of relative value in percent (String.) 
+`offsetPoints`, `mdOffsetPoints`, `lgOffsetPoints`, and `xlOffsetPoints` are like their percentage-based equivalents (i.e. applied to Column to produce offset) but use value in points instead of value in percent. 
 
 _Using offset values in RTL mode moves things from right to left. Using them in normal LTR mode moves things from left to right. It's pretty normal to expect that. If you're working in both directions, this makes offsets more useful than using marginLeft or marginRight directly._
 
 _Specifying an offset value in normal LTR mode means marginLeft (if specified in style prop) will be overwritten by offset value. However, marginRight (if specified in style prop) will not be overwritten by the offset value. Specifying offset value in RTL mode means marginRight (if specified in style prop) will be overwritten by offset value. However, marginLeft (if specified in style prop) will not be overwritten by offset value._
 
-`smHidden`, `mdHidden`, `lgHidden` and `xlHidden` - may be applied to Column. This tells the grid to hide certain columns based on the current width of the screen.  
+`smHidden`, `mdHidden`, `lgHidden` and `xlHidden` - may be applied to Column or Row which tells the parent Row or Column, respectively, to hide the affected child Column or child Row based on the current width (for child Columns) or height (for child Rows) of the screen.  
 
 `vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: `middle` | `center`, `top`, `bottom`, `space` and `distribute`. Default is top.
 
 `vAlign` may also be supplied as prop to Row to align the columns within it in the vertical direction. Possible values are: `top`, `middle` | `center`, `bottom`, `baseline` and `stretch`. Default is `stretch`.
 
-`hAlign` may be supplied as prop to Row to align the columns within it in the horizontal direction. Possible values are: `center` | `middle`, `left`, `right`, `space` and `distribute`. Default is left.
+`hAlign` may be supplied as prop to Row to align its child Columns and/or elements within it in the horizontal direction. Possible values are: `center` | `middle`, `left`, `right`, `space` and `distribute`. Default is left.
 
-`hAlign` may also be supplied as prop to Column to align its rows and/or elements within it in the horizontal direction. Possible values are: `center` | `middle`, `left`, `right`, and `stretch`. Default is `stretch`.
+`hAlign` may also be supplied as prop to Column to align its child Rows and/or elements within it in the horizontal direction. Possible values are: `center` | `middle`, `left`, `right`, and `stretch`. Default is `stretch`.
 
 `rtl` may be supplied as prop to Row to both reverse the order of columns (or elements) inside a row as well as to set hAlign to 'right.' This is useful for right-to-left layouts. 
 
-`fullHeight` may be supplied as prop to Row in place of size (height) of '100%' -- fullWidth on Row is not desired since it would interfere with Column's offset prop. 
+`fullHeight` may be supplied as prop to Column in place of style={{flex: 1}}  -- note that Columns have 0 height and width and must specify this explicitly if you like it to behave like a regular View with `style={{flex: 1}}` or set the height and width using the `size` props
 
-`fullWidth` may be supplied as prop to Column in place of size (width) of '100% -- fullHeight on Column is not desired since it would interfere with Row's size prop. 
-
-_Note, if row (or column) is a child of ScrollView you need to set the height (or width) explicitly, and if you wish to set it explicitly relative to container see Example # 1 which uses layoutEvent to get container size at runtime._
+`fullWidth` may be supplied as prop to Rowin in place of style={{flex: 1}}  -- note that Rowss have 0 height and width and must specify this explicitly if you like it to behave like a regular View with `style={{flex: 1, fleDirection: 'row'}}` or set the height and width using the `size` props 
 
 `alignLines` may be supplied as prop to Row to vertically align the wrapped lines within the Row (not to be confused with the items that are inside each line.) Possible values are: top, middle, bottom, space, distribute, stretch. (See section on Aligning Wrapped Lines within Rows)
 
@@ -362,36 +345,37 @@ Possible values are: `auto`, `top`, `bottom`, `middle` | `center`, `stretch`, `b
 
 `noWrap` may be supplied as prop to Row prevent child elements from wrapping. 
 
-The screen-size-specific _size_, _offset_ and _hidden_ props refer to the effective screen width, which changes with orientation. 
+The screen-size-specific _size_ and _hidden_ props refer to the current screen width in case of Columns and current screen height in case of Rows, which changes with orientation. The _offset_ props only apply to Columns so they refer to the curret screen width. 
 
-The following are the screen width thresholds for these props:
+The following are the thresholds for these props:
 
-- sm: <= 480px 
-- md: > 480 and < 1024
-- lg: >= 1024 and < 1366
-- xl: >= 1366 
+  - SMALL Width = 320 
+  - MEDIUM Width = 414 
+  - LARGE Width = 768
+  - XLARGE Width = 1024 
+
+  - SMALL Height = 480
+  - MEDIUM Height = 568
+  - LARGE Height = 736 
+  - XLARGE Height = 1366 
 
 ### Nesting
 
 If you're nesting a column inside a row which is inside another column that is inside another row as below:
 
 ```jsx
-  <Grid>{({state, setState}) => (
-       {/*  possibly other JSX here */}
-    <Row>
-        <Col size={50}>
-          <Row>
-            <Col size={50}>
-              <Text>
-                This column is 25% of the outer view's width (or 25% of the screen width if
-                the top level Row has no parent)
-              </Text>
-            </Col>
-          </Row>
-        </Col>
-    </Row>
-      )}
-  </Grid>)
+  <Row>
+      <Col size={50}>
+        <Row>
+          <Col size={50}>
+            <Text>
+              This column is 25% of the outer view's width (or 25% of the screen width if
+              the top level Row has no parent)
+            </Text>
+          </Col>
+        </Row>
+      </Col>
+  </Row>
 ```
 
 The nested column's size will be the column size value (size, sm, md, lg, xl) as a percentage of the width of the preceding column in the hierarchy . 
@@ -418,8 +402,6 @@ Notice the reversed order of the Text relative to the physical order in the mark
 ### Normal LTR Markup 
 
 ```jsx
-  <Grid>{({state, setState}) => (
-    {/*  possibly other JSX here */}
     <Row style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={60} offset={6} >
           <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
@@ -432,8 +414,6 @@ Notice the reversed order of the Text relative to the physical order in the mark
           </Text>
           </Col>
     </Row>
-          )}
-  </Grid>)
 ```
 
 ### RTL Markup
@@ -441,8 +421,6 @@ Notice the reversed order of the Text relative to the physical order in the mark
 Notice the offset values work in RTL direction now. The addition of .7 offset is to mimic the fact that the left margin in the LTR layout is smaller than the right margin in that layout, whereas it's the opposite in the RTL direction. So the .7 offset is used in RTL layout instead of the 1 offset, so alignment is identical. 
 
 ```jsx
-  <Grid>{({state, setState}) => (
-    {/*  possibly other JSX here */}
     <Row rtl style={{paddingTop: '11%', paddingBottom: '4%', backgroundColor: '#f3f3f3', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>
         <Col size={60} offset={4} >
           <Text style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
@@ -455,8 +433,6 @@ Notice the offset values work in RTL direction now. The addition of .7 offset is
           </Text>
         </Col>
     </Row>
-     )}
-  </Grid>)
 ```
 
 ### Utils
@@ -475,14 +451,12 @@ Columns and Rows have `position: 'relative'` enforced by design to keep them wit
 
 ```jsx
 import {Column as Col, Row} from 'react-native-responsive-grid';
-<Grid>{({state, setState}) => (
-  {/*  possibly other JSX here */}
-  <Row>
-      <Col smSize={50} mdSize={33.333} lgSize={25}>
-          <Text>First Column</Text>
-      </Col>
-  </Row>)}
-</Grid>
+
+<Row>
+    <Col smSize={50} mdSize={33.333} lgSize={25}>
+        <Text>First Column</Text>
+    </Col>
+</Row>
 ```
 
 In the example abovw, on a phone in portrait mode, the Column would take up 50% of the row's computed width. On a phone in landscape nmode or a normal tablet the Column would take up 33.333% of the row's width. On a big tablet the Column would take up 25% of the row's width.
@@ -490,14 +464,11 @@ In the example abovw, on a phone in portrait mode, the Column would take up 50% 
 ```jsx
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
-<Grid>{({state, setState}) => (
-  {/*  possibly other JSX here */}
-  <Row style={{height: 20}}>
-    <Col smOffset={0} mdOffset={10} lgOffset={20} xlOffset={40}>
-      <Text>test</Text>
-    </Col>
-  </Row>)}
-</Grid>
+<Row style={{height: 20}}>
+  <Col smOffset={0} mdOffset={10} lgOffset={20} xlOffset={40}>
+    <Text>test</Text>
+  </Col>
+</Row>
 ```
 
 In the example above, the text "test" will move further to the right with larger screen sizes.
@@ -505,17 +476,14 @@ In the example above, the text "test" will move further to the right with larger
 ```jsx
 import {Column as Col, Row} from 'react-native-responsive-grid';
 
-<Grid>{({state, setState}) => (
-  {/*  possibly other JSX here */}
-  <Row>
-      <Col smHidden>
-          <Text>Column displayed when width is <= 480</Text>
-      </Col>
-      <Col mdHidden lgHidden xlHidden>
-          <Text>Column displayed when width is > 480</Text>
-      </Col>
-  </Row>)}
-</Grid>
+<Row>
+    <Col smHidden>
+        <Text>Column displayed when width is <= 480</Text>
+    </Col>
+    <Col mdHidden lgHidden xlHidden>
+        <Text>Column displayed when width is > 480</Text>
+    </Col>
+</Row>
 ```
 
 In the example above, the column and all of it's children will be hidden on small screens like phones, but it will appear on bigger screens like tablets. The size-prefixed 'hidden' props may be applied to columns. Hidden props are all booleans. They default to false.

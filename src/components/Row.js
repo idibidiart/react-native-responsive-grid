@@ -30,7 +30,6 @@ export default class Row extends React.Component {
 
   cloneElements = () => {
     const rtl = this.props.rtl 
-
     return React.Children.map((rtl ? React.Children.toArray(this.props.children).reverse() : this.props.children), (element) => {
       if (!element) return null
       if (element.type && (element.type.name === 'Row')) {
@@ -38,7 +37,7 @@ export default class Row extends React.Component {
           console.error("Row may not contain other Rows as children. Child rows must be wrapped in a Column.")
         return null
       } else if (element.type && element.type.name === 'Column') {
-        if (isHidden(this.screenInfo.mediaSize, element.props) || 
+        if (isHidden(this.screenInfo.mediaSizeHeight, element.props) || 
             isExcludedByAspectRatio(element.props, this.screenInfo.aspectRatio)) {
           return null;
         } else {
@@ -60,15 +59,26 @@ export default class Row extends React.Component {
     hAlign: PropTypes.oneOf(['space', 'distribute', 'center', 'middle', 'left', 'right']),
     vAlign: PropTypes.oneOf(['stretch', 'middle', 'center', 'top', 'bottom', 'baseline']),
     alignSelf: PropTypes.oneOf(['auto', 'left', 'right', 'center', 'middle', 'stretch']),
-    fullHeight: PropTypes.bool,
-    alignLines: PropTypes.string
+    fullWidth: PropTypes.bool,
+    alignLines: PropTypes.string,
+    size: PropTypes.number,
+    smSize: PropTypes.number,
+    mdSize: PropTypes.number,
+    lgSize: PropTypes.number,
+    xlSize: PropTypes.number,
+    sizePoints: PropTypes.number,
+    smSizePoints: PropTypes.number,
+    mdSizePoints: PropTypes.number,
+    lgSizePoints: PropTypes.number,
+    xlSizePoints: PropTypes.number,
+    aspectRatio: PropTypes.object 
   }
 
   render() {
 
     const {
       rtl,
-      fullHeight,
+      fullWidth,
       noWrap,
       hAlign,
       vAlign,
@@ -84,14 +94,14 @@ export default class Row extends React.Component {
       mdSizePoints,
       lgSizePoints,
       xlSizePoints, 
+      aspectRatio,
       ...rest
     } = this.props
 
     this.screenInfo = ScreenInfo()
 
     this.wrapState = noWrap ? 'nowrap' : 'wrap'
-    this.height =  (this.props.style && this.props.style.height !== undefined) ? this.props.style.height : fullHeight ? '100%' : undefined
-    this.flex =  this.props.style && this.props.style.flex !== undefined ? this.props.style.flex : 0
+    this.flex = this.props.fullWidth ? 1 : this.props.style && this.props.style.flex !== undefined ? this.props.style.flex : 0
 
     if (rtl && !hAlign) {
       this.hAlign = 'flex-end'
@@ -188,12 +198,12 @@ export default class Row extends React.Component {
               display: this.state.display || 'flex',
               flex: this.flex,
               flexDirection: 'row',
-              height: this.height !== undefined ? this.height : 
+              height: this.props.style && this.props.style.height !== undefined ? this.props.style.height : 
                       (this.props.size !== undefined || 
                       this.props.sizePoints !== undefined ||
-                      this.props[this.screenInfo.mediaSize + 'Size'] !== undefined ||
-                      this.props[this.screenInfo.mediaSize + 'SizePoints'] !== undefined) ?
-                          getSize(this.screenInfo.mediaSize, this.props) : undefined,
+                      this.props[this.screenInfo.mediaSizeHeight + 'Size'] !== undefined ||
+                      this.props[this.screenInfo.mediaSizeHeight + 'SizePoints'] !== undefined) ?
+                          getSize(this.screenInfo.mediaSizeHeight, this.props) : undefined,
               alignContent: this.alignLines, 
               flexWrap: this.wrapState,
               alignItems: this.vAlign,

@@ -3,7 +3,6 @@
 import { Dimensions } from 'react-native';
 
 const isHidden = (screenSize, props) => {
-
   switch(screenSize) {
     case 'sm':
       return props.smHidden ? true : false;

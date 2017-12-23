@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import {ScreenInfo} from '../lib/ScreenInfo';
-import {getSize, getOffset} from '../lib/helpers';
+import {isHidden, isExcludedByAspectRatio, getSize, getOffset} from '../lib/helpers';
 import {View} from 'react-native';
 
 export default class Column extends React.Component {
@@ -36,6 +36,11 @@ export default class Column extends React.Component {
             if (__DEV__) 
               console.error("Column may not contain other Columns as children. Child columns must be wrapped in a Row.")
             return null
+        } else if (element.type && element.type.name === 'Row') {
+          if (isHidden(this.screenInfo.mediaSizeWidth, element.props) || 
+              isExcludedByAspectRatio(element.props, this.screenInfo.aspectRatio)) {
+            return null;
+          }
         }
         return element
       })
@@ -69,7 +74,7 @@ export default class Column extends React.Component {
       vAlign: PropTypes.oneOf(['space', 'distribute', 'middle', 'center', 'bottom', 'top']),
       hAlign: PropTypes.oneOf(['stretch', 'center', 'middle', 'right', 'left']),
       alignSelf: PropTypes.oneOf(['auto', 'top', 'bottom', 'middle', 'center', 'stretch', 'baseline']),
-      fullWidth: PropTypes.bool,
+      fullWHeight: PropTypes.bool,
       aspectRatio: PropTypes.object  
     }
 
@@ -104,19 +109,14 @@ export default class Column extends React.Component {
         hAlign,
         alignSelf,
         rtl,
-        fullWidth,
+        fullHeight,
         aspectRatio,
         ...rest
       } = this.props;
 
       this.screenInfo = ScreenInfo()
 
-      this.width =  this.state.width !== undefined ? this.state.width :
-                      (this.props.style && this.props.style.width !== undefined) ? 
-                        this.props.style.width : fullWidth ? '100%' : undefined
-      this.marginLeft =  (this.props.style && this.props.style.marginLeft !== undefined) ? this.props.style.marginLeft : undefined
-      this.marginRight =  (this.props.style && this.props.style.marginRight !== undefined) ? this.props.style.marginRight : undefined 
-      this.flex =  this.props.style && this.props.style.flex !== undefined ? this.props.style.flex : 0
+      this.flex =  this.props.fullHeight ? 1 : this.props.style && this.props.style.flex !== undefined ? this.props.style.flex : 0
 
       switch (vAlign) {
         case 'space': 
@@ -182,33 +182,33 @@ export default class Column extends React.Component {
       this.style = {
                     display: this.state.display || 'flex',
                     flex: this.flex,
-                    width: this.width !== undefined ? this.width : 
+                    width: this.props.style && this.props.style.width !== undefined ? this.props.style.width : 
                             (this.props.size !== undefined || 
                               this.props.sizePoints !== undefined ||
-                              this.props[this.screenInfo.mediaSize + 'Size'] !== undefined ||
-                              this.props[this.screenInfo.mediaSize + 'SizePoints'] !== undefined) ?
-                                getSize(this.screenInfo.mediaSize, this.props) : undefined,
+                              this.props[this.screenInfo.mediaSizeWidth + 'Size'] !== undefined ||
+                              this.props[this.screenInfo.mediaSizeWidth + 'SizePoints'] !== undefined) ?
+                                getSize(this.screenInfo.mediaSizeWidth, this.props) : undefined,
                     flexDirection: 'column',
-                    marginLeft: this.marginLeft !== undefined ? this.marginLeft :
+                    marginLeft: this.props.style && this.props.style.marginLeft !== undefined ? this.props.style.marginLeft :
                                   !this.props.rtl && (
                                   this.props.offset !== undefined || 
                                   this.props.offsetPoints !== undefined ||
-                                  this.props[this.screenInfo.mediaSize + 'Offset'] !== undefined ||
-                                  this.props[this.screenInfo.mediaSize + 'OffsetPoints'] !== undefined) ? 
-                                      getOffset(this.screenInfo.mediaSize, this.props) : undefined,
-                    marginRight: this.marginRight !== undefined ? this.marginRight :
+                                  this.props[this.screenInfo.mediaSizeWidth + 'Offset'] !== undefined ||
+                                  this.props[this.screenInfo.mediaSizeWidth + 'OffsetPoints'] !== undefined) ? 
+                                      getOffset(this.screenInfo.mediaSizeWidth, this.props) : undefined,
+                    marginRight: this.props.style && this.props.style.marginRight !== undefined ? this.props.style.marginRight :
                                   this.props.rtl && (
                                   this.props.offset !== undefined || 
                                   this.props.offsetPoints !== undefined ||
-                                  this.props[this.screenInfo.mediaSize + 'Offset'] !== undefined ||
-                                  this.props[this.screenInfo.mediaSize + 'OffsetPoints'] !== undefined) ? 
-                                      getOffset(this.screenInfo.mediaSize, this.props) : undefined,
+                                  this.props[this.screenInfo.mediaSizeWidth + 'Offset'] !== undefined ||
+                                  this.props[this.screenInfo.mediaSizeWidth + 'OffsetPoints'] !== undefined) ? 
+                                      getOffset(this.screenInfo.mediaSizeWidth, this.props) : undefined,
                     alignItems: this.hAlign,
                     justifyContent: this.vAlign,
                     alignSelf: this.alignSelf,
                     position: 'relative',
                     overflow: 'hidden'
-                  }
+                  }       
 
         try {
           return (
