@@ -10,7 +10,9 @@ While most React Native developers use `flex: n` (which is based on Facebook's Y
 
 Having said that, there is an escape hatch in that we can still specify a numerical `flex` constraint in styles of Row and Column and even use bare Views mixed in with Row and Column components. 
 
-In some cases when having a points-sized view followed by a view that needs to take the remaining space, you'll need to use a Column (to wrap vertical layout) and Row (to wrap horizontal layout) with style={{flex: 1}} on the wrapping Column or Row and on the wrapped variable size element. However, such mixing of absolute and Flexbox sizing is not recommended as it's not fully responsive.
+In some cases when having a points-sized view followed by a view that needs to take the remaining space, you'll need to use a Column (to wrap vertical layout) and Row (to wrap horizontal layout) with style={{flex: 1}} on the wrapping Column or Row and same on the wrapped variable size element. However, such mixing of absolute and Flexbox sizing is not recommended as it's not fully responsive.
+
+Other than that, the only other reason to use Flexbox grow/shrink sizing is for non-scrollable "squishy" UIs that shrink/grow elements instead of performing dynamic layout change and/or keeping things in proportion to screen width (rather tham to each other as is the case with Flexbox grow/shrink siing) via percentage based layout. You can still do that with this grid but you wouldn't want to use it if that was your only use case. 
 
 ### _Works in Both Directions_
 
