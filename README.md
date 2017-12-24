@@ -30,14 +30,6 @@ In some cases when having a points-sized view followed by a view that needs to t
 
 Other than that, the only other reason to use Flexbox grow/shrink sizing is for non-scrollable "squishy" UIs that shrink/grow elements instead of performing dynamic layout change and/or keeping things in proportion to screen width (rather tham to each other as is the case with Flexbox grow/shrink siing) via percentage based layout. You can still do that with this grid but you wouldn't want to use it if that was your only use case. 
 
-### A grid or a tree?
-
-With this grid, we don't lose any aspect of the Flexbox based responsive grid. We simply gain a generalized and consistent way of building responsive UI component trees.
-
-A grid is basically a tree where the rows are the children and the columns within each are the grand children. But a UI is constructed as a tree of arbitrary shape which corresponds to the UI's visual composition, so a normal rectilinear 2D grid is the simplest tree structure but for a layout farmework, which is what the responsive grid is, we want the ability to build UI View trees of any shape and complexity with predictable responsive behavior. That is what this grid gives us. It's a granular, responsive layout system, not just a design/formatting tool. We could certainly constructa high level rectilinear 2D grid with it, but that is just a specific use case. 
-
-(for more details see [Design Principles](https://github.com/idibidiart/react-native-responsive-grid/blob/master/DesignPrinciples.md))
-
 ## Examples
 
 You may use this grid to build responsive 2D layouts that maintain their relative proportions, change their basic structure in a predictable way and dynamically decide what content to display, based on screen size, aspect ratio, and orientation.  
