@@ -14,7 +14,7 @@ In your project folder, `yarn add react-native-responsive-grid`
 
 ## Background
 
-Before React Native v0.42 we didn't have a performant, declarative way of specifying percentage-based dimensions. Then came React Native v0.42 which gave us that ability. Since then several open source contributors have made responsive grids that take advantage of this new capability. This "grid" takes one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and modifies it heavily to produce a simple yet powerful layout model that we can use to implement responsive and adaptive behavior in our apps. 
+Before React Native v0.42 we didn't have a performant, declarative way of specifying percentage-based dimensions. Then came React Native v0.42 which gave us that ability. Since then several open source contributors have made responsive grids that take advantage of this new capability. This "grid" takes one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and modifies it heavily to produce a simple yet powerful layout model that we can use to implement responsive and adaptive behavior. 
 
 ## Percentsage-based Dynamic, Responsive Layout
 
@@ -51,9 +51,9 @@ The demos in the videos above show some of the possibilities, but this grid is c
 
 ## Components
 
-- Row: Flexbox View with flexDirection set to 'row' and convenient props 
+- Row: Flexbox View with flexDirection set to 'row' with convenient props and dynamic behavior. 
 
-- Col: Flexbox View with flexDirection set to 'column' and convenient props 
+- Col: Flexbox View with flexDirection set to 'column' with convenient props and dynamic behavior.
 
 - Grid: an optional, stateful, top-level component (at root, above ScrollView, ListView, FlatList et al but below a Modal or Drawer) that is not meant to be nested. The Grid uses the children-as-funnction pattern and passes its state to its children, and allows state to be declared in its props, which will have the latest screen and grid info after orientation changes. It also passes it's async render-causing setState method to its children. 
 
