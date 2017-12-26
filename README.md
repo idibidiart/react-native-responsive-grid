@@ -26,7 +26,7 @@ _Exceptions to the Rule (above):_
 
 _In some cases when having a points-sized view followed by a view that needs to take the remaining space, you'll need to use a Column (to wrap vertical layout) and Row (to wrap horizontal layout) with style={{flex: 1}} on the wrapping Column or Row and same on the wrapped variable size element. However, such mixing of absolute and Flexbox grow/shrink sizing is not recommended as it won't lead to a fully responsive UI layout._
 
-_The only other reason to use Flexbox grow/shrink sizing with this Grid is for grow-and-shrink-in-place UI (aka "squishy" UI) where elements shrink and grow in elastic fashion instead of undergoing dynamic re-layout change and/or staying in proportion to screen width._ 
+_The only other reason to use Flexbox grow/shrink sizing with this Grid is for grow-and-shrink-in-place UI (aka "squishy" UI) where elements shrink and grow in elastic fashion and relative to each other instead of undergoing dynamic re-layout change and/or staying in proportion to screen width._ 
 
 ## Examples
 
