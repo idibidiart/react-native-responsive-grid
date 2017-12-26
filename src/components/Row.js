@@ -169,7 +169,7 @@ export default class Row extends React.Component {
         this.alignLines = 'stretch'
         break;
       default: 
-        this.alignLines = 'flex-start' 
+        this.alignLines = 'stretch' 
     }
 
     switch (alignSelf) {

@@ -7,6 +7,12 @@ This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Released]
 
+## [0.40.0]
+
+### Changed (breaking)
+
+- alignLines on Row now has 'stretch' as default value (consistend with CSS spec)
+
 ## [0.39.0]
 
 ### Changed (breaking)
