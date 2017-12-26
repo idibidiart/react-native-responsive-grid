@@ -22,13 +22,11 @@ This grid eschews Flexbox grow/shrink sizing in favor of percentage-based sizing
 
 _The grid construct is extended beyond its common form as a Rectilinear 2D Grid and generalized as cross-nestable Row and Column components that can be combined in an alternating pattern to build a tree of Views of any shape and depth. That is to say, a Row View (Row for short) may contain one or more Column Views (Column for short), each of which may contain one or more Rows, which in turn may contain one or more Columns, and so on. Both Rows and Columns can be styled using predictable, percentage-based width, height, padding and margins. Rows can be aligned vertically (along main axis) and horizontally (along cross axis) inside Columns, and Columns can be aligned horizontally (along main axis) and vertically (along cross axis) inside Rows. [Additionally, the multiple lines created by wrapped Row content may be aligned vertically relative to the parent Column.] And with this, we can build the entire UI component tree (or an individual component's subtree) using a consistent, repeatable and recursive pattern, one that has predictable and dynamic --not only static-- responsiveness and the ability to trigger specific adaptive behavior._ 
 
-_The tree nodes are represented by Rows and their children are represented by Columns. Tree leaves are Columns that have no Row as a child._
+_Notes:_ 
 
-Notes: 
+_In some cases when having a points-sized view followed by a view that needs to take the remaining space, you'll need to use a Column (to wrap vertical layout) and Row (to wrap horizontal layout) with style={{flex: 1}} on the wrapping Column or Row and same on the wrapped variable size element. However, such mixing of absolute and Flexbox grow/shrink sizing is not recommended as it won't lead to a fully responsive UI layout._
 
-In some cases when having a points-sized view followed by a view that needs to take the remaining space, you'll need to use a Column (to wrap vertical layout) and Row (to wrap horizontal layout) with style={{flex: 1}} on the wrapping Column or Row and same on the wrapped variable size element. However, such mixing of absolute and Flexbox sizing is not recommended as it's not fully responsive.
-
-Other than that, the only other reason to use Flexbox grow/shrink sizing is for non-scrollable "squishy" UIs that shrink/grow elements instead of performing dynamic layout change and/or keeping things in proportion to screen width (rather tham to each other as is the case with Flexbox grow/shrink siing) via percentage based layout. You can still do that with this grid but you wouldn't want to use it if that was your only use case. 
+_The only other reason to use Flexbox grow/shrink sizing is for grow-and-shrink-in-place UI (aka "squishy" UI) where elements shrink and grow in elastic fashion instead of undergoing dynamic re-layout change and/or staying in proportion to screen width._ 
 
 ## Examples
 
