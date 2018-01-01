@@ -59,9 +59,9 @@ The demos in the videos above show some of the possibilities, but this grid is c
 
 **Important:**
 
-**Grid is required if you need to re-run the render() function in response to orientation change (many examples here)** 
+**Grid component is required if you need to re-run the render() function in response to orientation change (many examples here)** 
 
-**Grid is also required if you use aspectRatio prop on Rows or Columns since the selection of content of the closest aspect ratio requires re-running the render function after orientation change.**
+**Grid component is also required if you use aspectRatio prop on Rows or Columns since the selection of content of the closest aspect ratio requires re-running the render function after orientation change.**
 
 Below is an example:
 
@@ -84,35 +84,6 @@ export const Home = () => (
       )}
   </Grid>)
 ```
-
-## Utils
-
-import { Row, Column as Col, ScreenInfo, Grid} from './grid'
-
-`ScreenInfo(sizeOnly: Boolean)` This will return the following data:
-
-```js
-{
-  mediaSize: mediaSizeWidth,
-  mediaSizeWidth,
-  mediaSizeHeight, 
-  width: SCREEN_WIDTH, 
-  height: SCREEN_HEIGHT, 
-  aspectRatio: {currentNearestRatio, currentOrientation}
-}
-``` 
-- mediaSize is one of `sm`, `md`, `lg`, `xl` screen width categories and is aliased to mediaSizeWidth
-- mediaSizeHeight is the same but for screen height. It's used for hiding/showing Rows wit `hidden` prop based on screen height category and for Row `size` props.  
-
-if `sizeOnly` is true it will drop aspectRatio and its 'nearest match' calculation (shaves a few ms)
-
-## Methods
-
-Row and Column both have `.hide()` and `.show()` instance methods. The instance reference you get from a ref callback will have these methods. See Example #1 for usage.
-
-## Instance Variables
-
-These are provided mainly for unit tests, except for componentInstance`.hidden` and componentInstance`.shown` which can be used to tell the state of the component.
 
 ### Example 1
 
@@ -320,6 +291,35 @@ export default class Home extends Component {
   }
 }
 ```
+
+## Utils
+
+import { Row, Column as Col, ScreenInfo, Grid} from './grid'
+
+`ScreenInfo(sizeOnly: Boolean)` This will return the following data:
+
+```js
+{
+  mediaSize: mediaSizeWidth,
+  mediaSizeWidth,
+  mediaSizeHeight, 
+  width: SCREEN_WIDTH, 
+  height: SCREEN_HEIGHT, 
+  aspectRatio: {currentNearestRatio, currentOrientation}
+}
+``` 
+- mediaSize is one of `sm`, `md`, `lg`, `xl` screen width categories and is aliased to mediaSizeWidth
+- mediaSizeHeight is the same but for screen height. It's used for hiding/showing Rows wit `hidden` prop based on screen height category and for Row `size` props.  
+
+if `sizeOnly` is true it will drop aspectRatio and its 'nearest match' calculation (shaves a few ms)
+
+## Methods
+
+Row and Column both have `.hide()` and `.show()` instance methods. The instance reference you get from a ref callback will have these methods. See Example #1 for usage.
+
+## Instance Variables
+
+These are provided mainly for unit tests, except for componentInstance`.hidden` and componentInstance`.shown` which can be used to tell the state of the component.
 
 ## Props
 
