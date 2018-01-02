@@ -49,49 +49,13 @@ You may use this grid to build responsive 2D layouts that maintain their relativ
 
 The demos in the videos above show some of the possibilities, but this grid is capable of more complex responsive and adaptive behavior.
 
-## Components
-
-- Row: Flexbox View with flexDirection set to 'row' with convenient props and dynamic behavior. 
-
-- Col: Flexbox View with flexDirection set to 'column' with convenient props and dynamic behavior.
-
-- Grid: an optional, stateful, top-level component (at root, above ScrollView, ListView, FlatList et al but below a Modal or Drawer) that is not meant to be nested. The Grid uses the children-as-funnction pattern and passes its state to its children, and allows state to be declared in its props, which will have the latest screen and grid info after orientation changes. It also passes it's async render-causing setState method to its children. 
-
-**Important:**
-
-**Grid component is required if you need to re-run the render() function in response to orientation change (many examples here)** 
-
-**Grid component is also required if you use aspectRatio prop on Rows or Columns since the selection of content of the closest aspect ratio requires re-running the render function after orientation change.**
-
-Below is an example:
-
-```jsx 
-export const Home = () => (
-  <Grid state={
-    {
-      someState: 'yyz', 
-      anotherState: 'abc'
-    }}>
-  {({state, setState}) => (
-       {/*  possibly other JSX here */}
-        <Col fullWidth style={{backgroundColor: 'lightgray'}}> 
-          <ScrollView removeClippedSubviews={true} >
-            <Row fullHeight>
-              {layout(state)}
-            </Row>
-          </ScrollView>
-        </Col>
-      )}
-  </Grid>)
-```
-
-### Example 1
+### Example 1: Universal, Responsive Pinterest Layout
 
 This examples showcases 2-dimensional Constraint-Based Layout using a custom layout in a few lines of code. Flexbox fails us here in that it does not support a 2-dimensional constraint layout. This is precisely why React Native needs native support for display:'grid' Until then you may use this grid with your own constraint-based layout. This example shows a simplified Pinterest-like layout. You may extend it to build a masonry effect using a box packing algorithm and Flexbox's 1-dimensional constraint-based elastic layout. One thing this grid is not designed to do is to implement transitions but it can be forked and extended to do that (would happy take a PR.) 
 
 [Source Code for Example 1](https://github.com/idibidiart/react-native-responsive-grid/blob/master/UniversalPinterestLayout.md)
 
-### Example 2
+### Example 2: Reponsive Tiles for Universal Apps
 
 This examples showcases the grid's 1-dimensional Constraint-Based Layout using Flexbox wrapping behavior. 
 
@@ -107,7 +71,7 @@ _This example also showes how to use alignLines='stretch' for wrapped row conten
 
 [Source Code for Example 2](https://github.com/idibidiart/react-native-responsive-grid/blob/master/UniversalTiles.md)
 
-### Example 3
+### Example 3: Selecting an image with the right aspect ratio
 
 In this demo, the grid picks the image with the **closest aspect ratio** to the device aspect ratio, dynamically, taking into account the current device orientation. The images themselves must be sized and cropped by the designer so that they match the common device aspect ratios (see below) while also showing the part of the image that the designer intends to show for each aspect ratio. Since there could be many aspect ratios that correspond to different devices we should have multiple such images (and, optionally, their rotated versions.)
 
@@ -156,7 +120,7 @@ The following table maps some common device aspect ratios to the ratio of width/
 </Grid>
 ```
 
-### Example 4
+### Example 4: Responsive Break Points (Row Wrapping)
 
 A more basic example of he grid's 1-Dimensional Constraint-Based Layout using Flexbox.
 
@@ -195,7 +159,7 @@ The following are the preset screen widths (in points) at which breaks maybe spe
   </Row>
 ```
 
-### Example 5
+### Example 5: FlatList + Row & Column Wrapping
 
 FlatList is a virtualized replacement for React Native's old ListView component. Using FlatList as a container is supported by this grid. This example also demonstrate wrapping Column content based on screen size. See ('size' prop under the [Props](https://github.com/idibidiart/react-native-responsive-grid#props) section.) It also demonstrates who to wrap Row content (e.g. child columns) based on screen size (also see [Example 4](https://github.com/idibidiart/react-native-responsive-grid#example-4))
 
@@ -292,6 +256,42 @@ export default class Home extends Component {
 }
 ```
 
+## Components
+
+- Row: Flexbox View with flexDirection set to 'row' with convenient props and dynamic behavior. 
+
+- Col: Flexbox View with flexDirection set to 'column' with convenient props and dynamic behavior.
+
+- Grid: an optional, stateful, top-level component (at root, above ScrollView, ListView, FlatList et al but below a Modal or Drawer) that is not meant to be nested. The Grid uses the children-as-funnction pattern and passes its state to its children, and allows state to be declared in its props, which will have the latest screen and grid info after orientation changes. It also passes it's async render-causing setState method to its children. 
+
+**Important:**
+
+**Grid component is required if you need to re-run the render() function in response to orientation change (many examples here)** 
+
+**Grid component is also required if you use aspectRatio prop on Rows or Columns since the selection of content of the closest aspect ratio requires re-running the render function after orientation change.**
+
+Below is an example:
+
+```jsx 
+export const Home = () => (
+  <Grid state={
+    {
+      someState: 'yyz', 
+      anotherState: 'abc'
+    }}>
+  {({state, setState}) => (
+       {/*  possibly other JSX here */}
+        <Col fullWidth style={{backgroundColor: 'lightgray'}}> 
+          <ScrollView removeClippedSubviews={true} >
+            <Row fullHeight>
+              {layout(state)}
+            </Row>
+          </ScrollView>
+        </Col>
+      )}
+  </Grid>)
+```
+
 ## Utils
 
 import { Row, Column as Col, ScreenInfo, Grid} from './grid'
@@ -308,6 +308,7 @@ import { Row, Column as Col, ScreenInfo, Grid} from './grid'
   aspectRatio: {currentNearestRatio, currentOrientation}
 }
 ``` 
+
 - mediaSize is one of `sm`, `md`, `lg`, `xl` screen width categories and is aliased to mediaSizeWidth
 - mediaSizeHeight is the same but for screen height. It's used for hiding/showing Rows wit `hidden` prop based on screen height category and for Row `size` props.  
 
@@ -351,15 +352,15 @@ The screen-size-specific _size_ and _hidden_ props refer to the current screen w
 
 The following are the device width (for Columns) and height (for Rows) thresholds for these props:
 
-  - SMALL_Width = 375 
-  - MEDIUM_Width = 414 
-  - LARGE_Width = 768
-  - XLARGE_Width = 1024 
+  - SMALL Width = 375 
+  - MEDIUM Width = 414 
+  - LARGE Width = 768
+  - XLARGE Width = 1024 
 
-  - SMALL_Height = 667
-  - MEDIUM_Height = 736
-  - LARGE_Height = 1024 
-  - XLARGE_Height = 1366 
+  - SMALL Height = 667
+  - MEDIUM Height = 736
+  - LARGE Height = 1024 
+  - XLARGE Height = 1366 
 
 `vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: `middle` | `center`, `top`, `bottom`, `space` and `distribute`. Default is top.
 
