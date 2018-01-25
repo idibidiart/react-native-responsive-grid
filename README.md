@@ -262,7 +262,7 @@ export default class Home extends Component {
 
 - Col: Flexbox View with flexDirection set to 'column' with convenient props and dynamic behavior.
 
-- Grid: an optional, stateful, top-level component (at root, above ScrollView, ListView, FlatList et al but below a Modal or Drawer) that is not meant to be nested. The Grid uses the children-as-funnction pattern and passes its state to its children, and allows state to be declared in its props, which will have the latest screen and grid info after orientation changes. It also passes it's async render-causing setState method to its children. 
+- Grid: an optional, stateful, component with style={{flex: 1}}. The Grid uses the children-as-funnction pattern and passes its state to its children, and allows state to be declared in its props, which will have the latest screen and grid info after orientation changes. It also passes it's render-triggering async setState method to its children. 
 
 **Important:**
 
@@ -470,7 +470,7 @@ You may import ScreenInfo from grid and invoke inside of render() of your compon
 
 Being able to readt to layout changes, including changes due to device rotation (for apps that allow it), is a key aspect of responsive design. This grid is designed to enable dynamic response to layout changes (see the demos at the start of this Readme)
 
-Columns and Rows have `position: 'relative'` by default to keep them within the layout flow, but they can have position absolute specified in style for overlays and such. 
+Columns and Rows have `position: 'relative'` by default to keep them within the layout flow, but they can have `position: 'absolute'` specified in style prop, for overlays and such. 
 
 The Grid component is a stateful top-level component (at root, above ScrollView, ListView, FlatList et al but below a Modal and Drawer) Grid should not be inside another Grid and it is only needed if you wish to respond to orientation and layout changes by re-running the render() function. It uses the children-as-funnction pattern to pass its state, including its dimensions and any user-defined state, along with screen dimensions, to its children. The user may define Grid state in its props. The Grid also passes it's async render-causing setState method to its children.
 

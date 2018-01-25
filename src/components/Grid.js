@@ -10,20 +10,6 @@ export default class Grid extends React.Component {
         this.animFrame
     }
 
-    static childContextTypes = {
-        ____GRID____: PropTypes.bool
-    }
-
-    static contextTypes = {
-        ____GRID____: PropTypes.bool
-    }
-     
-    getChildContext() {
-        return {
-            ____GRID____: true
-        }
-    }
-
     componentWillUnmount = () => {
         cancelAnimationFrame(this.animFrame)
     }
@@ -39,11 +25,6 @@ export default class Grid extends React.Component {
     }
 
     render() {
-        if (this.context.____GRID____) {
-            if (__DEV__) 
-                console.error('Grid should bre used once as the root of the component tree. All others are nullified.')
-            return null
-        } 
         return (
             <View
                 style={[
