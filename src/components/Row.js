@@ -29,20 +29,20 @@ export default class Row extends React.Component {
   }
 
   cloneElements = () => {
-    const rtl = this.props.rtl 
+    if (isHidden(this.screenInfo.mediaSizeHeight, this.props) ||
+        isExcludedByAspectRatio(this.props, this.screenInfo.aspectRatio)) {
+      return null;
+    }
+
+    const rtl = this.props.rtl
     return React.Children.map((rtl ? React.Children.toArray(this.props.children).reverse() : this.props.children), (element) => {
       if (!element) return null
       if (element.type && (element.type.name === 'Row')) {
-        if (__DEV__) 
+        if (__DEV__)
           console.error("Row may not contain other Rows as children. Child rows must be wrapped in a Column.")
         return null
       } else if (element.type && element.type.name === 'Column') {
-        if (isHidden(this.screenInfo.mediaSizeHeight, element.props) || 
-            isExcludedByAspectRatio(element.props, this.screenInfo.aspectRatio)) {
-          return null;
-        } else {
-          return React.cloneElement(element, {rtl})
-        }
+        return React.cloneElement(element, [{rtl}])
       } else {
         return element
       }
