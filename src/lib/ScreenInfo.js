@@ -57,8 +57,8 @@ let cutoffSizes = {
   // XLARGE_Height: 1366+
 };
 
-const setCutoffs = newCutoffs => {
-  cutoffSizes = {...cutoffSizes, ...newCutoffs};
+const setBreakPoints = newBreakPoints => {
+  cutoffSizes = {...cutoffSizes, ...newBreakPoints};
 }
 
 const setScreenInfo = onlySize => {
@@ -131,5 +131,5 @@ const setScreenInfo = onlySize => {
 
 export {
   setScreenInfo as ScreenInfo,
-  setCutoffs
+  setBreakPoints
 }

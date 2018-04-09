@@ -133,11 +133,11 @@ The following are the preset screen widths (in points) at which breaks maybe spe
   - LARGE_Width = 1023 (768-1023)
   - XLARGE_Width = 1024+
 
-The preset values may be overridden with `setCutoffs` which merges the parameter object with the defaults.  Each cutoff specifies the upper end for that range.  `XLARGE_Width` is inferred from anything above `LARGE_Width`. Cutoffs should be set early in the app such as in `index.js`.  An example overriding the `SMALL_Width`, `MEDIUM_Width`, and `LARGE_Width` cutoffs:
+The preset values may be overridden with `setBreakPoints` which merges the parameter object with the defaults.  Each cutoff specifies the upper end for that range.  `XLARGE_Width` is inferred from anything above `LARGE_Width`. BreakPoints should be set early in the app such as in `index.js`.  An example overriding the `SMALL_Width`, `MEDIUM_Width`, and `LARGE_Width` break points:
 ```
-import { setCutoffs } from 'react-native-responsive-grid';
+import { setBreakPoints } from 'react-native-responsive-grid';
 
-setCutoffs({
+setBreakPoints({
   SMALL_Width: 414,
   MEDIUM_Width: 600,
   LARGE_Width: 1024

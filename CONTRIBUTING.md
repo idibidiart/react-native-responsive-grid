@@ -22,6 +22,7 @@ Any code change should be submitted as a pull request. The description should ex
 ## Code review process
 
 The bigger the pull request, the longer it will take to review and merge. Try to break down large pull requests in smaller chunks that are easier to review and merge.
+
 It is also always helpful to have some context for your pull request. What was the purpose? Why does it matter to you?
 
 ## Financial contributions
