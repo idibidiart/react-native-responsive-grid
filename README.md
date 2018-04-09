@@ -546,7 +546,7 @@ In the example above, the column and all of it's children will be hidden on smal
 ## Contributors
 
 This project exists thanks to all the people who contribute. [[Contribute]](CONTRIBUTING.md).
-<a href="graphs/contributors"><img src="https://opencollective.com/react-native-responsive-grid/contributors.svg?width=890" /></a>
+<a href="https://github.com/idibidiart/react-native-responsive-grid/graphs/contributors"><img src="https://opencollective.com/react-native-responsive-grid/contributors.svg?width=890" /></a>
 
 
 ## Backers
