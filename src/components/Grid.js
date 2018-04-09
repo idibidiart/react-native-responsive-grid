@@ -19,7 +19,7 @@ export default class Grid extends React.Component {
     callback = (e) => {
 
         if (this.unmounting) return
-        
+
         const layout = {
           screen: ScreenInfo(), 
           grid: e.nativeEvent.layout
@@ -42,6 +42,7 @@ export default class Grid extends React.Component {
                 onLayout={(e) => {
                     e.persist()
                     InteractionManager.runAfterInteractions(() => {
+                        cancelAnimationFrame(this.animFrame)
                         this.animFrame = requestAnimationFrame(() => {
                         this.callback(e)
                         })
