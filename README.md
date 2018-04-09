@@ -133,6 +133,11 @@ The following are the preset screen widths (in points) at which breaks maybe spe
   - LARGE_Width = 1023 (768-1023)
   - XLARGE_Width = 1024+
 
+  - SMALL_Height: 667 (0-667)
+  - MEDIUM_Height: 1023 (668-1023)
+  - LARGE_Height: 1365 (1024-1365)
+  - XLARGE_Height: 1366+
+
 The preset values may be overridden with `setBreakPoints` which merges the parameter object with the defaults.  Each cutoff specifies the upper end for that range.  `XLARGE_Width` is inferred from anything above `LARGE_Width`. BreakPoints should be set early in the app such as in `index.js`.  An example overriding the `SMALL_Width`, `MEDIUM_Width`, and `LARGE_Width` break points:
 ```
 import { setBreakPoints } from 'react-native-responsive-grid';
@@ -141,7 +146,7 @@ setBreakPoints({
   SMALL_Width: 414,
   MEDIUM_Width: 600,
   LARGE_Width: 1024
-});
+})
 ```
 
 ```jsx
@@ -363,15 +368,16 @@ The screen-size-specific _size_ and _hidden_ props refer to the current screen w
 
 The following are the device width (for Columns) and height (for Rows) thresholds for these props:
 
-  - SMALL Width = 375 
-  - MEDIUM Width = 414 
-  - LARGE Width = 768
-  - XLARGE Width = 1024 
+The preset values may be overridden with `setBreakPoints` which merges the parameter object with the defaults.  Each cutoff specifies the upper end for that range.  `XLARGE_Width` is inferred from anything above `LARGE_Width`. BreakPoints should be set early in the app such as in `index.js`.  An example overriding the `SMALL_Width`, `MEDIUM_Width`, and `LARGE_Width` break points:
+```
+import { setBreakPoints } from 'react-native-responsive-grid';
 
-  - SMALL Height = 667
-  - MEDIUM Height = 736
-  - LARGE Height = 1024 
-  - XLARGE Height = 1366 
+setBreakPoints({
+  SMALL_Width: 414,
+  MEDIUM_Width: 600,
+  LARGE_Width: 1024
+})
+```
 
 `vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: `middle` | `center`, `top`, `bottom`, `space` and `distribute`. Default is top.
 
