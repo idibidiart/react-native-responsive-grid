@@ -17,9 +17,6 @@ export default class Grid extends React.Component {
     }
 
     callback = (e) => {
-
-        if (this.unmounting) return
-
         const layout = {
           screen: ScreenInfo(), 
           grid: e.nativeEvent.layout
