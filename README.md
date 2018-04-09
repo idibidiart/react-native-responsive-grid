@@ -128,10 +128,10 @@ In the second demo, the grid folds columns in rows based on the screen-device-de
 
 The following are the preset screen widths (in points) at which breaks maybe specified (where row wraps columns within it into new horozintal lines):
 
-  - SMALL_Width = 375 (0-375)
-  - MEDIUM_Width = 767 (376-767)
-  - LARGE_Width = 1023 (768-1023)
-  - XLARGE_Width = 1024+
+  - SMALL_Width: 375 (0-375)
+  - MEDIUM_Width: 767 (376-767)
+  - LARGE_Width: 1023 (768-1023)
+  - XLARGE_Width: 1024+
 
   - SMALL_Height: 667 (0-667)
   - MEDIUM_Height: 1023 (668-1023)
