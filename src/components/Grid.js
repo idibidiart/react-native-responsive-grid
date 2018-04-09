@@ -11,12 +11,16 @@ export default class Grid extends React.Component {
     }
 
     componentWillUnmount = () => {
-        cancelAnimationFrame(this.animFrame)
+        cancelAnimationFrame(this.animFrame);
+        this.unmounted = true;
     }
 
     callback = (e) => {
+        if (this.unmounted) {
+          return;
+        }
         const layout = {
-          screen: ScreenInfo(), 
+          screen: ScreenInfo(),
           grid: e.nativeEvent.layout
         }
         this.setState((state) => {
@@ -33,7 +37,7 @@ export default class Grid extends React.Component {
                     },
                     this.props.style
                 ]}
-                
+
                 onLayout={(e) => {
                     e.persist()
                     InteractionManager.runAfterInteractions(() => {
