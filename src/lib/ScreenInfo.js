@@ -5,7 +5,7 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 
 const diff = (value, list, index) => Math.abs(value - list[index])
-    
+
 // binary search in case we wish to let user specify a wide range of aspect ratios for
 // the web/desktop version
 const closest = (value, list) => {
@@ -46,46 +46,51 @@ const closest = (value, list) => {
 }
 
 let mediaSizeWidth, mediaSizeHeight;
+let cutoffSizes = {
+  SMALL_Width: 375,
+  MEDIUM_Width: 767,
+  LARGE_Width: 1023,
+  // XLARGE_Width: 1024+
+  SMALL_Height: 667,
+  MEDIUM_Height: 1023,
+  LARGE_Height: 1365,
+  // XLARGE_Height: 1366+
+};
 
-const setScreenInfo = (onlySize) => {
+const setCutoffs = newCutoffs => {
+  cutoffSizes = {...cutoffSizes, ...newCutoffs};
+}
+
+const setScreenInfo = onlySize => {
   const SCREEN_WIDTH = Dimensions.get('window').width
   const SCREEN_HEIGHT = Dimensions.get('window').height
 
-  const SMALL_Width = 375 
-  const MEDIUM_Width = 414 
-  const LARGE_Width = 768
-  const XLARGE_Width = 1024 
+  if (SCREEN_WIDTH <= cutoffSizes.SMALL_Width) {  // 0 to SMALL_Width
+      mediaSizeWidth = 'sm';
+  }
+  else if (SCREEN_WIDTH <= cutoffSizes.MEDIUM_Width) { // SMALL_Width + 1 to MEDIUM_Width
+      mediaSizeWidth = 'md';
+  }
+  else if (SCREEN_WIDTH <= cutoffSizes.LARGE_Width) { // MEDIUM_Width + 1 to LARGE_Width
+      mediaSizeWidth = 'lg';
+  }
+  else { // > LARGE_Width (aka XLARGE_Width)
+      mediaSizeWidth = 'xl';
+  }
 
-  const SMALL_Height = 667
-  const MEDIUM_Height = 736
-  const LARGE_Height = 1024 
-  const XLARGE_Height = 1366 
- 
-    if (SCREEN_WIDTH <= SMALL_Width){
-        mediaSizeWidth = 'sm'
-    }
-    if (SCREEN_WIDTH > SMALL_Width  && SCREEN_WIDTH < LARGE_Width){
-        mediaSizeWidth =  'md'
-    }
-    if (SCREEN_WIDTH >= LARGE_Width && SCREEN_WIDTH < XLARGE_Width){
-        mediaSizeWidth = 'lg'
-    }
-    if (SCREEN_WIDTH >= XLARGE_Width){
-        mediaSizeWidth = 'xl'
-    }
-    if (SCREEN_HEIGHT <= SMALL_Height){
-        mediaSizeHeight = 'sm'
-    }
-    if (SCREEN_HEIGHT > SMALL_Height  && SCREEN_HEIGHT < LARGE_Height){
-        mediaSizeHeight =  'md'
-    }
-    if (SCREEN_HEIGHT >= LARGE_Height && SCREEN_HEIGHT < XLARGE_Height){
-        mediaSizeHeight = 'lg'
-    }
-    if (SCREEN_HEIGHT >= XLARGE_Height){
-        mediaSizeHeight = 'xl'
-    }
-  
+  if (SCREEN_HEIGHT <= cutoffSizes.SMALL_Height) { // 0 to SMALL_Height
+      mediaSizeHeight = 'sm';
+  }
+  else if (SCREEN_HEIGHT <= cutoffSizes.MEDIUM_Height) { // SMALL_Height + 1 to LARGE_Height
+      mediaSizeHeight =  'md';
+  }
+  else if (SCREEN_HEIGHT <= cutoffSizes.LARGE_Height) { // LARGE_Height + 1 to XLARGE_Height
+      mediaSizeHeight = 'lg';
+  }
+  else { // > LARGE_Height (aka XLARGE_Height)
+      mediaSizeHeight = 'xl';
+  }
+
   if (!onlySize) {
     // sorted ascending order
     const decimalRatios = [0.56, 0.625, 0.66, 0.75, 1, 1.33, 1.5, 1.6, 1.77];
@@ -94,7 +99,7 @@ const setScreenInfo = (onlySize) => {
     const currentFloatRatio= SCREEN_WIDTH/SCREEN_HEIGHT;
     const currentDecimalRatio = closest(currentFloatRatio, decimalRatios)
     const currentNearestRatio = aspectRatios[currentDecimalRatio.index];
-    
+
     let currentOrientation;
 
     if (currentDecimalRatio.value == 1) {
@@ -108,20 +113,23 @@ const setScreenInfo = (onlySize) => {
     return {
             mediaSize: mediaSizeWidth,
             mediaSizeWidth,
-            mediaSizeHeight, 
-            width: SCREEN_WIDTH, 
-            height: SCREEN_HEIGHT, 
+            mediaSizeHeight,
+            width: SCREEN_WIDTH,
+            height: SCREEN_HEIGHT,
             aspectRatio: {currentNearestRatio, currentOrientation}
           }
   } else {
     return {
             mediaSize: mediaSizeWidth,
             mediaSizeWidth,
-            mediaSizeHeight, 
-            width: SCREEN_WIDTH, 
-            height: SCREEN_HEIGHT 
+            mediaSizeHeight,
+            width: SCREEN_WIDTH,
+            height: SCREEN_HEIGHT
         }
   }
 }
 
-export const ScreenInfo = setScreenInfo 
+export {
+  setScreenInfo as ScreenInfo,
+  setCutoffs
+}

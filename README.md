@@ -128,10 +128,21 @@ In the second demo, the grid folds columns in rows based on the screen-device-de
 
 The following are the preset screen widths (in points) at which breaks maybe specified (where row wraps columns within it into new horozintal lines):
 
-  - SMALL_Width = 375 
-  - MEDIUM_Width = 414 
-  - LARGE_Width = 768
-  - XLARGE_Width = 1024 
+  - SMALL_Width = 375 (0-375)
+  - MEDIUM_Width = 767 (376-767)
+  - LARGE_Width = 1023 (768-1023)
+  - XLARGE_Width = 1024+
+
+The preset values may be overridden with `setCutoffs` which merges the parameter object with the defaults.  Each cutoff specifies the upper end for that range.  `XLARGE_Width` is inferred from anything above `LARGE_Width`. Cutoffs should be set early in the app such as in `index.js`.  An example overriding the `SMALL_Width`, `MEDIUM_Width`, and `LARGE_Width` cutoffs:
+```
+import { setCutoffs } from 'react-native-responsive-grid';
+
+setCutoffs({
+  SMALL_Width: 414,
+  MEDIUM_Width: 600,
+  LARGE_Width: 1024
+});
+```
 
 ```jsx
   <Row  style={{paddingTop: '6%', paddingBottom: '6%', backgroundColor: 'white', borderBottomColor: 'lightgray', borderBottomWidth: 1}}>

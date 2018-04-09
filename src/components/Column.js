@@ -30,17 +30,17 @@ export default class Column extends React.Component {
     }
 
     cloneElements = () => {
+      if (isHidden(this.screenInfo.mediaSizeWidth, this.props) ||
+          isExcludedByAspectRatio(this.props, this.screenInfo.aspectRatio)) {
+        return null;
+      }
+
       return React.Children.map(this.props.children, (element) => {
         if (!element) return null
         if (element.type && element.type.name === 'Column')  {
-            if (__DEV__) 
+            if (__DEV__)
               console.error("Column may not contain other Columns as children. Child columns must be wrapped in a Row.")
             return null
-        } else if (element.type && element.type.name === 'Row') {
-          if (isHidden(this.screenInfo.mediaSizeWidth, element.props) || 
-              isExcludedByAspectRatio(element.props, this.screenInfo.aspectRatio)) {
-            return null;
-          }
         }
         return element
       })
