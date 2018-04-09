@@ -8,9 +8,11 @@ export default class Grid extends React.Component {
         super(props)
         this.state = {...props.state, layout: {}}
         this.animFrame
+        this.unmounting = false
     }
 
     componentWillUnmount = () => {
+        this.unmounting = true
         cancelAnimationFrame(this.animFrame)
     }
 
@@ -20,7 +22,7 @@ export default class Grid extends React.Component {
           grid: e.nativeEvent.layout
         }
         this.setState((state) => {
-            return {...state, layout}
+            return this.unmounting ? null : {...state, layout}
         })
     }
 
