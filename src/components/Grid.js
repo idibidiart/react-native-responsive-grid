@@ -20,7 +20,7 @@ export default class Grid extends React.Component {
 
         // callback to runAfterInteractions is async
         // so onLayout might be triggered before component is unmounted
-        // and it mifght schedule rFA after component is unmounted 
+        // and it mifht schedule rAF after component is unmounted 
         // so cAF in componentWillUnmount would then miss that rFA
         if (this.unmounting) return
 
@@ -46,7 +46,7 @@ export default class Grid extends React.Component {
                 onLayout={(e) => {
                     e.persist()
                     InteractionManager.runAfterInteractions(() => {
-                        // avoid queuing up rFA tasks
+                        // avoid queuing up rAF tasks
                         cancelAnimationFrame(this.animFrame)
                         this.animFrame = requestAnimationFrame(() => {
                             this.callback(e)
