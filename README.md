@@ -16,7 +16,7 @@ In your project folder, `yarn add react-native-responsive-grid`
 
 Before React Native v0.42 we didn't have a performant, declarative way of specifying percentage-based dimensions. Then came React Native v0.42 which gave us that ability. Since then several open source contributors have made responsive grids that take advantage of this new capability. This "grid" takes one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and modifies it heavily to produce a simple yet powerful layout model that we can use to implement responsive and adaptive behavior. 
 
-## Percentsage-based Dynamic, Responsive Layout
+## Percentage-based Dynamic, Responsive Layout
 
 This grid eschews Flexbox grow/shrink sizing in favor of percentage-based sizing while at the same time relying other aspects of Flexbox's 1-dimensional constraint-based layout. The grid aims to deliver the predictability of the percentage-based model with the more sophisticated alignment capability of the Flexbox model.
 
