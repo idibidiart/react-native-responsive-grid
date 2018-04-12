@@ -12,19 +12,15 @@ In your project folder, `yarn add react-native-responsive-grid`
 
 *For best results, use React Native 0.50 or later 
 
-## Background
-
-Before React Native v0.42 we didn't have a performant, declarative way of specifying percentage-based dimensions. Then came React Native v0.42 which gave us that ability. Since then several open source contributors have made responsive grids that take advantage of this new capability. This "grid" takes one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and modifies it heavily to produce a simple yet powerful layout model that we can use to implement responsive and adaptive behavior. 
-
 ## Percentage-based Dynamic, Responsive Layout
 
-This grid eschews Flexbox grow/shrink sizing in favor of percentage-based sizing while at the same time relying other aspects of Flexbox's 1-dimensional constraint-based layout. The grid aims to deliver the predictability of the percentage-based model with the more sophisticated alignment capability of the Flexbox model.
+This grid eschews complex Flex sizing in favor of percentage-based sizing while at the same time relying pn the 1-dimensional constraint-based layout of Flexbox for vertical and horizontal alignment. The grid aims to deliver the predictability of the percentage-based model with the more sophisticated alignment capability of the Flexbox model.
 
 The grid construct is extended beyond its common form as a rectilinear 2D Grid and generalized as Row and Column components that can be nested in an alternating pattern to build a tree of Views of any shape and depth. That is to say, a Row View (Row for short) may contain one or more Column Views (Column for short), each of which may contain one or more Rows, which in turn may contain one or more Columns, and so on. Both Rows and Columns can be styled using predictable, percentage-based dimensions and, in case of Columns, percentage-based horizontal offsets. Rows can be aligned inside Columns, vertically (along main axis,) and aligned and stretched horizontally (along cross axis.) Columns can be aligned inside Rows, horizontally (along main axis), and and aligned and stretched vertically (along cross axis.) Additionally, the multiple lines created by a wrapped Row may be aligned and stretched vertically relative to the parent Column. And with these basic features, we can build the entire UI component tree (or an individual component's subtree) as a consistent, repeatable and recursive pattern, one that has predictable and dynamic --not only static-- responsiveness and the ability to trigger specific adaptive behavior. 
 
 _When To Use Flexbox Sizing:_ 
 
-_In some cases when having a points-sized view followed by a view that needs to take the remaining space, you'll need to use a Column (to wrap vertical layout) and Row (to wrap horizontal layout) with style={{flex: 1}} on the wrapping Column or Row and same on the wrapped variable size element. However, such mixing of absolute and Flexbox grow/shrink sizing is not recommended as it won't lead to a fully responsive UI layout._
+_In some cases when having an absolutely sized view followed (vertically or horizontally) by a view that must take up the remaining space, we'll need to use a wrapping grid element -- Column (to wrap vertical layout) or Row (to wrap horizontal layout) -- with style={{flex: 1}} and same on the Flex sized element that it wraps along with the absolutely sized element. However, such mixing of absolute and Flex sizing is not recommended as it won't lead to a fully responsive UI layout._
 
 _The only other reason to use Flexbox grow/shrink sizing with this Grid is for grow-and-shrink-in-place UI (aka "squishy" UI) where elements shrink and grow in elastic fashion and relative to each other instead of undergoing dynamic re-layout change and/or staying in proportion to screen width._ 
 
@@ -537,6 +533,10 @@ In the example above, the column and all of it's children will be hidden on smal
 - [Responsive Layout](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMoreExamples.md#responsive-layout)
 - [Custom Components](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMoreExamples.md#custom-components)
 - [Wrapped Alignment](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMoreExamples.md#wrapped-alignment)
+
+## History
+
+Before React Native v0.42 we didn't have a performant, declarative way of specifying percentage-based dimensions. Then came React Native v0.42 which gave us that ability. Since then several open source contributors have made responsive grids that take advantage of this new capability. This "grid" takes one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and modifies it heavily to produce a simple yet powerful layout model that we can use to implement responsive and adaptive behavior. 
 
 # Gridism
 
