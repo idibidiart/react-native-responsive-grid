@@ -22,7 +22,7 @@ _When To Use Flexbox Sizing:_
 
 _In some cases when having an absolutely sized view followed (vertically or horizontally) by a view that must take up the remaining space, we'll need to use a wrapping grid element -- Column (to wrap vertical layout) or Row (to wrap horizontal layout) -- with style={{flex: 1}} and same on the Flex sized element that it wraps along with the absolutely sized element. However, such mixing of absolute and Flex sizing is not recommended as it won't lead to a fully responsive UI layout._
 
-_The only other reason to use Flexbox grow/shrink sizing with this Grid is for grow-and-shrink-in-place UI (aka "squishy" UI) where elements shrink and grow in elastic fashion and relative to each other instead of undergoing dynamic re-layout change and/or staying in proportion to screen width._ 
+_The only other reason to use Flexbox grow/shrink sizing with this Grid is for grow-and-shrink-in-place UI (aka "squishy" UI) where elements shrink and grow in elastic fashion and relative to each other instead of undergoing dynamic layout change and/or staying in proportion to screen width._ 
 
 ## Examples
 
