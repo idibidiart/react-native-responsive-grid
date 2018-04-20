@@ -12,21 +12,19 @@ In your project folder, `yarn add react-native-responsive-grid`
 
 *For best results, use React Native 0.50 or later 
 
-## Background
+## Percentage-based Dynamic, Responsive Layout
 
-Before React Native v0.42 we didn't have a performant, declarative way of specifying percentage-based dimensions. Then came React Native v0.42 which gave us that ability. Since then several open source contributors have made responsive grids that take advantage of this new capability. This "grid" takes one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and modifies it heavily to produce a simple yet powerful layout model that we can use to implement responsive and adaptive behavior. 
+This grid eschews complex Flex sizing in favor of percentage-based sizing while at the same time relying pn the 1-dimensional constraint-based layout of Flexbox for vertical and horizontal alignment. The grid aims to deliver the predictability of the percentage-based model with the more sophisticated alignment capability of the Flexbox model.
 
-## Percentsage-based Dynamic, Responsive Layout
+The grid construct is extended beyond its common form as a rectilinear 2D Grid and generalized as Row and Column components that can be nested in an alternating pattern to build a tree of Views of any shape and depth. That is to say, a Row View (Row for short) may contain one or more Column Views (Column for short), each of which may contain one or more Rows, which in turn may contain one or more Columns, and so on. Both Rows and Columns can be styled using predictable, percentage-based dimensions and, in case of Columns, percentage-based horizontal offsets. Rows can be aligned inside Columns, vertically (along main axis,) and aligned and stretched horizontally (along cross axis.) Columns can be aligned inside Rows, horizontally (along main axis), and and aligned and stretched vertically (along cross axis.) Additionally, the lines created within a Row that wraps may be aligned and stretched vertically relative to a parent Column. 
 
-This grid eschews Flexbox grow/shrink sizing in favor of percentage-based sizing while at the same time relying other aspects of Flexbox's 1-dimensional constraint-based layout. The grid aims to deliver the predictability of the percentage-based model with the more sophisticated alignment capability of the Flexbox model.
-
-The grid construct is extended beyond its common form as a rectilinear 2D Grid and generalized as Row and Column components that can be nested in an alternating pattern to build a tree of Views of any shape and depth. That is to say, a Row View (Row for short) may contain one or more Column Views (Column for short), each of which may contain one or more Rows, which in turn may contain one or more Columns, and so on. Both Rows and Columns can be styled using predictable, percentage-based dimensions and, in case of Columns, percentage-based horizontal offsets. Rows can be aligned inside Columns, vertically (along main axis,) and aligned and stretched horizontally (along cross axis.) Columns can be aligned inside Rows, horizontally (along main axis), and and aligned and stretched vertically (along cross axis.) Additionally, the multiple lines created by a wrapped Row may be aligned and stretched vertically relative to the parent Column. And with these basic features, we can build the entire UI component tree (or an individual component's subtree) as a consistent, repeatable and recursive pattern, one that has predictable and dynamic --not only static-- responsiveness and the ability to trigger specific adaptive behavior. 
+With these basic features, we can build the entire UI component tree (or an individual component's subtree) as a consistent, repeatable and recursive pattern, one that has predictable and dynamic --not only static-- responsiveness and the ability to trigger specific adaptive behavior. 
 
 _When To Use Flexbox Sizing:_ 
 
-_In some cases when having a points-sized view followed by a view that needs to take the remaining space, you'll need to use a Column (to wrap vertical layout) and Row (to wrap horizontal layout) with style={{flex: 1}} on the wrapping Column or Row and same on the wrapped variable size element. However, such mixing of absolute and Flexbox grow/shrink sizing is not recommended as it won't lead to a fully responsive UI layout._
+_In some cases when having an absolutely sized view followed (vertically or horizontally) by a view that must take up the remaining space, we'll need to use a wrapping grid element -- Column (to wrap vertical layout) or Row (to wrap horizontal layout) -- with style={{flex: 1}} and same on the Flex sized element that it wraps along with the absolutely sized element. However, such mixing of absolute and Flex sizing is not recommended as it won't lead to a fully responsive UI layout._
 
-_The only other reason to use Flexbox grow/shrink sizing with this Grid is for grow-and-shrink-in-place UI (aka "squishy" UI) where elements shrink and grow in elastic fashion and relative to each other instead of undergoing dynamic re-layout change and/or staying in proportion to screen width._ 
+_The only other reason to use Flexbox grow/shrink sizing with this Grid is for grow-and-shrink-in-place UI (aka "squishy" UI) where elements shrink and grow in elastic fashion and relative to each other instead of undergoing dynamic layout change and/or staying in proportion to screen width._ 
 
 ## Examples
 
@@ -128,10 +126,15 @@ In the second demo, the grid folds columns in rows based on the screen-device-de
 
 The following are the preset screen widths (in points) at which breaks maybe specified (where row wraps columns within it into new horozintal lines):
 
-  - SMALL_Width = 375 (0-375)
-  - MEDIUM_Width = 767 (376-767)
-  - LARGE_Width = 1023 (768-1023)
-  - XLARGE_Width = 1024+
+  - SMALL_Width: 375 (0-375)
+  - MEDIUM_Width: 767 (376-767)
+  - LARGE_Width: 1023 (768-1023)
+  - XLARGE_Width: 1024+
+
+  - SMALL_Height: 667 (0-667)
+  - MEDIUM_Height: 1023 (668-1023)
+  - LARGE_Height: 1365 (1024-1365)
+  - XLARGE_Height: 1366+
 
 The preset values may be overridden with `setBreakPoints` which merges the parameter object with the defaults.  Each cutoff specifies the upper end for that range.  `XLARGE_Width` is inferred from anything above `LARGE_Width`. BreakPoints should be set early in the app such as in `index.js`.  An example overriding the `SMALL_Width`, `MEDIUM_Width`, and `LARGE_Width` break points:
 ```
@@ -141,7 +144,7 @@ setBreakPoints({
   SMALL_Width: 414,
   MEDIUM_Width: 600,
   LARGE_Width: 1024
-});
+})
 ```
 
 ```jsx
@@ -363,15 +366,16 @@ The screen-size-specific _size_ and _hidden_ props refer to the current screen w
 
 The following are the device width (for Columns) and height (for Rows) thresholds for these props:
 
-  - SMALL Width = 375 
-  - MEDIUM Width = 414 
-  - LARGE Width = 768
-  - XLARGE Width = 1024 
+The preset values may be overridden with `setBreakPoints` which merges the parameter object with the defaults.  Each cutoff specifies the upper end for that range.  `XLARGE_Width` is inferred from anything above `LARGE_Width`. BreakPoints should be set early in the app such as in `index.js`.  An example overriding the `SMALL_Width`, `MEDIUM_Width`, and `LARGE_Width` break points:
+```
+import { setBreakPoints } from 'react-native-responsive-grid';
 
-  - SMALL Height = 667
-  - MEDIUM Height = 736
-  - LARGE Height = 1024 
-  - XLARGE Height = 1366 
+setBreakPoints({
+  SMALL_Width: 414,
+  MEDIUM_Width: 600,
+  LARGE_Width: 1024
+})
+```
 
 `vAlign` may be supplied as prop to Column to vertically align the elements and/or rows within it. Possible values are: `middle` | `center`, `top`, `bottom`, `space` and `distribute`. Default is top.
 
@@ -532,6 +536,10 @@ In the example above, the column and all of it's children will be hidden on smal
 - [Custom Components](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMoreExamples.md#custom-components)
 - [Wrapped Alignment](https://github.com/idibidiart/react-native-responsive-grid/blob/master/EvenMoreExamples.md#wrapped-alignment)
 
+## History
+
+Before React Native v0.42 we didn't have a performant, declarative way of specifying percentage-based dimensions. Then came React Native v0.42 which gave us that ability. Since then several open source contributors have made responsive grids that take advantage of this new capability. This "grid" takes one of the simplest and most well-thought-out ones, namely, `react-native-flexbox-grid` (by @rundmt), and modifies it heavily to produce a simple yet powerful layout model that we can use to implement responsive and adaptive behavior. 
+
 # Gridism
 
 ## _When I first made a grid I happened to be thinking of the innocence of trees and then this grid came into my mind and I thought it represented innocence, and I still do, and so I painted it and then I was satisfied. I thought, this is my vision._ --[Agnes Martin](https://www.guggenheim.org/arts-curriculum/topic/grids)
@@ -540,7 +548,7 @@ In the example above, the column and all of it's children will be hidden on smal
 ## Contributors
 
 This project exists thanks to all the people who contribute. [[Contribute]](CONTRIBUTING.md).
-<a href="graphs/contributors"><img src="https://opencollective.com/react-native-responsive-grid/contributors.svg?width=890" /></a>
+<a href="https://github.com/idibidiart/react-native-responsive-grid/graphs/contributors"><img src="https://opencollective.com/react-native-responsive-grid/contributors.svg?width=890" /></a>
 
 
 ## Backers
