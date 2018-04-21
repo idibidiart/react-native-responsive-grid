@@ -45,6 +45,17 @@ const closest = (value, list) => {
     return {index: resultIndex, value: list[resultIndex]}
 }
 
+let _screenInfo = {
+  mediaSize: 0,
+  mediaSizeWidth: 0,
+  mediaSizeHeight: 0,
+  width: 0,
+  height: 0,
+  aspectRatio: {currentNearestRatio: 0, currentOrientation: 0}
+};
+let _screenWidth = 0;
+let _screenHeight = 0;
+
 let mediaSizeWidth, mediaSizeHeight;
 let cutoffSizes = {
   SMALL_Width: 375,
@@ -64,6 +75,12 @@ const setBreakPoints = newBreakPoints => {
 const setScreenInfo = onlySize => {
   const SCREEN_WIDTH = Dimensions.get('window').width
   const SCREEN_HEIGHT = Dimensions.get('window').height
+
+  if ((_screenWidth === SCREEN_WIDTH) && (_screenHeight === SCREEN_HEIGHT)) {
+    return _screenInfo;
+  }
+  _screenWidth = SCREEN_WIDTH;
+  _screenHeight = SCREEN_HEIGHT;
 
   if (SCREEN_WIDTH <= cutoffSizes.SMALL_Width) {  // 0 to SMALL_Width
       mediaSizeWidth = 'sm';
@@ -110,22 +127,27 @@ const setScreenInfo = onlySize => {
         currentOrientation = "portrait"
     }
 
-    return {
-            mediaSize: mediaSizeWidth,
-            mediaSizeWidth,
-            mediaSizeHeight,
-            width: SCREEN_WIDTH,
-            height: SCREEN_HEIGHT,
-            aspectRatio: {currentNearestRatio, currentOrientation}
-          }
-  } else {
-    return {
-            mediaSize: mediaSizeWidth,
-            mediaSizeWidth,
-            mediaSizeHeight,
-            width: SCREEN_WIDTH,
-            height: SCREEN_HEIGHT
-        }
+    _screenInfo = {
+      ..._screenInfo,
+      mediaSize: mediaSizeWidth,
+      mediaSizeWidth,
+      mediaSizeHeight,
+      width: SCREEN_WIDTH,
+      height: SCREEN_HEIGHT,
+      aspectRatio: {currentNearestRatio, currentOrientation}
+    };
+    return _screenInfo;
+  }
+  else {
+    _screenInfo = {
+      ..._screenInfo,
+      mediaSize: mediaSizeWidth,
+      mediaSizeWidth,
+      mediaSizeHeight,
+      width: SCREEN_WIDTH,
+      height: SCREEN_HEIGHT
+    };
+    return _screenInfo;
   }
 }
 
