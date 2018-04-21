@@ -62,12 +62,13 @@ const setBreakPoints = newBreakPoints => {
     breakPoints = {...breakPoints, ...newBreakPoints};
 }
 
-let _screenInfo = null,  _screenWidth = 0, _screenHeight = 0
+let _screenInfo = null,  _screenWidth = null, _screenHeight = null
 
 const setScreenInfo = () => {
     const SCREEN_WIDTH = Dimensions.get('window').width
     const SCREEN_HEIGHT = Dimensions.get('window').height
 
+    // no need to recompute everything if width/height haven't changed
     if ((_screenWidth === SCREEN_WIDTH) && (_screenHeight === SCREEN_HEIGHT)) {
         return _screenInfo;
     }
