@@ -19,7 +19,7 @@ const sizes = {sm: 100, md: 50, lg: 25, xl: 20}
 
 const layout = (state) => {
 
-  const numCols = Math.floor(100/sizes[ScreenInfo(true).mediaSize])
+  const numCols = Math.floor(100/sizes[ScreenInfo().mediaSize])
   const numRows = Math.ceil(data.length / numCols)
   const colWidth = state.layout.grid ? state.layout.grid.width / numCols : 0
   

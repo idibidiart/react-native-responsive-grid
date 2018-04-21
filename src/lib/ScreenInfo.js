@@ -46,52 +46,60 @@ const closest = (value, list) => {
 }
 
 let mediaSizeWidth, mediaSizeHeight;
-let cutoffSizes = {
-  SMALL_Width: 375,
-  MEDIUM_Width: 767,
-  LARGE_Width: 1023,
-  // XLARGE_Width: 1024+
-  SMALL_Height: 667,
-  MEDIUM_Height: 1023,
-  LARGE_Height: 1365,
-  // XLARGE_Height: 1366+
+
+let breakPoints = {
+    SMALL_Width: 375,
+    MEDIUM_Width: 767,
+    LARGE_Width: 1023,
+    // XLARGE_Width: 1024+
+    SMALL_Height: 667,
+    MEDIUM_Height: 1023,
+    LARGE_Height: 1365,
+    // XLARGE_Height: 1366+
 };
 
 const setBreakPoints = newBreakPoints => {
-  cutoffSizes = {...cutoffSizes, ...newBreakPoints};
+    breakPoints = {...breakPoints, ...newBreakPoints};
 }
 
-const setScreenInfo = onlySize => {
-  const SCREEN_WIDTH = Dimensions.get('window').width
-  const SCREEN_HEIGHT = Dimensions.get('window').height
+let _screenInfo = null,  _screenWidth = 0, _screenHeight = 0
 
-  if (SCREEN_WIDTH <= cutoffSizes.SMALL_Width) {  // 0 to SMALL_Width
-      mediaSizeWidth = 'sm';
-  }
-  else if (SCREEN_WIDTH <= cutoffSizes.MEDIUM_Width) { // SMALL_Width + 1 to MEDIUM_Width
-      mediaSizeWidth = 'md';
-  }
-  else if (SCREEN_WIDTH <= cutoffSizes.LARGE_Width) { // MEDIUM_Width + 1 to LARGE_Width
-      mediaSizeWidth = 'lg';
-  }
-  else { // > LARGE_Width (aka XLARGE_Width)
-      mediaSizeWidth = 'xl';
-  }
+const setScreenInfo = () => {
+    const SCREEN_WIDTH = Dimensions.get('window').width
+    const SCREEN_HEIGHT = Dimensions.get('window').height
 
-  if (SCREEN_HEIGHT <= cutoffSizes.SMALL_Height) { // 0 to SMALL_Height
-      mediaSizeHeight = 'sm';
-  }
-  else if (SCREEN_HEIGHT <= cutoffSizes.MEDIUM_Height) { // SMALL_Height + 1 to LARGE_Height
-      mediaSizeHeight =  'md';
-  }
-  else if (SCREEN_HEIGHT <= cutoffSizes.LARGE_Height) { // LARGE_Height + 1 to XLARGE_Height
-      mediaSizeHeight = 'lg';
-  }
-  else { // > LARGE_Height (aka XLARGE_Height)
-      mediaSizeHeight = 'xl';
-  }
+    if ((_screenWidth === SCREEN_WIDTH) && (_screenHeight === SCREEN_HEIGHT)) {
+        return _screenInfo;
+    }
+    _screenWidth = SCREEN_WIDTH;
+    _screenHeight = SCREEN_HEIGHT;
 
-  if (!onlySize) {
+    if (SCREEN_WIDTH <= breakPoints.SMALL_Width) {  // 0 to SMALL_Width
+        mediaSizeWidth = 'sm';
+    }
+    else if (SCREEN_WIDTH <= breakPoints.MEDIUM_Width) { // SMALL_Width + 1 to MEDIUM_Width
+        mediaSizeWidth = 'md';
+    }
+    else if (SCREEN_WIDTH <= breakPoints.LARGE_Width) { // MEDIUM_Width + 1 to LARGE_Width
+        mediaSizeWidth = 'lg';
+    }
+    else { // > LARGE_Width (aka XLARGE_Width)
+        mediaSizeWidth = 'xl';
+    }
+
+    if (SCREEN_HEIGHT <= breakPoints.SMALL_Height) { // 0 to SMALL_Height
+        mediaSizeHeight = 'sm';
+    }
+    else if (SCREEN_HEIGHT <= breakPoints.MEDIUM_Height) { // SMALL_Height + 1 to LARGE_Height
+        mediaSizeHeight =  'md';
+    }
+    else if (SCREEN_HEIGHT <= breakPoints.LARGE_Height) { // LARGE_Height + 1 to XLARGE_Height
+        mediaSizeHeight = 'lg';
+    }
+    else { // > LARGE_Height (aka XLARGE_Height)
+        mediaSizeHeight = 'xl';
+    }
+
     // sorted ascending order
     const decimalRatios = [0.56, 0.625, 0.66, 0.75, 1, 1.33, 1.5, 1.6, 1.77];
     // values in aspetcRatios array must map 1:1 order-wise to values in decimalRatios array
@@ -110,23 +118,15 @@ const setScreenInfo = onlySize => {
         currentOrientation = "portrait"
     }
 
-    return {
+    _screenInfo = {
             mediaSize: mediaSizeWidth,
             mediaSizeWidth,
             mediaSizeHeight,
             width: SCREEN_WIDTH,
             height: SCREEN_HEIGHT,
             aspectRatio: {currentNearestRatio, currentOrientation}
-          }
-  } else {
-    return {
-            mediaSize: mediaSizeWidth,
-            mediaSizeWidth,
-            mediaSizeHeight,
-            width: SCREEN_WIDTH,
-            height: SCREEN_HEIGHT
-        }
-  }
+            }
+    return _screenInfo
 }
 
 export {
