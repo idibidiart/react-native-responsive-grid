@@ -310,7 +310,7 @@ export const Home = () => (
 
 import { Row, Column as Col, ScreenInfo, Grid} from './grid'
 
-`ScreenInfo(sizeOnly: Boolean)` This will return the following data:
+`ScreenInfo()` This will return the following data:
 
 ```js
 {
