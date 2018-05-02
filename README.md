@@ -6,6 +6,17 @@
 
 # React Native Library for Responsive and Universal Apps
 
+### Pending Proposals
+
+All isues that are not bugs are appropriately labeled and closed.
+
+For now we have three kinds of non-bug issues that are open:
+
+- [Pending Proposals](https://github.com/idibidiart/react-native-responsive-grid/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3Aproposal+label%3Apending)
+
+- [Pending Questions](https://github.com/idibidiart/react-native-responsive-grid/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3Aquestion+label%3Apending)
+
+
 ### Install
 
 In your project folder, `yarn add react-native-responsive-grid`
