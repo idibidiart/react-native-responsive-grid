@@ -25,9 +25,11 @@ In your project folder, `yarn add react-native-responsive-grid`
 
 ## Predictable Responsive Layout
 
-This grid eschews complex Flexbox-based size constraints in favor of simple percentage-based size constraints and Flexbox-based vertical and horizontal alignment constraints. 
+This grid is based on row and column components that can be nested in an alternating pattern to build a responsive and adaptive 'tree of Views' of any shape and depth. It eschews complicated Flexbox-based size constraints in favor of simple percentage-based size constraints. And it does so while using Flexbox-based vertical and horizontal alignment constraints. 
 
-The grid construct used by this library goes beyond the columnar format. It's based on row and column components that can be nested in an alternating pattern to build a tree of Views of any shape and depth. A Row View (Row for short) may contain one or more Column Views (Column for short), each of which may contain one or more Rows, which in turn may contain one or more Columns, and so on. Both Rows and Columns can be styled using predictable, percentage-based dimensions and, in case of Columns, percentage-based horizontal offsets. Rows can be aligned inside Columns, vertically (along main axis,) and aligned and stretched horizontally (along cross axis.) Columns can be aligned inside Rows, horizontally (along main axis), and and aligned and stretched vertically (along cross axis.) Additionally, the lines created within a Row that wraps may be aligned and stretched vertically relative to a parent Column. 
+A Column may contain one or more Rows, each of which may contain one or more Columns, each of which may contain one or more Rows, and so on. Both Rows and Columns can be styled using predictable, percentage-based dimensions and, in case of Columns, percentage-based horizontal `offset`.
+
+Rows can be aligned inside Columns, vertically (along main axis,) and aligned and stretched horizontally (along cross axis.) Columns can be aligned inside Rows, horizontally (along main axis), and and aligned and stretched vertically (along cross axis.) Additionally, the lines created within a Row that wraps may be aligned and stretched vertically relative to a parent Column. 
 
 With these basic features, we can build the entire UI component tree (or an individual component's subtree) as a consistent, repeatable and recursive pattern, one that has predictable and dynamic --not only static-- responsiveness and the ability to trigger specific adaptive behavior. 
 
