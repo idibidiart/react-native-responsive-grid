@@ -74,7 +74,7 @@ export default class Column extends React.Component {
       vAlign: PropTypes.oneOf(['space', 'distribute', 'middle', 'center', 'bottom', 'top']),
       hAlign: PropTypes.oneOf(['stretch', 'center', 'middle', 'right', 'left']),
       alignSelf: PropTypes.oneOf(['auto', 'top', 'bottom', 'middle', 'center', 'stretch', 'baseline']),
-      fullWidtht: PropTypes.bool,
+      fullWidth: PropTypes.bool,
       aspectRatio: PropTypes.object  
     }
 
