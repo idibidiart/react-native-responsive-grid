@@ -8,7 +8,7 @@
 
 ### Pending Proposals
 
-All isues that are not bugs are appropriately labeled and closed.
+All issues that are not bugs are appropriately labeled and closed.
 
 For now we have three kinds of non-bug issues that are open:
 
