@@ -2,7 +2,7 @@
 
 import { Dimensions } from 'react-native';
 
-const isHidden = (screenSize, props) => {
+export const isHidden = (screenSize, props) => {
   switch(screenSize) {
     case 'sm':
       return props.smHidden ? true : false;
@@ -17,7 +17,7 @@ const isHidden = (screenSize, props) => {
   }
 }
 
-const isExcludedByAspectRatio = ({aspectRatio},  {currentNearestRatio, currentOrientation}) => {
+export const isExcludedByAspectRatio = ({aspectRatio},  {currentNearestRatio, currentOrientation}) => {
   if (aspectRatio !== undefined) {
     if (aspectRatio.ratio !== currentNearestRatio || aspectRatio.orientation.toLowerCase() !== currentOrientation) {
       return true
@@ -28,7 +28,7 @@ const isExcludedByAspectRatio = ({aspectRatio},  {currentNearestRatio, currentOr
 
 const toPercent = (num) => num + '%';
 
-const getSize = (screenSize, props) => {
+export const getSize = (screenSize, props) => {
 
   switch(screenSize) {
     case 'sm':
@@ -85,7 +85,7 @@ const getSize = (screenSize, props) => {
   }
 }
 
-const getOffset = (screenSize, props) => {
+export const getOffset = (screenSize, props) => {
 
   switch(screenSize) {
     case 'sm':
@@ -141,5 +141,3 @@ const getOffset = (screenSize, props) => {
       }
   }
 };
-
-module.exports = {isHidden, isExcludedByAspectRatio, getSize, getOffset}
